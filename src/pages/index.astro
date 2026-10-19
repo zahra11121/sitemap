@@ -1,11 +1,817 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Import Seluruh 64 Gambar Produk
+import Asparagus_7 from '../assets/products/Asparagus_7.jpg';
+import Bawang_Bombay_9 from '../assets/products/Bawang_Bombay_9.jpg';
+import Bawang_Daun_3 from '../assets/products/Bawang_Daun_3.jpg';
+import Bawang_Merah_4 from '../assets/products/Bawang_Merah_4.jpg';
+import Bawang_Putih_10 from '../assets/products/Bawang_Putih_10.jpg';
+import Bayam_Hijau_6 from '../assets/products/Bayam_Hijau_6.jpg';
+import Bengkuang_8 from '../assets/products/Bengkuang_8.jpg';
+import Bit_1 from '../assets/products/Bit_1.jpg';
+import Brokoli_2 from '../assets/products/Brokoli_2.jpg';
+import Buncis_2 from '../assets/products/Buncis_2.jpg';
+import Bunga_Kol_3 from '../assets/products/Bunga_Kol_3.jpg';
+import Cabai_Hijau_5 from '../assets/products/Cabai_Hijau_5.jpg';
+import Cabai_Merah_4 from '../assets/products/Cabai_Merah_4.jpg';
+import Daun_Kelor_10 from '../assets/products/Daun_Kelor_10.jpg';
+import Daun_Ketumbar_1 from '../assets/products/Daun_Ketumbar_1.jpg';
+import Daun_Pepaya_5 from '../assets/products/Daun_Pepaya_5.jpg';
+import Daun_Singkong_5 from '../assets/products/Daun_Singkong_5.jpg';
+import Jagung_1 from '../assets/products/Jagung_1.jpg';
+import Jahe_1 from '../assets/products/Jahe_1.jpg';
+import Jamur_Enoki_3 from '../assets/products/Jamur_Enoki_3.jpg';
+import Jamur_Enoki_6 from '../assets/products/Jamur_Enoki_6.jpg';
+import Jamur_Kancing_5 from '../assets/products/Jamur_Kancing_5.jpg';
+import Jamur_Kancing_6 from '../assets/products/Jamur_Kancing_6.jpg';
+import Jamur_Kancing_9 from '../assets/products/Jamur_Kancing_9.jpg';
+import Jamur_Kuping_4 from '../assets/products/Jamur_Kuping_4.jpg';
+import Jamur_Shiitake_3 from '../assets/products/Jamur_Shiitake_3.jpg';
+import Jamur_Tiram_7 from '../assets/products/Jamur_Tiram_7.jpg';
+import Jantung_Pisang_9 from '../assets/products/Jantung_Pisang_9.jpg';
+import Kacang_Hijau_8 from '../assets/products/Kacang_Hijau_8.jpg';
+import Kacang_Kapri_2 from '../assets/products/Kacang_Kapri_2.jpg';
+import Kacang_Panjang_10 from '../assets/products/Kacang_Panjang_10.jpg';
+import Kacang_Tanah_1 from '../assets/products/Kacang_Tanah_1.jpg';
+import Kacang_Tanah_2 from '../assets/products/Kacang_Tanah_2.jpg';
+import Kale_1 from '../assets/products/Kale_1.jpg';
+import Kangkung_2 from '../assets/products/Kangkung_2.jpg';
+import Kecombrang_9 from '../assets/products/Kecombrang_9.jpg';
+import Kemangi_8 from '../assets/products/Kemangi_8.jpg';
+import Kentang_2 from '../assets/products/Kentang_2.jpg';
+import Labu_Madu_3 from '../assets/products/Labu_Madu_3.jpg';
+import Labu_Madu_5 from '../assets/products/Labu_Madu_5.jpg';
+import Labu_Siam_4 from '../assets/products/Labu_Siam_4.jpg';
+import Lobak_9 from '../assets/products/Lobak_9.jpg';
+import Melinjo_1 from '../assets/products/Melinjo_1.jpg';
+import Okra_1 from '../assets/products/Okra_1.jpg';
+import Pakcoy_10 from '../assets/products/Pakcoy_10.jpg';
+import Paprika_2 from '../assets/products/Paprika_2.jpg';
+import Paprika_6 from '../assets/products/Paprika_6.jpg';
+import Pare_1 from '../assets/products/Pare_1.jpg';
+import Pare_7 from '../assets/products/Pare_7.jpg';
+import Petai_1 from '../assets/products/Petai_1.jpg';
+import Rebung_6 from '../assets/products/Rebung_6.jpg';
+import Sawi_Caisim_7 from '../assets/products/Sawi_Caisim_7.jpg';
+import Sawi_Putih_4 from '../assets/products/Sawi_Putih_4.jpg';
+import Selada_3 from '../assets/products/Selada_3.jpg';
+import Seledri_5 from '../assets/products/Seledri_5.jpg';
+import Serai_10 from '../assets/products/Serai_10.jpg';
+import Singkong_8 from '../assets/products/Singkong_8.jpg';
+import Talas_2 from '../assets/products/Talas_2.jpg';
+import Terung_Belanda_6 from '../assets/products/Terung_Belanda_6.jpg';
+import Terung_Ungu_1 from '../assets/products/Terung_Ungu_1.jpg';
+import Timun_1 from '../assets/products/Timun_1.jpg';
+import Tomat_10 from '../assets/products/Tomat_10.jpg';
+import Ubi_Cilembu_4 from '../assets/products/Ubi_Cilembu_4.jpg';
+import Wortel_10 from '../assets/products/Wortel_10.jpg';
+
+// Master Data Company Info
+const companyData = {
+  name: "CV Green Fresh Cipanas",
+  npwp: "93.038.709.7-406.000",
+  address: "Kp. Kayumanis, RT 001 / RW 006, Kel. Sukatani, Kec. Pacet, Kab. Cianjur, Jawa Barat",
+  phone: "087780937884",
+  waNumber: "6287780937884",
+  bank: {
+    name: "BCA",
+    branch: "KCP Cipanas",
+    accountName: "Green Fresh Cipanas",
+    accountNumber: "1978400999"
+  }
+};
+
+// Master Data 64 Produk
+const products = [
+  { name: 'Asparagus', category: 'Sayuran Premium', image: Asparagus_7 },
+  { name: 'Bawang Bombay', category: 'Bumbu & Rempah', image: Bawang_Bombay_9 },
+  { name: 'Bawang Daun', category: 'Bumbu & Rempah', image: Bawang_Daun_3 },
+  { name: 'Bawang Merah', category: 'Bumbu & Rempah', image: Bawang_Merah_4 },
+  { name: 'Bawang Putih', category: 'Bumbu & Rempah', image: Bawang_Putih_10 },
+  { name: 'Bayam Hijau', category: 'Sayuran Hijau', image: Bayam_Hijau_6 },
+  { name: 'Bengkuang', category: 'Umbi-Umbian', image: Bengkuang_8 },
+  { name: 'Buah Bit', category: 'Umbi-Umbian', image: Bit_1 },
+  { name: 'Brokoli', category: 'Sayuran Hijau', image: Brokoli_2 },
+  { name: 'Buncis', category: 'Kacang-Kacangan', image: Buncis_2 },
+  { name: 'Bunga Kol', category: 'Sayuran Hijau', image: Bunga_Kol_3 },
+  { name: 'Cabai Hijau', category: 'Bumbu & Rempah', image: Cabai_Hijau_5 },
+  { name: 'Cabai Merah', category: 'Bumbu & Rempah', image: Cabai_Merah_4 },
+  { name: 'Daun Kelor', category: 'Sayuran Hijau', image: Daun_Kelor_10 },
+  { name: 'Daun Ketumbar', category: 'Bumbu & Rempah', image: Daun_Ketumbar_1 },
+  { name: 'Daun Pepaya', category: 'Sayuran Hijau', image: Daun_Pepaya_5 },
+  { name: 'Daun Singkong', category: 'Sayuran Hijau', image: Daun_Singkong_5 },
+  { name: 'Jagung Manis', category: 'Biji & Kacang', image: Jagung_1 },
+  { name: 'Jahe Segar', category: 'Bumbu & Rempah', image: Jahe_1 },
+  { name: 'Jamur Enoki 3', category: 'Jamur', image: Jamur_Enoki_3 },
+  { name: 'Jamur Enoki 6', category: 'Jamur', image: Jamur_Enoki_6 },
+  { name: 'Jamur Kancing 5', category: 'Jamur', image: Jamur_Kancing_5 },
+  { name: 'Jamur Kancing 6', category: 'Jamur', image: Jamur_Kancing_6 },
+  { name: 'Jamur Kancing 9', category: 'Jamur', image: Jamur_Kancing_9 },
+  { name: 'Jamur Kuping', category: 'Jamur', image: Jamur_Kuping_4 },
+  { name: 'Jamur Shiitake', category: 'Jamur', image: Jamur_Shiitake_3 },
+  { name: 'Jamur Tiram', category: 'Jamur', image: Jamur_Tiram_7 },
+  { name: 'Jantung Pisang', category: 'Sayuran Tradisional', image: Jantung_Pisang_9 },
+  { name: 'Kacang Hijau', category: 'Kacang-Kacangan', image: Kacang_Hijau_8 },
+  { name: 'Kacang Kapri', category: 'Kacang-Kacangan', image: Kacang_Kapri_2 },
+  { name: 'Kacang Panjang', category: 'Kacang-Kacangan', image: Kacang_Panjang_10 },
+  { name: 'Kacang Tanah 1', category: 'Kacang-Kacangan', image: Kacang_Tanah_1 },
+  { name: 'Kacang Tanah 2', category: 'Kacang-Kacangan', image: Kacang_Tanah_2 },
+  { name: 'Kale Fresh', category: 'Sayuran Premium', image: Kale_1 },
+  { name: 'Kangkung', category: 'Sayuran Hijau', image: Kangkung_2 },
+  { name: 'Kecombrang', category: 'Bumbu & Rempah', image: Kecombrang_9 },
+  { name: 'Kemangi', category: 'Bumbu & Rempah', image: Kemangi_8 },
+  { name: 'Kentang Dieng', category: 'Umbi-Umbian', image: Kentang_2 },
+  { name: 'Labu Madu 3', category: 'Labu & Timun', image: Labu_Madu_3 },
+  { name: 'Labu Madu 5', category: 'Labu & Timun', image: Labu_Madu_5 },
+  { name: 'Labu Siam', category: 'Labu & Timun', image: Labu_Siam_4 },
+  { name: 'Lobak Putih', category: 'Umbi-Umbian', image: Lobak_9 },
+  { name: 'Melinjo', category: 'Sayuran Tradisional', image: Melinjo_1 },
+  { name: 'Okra Hijau', category: 'Sayuran Premium', image: Okra_1 },
+  { name: 'Pakcoy Fresh', category: 'Sayuran Hijau', image: Pakcoy_10 },
+  { name: 'Paprika Hijau', category: 'Sayuran Premium', image: Paprika_2 },
+  { name: 'Paprika Merah', category: 'Sayuran Premium', image: Paprika_6 },
+  { name: 'Pare 1', category: 'Sayuran Tradisional', image: Pare_1 },
+  { name: 'Pare 7', category: 'Sayuran Tradisional', image: Pare_7 },
+  { name: 'Petai Segar', category: 'Bumbu & Rempah', image: Petai_1 },
+  { name: 'Rebung Bambu', category: 'Sayuran Tradisional', image: Rebung_6 },
+  { name: 'Sawi Caisim', category: 'Sayuran Hijau', image: Sawi_Caisim_7 },
+  { name: 'Sawi Putih', category: 'Sayuran Hijau', image: Sawi_Putih_4 },
+  { name: 'Selada Keriting', category: 'Sayuran Hijau', image: Selada_3 },
+  { name: 'Seledri', category: 'Bumbu & Rempah', image: Seledri_5 },
+  { name: 'Serai Wangi', category: 'Bumbu & Rempah', image: Serai_10 },
+  { name: 'Singkong', category: 'Umbi-Umbian', image: Singkong_8 },
+  { name: 'Talas Bogor', category: 'Umbi-Umbian', image: Talas_2 },
+  { name: 'Terung Belanda', category: 'Buah & Sayur', image: Terung_Belanda_6 },
+  { name: 'Terung Ungu', category: 'Buah & Sayur', image: Terung_Ungu_1 },
+  { name: 'Timun Segar', category: 'Labu & Timun', image: Timun_1 },
+  { name: 'Tomat Merah', category: 'Buah & Sayur', image: Tomat_10 },
+  { name: 'Ubi Cilembu', category: 'Umbi-Umbian', image: Ubi_Cilembu_4 },
+  { name: 'Wortel Manis', category: 'Umbi-Umbian', image: Wortel_10 }
+];
+
+const categories = ['Semua', ...new Set(products.map(p => p.category))];
+
+const faqs = [
+  {
+    q: "Berapa minimal order transaksi di CV Green Fresh Cipanas?",
+    a: "Minimal pemesanan (Minimum Order Value / MOV) untuk pasokan B2B/ adalah **Rp 1.500.000,-** per satu kali jadwal pengiriman."
+  },
+  {
+    q: "Bagaimana mekanisme syarat termin pembayaran 7 hari (TOP 7 Days)?",
+    a: "Termin pembayaran **7 Hari (TOP 7 Days)** berlaku khusus mitra bisnis terdaftar (Hotel, Restoran, Supermarket, Katering) yang telah melewati verifikasi dokumen legalitas B2B."
+  },
+  {
+    q: "Ke manakah pembayaran transfer tagihan resmi dikirimkan?",
+    a: "Pembayaran transfer resmi dikirimkan ke **Bank BCA KCP Cipanas**, No. Rekening **1978400999** a/n **Green Fresh Cipanas**."
+  },
+  {
+    q: "Apakah komoditas yang dikirim dijamin segar?",
+    a: "Tentu. Seluruh sayuran dipanen langsung dari kebun Kayumanis & Puncak pada hari pengiriman serta melewati Quality Control (QC) Grade A."
+  },
+  {
+    q: "Bagaimana jika ada produk yang rusak saat diterima?",
+    a: "CV Green Fresh Cipanas memberikan **Garansi Retur 100%**. Pengajuan klaim dapat difoto dan diinfokan maksimal 24 jam setelah penerimaan barang."
+  }
+];
+
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "WholesaleStore",
+  "name": companyData.name,
+  "url": "https://greenfresh.co.id",
+  "logo": "https://greenfresh.co.id/logo.png",
+  "description": "Supplier pasokan sayur segar, jamur, umbi-umbian, dan bumbu rempah berkualitas langsung dari petani lokal Cipanas & Puncak.",
+  "telephone": companyData.phone,
+  "taxID": companyData.npwp,
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Kp. Kayumanis, RT 001 / RW 006, Kel. Sukatani",
+    "addressLocality": "Pacet, Cianjur",
+    "addressRegion": "Jawa Barat",
+    "addressCountry": "ID"
+  }
+};
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="CV Green Fresh Cipanas — Supplier Sayur Mayur & Hasil Tani">
+
+  <!-- SEO Schema Injection -->
+  <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+
+  <!-- HERO SECTION (Deep Emerald Glow) -->
+  <section id="hero" class="relative pt-12 pb-20 md:pt-28 md:pb-36 overflow-hidden bg-gradient-to-br from-emerald-950 via-emerald-900 to-slate-950 text-white select-none">
+    <div class="absolute -top-40 -left-40 w-96 h-96 bg-emerald-500/20 rounded-full blur-3xl animate-pulse"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 animate-fade-in-up">
+      
+      <!-- Emblem Leaf SVG Glowing -->
+      <div class="inline-flex items-center justify-center p-3 mb-4 md:mb-6 bg-white/10 backdrop-blur-xl rounded-2xl md:rounded-3xl border border-white/20 shadow-2xl hover:scale-110 transition-transform duration-300">
+        <svg class="w-12 h-12 md:w-16 md:h-16 text-emerald-400 drop-shadow-[0_0_15px_rgba(52,211,153,0.5)]" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M50 10C50 10 20 35 20 62C20 78.5685 33.4315 92 50 92C66.5685 92 80 78.5685 80 62C80 35 50 10 50 10Z" fill="url(#leafGradient)"/>
+          <path d="M50 25V85M50 50L32 38M50 62L68 50M50 40L65 30M50 72L35 62" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="72" cy="25" r="5" fill="#34D399" class="animate-ping"/>
+          <circle cx="72" cy="25" r="4" fill="#A7F3D0"/>
+          <defs>
+            <linearGradient id="leafGradient" x1="20" y1="10" x2="80" y2="92" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#10B981"/>
+              <stop offset="1" stop-color="#047857"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <div class="inline-block">
+        <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-[11px] md:text-sm font-semibold mb-4 backdrop-blur-md shadow-lg">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> Min. Order 1.5 Juta • Termin TOP 7 Hari
+        </span>
+      </div>
+
+      <h1 class="text-3xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight max-w-5xl mx-auto text-transparent bg-clip-text bg-gradient-to-r from-white via-emerald-100 to-teal-200">
+        CV Green Fresh Cipanas
+      </h1>
+
+      <p class="mt-3 text-xs sm:text-2xl text-emerald-100/80 max-w-3xl mx-auto font-light leading-relaxed">
+        Pemasok Utama Sayur Mayur & Hasil Tani Cipanas. Garansi segar Grade A dengan <span class="font-semibold text-emerald-300">Termin B2B 7 Hari</span>.
+      </p>
+
+      <!-- App Action Buttons -->
+      <div class="mt-6 md:mt-10 flex flex-row gap-3 justify-center items-center max-w-md mx-auto">
+        <a href="#order-form" class="flex-1 px-5 py-3.5 rounded-xl md:rounded-2xl bg-emerald-400 text-slate-950 font-extrabold text-xs md:text-lg shadow-xl hover:bg-emerald-300 active:scale-95 transition-all text-center flex items-center justify-center gap-2">
+          <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+          <span>Form Order WA</span>
+        </a>
+        <a href="#katalog" class="flex-1 px-5 py-3.5 rounded-xl md:rounded-2xl bg-white/10 border border-white/20 text-white font-bold text-xs md:text-lg backdrop-blur-md hover:bg-white/20 active:scale-95 transition-all text-center flex items-center justify-center gap-2">
+          <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+          </svg>
+          <span>Katalog ({products.length})</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- HIGHLIGHT FEATURE BARS (Mint Fresh Theme) -->
+  <section class="py-6 md:py-10 bg-gradient-to-r from-emerald-900 via-teal-900 to-emerald-950 text-white border-y border-emerald-800 shadow-inner">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+        <div class="p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 text-center hover:bg-white/15 transition-all duration-300 group">
+          <div class="text-emerald-300 font-extrabold text-base md:text-2xl group-hover:scale-105 transition-transform">Rp 1.500.000</div>
+          <div class="text-[10px] md:text-xs font-semibold text-emerald-100/70 uppercase tracking-wider mt-1">Minimal Order (MOV)</div>
+        </div>
+        <div class="p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 text-center hover:bg-white/15 transition-all duration-300 group">
+          <div class="text-emerald-300 font-extrabold text-base md:text-2xl group-hover:scale-105 transition-transform">7 Hari TOP</div>
+          <div class="text-[10px] md:text-xs font-semibold text-emerald-100/70 uppercase tracking-wider mt-1">Termin Pembayaran</div>
+        </div>
+        <div class="p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 text-center hover:bg-white/15 transition-all duration-300 group">
+          <div class="text-emerald-300 font-extrabold text-base md:text-2xl group-hover:scale-105 transition-transform">Bank BCA</div>
+          <div class="text-[10px] md:text-xs font-semibold text-emerald-100/70 uppercase tracking-wider mt-1">Rekening Perusahaan</div>
+        </div>
+        <div class="p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 text-center hover:bg-white/15 transition-all duration-300 group">
+          <div class="text-emerald-300 font-extrabold text-base md:text-2xl group-hover:scale-105 transition-transform">QC Grade A</div>
+          <div class="text-[10px] md:text-xs font-semibold text-emerald-100/70 uppercase tracking-wider mt-1">Sortir Tangan Pertama</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEKSI TENTANG KAMI, VISI & MISI (Warm Creamy/Soft Green Background) -->
+  <section id="tentang-kami" class="py-12 md:py-24 bg-gradient-to-b from-emerald-50/60 via-teal-50/40 to-white border-b border-emerald-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <!-- Text Deskripsi Tentang Kami -->
+        <div class="space-y-6">
+          <div>
+            <span class="inline-block px-3.5 py-1 rounded-full bg-emerald-100 text-emerald-800 font-extrabold text-xs tracking-wider uppercase mb-2">Profil Perusahaan</span>
+            <h2 class="text-2xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Tentang CV Green Fresh Cipanas</h2>
+          </div>
+          
+          <p class="text-slate-600 text-sm md:text-base leading-relaxed">
+            <strong>CV Green Fresh Cipanas</strong> adalah perusahaan penyedia dan distributor komoditas pertanian, sayur mayur segar, jamur, umbi-umbian, serta bumbu rempah berkualitas tinggi yang berbasis di Pacet, Cianjur, Jawa Barat.
+          </p>
+
+          <p class="text-slate-600 text-sm md:text-base leading-relaxed">
+            Berada langsung di kawasan dataran tinggi Cipanas & Puncak, kami bermitra erat dengan para petani lokal terpercaya untuk memastikan setiap komoditas dipanen dalam kondisi optimal, melewati proses penyortiran <em>Quality Control (QC) Grade A</em>, dan siap disalurkan secara konsisten ke mitra bisnis kami.
+          </p>
+
+          <div class="pt-2 grid grid-cols-2 gap-4 border-t border-emerald-200/60">
+            <div class="p-3 bg-white rounded-2xl border border-emerald-100 shadow-sm">
+              <p class="text-2xl md:text-3xl font-extrabold text-emerald-600">60+</p>
+              <p class="text-xs text-slate-500 font-medium">Varietas Komoditas Ready</p>
+            </div>
+            <div class="p-3 bg-white rounded-2xl border border-emerald-100 shadow-sm">
+              <p class="text-2xl md:text-3xl font-extrabold text-emerald-600">Grade A</p>
+              <p class="text-xs text-slate-500 font-medium">Standar Penyortiran Segar</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kartu Visi & Misi -->
+        <div class="space-y-6 bg-white p-6 md:p-8 rounded-3xl border border-emerald-100 shadow-xl shadow-emerald-900/5">
+          <div class="p-5 bg-emerald-50/70 rounded-2xl border border-emerald-200/70 hover:shadow-md transition-all duration-300">
+            <div class="flex items-center gap-3 mb-2">
+              <div class="w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold text-sm shadow-md">👁️</div>
+              <h3 class="text-lg font-extrabold text-slate-900">Visi Kami</h3>
+            </div>
+            <p class="text-slate-700 text-xs md:text-sm leading-relaxed">
+              Menjadi mitra utama supplier hasil tani dan sayuran terdepan di Indonesia yang terpercaya dalam mutu kesegaran, kontinuitas pasokan, serta profesionalisme layanan B2B.
+            </p>
+          </div>
+
+          <div class="p-5 bg-teal-50/70 rounded-2xl border border-teal-200/70 hover:shadow-md transition-all duration-300">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-8 h-8 rounded-xl bg-teal-600 text-white flex items-center justify-center font-bold text-sm shadow-md">🎯</div>
+              <h3 class="text-lg font-extrabold text-slate-900">Misi Kami</h3>
+            </div>
+            <ul class="space-y-2 text-slate-700 text-xs md:text-sm leading-relaxed">
+              <li class="flex items-start gap-2">
+                <span class="text-teal-600 font-extrabold">•</span>
+                <span>Menjamin distribusi produk pertanian segar berkualitas Grade A langsung dari petani lokal Cipanas & Puncak.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-teal-600 font-extrabold">•</span>
+                <span>Memberikan kepastian jadwal pengiriman yang konsisten dan efisien untuk mendukung kelancaran operasional mitra hotel, restoran, dan supermarket.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-teal-600 font-extrabold">•</span>
+                <span>Membangun kerjasama jangka panjang yang saling menguntungkan dengan fleksibilitas sistem pembayaran B2B (TOP 7 Hari).</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- KATALOG PRODUK (Light Amber/Nature Cream Background) -->
+  <section id="katalog" class="py-12 md:py-24 bg-gradient-to-b from-white via-amber-50/30 to-slate-50 pb-28 md:pb-24 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-6 md:mb-10">
+        <span class="inline-block px-3.5 py-1 rounded-full bg-amber-100 text-amber-800 font-extrabold text-xs tracking-wider uppercase mb-2">Katalog Komoditas</span>
+        <h2 class="text-2xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">Daftar Produk Segar Ready</h2>
+      </div>
+
+      <!-- SEARCH & CATEGORY CHIPS BAR -->
+      <div class="sticky top-16 md:top-24 z-30 mb-8 bg-white/95 backdrop-blur-md p-3 rounded-2xl shadow-md border border-slate-200 transition-all">
+        <div class="relative mb-3">
+          <input
+            type="text"
+            id="search-input"
+            placeholder="Cari wortel, jamur, cabai..."
+            class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-emerald-500 text-xs md:text-sm bg-slate-50 font-medium transition-all"
+          />
+          <svg class="w-5 h-5 absolute left-3 top-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </div>
+
+        <div class="flex gap-2 overflow-x-auto no-scrollbar pb-1">
+          {categories.map((cat, index) => (
+            <button
+              class={`filter-btn px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all duration-300 ${
+                index === 0
+                  ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30 active-category scale-105'
+                  : 'bg-white text-slate-600 border border-slate-200 hover:bg-emerald-50 hover:text-emerald-700'
+              }`}
+              data-category={cat}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <!-- PRODUCT GRID WITH ZOOM ANIMATION -->
+      <div id="product-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4 sm:gap-6">
+        {products.map((item, index) => (
+          <div
+            class={`product-card bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-2xl hover:border-emerald-300 transition-all duration-300 flex flex-col group ${index >= 8 ? 'hidden' : ''}`}
+            data-name={item.name.toLowerCase()}
+            data-category={item.category}
+          >
+            <div class="relative aspect-square bg-slate-100 overflow-hidden">
+              <Image
+                src={item.image}
+                alt={item.name}
+                width={300}
+                height={300}
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ease-out"
+                loading="lazy"
+              />
+              <span class="absolute top-3 left-3 bg-white/95 backdrop-blur-md text-emerald-800 text-[9px] md:text-[10px] font-extrabold px-2.5 py-1 rounded-full border border-emerald-100 shadow-sm">
+                {item.category}
+              </span>
+            </div>
+
+            <div class="p-4 md:p-5 flex flex-col flex-grow justify-between">
+              <div>
+                <h3 class="font-extrabold text-slate-900 text-xs md:text-base line-clamp-1 group-hover:text-emerald-600 transition-colors">
+                  {item.name}
+                </h3>
+                <p class="text-[10px] md:text-xs text-slate-500 mt-0.5 font-medium">Grade A Quality</p>
+              </div>
+
+              <button
+                type="button"
+                data-product-name={item.name}
+                class="add-to-form-btn mt-4 w-full py-2.5 rounded-xl bg-emerald-50 text-emerald-700 font-bold text-[11px] md:text-xs text-center hover:bg-emerald-600 hover:text-white active:scale-95 transition-all flex items-center justify-center gap-1.5 shadow-sm"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                </svg>
+                <span>Tambah Order</span>
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- LOAD MORE BUTTON CONTAINER -->
+      <div id="load-more-container" class="text-center mt-10 md:mt-14">
+        <button
+          id="load-more-btn"
+          type="button"
+          class="px-8 py-4 rounded-2xl bg-white border-2 border-emerald-600 text-emerald-700 font-extrabold text-xs md:text-sm hover:bg-emerald-600 hover:text-white active:scale-95 transition-all shadow-md inline-flex items-center gap-2"
+        >
+          <span>Muat Lebih Banyak Produk</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <p id="product-count-info" class="text-xs text-slate-500 mt-3 font-semibold">Menampilkan 8 dari {products.length} produk</p>
+      </div>
+
+      <div id="empty-state" class="hidden text-center py-12 bg-white rounded-3xl border border-slate-200 mt-4 shadow-sm">
+        <p class="text-slate-500 text-xs font-semibold">Produk tidak ditemukan.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FORM DIRECT ORDER TO WHATSAPP (Vibrant Emerald Gradient Background) -->
+  <section id="order-form" class="py-12 md:py-24 bg-gradient-to-br from-emerald-900 via-teal-900 to-slate-900 text-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="bg-white text-slate-900 p-6 sm:p-12 rounded-3xl border border-emerald-200 shadow-2xl relative overflow-hidden">
+        <div class="absolute -right-20 -top-20 w-64 h-64 bg-emerald-100 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="text-center mb-8 relative z-10">
+          <span class="inline-block px-3.5 py-1 rounded-full bg-emerald-100 text-emerald-800 font-extrabold text-[10px] md:text-xs uppercase tracking-wider mb-2">Form Order Instan</span>
+          <h2 class="text-2xl md:text-4xl font-extrabold text-slate-900">Form Pasokan WhatsApp</h2>
+          <p class="text-xs md:text-sm text-slate-500 mt-1">Isi formulir pesanan di bawah untuk langsung terhubung dengan admin  kami.</p>
+        </div>
+
+        <form id="wa-order-form" class="space-y-4 md:space-y-6 relative z-10">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Nama Usaha / Pembeli *</label>
+              <input type="text" id="form-nama" required placeholder="Hotel / Resto / Nama Pembeli" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-xs md:text-sm focus:ring-2 focus:ring-emerald-500 bg-slate-50 transition-all font-medium" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Alamat Kirim *</label>
+              <input type="text" id="form-alamat" required placeholder="Kota / Alamat Tujuan" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-xs md:text-sm focus:ring-2 focus:ring-emerald-500 bg-slate-50 transition-all font-medium" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Tgl Pengiriman *</label>
+              <input type="date" id="form-tanggal" required class="w-full px-4 py-3 rounded-xl border border-slate-200 text-xs md:text-sm focus:ring-2 focus:ring-emerald-500 bg-slate-50 transition-all font-medium" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Metode Bayar</label>
+              <select id="form-pembayaran" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-xs md:text-sm font-semibold focus:ring-2 focus:ring-emerald-500 bg-slate-50 transition-all">
+                <option value="Cash / Transfer Harian">Cash / Transfer Harian (BCA 1978400999)</option>
+                <option value="Termin Pembayaran 7 Hari (TOP 7)">Termin Pembayaran 7 Hari (B2B)</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Daftar Komoditas (Kg/Pack) *</label>
+            <textarea id="form-komoditas" rows="4" required placeholder="- Wortel: 50 Kg&#10;- Kentang: 30 Kg" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-xs md:text-sm font-mono focus:ring-2 focus:ring-emerald-500 bg-slate-50 transition-all"></textarea>
+          </div>
+
+          <div class="p-3.5 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 text-xs flex items-center gap-3">
+            <svg class="w-5 h-5 text-amber-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+            </svg>
+            <p><strong>Minimal Order:</strong> Akumulasi pesanan harian minimal <strong>Rp 1.500.000,-</strong>.</p>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full py-4 rounded-2xl bg-emerald-600 text-white font-extrabold text-xs md:text-base hover:bg-emerald-700 active:scale-95 transition-all flex items-center justify-center gap-2.5 shadow-xl shadow-emerald-600/30"
+          >
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+            </svg>
+            <span>Kirim Pesanan ke WA (087780937884)</span>
+          </button>
+        </form>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- LEGAL INFORMATION & BANK DETAILS SECTION (Clean Slate / Soft Blue-Grey Background) -->
+  <section id="informasi-perusahaan" class="py-12 md:py-24 bg-gradient-to-b from-slate-100 via-slate-50 to-slate-100 border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+        
+        <!-- Legal & Bank Box -->
+        <div class="bg-white p-6 md:p-10 rounded-3xl border border-slate-200 shadow-xl space-y-6 flex flex-col justify-between">
+          <div>
+            <span class="inline-block px-3.5 py-1 rounded-full bg-slate-200 text-slate-800 font-extrabold text-[10px] md:text-xs uppercase tracking-wider mb-2">Informasi Legalitas</span>
+            <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">{companyData.name}</h2>
+            <p class="text-xs text-slate-500 mt-1">NPWP: <span class="font-mono font-bold text-slate-700">{companyData.npwp}</span></p>
+          </div>
+
+          <div class="border-t border-slate-100 pt-5 space-y-4 text-xs md:text-sm text-slate-600">
+            <div class="flex items-start gap-3.5">
+              <div class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center flex-shrink-0 mt-0.5">📍</div>
+              <p><strong>Alamat Gudang:</strong> {companyData.address}</p>
+            </div>
+
+            <div class="flex items-center gap-3.5">
+              <div class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center flex-shrink-0">📞</div>
+              <p><strong>Telepon / WA Resmi:</strong> <a href={`https://wa.me/${companyData.waNumber}`} class="text-emerald-700 font-extrabold hover:underline">{companyData.phone}</a></p>
+            </div>
+          </div>
+
+          <!-- Bank Rekening Card -->
+          <div class="p-5 md:p-6 rounded-2xl bg-gradient-to-r from-emerald-950 to-emerald-900 text-white space-y-3 relative overflow-hidden shadow-lg">
+            <div class="absolute -right-4 -bottom-4 w-32 h-32 bg-emerald-700/30 rounded-full blur-2xl"></div>
+            <p class="text-[10px] md:text-xs text-emerald-300 font-extrabold uppercase tracking-widest">Rekening Resmi Transaksi Pembayaran</p>
+            <div class="flex justify-between items-center pt-1 relative z-10">
+              <div>
+                <p class="text-xs text-emerald-100 font-medium">{companyData.bank.name} — {companyData.bank.branch}</p>
+                <p class="text-xl md:text-3xl font-mono font-extrabold tracking-wider text-emerald-300 mt-1">{companyData.bank.accountNumber}</p>
+                <p class="text-xs text-emerald-100 mt-1">a/n <strong>{companyData.bank.accountName}</strong></p>
+              </div>
+              <div class="bg-white/15 px-4 py-2 rounded-xl border border-white/20 text-xs font-black tracking-wider text-white backdrop-blur-md">
+                BCA
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Location Google Maps Embed -->
+        <div class="bg-white p-5 md:p-6 rounded-3xl border border-slate-200 shadow-xl overflow-hidden flex flex-col justify-between">
+          <div class="mb-4 px-2">
+            <h3 class="font-extrabold text-slate-900 text-lg md:text-xl">Lokasi Gudang & Kebun</h3>
+            <p class="text-xs text-slate-500 font-medium">CV Green Fresh Cipanas — Supplier Sayur Mayur Pacet, Cianjur</p>
+          </div>
+          <div class="w-full h-80 md:h-96 rounded-2xl overflow-hidden border border-slate-100 shadow-inner">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3962.207870561313!2d107.0236364!3d-6.7444817!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69b3dec98fb5cf%3A0xa1a6070b0a2a9ef3!2sCV%20Green%20Fresh%20Cipanas%20-%20Supplier%20Sayur%20Mayur!5e0!3m2!1sid!2sid!4v1792404928345!5m2!1sid!2sid" 
+              width="100%" 
+              height="100%" 
+              style="border:0;" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="strict-origin-when-cross-origin"
+            ></iframe>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ ACCORDION (Soft Mint / Light Emerald Background) -->
+  <section id="faq" class="py-12 md:py-24 bg-gradient-to-b from-emerald-50/50 via-teal-50/30 to-white border-t border-slate-200 pb-28 md:pb-24">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8">
+        <span class="inline-block px-3.5 py-1 rounded-full bg-emerald-100 text-emerald-800 font-extrabold text-xs tracking-wider uppercase mb-2">Bantuan & FAQ</span>
+        <h2 class="text-2xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Pertanyaan yang Sering Diajukan</h2>
+      </div>
+
+      <div class="space-y-4">
+        {faqs.map((faq, idx) => (
+          <div class="faq-item bg-white rounded-2xl border border-emerald-100 overflow-hidden shadow-sm hover:border-emerald-300 transition-all">
+            <button
+              type="button"
+              class="faq-trigger w-full px-5 py-4 text-left font-bold text-slate-900 text-xs md:text-sm flex justify-between items-center gap-3"
+              data-target={`faq-ans-${idx}`}
+            >
+              <span>{faq.q}</span>
+              <svg class="faq-icon w-5 h-5 text-emerald-600 flex-shrink-0 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div id={`faq-ans-${idx}`} class="faq-answer hidden px-5 pb-5 text-slate-600 text-xs md:text-sm leading-relaxed border-t border-slate-100 pt-3 bg-emerald-50/30">
+              <p set:html={faq.a}></p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTTOM APP NAVIGATION DOCK -->
+  <div class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-t border-slate-200 px-4 py-2 flex justify-around items-center text-slate-600 shadow-2xl">
+    <a href="#hero" class="flex flex-col items-center gap-1 text-[10px] font-bold text-slate-600 hover:text-emerald-600 active:scale-95 transition-all">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+      </svg>
+      <span>Beranda</span>
+    </a>
+
+    <a href="#katalog" class="flex flex-col items-center gap-1 text-[10px] font-bold text-slate-600 hover:text-emerald-600 active:scale-95 transition-all">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+      </svg>
+      <span>Katalog</span>
+    </a>
+
+    <a href="#order-form" class="flex flex-col items-center gap-0.5 text-[10px] font-bold text-emerald-600 active:scale-95 transition-all">
+      <div class="w-11 h-11 -mt-6 rounded-full bg-emerald-600 text-white flex items-center justify-center shadow-lg shadow-emerald-600/40">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+        </svg>
+      </div>
+      <span>Order WA</span>
+    </a>
+
+    <a href="#faq" class="flex flex-col items-center gap-1 text-[10px] font-bold text-slate-600 hover:text-emerald-600 active:scale-95 transition-all">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+      </svg>
+      <span>FAQ</span>
+    </a>
+
+    <a href={`https://wa.me/${companyData.waNumber}`} target="_blank" class="flex flex-col items-center gap-1 text-[10px] font-bold text-slate-600 hover:text-emerald-600 active:scale-95 transition-all">
+      <svg class="w-5 h-5 fill-current text-emerald-600" viewBox="0 0 24 24">
+        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+      </svg>
+      <span>Kontak</span>
+    </a>
+  </div>
+
+  <style>
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+
+  <!-- CLIENT INTERACTIVE SCRIPTS -->
+  <script>
+    const searchInput = document.getElementById('search-input') as HTMLInputElement;
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const productCards = document.querySelectorAll('.product-card');
+    const emptyState = document.getElementById('empty-state');
+    const loadMoreBtn = document.getElementById('load-more-btn');
+    const loadMoreContainer = document.getElementById('load-more-container');
+    const countInfo = document.getElementById('product-count-info');
+
+    let currentCategory = 'Semua';
+    let currentSearch = '';
+    let visibleLimit = 8;
+
+    function renderProducts() {
+      let matchingCards: HTMLElement[] = [];
+
+      productCards.forEach((card) => {
+        const el = card as HTMLElement;
+        const name = el.dataset.name || '';
+        const category = el.dataset.category || '';
+
+        const matchesCategory = currentCategory === 'Semua' || category === currentCategory;
+        const matchesSearch = name.includes(currentSearch.toLowerCase());
+
+        if (matchesCategory && matchesSearch) {
+          matchingCards.push(el);
+        } else {
+          el.classList.add('hidden');
+        }
+      });
+
+      if (emptyState) {
+        emptyState.style.display = matchingCards.length === 0 ? 'block' : 'none';
+      }
+
+      const totalMatching = matchingCards.length;
+      
+      matchingCards.forEach((el, index) => {
+        if (index < visibleLimit) {
+          el.classList.remove('hidden');
+        } else {
+          el.classList.add('hidden');
+        }
+      });
+
+      if (loadMoreContainer) {
+        if (visibleLimit >= totalMatching || totalMatching === 0) {
+          loadMoreContainer.style.display = 'none';
+        } else {
+          loadMoreContainer.style.display = 'block';
+        }
+      }
+
+      if (countInfo) {
+        const currentlyShown = Math.min(visibleLimit, totalMatching);
+        countInfo.innerText = `Menampilkan ${currentlyShown} dari ${totalMatching} produk`;
+      }
+    }
+
+    loadMoreBtn?.addEventListener('click', () => {
+      visibleLimit += 8;
+      renderProducts();
+    });
+
+    searchInput?.addEventListener('input', (e) => {
+      currentSearch = (e.target as HTMLInputElement).value;
+      visibleLimit = 8;
+      renderProducts();
+    });
+
+    filterBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach((b) => {
+          b.classList.remove('bg-emerald-600', 'text-white', 'shadow-lg', 'shadow-emerald-600/30', 'active-category', 'scale-105');
+          b.classList.add('bg-white', 'text-slate-600', 'border', 'border-slate-200');
+        });
+
+        btn.classList.remove('bg-white', 'text-slate-600', 'border', 'border-slate-200');
+        btn.classList.add('bg-emerald-600', 'text-white', 'shadow-lg', 'shadow-emerald-600/30', 'active-category', 'scale-105');
+
+        currentCategory = (btn as HTMLElement).dataset.category || 'Semua';
+        visibleLimit = 8;
+        renderProducts();
+      });
+    });
+
+    const addBtns = document.querySelectorAll('.add-to-form-btn');
+    const komoditasTextarea = document.getElementById('form-komoditas') as HTMLTextAreaElement;
+
+    addBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const pName = (btn as HTMLElement).dataset.productName;
+        if (komoditasTextarea && pName) {
+          if (!komoditasTextarea.value.includes(pName)) {
+            komoditasTextarea.value += (komoditasTextarea.value ? '\n' : '') + `- ${pName}: ... Kg`;
+          }
+          const orderFormSec = document.getElementById('order-form');
+          orderFormSec?.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    const waForm = document.getElementById('wa-order-form');
+    waForm?.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const nama = (document.getElementById('form-nama') as HTMLInputElement).value;
+      const alamat = (document.getElementById('form-alamat') as HTMLInputElement).value;
+      const tgl = (document.getElementById('form-tanggal') as HTMLInputElement).value;
+      const bayar = (document.getElementById('form-pembayaran') as HTMLSelectElement).value;
+      const komoditas = (document.getElementById('form-komoditas') as HTMLTextAreaElement).value;
+
+      const message = `Halo CV Green Fresh Cipanas, saya ingin memesan pasokan sayur:\n\n` +
+                      `*Nama Usaha:* ${nama}\n` +
+                      `*Alamat Kirim:* ${alamat}\n` +
+                      `*Tgl Kirim:* ${tgl}\n` +
+                      `*Metode Bayar:* ${bayar}\n\n` +
+                      `*Pesanan (Min. Rp 1.5 Juta):*\n${komoditas}\n\n` +
+                      `Mohon info penawaran harganya. Terima kasih.`;
+
+      window.open(`https://wa.me/6287780937884?text=${encodeURIComponent(message)}`, '_blank');
+    });
+
+    const faqTriggers = document.querySelectorAll('.faq-trigger');
+    faqTriggers.forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        const targetId = (trigger as HTMLElement).dataset.target;
+        const targetAns = document.getElementById(targetId || '');
+        const icon = trigger.querySelector('.faq-icon');
+
+        if (targetAns) {
+          const isHidden = targetAns.classList.contains('hidden');
+          document.querySelectorAll('.faq-answer').forEach(ans => ans.classList.add('hidden'));
+          document.querySelectorAll('.faq-icon').forEach(ic => ic.classList.remove('rotate-180'));
+
+          if (isHidden) {
+            targetAns.classList.remove('hidden');
+            icon?.classList.add('rotate-180');
+          }
+        }
+      });
+    });
+
+    renderProducts();
+  </script>
+
 </Layout>

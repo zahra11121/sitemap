@@ -1,0 +1,1238 @@
+[
+    {
+        "id": "kedoya-utara",
+        "lokasi": "Kedoya Utara"
+    },
+    {
+        "id": "wijaya-kusuma",
+        "lokasi": "Wijaya Kusuma"
+    },
+	 {
+        "id": "cikarang",
+        "lokasi": "Cikarang"
+    },
+    {
+        "id": "tomang",
+        "lokasi": "Tomang"
+    },
+     {
+        "id": "cianjur",
+        "lokasi": "cianjur"
+    },
+     {
+        "id": "cipanas",
+        "lokasi": "cipanas"
+    },
+     {
+        "id": "bandung",
+        "lokasi": "bandung"
+    },
+     {
+        "id": "cilegon",
+        "lokasi": "cilegon"
+    },
+     {
+        "id": "sukabumi",
+        "lokasi": "sukabumi"
+    },
+    {
+        "id": "thamrin",
+        "lokasi": "Thamrin"
+    },
+    {
+        "id": "tebet-timur",
+        "lokasi": "Tebet Timur"
+    },
+    {
+        "id": "tebet-barat",
+        "lokasi": "Tebet Barat"
+    },
+    {
+        "id": "tebet",
+        "lokasi": "Tebet"
+    },
+    {
+        "id": "tanah-abang",
+        "lokasi": "Tanah Abang"
+    },
+    {
+        "id": "taman-rasuna",
+        "lokasi": "Taman Rasuna"
+    },
+    {
+        "id": "taman-kota",
+        "lokasi": "Taman Kota"
+    },
+    {
+        "id": "taman-galaxi",
+        "lokasi": "Taman Galaxi"
+    },
+    {
+        "id": "taman-duta",
+        "lokasi": "Taman Duta"
+    },
+    {
+        "id": "tajur",
+        "lokasi": "Tajur"
+    },
+    {
+        "id": "sunter",
+        "lokasi": "Sunter"
+    },
+    {
+        "id": "sukatani",
+        "lokasi": "Sukatani"
+    },
+    {
+        "id": "sukaraja",
+        "lokasi": "Sukaraja"
+    },
+    {
+        "id": "sudirman",
+        "lokasi": "Sudirman"
+    },
+    {
+        "id": "srengseng-sawah",
+        "lokasi": "Srengseng Sawah"
+    },
+    {
+        "id": "srengseng-raya",
+        "lokasi": "Srengseng Raya"
+    },
+    {
+        "id": "srengseng",
+        "lokasi": "Srengseng"
+    },
+    {
+        "id": "slipi",
+        "lokasi": "Slipi"
+    },
+    {
+        "id": "setu-cipayung",
+        "lokasi": "Setu Cipayung"
+    },
+    {
+        "id": "setu",
+        "lokasi": "Setu"
+    },
+    {
+        "id": "setiabudi",
+        "lokasi": "Setiabudi"
+    },
+    {
+        "id": "serpong-utara",
+        "lokasi": "Serpong Utara"
+    },
+    {
+        "id": "serpong",
+        "lokasi": "Serpong"
+    },
+    {
+        "id": "senopati",
+        "lokasi": "Senopati"
+    },
+    {
+        "id": "senayan",
+        "lokasi": "Senayan"
+    },
+    {
+        "id": "sawangan",
+        "lokasi": "Sawangan"
+    },
+    {
+        "id": "rempoa",
+        "lokasi": "Rempoa"
+    },
+    {
+        "id": "rawamangun",
+        "lokasi": "Rawamangun"
+    },
+    {
+        "id": "rawalumbu",
+        "lokasi": "Rawalumbu"
+    },
+    {
+        "id": "rawa-buntu",
+        "lokasi": "Rawa Buntu"
+    },
+    {
+        "id": "rawa-barat",
+        "lokasi": "Rawa Barat"
+    },
+    {
+        "id": "ragunan",
+        "lokasi": "Ragunan"
+    },
+    {
+        "id": "puri-indah",
+        "lokasi": "Puri Indah"
+    },
+    {
+        "id": "puri-botanica",
+        "lokasi": "Puri Botanica"
+    },
+    {
+        "id": "puri-bali",
+        "lokasi": "Puri Bali"
+    },
+    {
+        "id": "pulomas",
+        "lokasi": "Pulomas"
+    },
+    {
+        "id": "pulo-gadung",
+        "lokasi": "Pulo Gadung"
+    },
+    {
+        "id": "poris-indah",
+        "lokasi": "Poris Indah"
+    },
+    {
+        "id": "pondok-ungu",
+        "lokasi": "Pondok Ungu"
+    },
+    {
+        "id": "pondok-timur",
+        "lokasi": "Pondok Timur"
+    },
+    {
+        "id": "pondok-ranggon",
+        "lokasi": "Pondok Ranggon"
+    },
+    {
+        "id": "pondok-pucung",
+        "lokasi": "Pondok Pucung"
+    },
+    {
+        "id": "pondok-pinang-centre",
+        "lokasi": "Pondok Pinang Centre"
+    },
+    {
+        "id": "pondok-pinang",
+        "lokasi": "Pondok Pinang"
+    },
+    {
+        "id": "pondok-melati",
+        "lokasi": "Pondok Melati"
+    },
+    {
+        "id": "pondok-labu",
+        "lokasi": "Pondok Labu"
+    },
+    {
+        "id": "pondok-kopi",
+        "lokasi": "Pondok Kopi"
+    },
+    {
+        "id": "pondok-karya",
+        "lokasi": "Pondok Karya"
+    },
+    {
+        "id": "pondok-kacang",
+        "lokasi": "Pondok Kacang"
+    },
+    {
+        "id": "pondok-jaya",
+        "lokasi": "Pondok Jaya"
+    },
+    {
+        "id": "pondok-jagung",
+        "lokasi": "Pondok Jagung"
+    },
+    {
+        "id": "pondok-indah",
+        "lokasi": "Pondok Indah"
+    },
+    {
+        "id": "pondok-gede",
+        "lokasi": "Pondok Gede"
+    },
+    {
+        "id": "pondok-cabe",
+        "lokasi": "Pondok Cabe"
+    },
+    {
+        "id": "pondok-betung",
+        "lokasi": "Pondok Betung"
+    },
+    {
+        "id": "pondok-benda",
+        "lokasi": "Pondok Benda"
+    },
+    {
+        "id": "pondok-aren",
+        "lokasi": "Pondok Aren"
+    },
+    {
+        "id": "podomoro-park",
+        "lokasi": "Podomoro Park"
+    },
+    {
+        "id": "pluit",
+        "lokasi": "Pluit"
+    },
+    {
+        "id": "pisangan-barat",
+        "lokasi": "Pisangan Barat"
+    },
+    {
+        "id": "petukangan",
+        "lokasi": "Petukangan"
+    },
+    {
+        "id": "petojo",
+        "lokasi": "Petojo"
+    },
+    {
+        "id": "petogogan",
+        "lokasi": "Petogogan"
+    },
+    {
+        "id": "petamburan",
+        "lokasi": "Petamburan"
+    },
+    {
+        "id": "pesona-khayangan",
+        "lokasi": "Pesona Khayangan"
+    },
+    {
+        "id": "pesanggrahan",
+        "lokasi": "Pesanggrahan"
+    },
+    {
+        "id": "permata-senayan",
+        "lokasi": "Permata Senayan"
+    },
+    {
+        "id": "permata-hijau",
+        "lokasi": "Permata Hijau"
+    },
+    {
+        "id": "periuk",
+        "lokasi": "Periuk"
+    },
+    {
+        "id": "penjaringan",
+        "lokasi": "Penjaringan"
+    },
+    {
+        "id": "pengadegan",
+        "lokasi": "Pengadegan"
+    },
+    {
+        "id": "pela-mampang",
+        "lokasi": "Pela Mampang"
+    },
+    {
+        "id": "pejaten",
+        "lokasi": "Pejaten"
+    },
+    {
+        "id": "pekayon-pasar-rebo",
+        "lokasi": "Pekayon Pasar Rebo"
+    },
+    {
+        "id": "pekayon",
+        "lokasi": "Pekayon"
+    },
+    {
+        "id": "pejagalan",
+        "lokasi": "Pejagalan"
+    },
+    {
+        "id": "pegangsaan",
+        "lokasi": "Pegangsaan"
+    },
+    {
+        "id": "pasar-rebo",
+        "lokasi": "Pasar Rebo"
+    },
+    {
+        "id": "pasar-rawa-buaya",
+        "lokasi": "Pasar Rawa Buaya"
+    },
+    {
+        "id": "pasar-minggu",
+        "lokasi": "Pasar Minggu"
+    },
+    {
+        "id": "pasar-induk-tanah-tinggi",
+        "lokasi": "Pasar Induk Tanah Tinggi"
+    },
+    {
+        "id": "pasar-induk-kramat-jati",
+        "lokasi": "Pasar Induk Kramat Jati"
+    },
+    {
+        "id": "pasar-induk-cibitung",
+        "lokasi": "Pasar Induk Cibitung"
+    },
+    {
+        "id": "pasar-baru",
+        "lokasi": "Pasar Baru"
+    },
+    {
+        "id": "pantai-maju-promenade-pik-2",
+        "lokasi": "Pantai Maju Promenade Pik 2"
+    },
+    {
+        "id": "pantai-indah-kapuk-pik",
+        "lokasi": "Pantai Indah Kapuk (Pik)"
+    },
+    {
+        "id": "pancoran-selatan",
+        "lokasi": "Pancoran Selatan"
+    },
+    {
+        "id": "pancoran",
+        "lokasi": "Pancoran"
+    },
+    {
+        "id": "pamulang",
+        "lokasi": "Pamulang"
+    },
+    {
+        "id": "-palmerah",
+        "lokasi": " Palmerah"
+    },
+    {
+        "id": "pakulonan",
+        "lokasi": "Pakulonan"
+    },
+    {
+        "id": "pakubuwono-signature",
+        "lokasi": "Pakubuwono Signature"
+    },
+    {
+        "id": "pakubuwono-residence",
+        "lokasi": "Pakubuwono Residence"
+    },
+    {
+        "id": "paku-jaya",
+        "lokasi": "Paku Jaya"
+    },
+    {
+        "id": "nava-park",
+        "lokasi": "Nava Park"
+    },
+    {
+        "id": "mustika-jaya",
+        "lokasi": "Mustika Jaya"
+    },
+    {
+        "id": "munjul",
+        "lokasi": "Munjul"
+    },
+    {
+        "id": "mulyaharja",
+        "lokasi": "Mulyaharja"
+    },
+    {
+        "id": "muara-karang",
+        "lokasi": "Muara Karang"
+    },
+    {
+        "id": "metland-town",
+        "lokasi": "Metland Town"
+    },
+    {
+        "id": "meruya-utara",
+        "lokasi": "Meruya Utara"
+    },
+    {
+        "id": "meruya-selatan",
+        "lokasi": "Meruya Selatan"
+    },
+    {
+        "id": "meruya",
+        "lokasi": "Meruya"
+    },
+    {
+        "id": "menteng-dalam",
+        "lokasi": "Menteng Dalam"
+    },
+    {
+        "id": "menteng",
+        "lokasi": "Menteng"
+    },
+    {
+        "id": "melawai",
+        "lokasi": "Melawai"
+    },
+    {
+        "id": "mega-city",
+        "lokasi": "Mega City"
+    },
+    {
+        "id": "medan-satria",
+        "lokasi": "Medan Satria"
+    },
+    {
+        "id": "marunda",
+        "lokasi": "Marunda"
+    },
+    {
+        "id": "margonda",
+        "lokasi": "Margonda"
+    },
+    {
+        "id": "margahayu",
+        "lokasi": "Margahayu"
+    },
+    {
+        "id": "marga-jaya",
+        "lokasi": "Marga Jaya"
+    },
+    {
+        "id": "manggarai-selatan",
+        "lokasi": "Manggarai Selatan"
+    },
+    {
+        "id": "manggarai",
+        "lokasi": "Manggarai"
+    },
+    {
+        "id": "mangga-dua",
+        "lokasi": "Mangga Dua"
+    },
+    {
+        "id": "mangga-besar",
+        "lokasi": "Mangga Besar"
+    },
+    {
+        "id": "mampang-prapatan",
+        "lokasi": "Mampang Prapatan"
+    },
+    {
+        "id": "malaka-jaya",
+        "lokasi": "Malaka Jaya"
+    },
+    {
+        "id": "pasar-kemis",
+        "lokasi": "Pasar Kemis"
+    },
+    {
+        "id": "lubang-buaya",
+        "lokasi": "Lubang Buaya"
+    },
+    {
+        "id": "lippo-village",
+        "lokasi": "Lippo Village"
+    },
+    {
+        "id": "limo",
+        "lokasi": "Limo"
+    },
+    {
+        "id": "lenteng-agung",
+        "lokasi": "Lenteng Agung"
+    },
+    {
+        "id": "lengkong",
+        "lokasi": "Lengkong"
+    },
+    {
+        "id": "legenda-wisata",
+        "lokasi": "Legenda Wisata"
+    },
+    {
+        "id": "lebak-bulus",
+        "lokasi": "Lebak Bulus"
+    },
+    {
+        "id": "kuningan-village",
+        "lokasi": "Kuningan Village"
+    },
+    {
+        "id": "kuningan-city",
+        "lokasi": "Kuningan City"
+    },
+    {
+        "id": "kuningan",
+        "lokasi": "Kuningan"
+    },
+    {
+        "id": "kukusan",
+        "lokasi": "Kukusan"
+    },
+    {
+        "id": "kranji",
+        "lokasi": "Kranji"
+    },
+    {
+        "id": "kramat-pela",
+        "lokasi": "Kramat Pela"
+    },
+    {
+        "id": "kramat-jati",
+        "lokasi": "Kramat Jati"
+    },
+    {
+        "id": "kota-wisata-cibubur",
+        "lokasi": "Kota Wisata Cibubur"
+    },
+    {
+        "id": "kota-tangerang-selatan",
+        "lokasi": "Kota Tangerang Selatan"
+    },
+    {
+        "id": "kabupaten-tangerang",
+        "lokasi": "Kota Tangerang"
+    },
+    {
+        "id": "kota-harapan-indah",
+        "lokasi": "Kota Harapan Indah"
+    },
+    {
+        "id": "kota-depok",
+        "lokasi": "Kota Depok"
+    },
+    {
+        "id": "kabupaten-bekasi",
+        "lokasi": "Kota Bekasi"
+    },
+    {
+        "id": "kota-tangerang",
+        "lokasi": "Kota Tangerang"
+    },
+    {
+        "id": "klender",
+        "lokasi": "Klender"
+    },
+    {
+        "id": "kembangan-selatan",
+        "lokasi": "Kembangan Selatan"
+    },
+    {
+        "id": "kembangan-barat",
+        "lokasi": "Kembangan Barat"
+    },
+    {
+        "id": "kemayoran",
+        "lokasi": "Kemayoran"
+    },
+    {
+        "id": "kemanggisan",
+        "lokasi": "Kemanggisan"
+    },
+    {
+        "id": "kemang-village",
+        "lokasi": "Kemang Village"
+    },
+    {
+        "id": "kemang-pratama",
+        "lokasi": "Kemang Pratama"
+    },
+    {
+        "id": "kemang-point",
+        "lokasi": "Kemang Point"
+    },
+    {
+        "id": "kemang",
+        "lokasi": "Kemang"
+    },
+    {
+        "id": "kelapa-gading",
+        "lokasi": "Kelapa Gading"
+    },
+    {
+        "id": "kelapa-dua-wetan",
+        "lokasi": "Kelapa Dua Wetan"
+    },
+    {
+        "id": "kelapa-dua",
+        "lokasi": "Kelapa Dua"
+    },
+    {
+        "id": "kedunghalang",
+        "lokasi": "Kedunghalang"
+    },
+    {
+        "id": "kedoya-selatan",
+        "lokasi": "Kedoya Selatan"
+    },
+    {
+        "id": "kedoya",
+        "lokasi": "Kedoya"
+    },
+    {
+        "id": "kebon-sirih",
+        "lokasi": "Kebon Sirih"
+    },
+    {
+        "id": "kebon-pala",
+        "lokasi": "Kebon Pala"
+    },
+    {
+        "id": "kebon-kacang",
+        "lokasi": "Kebon Kacang"
+    },
+    {
+        "id": "kebon-jeruk",
+        "lokasi": "Kebon Jeruk"
+    },
+    {
+        "id": "kebon-baru-tebet",
+        "lokasi": "Kebon Baru Tebet"
+    },
+    {
+        "id": "kebon-baru",
+        "lokasi": "Kebon Baru"
+    },
+    {
+        "id": "kebayoran-lama",
+        "lokasi": "Kebayoran Lama"
+    },
+    {
+        "id": "kebayoran-baru",
+        "lokasi": "Kebayoran Baru"
+    },
+    {
+        "id": "kebagusan",
+        "lokasi": "Kebagusan"
+    },
+    {
+        "id": "kayu-putih",
+        "lokasi": "Kayu Putih"
+    },
+    {
+        "id": "karawaci",
+        "lokasi": "Karawaci"
+    },
+    {
+        "id": "kapuk",
+        "lokasi": "Kapuk"
+    },
+    {
+        "id": "karang-tengah",
+        "lokasi": "Karang Tengah"
+    },
+    {
+        "id": "karang-anyar",
+        "lokasi": "Karang Anyar"
+    },
+    {
+        "id": "kapuk-muara",
+        "lokasi": "Kapuk Muara"
+    },
+    {
+        "id": "kampung-melayu",
+        "lokasi": "Kampung Melayu"
+    },
+    {
+        "id": "kalisari",
+        "lokasi": "Kalisari"
+    },
+    {
+        "id": "kalibata-city",
+        "lokasi": "Kalibata City"
+    },
+    {
+        "id": "kalibata",
+        "lokasi": "Kalibata"
+    },
+    {
+        "id": "kaliabang",
+        "lokasi": "Kaliabang"
+    },
+    {
+        "id": "joglo-raya",
+        "lokasi": "Joglo Raya"
+    },
+    {
+        "id": "joglo",
+        "lokasi": "Joglo"
+    },
+    {
+        "id": "johar-baru",
+        "lokasi": "Johar Baru"
+    },
+    {
+        "id": "jelupang",
+        "lokasi": "Jelupang"
+    },
+    {
+        "id": "jelambar",
+        "lokasi": "Jelambar"
+    },
+    {
+        "id": "jatiwaringin",
+        "lokasi": "Jatiwaringin"
+    },
+    {
+        "id": "jatinegara",
+        "lokasi": "Jatinegara"
+    },
+    {
+        "id": "jatijajar",
+        "lokasi": "Jatijajar"
+    },
+    {
+        "id": "jati-warna",
+        "lokasi": "Jati Warna"
+    },
+    {
+        "id": "jati-sampurna",
+        "lokasi": "Jati Sampurna"
+    },
+    {
+        "id": "jati-luhur",
+        "lokasi": "Jati Luhur"
+    },
+    {
+        "id": "jati-bening",
+        "lokasi": "Jati Bening"
+    },
+    {
+        "id": "jati-asih",
+        "lokasi": "Jati Asih"
+    },
+    {
+        "id": "jalan-cipete-raya",
+        "lokasi": "Jalan Cipete Raya"
+    },
+    {
+        "id": "jakarta-utara",
+        "lokasi": "Jakarta Utara"
+    },
+    {
+        "id": "jakarta-timur",
+        "lokasi": "Jakarta Timur"
+    },
+    {
+        "id": "jakarta-selatan",
+        "lokasi": "Jakarta Selatan"
+    },
+    {
+        "id": "jakarta-pusat",
+        "lokasi": "Jakarta Pusat"
+    },
+    {
+        "id": "jakarta-barat",
+        "lokasi": "Jakarta Barat"
+    },
+    {
+        "id": "jagakarsa-selatan",
+        "lokasi": "Jagakarsa Selatan"
+    },
+    {
+        "id": "jagakarsa",
+        "lokasi": "Jagakarsa"
+    },
+    {
+        "id": "harapan-indah",
+        "lokasi": "Harapan Indah"
+    },
+    {
+        "id": "halim-perdanakusuma",
+        "lokasi": "Halim Perdanakusuma"
+    },
+    {
+        "id": "gunung-putri",
+        "lokasi": "Gunung Putri"
+    },
+    {
+        "id": "gunung-sahari",
+        "lokasi": "Gunung Sahari"
+    },
+    {
+        "id": "grogol",
+        "lokasi": "Grogol"
+    },
+    {
+        "id": "griya-bukit-jaya",
+        "lokasi": "Griya Bukit Jaya"
+    },
+    {
+        "id": "green-ville",
+        "lokasi": "Green Ville"
+    },
+    {
+        "id": "green-lake-city",
+        "lokasi": "Green Lake City"
+    },
+    {
+        "id": "green-bay-pluit",
+        "lokasi": "Green Bay Pluit"
+    },
+    {
+        "id": "grand-wisata",
+        "lokasi": "Grand Wisata"
+    },
+    {
+        "id": "grand-mirage-residence",
+        "lokasi": "Grand Mirage Residence"
+    },
+    {
+        "id": "grand-kamala-lagoon",
+        "lokasi": "Grand Kamala Lagoon"
+    },
+    {
+        "id": "grand-dhika-city",
+        "lokasi": "Grand Dhika City"
+    },
+    {
+        "id": "gondangdia",
+        "lokasi": "Gondangdia"
+    },
+    {
+        "id": "golf-island",
+        "lokasi": "Golf Island"
+    },
+    {
+        "id": "golden-vienna",
+        "lokasi": "Golden Vienna"
+    },
+    {
+        "id": "glodok",
+        "lokasi": "Glodok"
+    },
+    {
+        "id": "gandul",
+        "lokasi": "Gandul"
+    },
+    {
+        "id": "gandaria-utara",
+        "lokasi": "Gandaria Utara"
+    },
+    {
+        "id": "gandaria-selatan",
+        "lokasi": "Gandaria Selatan"
+    },
+    {
+        "id": "gandaria",
+        "lokasi": "Gandaria"
+    },
+    {
+        "id": "gambir",
+        "lokasi": "Gambir"
+    },
+    {
+        "id": "galaxi-bekasi",
+        "lokasi": "Galaxi Bekasi"
+    },
+    {
+        "id": "gading-serpong",
+        "lokasi": "Gading Serpong"
+    },
+    {
+        "id": "fatmawati",
+        "lokasi": "Fatmawati"
+    },
+    {
+        "id": "duri-kepa",
+        "lokasi": "Duri Kepa"
+    },
+    {
+        "id": "duren-tiga-raya",
+        "lokasi": "Duren Tiga Raya"
+    },
+    {
+        "id": "duren-tiga",
+        "lokasi": "Duren Tiga"
+    },
+    {
+        "id": "duren-sawit",
+        "lokasi": "Duren Sawit"
+    },
+    {
+        "id": "duren-jaya",
+        "lokasi": "Duren Jaya"
+    },
+    {
+        "id": "dharmawangsa",
+        "lokasi": "Dharmawangsa"
+    },
+    {
+        "id": "depok-jaya",
+        "lokasi": "Depok Jaya"
+    },
+    {
+        "id": "depok-baru",
+        "lokasi": "Depok Baru"
+    },
+    {
+        "id": "cove-at-pik",
+        "lokasi": "Cove At Pik"
+    },
+    {
+        "id": "citra-grand",
+        "lokasi": "Citra Grand"
+    },
+    {
+        "id": "citayam",
+        "lokasi": "Citayam"
+    },
+    {
+        "id": "cisauk",
+        "lokasi": "Cisauk"
+    },
+    {
+        "id": "cirendeu",
+        "lokasi": "Cirendeu"
+    },
+    {
+        "id": "ciputat",
+        "lokasi": "Ciputat"
+    },
+    {
+        "id": "cipulir",
+        "lokasi": "Cipulir"
+    },
+    {
+        "id": "cipondoh",
+        "lokasi": "Cipondoh"
+    },
+    {
+        "id": "cipinang-muara",
+        "lokasi": "Cipinang Muara"
+    },
+    {
+        "id": "cipinang-cempedak",
+        "lokasi": "Cipinang Cempedak"
+    },
+    {
+        "id": "cipinang",
+        "lokasi": "Cipinang"
+    },
+    {
+        "id": "cipayung",
+        "lokasi": "Cipayung"
+    },
+    {
+        "id": "cipete-utara",
+        "lokasi": "Cipete Utara"
+    },
+    {
+        "id": "cipete-selatan",
+        "lokasi": "Cipete Selatan"
+    },
+    {
+        "id": "cipete",
+        "lokasi": "Cipete"
+    },
+    {
+        "id": "cinere",
+        "lokasi": "Cinere"
+    },
+    {
+        "id": "cimanggis-golf-estate",
+        "lokasi": "Cimanggis Golf Estate"
+    },
+    {
+        "id": "cimanggis",
+        "lokasi": "Cimanggis"
+    },
+    {
+        "id": "cimahpar",
+        "lokasi": "Cimahpar"
+    },
+    {
+        "id": "ciluar",
+        "lokasi": "Ciluar"
+    },
+    {
+        "id": "cilodong",
+        "lokasi": "Cilodong"
+    },
+    {
+        "id": "cilincing",
+        "lokasi": "Cilincing"
+    },
+    {
+        "id": "cileungsi",
+        "lokasi": "Cileungsi"
+    },
+    {
+        "id": "ciganjur-raya",
+        "lokasi": "Ciganjur Raya"
+    },
+    {
+        "id": "china-town-pik",
+        "lokasi": "China Town Pik"
+    },
+    {
+        "id": "bukit-duri-tanjakan",
+        "lokasi": "Bukit Duri Tanjakan"
+    },
+    {
+        "id": "bambu-apus",
+        "lokasi": "Bambu Apus"
+    },
+    {
+        "id": "alternatif-cibubur",
+        "lokasi": "Alternatif Cibubur"
+    },
+    {
+        "id": "ciledug",
+        "lokasi": "Ciledug"
+    },
+    {
+        "id": "cilangkap",
+        "lokasi": "Cilangkap"
+    },
+    {
+        "id": "cilandak-timur",
+        "lokasi": "Cilandak Timur"
+    },
+    {
+        "id": "cilandak-barat",
+        "lokasi": "Cilandak Barat"
+    },
+    {
+        "id": "cikoko",
+        "lokasi": "Cikoko"
+    },
+    {
+        "id": "cikini",
+        "lokasi": "Cikini"
+    },
+    {
+        "id": "cijantung",
+        "lokasi": "Cijantung"
+    },
+    {
+        "id": "ciganjur",
+        "lokasi": "Ciganjur"
+    },
+    {
+        "id": "cideng",
+        "lokasi": "Cideng"
+    },
+    {
+        "id": "cibubur",
+        "lokasi": "Cibubur"
+    },
+    {
+        "id": "ciater",
+        "lokasi": "Ciater"
+    },
+    {
+        "id": "ciangsana",
+        "lokasi": "Ciangsana"
+    },
+    {
+        "id": "central-park-podomoro-city",
+        "lokasi": "Central Park Podomoro City"
+    },
+    {
+        "id": "cengkareng",
+        "lokasi": "Cengkareng"
+    },
+    {
+        "id": "cempaka-putih",
+        "lokasi": "Cempaka Putih"
+    },
+    {
+        "id": "ceger",
+        "lokasi": "Ceger"
+    },
+    {
+        "id": "cawang",
+        "lokasi": "Cawang"
+    },
+    {
+        "id": "cakung",
+        "lokasi": "Cakung"
+    },
+    {
+        "id": "bukit-sentul",
+        "lokasi": "Bukit Sentul"
+    },
+    {
+        "id": "bukit-golf-hijau",
+        "lokasi": "Bukit Golf Hijau"
+    },
+    {
+        "id": "bukit-duri",
+        "lokasi": "Bukit Duri"
+    },
+    {
+        "id": "buaran",
+        "lokasi": "Buaran"
+    },
+    {
+        "id": "bsd-city",
+        "lokasi": "Bsd City"
+    },
+    {
+        "id": "boulevard-gading-serpong",
+        "lokasi": "Boulevard Gading Serpong"
+    },
+    {
+        "id": "boulevard-bintaro-jaya",
+        "lokasi": "Boulevard Bintaro Jaya"
+    },
+    {
+        "id": "bojongsari",
+        "lokasi": "Bojongsari"
+    },
+    {
+        "id": "bojong-kulur",
+        "lokasi": "Bojong Kulur"
+    },
+    {
+        "id": "bogor-raya-residence",
+        "lokasi": "Bogor Raya Residence"
+    },
+    {
+        "id": "bogor-nirwana-residence-bnr",
+        "lokasi": "Bogor Nirwana Residence Bnr"
+    },
+    {
+        "id": "bogor",
+        "lokasi": "Bogor"
+    },
+    {
+        "id": "-bintaro-jaya",
+        "lokasi": " Bintaro Jaya"
+    },
+    {
+        "id": "bintaro",
+        "lokasi": "Bintaro"
+    },
+    {
+        "id": "bintara",
+        "lokasi": "Bintara"
+    },
+    {
+        "id": "bendungan-hilir",
+        "lokasi": "Bendungan Hilir"
+    },
+    {
+        "id": "bekasi-timur",
+        "lokasi": "Bekasi Timur"
+    },
+    {
+        "id": "bekasi-jaya",
+        "lokasi": "Bekasi Jaya"
+    },
+    {
+        "id": "bangka",
+        "lokasi": "Bangka"
+    },
+    {
+        "id": "bekasi-central-park",
+        "lokasi": "Bekasi Central Park"
+    },
+    {
+        "id": "arteri-pondok-indah",
+        "lokasi": "Arteri Pondok Indah"
+    },
+    {
+        "id": "avia-city",
+        "lokasi": "Avia City"
+    },
+    {
+        "id": "ancol",
+        "lokasi": "Ancol"
+    },
+    {
+        "id": "beji",
+        "lokasi": "Beji"
+    },
+    {
+        "id": "alam-sutera",
+        "lokasi": "Alam Sutera"
+    }
+]
