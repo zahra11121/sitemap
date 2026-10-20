@@ -201,12 +201,157 @@ const products = [
 ];
 
 const categories = ['Semua', ...new Set(products.map(p => p.category))];
+
+// ====================== SEO SCHEMA DATA ======================
+const siteUrl = "https://greenfreshcipanas.com"; // GANTI dengan domain asli Anda
+const pageUrl = `${siteUrl}/kota/${item.id}`;
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Beranda", "item": siteUrl },
+    { "@type": "ListItem", "position": 2, "name": "Area Layanan", "item": `${siteUrl}/kota` },
+    { "@type": "ListItem", "position": 3, "name": `Supplier Sayuran ${namaLokasi}`, "item": pageUrl }
+  ]
+};
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": `${siteUrl}/#organization`,
+  "name": companyData.name,
+  "image": `${siteUrl}/og-image.jpg`,
+  "url": siteUrl,
+  "telephone": `+${companyData.waNumber}`,
+  "priceRange": "Rp",
+  "description": `Supplier & distributor sayuran segar di ${namaLokasi} untuk hotel, restoran, rumah sakit, dan pabrik. Garansi Grade A & Termin 7 Hari.`,
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Kp. Kayumanis, RT 001 / RW 006, Kel. Sukatani",
+    "addressLocality": "Pacet",
+    "addressRegion": "Jawa Barat",
+    "postalCode": "43253",
+    "addressCountry": "ID"
+  },
+  "geo": { "@type": "GeoCoordinates", "latitude": -6.7444817, "longitude": 107.0236364 },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+      "opens": "07:00",
+      "closes": "17:00"
+    }
+  ],
+  "areaServed": { "@type": "City", "name": namaLokasi },
+  "sameAs": [`https://wa.me/${companyData.waNumber}`]
+};
+
+const productListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": `Katalog Sayuran Segar untuk ${namaLokasi}`,
+  "numberOfItems": products.length,
+  "itemListElement": products.slice(0, 20).map((p, i) => ({
+    "@type": "ListItem",
+    "position": i + 1,
+    "item": {
+      "@type": "Product",
+      "name": p.name,
+      "category": p.category,
+      "brand": { "@type": "Brand", "name": companyData.name }
+    }
+  }))
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "Supplier & Distributor Sayuran Segar B2B",
+  "provider": { "@type": "LocalBusiness", "name": companyData.name },
+  "areaServed": { "@type": "City", "name": namaLokasi },
+  "audience": {
+    "@type": "BusinessAudience",
+    "audienceType": "Hotel, Restoran, Rumah Sakit, Katering Pabrik"
+  },
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "IDR",
+    "availability": "https://schema.org/InStock",
+    "description": "Pasokan harian sayuran Grade A dengan termin pembayaran 7 hari (TOP)."
+  }
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": `Apakah CV Green Fresh melayani pengiriman sayuran ke ${namaLokasi}?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": `Ya, kami melayani pasokan harian sayuran segar Grade A ke ${namaLokasi} untuk hotel, restoran, rumah sakit, dan katering pabrik.`
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Apa minimal order (MOV) untuk pembelian B2B?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Minimal order Rp 1.500.000 dengan opsi termin pembayaran 7 hari (TOP 7)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Bagaimana jaminan kualitas produk?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Setiap komoditas melewati sortir QC Grade A. Kami memberi garansi retur 100% untuk produk yang tidak sesuai standar."
+      }
+    }
+  ]
+};
+
+const jsonLdSchemas = [
+  breadcrumbSchema,
+  localBusinessSchema,
+  productListSchema,
+  serviceSchema,
+  faqSchema
+];
 ---
 
 <Layout 
   title={`${selectedTitle} — CV Green Fresh Cipanas`}
   description={`Supplier, distributor, dan pemasok sayuran segar di ${namaLokasi} untuk hotel, restoran, rumah sakit, dan pabrik. Garansi Grade A & Termin 7 Hari.`}
 >
+
+  <!-- ================= SEO JSON-LD SCHEMA ================= -->
+  {jsonLdSchemas.map((schema) => (
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  ))}
+
+  <!-- ================= SEO META TAMBAHAN ================= -->
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="author" content="CV Green Fresh Cipanas" />
+  <meta name="geo.region" content="ID-JB" />
+  <meta name="geo.placename" content={namaLokasi} />
+  <meta name="geo.position" content="-6.7444817;107.0236364" />
+  <meta name="ICBM" content="-6.7444817, 107.0236364" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="CV Green Fresh Cipanas" />
+  <meta property="og:title" content={`${selectedTitle} — CV Green Fresh Cipanas`} />
+  <meta property="og:description" content={`Supplier sayuran segar di ${namaLokasi}. Garansi Grade A, termin 7 hari, armada harian.`} />
+  <meta property="og:url" content={pageUrl} />
+  <meta property="og:locale" content="id_ID" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={selectedTitle} />
+  <meta name="twitter:description" content={`Pemasok sayuran segar B2B di ${namaLokasi}.`} />
+
+  <link rel="canonical" href={pageUrl} />
 
   <!-- ================= HERO SECTION ================= -->
 <section id="hero" class="relative pt-20 pb-28 md:pt-48 md:pb-40 bg-gradient-to-br from-emerald-950 via-slate-900 to-emerald-900 text-white overflow-hidden transition-all duration-300">
