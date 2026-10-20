@@ -11,6 +11,9 @@ import vue from '@astrojs/vue';
 
 // https://astro.build/config
 export default defineConfig({
+  // URL domain untuk sitemap dan SEO Astro
+  site: 'https://greenfresh.co.id',
+
   vite: {
     plugins: [tailwindcss()]
   },
