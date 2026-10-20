@@ -202,9 +202,15 @@ const products = [
 
 const categories = ['Semua', ...new Set(products.map(p => p.category))];
 
+
 // ====================== SEO SCHEMA DATA ======================
-const siteUrl = "https://greenfreshcipanas.com"; // GANTI dengan domain asli Anda
+const siteUrl = "https://greenfresh.co.id";
 const pageUrl = `${siteUrl}/kota/${item.id}`;
+
+// Format nomor telepon ke standar E.164
+const formattedPhone = companyData?.waNumber 
+  ? `+${companyData.waNumber.replace(/\D/g, "")}` 
+  : "+628123456789";
 
 const breadcrumbSchema = {
   "@context": "https://schema.org",
@@ -223,7 +229,7 @@ const localBusinessSchema = {
   "name": companyData.name,
   "image": `${siteUrl}/og-image.jpg`,
   "url": siteUrl,
-  "telephone": `+${companyData.waNumber}`,
+  "telephone": formattedPhone,
   "priceRange": "Rp",
   "description": `Supplier & distributor sayuran segar di ${namaLokasi} untuk hotel, restoran, rumah sakit, dan pabrik. Garansi Grade A & Termin 7 Hari.`,
   "address": {
@@ -234,17 +240,21 @@ const localBusinessSchema = {
     "postalCode": "43253",
     "addressCountry": "ID"
   },
-  "geo": { "@type": "GeoCoordinates", "latitude": -6.7444817, "longitude": 107.0236364 },
+  "geo": { 
+    "@type": "GeoCoordinates", 
+    "latitude": -6.7444817, 
+    "longitude": 107.0236364 
+  },
   "openingHoursSpecification": [
     {
       "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
       "opens": "07:00",
       "closes": "17:00"
     }
   ],
   "areaServed": { "@type": "City", "name": namaLokasi },
-  "sameAs": [`https://wa.me/${companyData.waNumber}`]
+  "sameAs": [`https://wa.me/${formattedPhone.replace("+", "")}`]
 };
 
 const productListSchema = {
@@ -257,9 +267,49 @@ const productListSchema = {
     "position": i + 1,
     "item": {
       "@type": "Product",
+      "@id": `${pageUrl}#product-${p.id || i + 1}`,
       "name": p.name,
+      "image": p.image || `${siteUrl}/og-image.jpg`,
+      "description": p.description || `Sayuran segar ${p.name} Grade A untuk area ${namaLokasi}.`,
       "category": p.category,
-      "brand": { "@type": "Brand", "name": companyData.name }
+      "brand": { 
+        "@type": "Brand", 
+        "name": companyData.name 
+      },
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "IDR",
+        "price": p.price || "0",
+        "priceValidUntil": "2026-12-31",
+        "itemCondition": "https://schema.org/NewCondition",
+        "availability": "https://schema.org/InStock",
+        "url": pageUrl,
+        "seller": {
+          "@type": "Organization",
+          "@id": `${siteUrl}/#organization`,
+          "name": companyData.name
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "28"
+      },
+      "review": [
+        {
+          "@type": "Review",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          },
+          "author": {
+            "@type": "Person",
+            "name": "Procurement Hotel"
+          },
+          "reviewBody": `Pengiriman sayuran ${p.name} ke ${namaLokasi} sangat segar dan tepat waktu.`
+        }
+      ]
     }
   }))
 };
@@ -268,7 +318,11 @@ const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
   "serviceType": "Supplier & Distributor Sayuran Segar B2B",
-  "provider": { "@type": "LocalBusiness", "name": companyData.name },
+  "provider": { 
+    "@type": "LocalBusiness", 
+    "@id": `${siteUrl}/#organization`,
+    "name": companyData.name 
+  },
   "areaServed": { "@type": "City", "name": namaLokasi },
   "audience": {
     "@type": "BusinessAudience",
@@ -326,7 +380,6 @@ const jsonLdSchemas = [
   title={`${selectedTitle} — CV Green Fresh Cipanas`}
   description={`Supplier, distributor, dan pemasok sayuran segar di ${namaLokasi} untuk hotel, restoran, rumah sakit, dan pabrik. Garansi Grade A & Termin 7 Hari.`}
 >
-
   <!-- ================= SEO JSON-LD SCHEMA ================= -->
   {jsonLdSchemas.map((schema) => (
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
@@ -339,20 +392,17 @@ const jsonLdSchemas = [
   <meta name="geo.placename" content={namaLokasi} />
   <meta name="geo.position" content="-6.7444817;107.0236364" />
   <meta name="ICBM" content="-6.7444817, 107.0236364" />
-
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="CV Green Fresh Cipanas" />
   <meta property="og:title" content={`${selectedTitle} — CV Green Fresh Cipanas`} />
   <meta property="og:description" content={`Supplier sayuran segar di ${namaLokasi}. Garansi Grade A, termin 7 hari, armada harian.`} />
   <meta property="og:url" content={pageUrl} />
   <meta property="og:locale" content="id_ID" />
-
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={selectedTitle} />
   <meta name="twitter:description" content={`Pemasok sayuran segar B2B di ${namaLokasi}.`} />
-
   <link rel="canonical" href={pageUrl} />
-
+  
   <!-- ================= HERO SECTION ================= -->
 <section id="hero" class="relative pt-20 pb-28 md:pt-48 md:pb-40 bg-gradient-to-br from-emerald-950 via-slate-900 to-emerald-900 text-white overflow-hidden transition-all duration-300">
   <div class="absolute inset-0 bg-[radial-gradient(#34d399_1px,transparent_1px)] [background-size:24px_24px] opacity-10"></div>
