@@ -277,26 +277,26 @@ const jsonLdSchema = {
   title={`${selectedTitle} — CV Green Fresh Cipanas`}
   description={`Supplier, distributor, dan pemasok sayuran segar di ${namaLokasi} untuk hotel, restoran, rumah sakit, dan pabrik. Garansi Grade A & Termin 7 Hari.`}
 >
-  <!-- ================= SEO JSON-LD SCHEMA ================= -->
-  <script type="application/ld+json" set:html={JSON.stringify(jsonLdSchema)} />
-
-  <!-- ================= SEO META TAMBAHAN ================= -->
-  <meta name="robots" content="index, follow, max-image-preview:large" />
-  <meta name="author" content="CV Green Fresh Cipanas" />
-  <meta name="geo.region" content="ID-JB" />
-  <meta name="geo.placename" content={namaLokasi} />
-  <meta name="geo.position" content="-6.7444817;107.0236364" />
-  <meta name="ICBM" content="-6.7444817, 107.0236364" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="CV Green Fresh Cipanas" />
-  <meta property="og:title" content={`${selectedTitle} — CV Green Fresh Cipanas`} />
-  <meta property="og:description" content={`Supplier sayuran segar di ${namaLokasi}. Garansi Grade A, termin 7 hari, armada harian.`} />
-  <meta property="og:url" content={pageUrl} />
-  <meta property="og:locale" content="id_ID" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content={selectedTitle} />
-  <meta name="twitter:description" content={`Pemasok sayuran segar B2B di ${namaLokasi}.`} />
-  <link rel="canonical" href={pageUrl} />
+  <!-- ================= KUMPULAN META, SCHEMA & CANONICAL DI DALAM <HEAD> ================= -->
+  <Fragment slot="head">
+    <link rel="canonical" href={pageUrl} />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLdSchema)} />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="author" content="CV Green Fresh Cipanas" />
+    <meta name="geo.region" content="ID-JB" />
+    <meta name="geo.placename" content={namaLokasi} />
+    <meta name="geo.position" content="-6.7444817;107.0236364" />
+    <meta name="ICBM" content="-6.7444817, 107.0236364" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CV Green Fresh Cipanas" />
+    <meta property="og:title" content={`${selectedTitle} — CV Green Fresh Cipanas`} />
+    <meta property="og:description" content={`Supplier sayuran segar di ${namaLokasi}. Garansi Grade A, termin 7 hari, armada harian.`} />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:locale" content="id_ID" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={selectedTitle} />
+    <meta name="twitter:description" content={`Pemasok sayuran segar B2B di ${namaLokasi}.`} />
+  </Fragment>
   
   <!-- ================= HERO SECTION ================= -->
 <section id="hero" class="relative pt-20 pb-28 md:pt-48 md:pb-40 bg-gradient-to-br from-emerald-950 via-slate-900 to-emerald-900 text-white overflow-hidden transition-all duration-300">
