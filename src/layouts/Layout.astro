@@ -4,11 +4,13 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   description?: string;
+  canonical?: string;
 }
 
 const {
   title = "CV Green Fresh Cipanas",
-  description = "Penyedia produk pertanian, sayuran, jamur, dan bahan pangan segar berkualitas tinggi dari petani lokal Cipanas & Puncak."
+  description = "Penyedia produk pertanian, sayuran, jamur, dan bahan pangan segar berkualitas tinggi dari petani lokal Cipanas & Puncak.",
+  canonical
 } = Astro.props;
 ---
 
@@ -27,6 +29,16 @@ const {
 
 		<title>{title}</title>
 		<meta name="description" content={description} />
+
+		<!-- Render Tag Canonical jika dipassing via props -->
+		{canonical && <link rel="canonical" href={canonical} />}
+
+		<!-- 
+		  SLOT HEAD UNTUK MENANGKAP META, JSON-LD SCHEMA, & CANONICAL 
+		  DARI FILE [id].astro DAN HALAMAN LAINNYA 
+		-->
+		<slot name="head" />
+		<slot name="head-meta" />
 
 		<!-- Google Fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
