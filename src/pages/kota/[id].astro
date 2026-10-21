@@ -87,6 +87,14 @@ function getHash(str: string) {
   return Math.abs(hash);
 }
 const hash = getHash(item.id);
+// Mengambil 4 kota berikutnya secara berurutan & berputar sesuai urutan JSON
+const currentIndex = kotaData.findIndex((k) => k.id === item.id);
+const kotaLain = [
+  kotaData[(currentIndex + 1) % kotaData.length],
+  kotaData[(currentIndex + 2) % kotaData.length],
+  kotaData[(currentIndex + 3) % kotaData.length],
+  kotaData[(currentIndex + 4) % kotaData.length],
+].filter((k) => k.id !== item.id);
 
 const titles = [
   `Supplier & Distributor Sayuran Segar ${namaLokasi} — Hotel, Resto & Pabrik`,
@@ -656,6 +664,45 @@ const jsonLdSchema = {
         </div>
 
       </div>
+    </div>
+  </section>
+  
+  <!-- ================= SECTION INTERNAL LINKING 4 KOTA (SEDERHANA) ================= -->
+  <section id="area-layanan-lain" class="py-12 md:py-16 bg-slate-900 text-white border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Header Section -->
+      <div class="mb-6">
+        <span class="text-emerald-400 font-extrabold text-xs uppercase tracking-wider block mb-1">Jaringan Layanan B2B</span>
+        <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">
+          Pemasok Sayuran Segar di Kota Lainnya
+        </h2>
+      </div>
+
+      <!-- Grid Tautan Internal 4 Kota -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+        {kotaLain.map((k) => {
+          const namaKotaLain = k.lokasi.charAt(0).toUpperCase() + k.lokasi.slice(1);
+          return (
+            <a
+              href={`/kota/${k.id}`}
+              class="group bg-slate-800/80 hover:bg-emerald-700/30 border border-slate-700/70 hover:border-emerald-500/60 p-4 rounded-xl transition-all duration-200 flex items-center justify-between shadow-sm"
+              title={`Supplier Sayuran Segar ${namaKotaLain}`}
+            >
+              <div class="flex items-center gap-2.5 min-w-0">
+                <span class="text-emerald-400 text-sm">📍</span>
+                <span class="text-xs sm:text-sm font-bold text-slate-200 group-hover:text-emerald-300 truncate">
+                  {namaKotaLain}
+                </span>
+              </div>
+              <span class="text-slate-500 group-hover:text-emerald-400 group-hover:translate-x-1 transition-all text-xs font-bold">
+                →
+              </span>
+            </a>
+          );
+        })}
+      </div>
+
     </div>
   </section>
 
