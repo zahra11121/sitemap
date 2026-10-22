@@ -1,0 +1,236 @@
+---
+import Layout from '../layouts/Layout.astro';
+import kotaData from '../data/kota.json';
+
+const siteUrl = "https://greenfresh.co.id";
+const pageUrl = `${siteUrl}/kota`;
+
+const jsonLdSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Beranda", "item": siteUrl },
+    { "@type": "ListItem", "position": 2, "name": "Area Layanan Kota", "item": pageUrl }
+  ]
+};
+
+// Fungsi generator deskripsi unik agar tidak ada kota yang sama persis
+function getUniqueDescription(id: string, namaLokasi: string) {
+  let hash = 0;
+  for (let i = 0; i < id.length; i++) {
+    hash = id.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  const seed = Math.abs(hash);
+
+  const subjek = [
+    `pasokan harian sayur mayur, jamur segar, dan bumbu rempah pilihan Grade A`,
+    `distribusi komoditas hasil pertanian dataran tinggi Cipanas berkualitas tinggi`,
+    `pengiriman rutin bahan pangan segar langsung dari kebun petani lokal`,
+    `suplai bahan baku sayuran organik dan segar siap saji berstandar industri`,
+    `layanan logistik dan pengiriman komoditas tani terbaik untuk dapur komersial`
+  ];
+
+  const target = [
+    `hotel bintang lima, kafe, restoran, serta katering pabrik`,
+    `sektor perhotelan, rumah makan, villa, dan resort`,
+    `industri kuliner, rumah sakit, dan pusat perbelanjaan modern`,
+    `bisnis kuliner, kedai makanan, serta korporasi skala besar`,
+    `dapur profesional hotel, resto, dan penyedia jasa boga`
+  ];
+
+  const penutup = [
+    `di kawasan ${namaLokasi}.`,
+    `untuk mendukung kelancaran operasional bisnis di ${namaLokasi}.`,
+    `guna memenuhi standar mutu kuliner terbaik di ${namaLokasi}.`,
+    `secara konsisten dan tepat waktu di wilayah ${namaLokasi}.`,
+    `dengan jaminan kesegaran maksimal bagi mitra di ${namaLokasi}.`
+  ];
+
+  const s = subjek[seed % subjek.length];
+  const t = target[(seed >> 1) % target.length];
+  const p = penutup[(seed >> 2) % penutup.length];
+
+  return `Pusat ${s} untuk ${t} ${p}`;
+}
+---
+
+<Layout 
+  title="Daftar Area Layanan Supplier Sayuran — CV Green Fresh Cipanas"
+  description="Pusat informasi area layanan pasokan sayur mayur segar B2B CV Green Fresh Cipanas untuk berbagai kota dan wilayah."
+>
+  <Fragment slot="head">
+    <link rel="canonical" href={pageUrl} />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLdSchema)} />
+    <meta name="robots" content="index, follow" />
+  </Fragment>
+
+  <!-- HERO SECTION -->
+  <section class="pt-20 pb-16 md:pt-32 md:pb-24 bg-gradient-to-br from-emerald-950 via-slate-900 to-emerald-900 text-white relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-xs font-bold uppercase tracking-widest mb-4">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+        Jangkauan Logistik & Distribusi B2B
+      </span>
+      <h1 class="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-white max-w-4xl mx-auto leading-tight">
+        Area Layanan Pemasok Sayuran Segar
+      </h1>
+      <p class="mt-4 text-emerald-100/80 text-sm sm:text-lg max-w-2xl mx-auto font-light leading-relaxed">
+        CV Green Fresh Cipanas melayani pengiriman harian komoditas pertanian Grade A untuk Hotel, Restoran, Rumah Sakit, dan Katering di berbagai kota.
+      </p>
+    </div>
+  </section>
+
+  <!-- SEARCH & KOTA GRID SECTION WITH LOAD MORE -->
+  <section class="py-12 md:py-20 bg-slate-50 min-h-screen">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- SEARCH BAR -->
+      <div class="max-w-xl mx-auto mb-10">
+        <div class="relative">
+          <input
+            type="text"
+            id="search-kota-input"
+            placeholder="Cari nama kota atau wilayah..."
+            class="w-full pl-11 pr-4 py-3.5 rounded-2xl border border-slate-200 text-xs md:text-sm bg-white font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
+          />
+          <svg class="w-5 h-5 absolute left-4 top-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </div>
+      </div>
+
+      <!-- KOTA CARDS GRID (Deskripsi dijamin unik antar kota) -->
+      <div id="kota-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {kotaData.map((item, index) => {
+          const namaLokasi = item.lokasi.charAt(0).toUpperCase() + item.lokasi.slice(1);
+          const uniqueDesc = getUniqueDescription(item.id, namaLokasi);
+          return (
+            <div 
+              class={`kota-card bg-white p-6 rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:border-emerald-300 transition-all duration-300 flex flex-col justify-between group ${index >= 6 ? 'hidden' : ''}`}
+              data-nama={namaLokasi.toLowerCase()}
+            >
+              <div>
+                <div class="flex items-center justify-between mb-3">
+                  <span class="w-10 h-10 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-lg font-bold">
+                    📍
+                  </span>
+                  <span class="text-[10px] font-extrabold uppercase tracking-widest text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-100">
+                    Ready Delivery
+                  </span>
+                </div>
+                <h2 class="text-xl font-extrabold text-slate-900 group-hover:text-emerald-600 transition-colors">
+                  Supplier Sayuran {namaLokasi}
+                </h2>
+                <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+                  {uniqueDesc}
+                </p>
+              </div>
+
+              <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                <span class="text-[11px] font-semibold text-slate-400">Termin TOP 7 Hari</span>
+                <a 
+                  href={`/kota/${item.id}`} 
+                  class="inline-flex items-center gap-1.5 text-xs font-extrabold text-emerald-600 hover:text-emerald-700 group-hover:translate-x-1 transition-all"
+                >
+                  <span>Lihat Layanan</span>
+                  <span>→</span>
+                </a>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <!-- EMPTY STATE -->
+      <div id="empty-state" class="hidden text-center py-16 bg-white rounded-3xl border border-slate-200 mt-6 shadow-sm">
+        <p class="text-slate-500 text-sm font-semibold">Wilayah atau kota yang Anda cari belum ditemukan.</p>
+      </div>
+
+      <!-- LOAD MORE BUTTON -->
+      <div id="load-more-container" class="text-center mt-12">
+        <button
+          id="load-more-btn"
+          type="button"
+          class="px-8 py-4 rounded-2xl bg-white border-2 border-emerald-600 text-emerald-700 font-extrabold text-xs md:text-sm hover:bg-emerald-600 hover:text-white active:scale-95 transition-all shadow-md inline-flex items-center gap-2"
+        >
+          <span>Muat Lebih Banyak Wilayah</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <p id="kota-count-info" class="text-xs text-slate-500 mt-3 font-semibold">
+          Menampilkan 6 dari {kotaData.length} kota
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SCRIPT INTERAKTIF CLIENT-SIDE -->
+  <script define:vars={{ totalKota: kotaData.length }}>
+    const searchInput = document.getElementById('search-kota-input');
+    const kotaCards = document.querySelectorAll('.kota-card');
+    const loadMoreBtn = document.getElementById('load-more-btn');
+    const loadMoreContainer = document.getElementById('load-more-container');
+    const emptyState = document.getElementById('empty-state');
+    const countInfo = document.getElementById('kota-count-info');
+
+    let visibleLimit = 6;
+    let currentSearch = '';
+
+    function renderKota() {
+      let matchingCards = [];
+
+      kotaCards.forEach((card) => {
+        const namaKota = card.dataset.nama || '';
+        const matchesSearch = namaKota.includes(currentSearch.toLowerCase());
+
+        if (matchesSearch) {
+          matchingCards.push(card);
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      if (emptyState) {
+        emptyState.style.display = matchingCards.length === 0 ? 'block' : 'none';
+      }
+
+      const totalMatching = matchingCards.length;
+
+      matchingCards.forEach((el, index) => {
+        if (index < visibleLimit) {
+          el.classList.remove('hidden');
+        } else {
+          el.classList.add('hidden');
+        }
+      });
+
+      if (loadMoreContainer) {
+        if (visibleLimit >= totalMatching || totalMatching === 0) {
+          loadMoreContainer.style.display = 'none';
+        } else {
+          loadMoreContainer.style.display = 'block';
+        }
+      }
+
+      if (countInfo) {
+        const currentlyShown = Math.min(visibleLimit, totalMatching);
+        countInfo.innerText = `Menampilkan ${currentlyShown} dari ${totalMatching} kota`;
+      }
+    }
+
+    loadMoreBtn?.addEventListener('click', () => {
+      visibleLimit += 6;
+      renderKota();
+    });
+
+    searchInput?.addEventListener('input', (e) => {
+      currentSearch = e.target.value;
+      visibleLimit = 6;
+      renderKota();
+    });
+
+    renderKota();
+  </script>
+</Layout>
