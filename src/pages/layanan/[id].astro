@@ -218,7 +218,7 @@ const categories = ['Semua', ...new Set(products.map(p => p.category))];
 
 // ====================== SEO SCHEMA DATA (WORLD-CLASS + PRODUCT FULL) ======================
 const siteUrl = "https://greenfresh.co.id";
-const pageUrl = `${siteUrl}/layanan/${item.id}`;
+const pageUrl = `${siteUrl}/layanan/${item.id}/`;
 
 const formattedPhone = companyData?.waNumber
   ? `+${companyData.waNumber.replace(/\D/g, "")}`
