@@ -87,7 +87,6 @@ function getHash(str: string) {
   return Math.abs(hash);
 }
 const hash = getHash(item.id);
-// Mengambil 4 kota berikutnya secara berurutan & berputar sesuai urutan JSON
 const currentIndex = kotaData.findIndex((k) => k.id === item.id);
 const kotaLain = [
   kotaData[(currentIndex + 1) % kotaData.length],
@@ -217,7 +216,7 @@ const products = [
 
 const categories = ['Semua', ...new Set(products.map(p => p.category))];
 
-// ====================== SEO SCHEMA DATA (WORLD-CLASS) ======================
+// ====================== SEO SCHEMA DATA (WORLD-CLASS + PRODUCT FULL) ======================
 const siteUrl = "https://greenfresh.co.id";
 const pageUrl = `${siteUrl}/layanan/${item.id}`;
 
@@ -228,6 +227,10 @@ const formattedPhone = companyData?.waNumber
 // Keyword-rich alt text builder
 const buildProductAlt = (p: { name: string; category: string }) =>
   `${p.name} ${p.category} Grade A — Supplier Sayuran Segar ${namaLokasi} | CV Green Fresh Cipanas`;
+
+// Description per produk (dinamis)
+const buildProductDescription = (p: { name: string; category: string }) =>
+  `${p.name} Grade A kategori ${p.category} dari CV Green Fresh Cipanas, supplier sayuran segar di ${namaLokasi}. Dipanen langsung dari kebun dataran tinggi Cipanas–Puncak, melewati QC ketat, cocok untuk kebutuhan hotel, restoran, rumah sakit, dan katering pabrik.`;
 
 // ====================== FAQ DINAMIS (RENDER + SCHEMA) ======================
 const faqs = [
@@ -363,40 +366,97 @@ const jsonLdSchema = {
         { "@type": "Country", "name": "Indonesia" },
       ],
       "parentOrganization": { "@id": `${siteUrl}/#organization` },
-     "hasOfferCatalog": {
-  "@type": "OfferCatalog",
-  "name": `Katalog Sayuran Segar ${namaLokasi}`,
-  "numberOfItems": products.length,
-  "itemListElement": products.map((p) => ({
-    "@type": "Offer",
-    "itemOffered": {
-      "@type": "Product",
-      "name": p.name,
-      "category": p.category,
-      "brand": { "@type": "Brand", "name": companyData.name },
-      // ✅ WAJIB: Product harus punya offers / review / aggregateRating
-      "offers": {
-        "@type": "Offer",
-        "url": pageUrl,
-        "priceCurrency": "IDR",
-        "price": "0",
-        "priceValidUntil": "2030-12-31",
-        "availability": "https://schema.org/InStock",
-        "itemCondition": "https://schema.org/NewCondition",
-        "seller": { "@id": `${siteUrl}/#organization` },
-        "priceSpecification": {
-          "@type": "PriceSpecification",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": `Katalog Sayuran Segar ${namaLokasi}`,
+        "numberOfItems": products.length,
+        "itemListElement": products.map((p) => ({
+          "@type": "Offer",
+          "url": pageUrl,
           "priceCurrency": "IDR",
-          "valueAddedTaxIncluded": false,
-          "description": "Harga grosir B2B — hubungi admin untuk penawaran terbaru",
-        },
+          "price": "0",
+          "priceValidUntil": "2030-12-31",
+          "availability": "https://schema.org/InStock",
+          "itemCondition": "https://schema.org/NewCondition",
+          "seller": { "@id": `${siteUrl}/#organization` },
+          "validFrom": "2025-01-01",
+          "priceSpecification": {
+            "@type": "PriceSpecification",
+            "priceCurrency": "IDR",
+            "valueAddedTaxIncluded": false,
+            "description": "Harga grosir B2B — hubungi admin untuk penawaran terbaru",
+          },
+          "itemOffered": {
+            "@type": "Product",
+            "name": p.name,
+            "category": p.category,
+            "brand": { "@type": "Brand", "name": companyData.name },
+            // ✅ CRITICAL FIX: image wajib untuk Product
+            "image": `${siteUrl}/og-image.jpg`,
+            // ✅ NON-CRITICAL FIX: description per produk
+            "description": buildProductDescription(p),
+            "sku": `${item.id}-${p.name.toLowerCase().replace(/\s+/g, "-")}`,
+            "mpn": `${item.id.toUpperCase()}-${p.category.replace(/\s+/g, "").toUpperCase()}`,
+            // ✅ CRITICAL FIX: offers lengkap + non-critical fields
+            "offers": {
+              "@type": "Offer",
+              "url": pageUrl,
+              "priceCurrency": "IDR",
+              "price": "0",
+              "priceValidUntil": "2030-12-31",
+              "validFrom": "2025-01-01",
+              "availability": "https://schema.org/InStock",
+              "itemCondition": "https://schema.org/NewCondition",
+              "seller": { "@id": `${siteUrl}/#organization` },
+              "priceSpecification": {
+                "@type": "PriceSpecification",
+                "priceCurrency": "IDR",
+                "valueAddedTaxIncluded": false,
+                "description": "Harga grosir B2B — hubungi admin untuk penawaran terbaru",
+              },
+              // ✅ NON-CRITICAL FIX: shippingDetails
+              "shippingDetails": {
+                "@type": "OfferShippingDetails",
+                "shippingRate": {
+                  "@type": "MonetaryAmount",
+                  "value": "0",
+                  "currency": "IDR",
+                },
+                "shippingDestination": {
+                  "@type": "DefinedRegion",
+                  "addressCountry": "ID",
+                  "addressRegion": "Jawa Barat",
+                },
+                "deliveryTime": {
+                  "@type": "ShippingDeliveryTime",
+                  "handlingTime": {
+                    "@type": "QuantitativeValue",
+                    "minValue": 0,
+                    "maxValue": 1,
+                    "unitCode": "DAY",
+                  },
+                  "transitTime": {
+                    "@type": "QuantitativeValue",
+                    "minValue": 0,
+                    "maxValue": 1,
+                    "unitCode": "DAY",
+                  },
+                },
+              },
+              // ✅ NON-CRITICAL FIX: hasMerchantReturnPolicy
+              "hasMerchantReturnPolicy": {
+                "@type": "MerchantReturnPolicy",
+                "applicableCountry": "ID",
+                "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+                "merchantReturnDays": 1,
+                "returnMethod": "https://schema.org/ReturnByMail",
+                "returnFees": "https://schema.org/FreeReturn",
+                "description": "Garansi retur 100% untuk produk tidak segar, klaim maksimal 24 jam setelah penerimaan.",
+              },
+            },
+          },
+        })),
       },
-    },
-    "priceCurrency": "IDR",
-    "availability": "https://schema.org/InStock",
-    "seller": { "@id": `${siteUrl}/#organization` },
-  })),
-},
     },
     // 5. WebPage
     {
@@ -427,7 +487,7 @@ const jsonLdSchema = {
         "audienceType": "Hotel, Restoran, Rumah Sakit, Katering Pabrik",
       },
     },
-    // 7. FAQPage — sinkron dengan array faqs[] di atas
+    // 7. FAQPage
     {
       "@type": "FAQPage",
       "@id": `${pageUrl}#faq`,
@@ -526,7 +586,6 @@ const jsonLdSchema = {
 
     <p class="text-emerald-100/90 text-sm sm:text-lg leading-relaxed max-w-3xl mx-auto font-light mb-10" set:html={selectedAbout}></p>
 
-    <!-- Jarak ke atas ditambah menggunakan mt-8 -->
     <div class="flex flex-col sm:flex-row justify-center gap-5 mt-8">
       <a href="#order-form" class="px-8 py-4 rounded-2xl bg-emerald-400 text-slate-950 font-extrabold text-sm shadow-xl transition-all duration-300 hover:scale-105 hover:bg-emerald-300 text-center">
         Form Pesanan {namaLokasi}
@@ -542,22 +601,18 @@ const jsonLdSchema = {
 <section class="py-6 md:py-8 bg-emerald-900 text-white border-y border-emerald-800 shadow-inner">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 text-center">
-      <!-- Item 1: MOV -->
       <div class="p-4 bg-white/5 rounded-2xl border border-white/10 transition-all duration-300 hover:scale-105">
         <div class="text-emerald-300 font-extrabold text-base md:text-xl">Rp 1.500.000</div>
         <div class="text-[10px] md:text-xs text-emerald-100/70 uppercase tracking-wider mt-1 font-medium">Minimal Order (MOV)</div>
       </div>
-      <!-- Item 2: TOP -->
       <div class="p-4 bg-white/5 rounded-2xl border border-white/10 transition-all duration-300 hover:scale-105">
         <div class="text-emerald-300 font-extrabold text-base md:text-xl">7 Hari TOP</div>
         <div class="text-[10px] md:text-xs text-emerald-100/70 uppercase tracking-wider mt-1 font-medium">Termin Pembayaran</div>
       </div>
-      <!-- Item 3: Bank BCA -->
       <div class="p-4 bg-white/5 rounded-2xl border border-white/10 transition-all duration-300 hover:scale-105">
         <div class="text-emerald-300 font-extrabold text-base md:text-xl">Bank BCA</div>
         <div class="text-[10px] md:text-xs text-emerald-100/70 uppercase tracking-wider mt-1 font-medium">Rekening Perusahaan</div>
       </div>
-      <!-- Item 4: Quality Control -->
       <div class="p-4 bg-white/5 rounded-2xl border border-white/10 transition-all duration-300 hover:scale-105">
         <div class="text-emerald-300 font-extrabold text-base md:text-xl">QC Grade A</div>
         <div class="text-[10px] md:text-xs text-emerald-100/70 uppercase tracking-wider mt-1 font-medium">Sortir Tangan Pertama</div>
@@ -586,7 +641,6 @@ const jsonLdSchema = {
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-stretch">
       
-      <!-- Visi Card -->
       <div class="bg-white/90 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-slate-200 shadow-lg shadow-slate-200/40 transition-all duration-300 hover:-translate-y-1 hover:border-emerald-500/50 flex flex-col justify-between relative group">
         <div class="absolute top-0 right-0 w-28 h-28 bg-gradient-to-bl from-emerald-100/60 to-transparent rounded-bl-full pointer-events-none"></div>
         <div>
@@ -611,7 +665,6 @@ const jsonLdSchema = {
         </div>
       </div>
 
-      <!-- Misi Card -->
       <div class="bg-white/90 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-slate-200 shadow-lg shadow-slate-200/40 transition-all duration-300 hover:-translate-y-1 hover:border-emerald-500/50 flex flex-col justify-between relative group">
         <div class="absolute top-0 right-0 w-28 h-28 bg-gradient-to-bl from-teal-100/60 to-transparent rounded-bl-full pointer-events-none"></div>
         <div>
@@ -652,7 +705,6 @@ const jsonLdSchema = {
         <p class="text-xs md:text-sm text-slate-500 mt-1">Pilih komoditas dan klik tambah untuk menyusun pesanan.</p>
       </div>
 
-      <!-- SEARCH & CHIPS -->
       <div class="sticky top-4 md:top-24 z-30 mb-10 bg-white/95 backdrop-blur-md p-4 rounded-2xl shadow-md border border-slate-200">
         <div class="relative mb-3">
           <input
@@ -683,7 +735,6 @@ const jsonLdSchema = {
         </div>
       </div>
 
-      <!-- PRODUCT GRID -->
       <div id="product-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4 sm:gap-6">
         {products.map((item, index) => (
           <div
@@ -732,7 +783,6 @@ const jsonLdSchema = {
         ))}
       </div>
 
-      <!-- LOAD MORE -->
       <div id="load-more-container" class="text-center mt-14">
         <button
           id="load-more-btn"
@@ -869,7 +919,7 @@ const jsonLdSchema = {
     </div>
   </section>
 
-  <!-- ================= FAQ DINAMIS (RENDER + SCHEMA SINKRON) ================= -->
+  <!-- ================= FAQ DINAMIS ================= -->
   <section id="faq" class="py-12 md:py-24 bg-gradient-to-b from-emerald-50/50 via-teal-50/30 to-white border-t border-slate-200 pb-28 md:pb-24">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-10">
@@ -904,7 +954,6 @@ const jsonLdSchema = {
         ))}
       </div>
 
-      <!-- CTA kecil di bawah FAQ -->
       <div class="mt-8 text-center">
         <a
           href={`https://wa.me/${companyData.waNumber}?text=${encodeURIComponent(`Halo CV Green Fresh, saya ingin tanya pasokan sayur untuk area ${namaLokasi}`)}`}
@@ -1078,7 +1127,6 @@ const jsonLdSchema = {
       window.open(`https://wa.me/6287780937884?text=${encodeURIComponent(message)}`, '_blank');
     });
 
-    // ================= FAQ ACCORDION =================
     const faqTriggers = document.querySelectorAll('.faq-trigger');
     faqTriggers.forEach((trigger) => {
       trigger.addEventListener('click', () => {
@@ -1088,12 +1136,10 @@ const jsonLdSchema = {
         if (!targetAns) return;
 
         const isHidden = targetAns.classList.contains('hidden');
-        // Tutup semua
         document.querySelectorAll('.faq-answer').forEach((ans) => ans.classList.add('hidden'));
         document.querySelectorAll('.faq-icon').forEach((ic) => ic.classList.remove('rotate-180'));
         document.querySelectorAll('.faq-trigger').forEach((tr) => tr.setAttribute('aria-expanded', 'false'));
 
-        // Buka yang diklik (jika sebelumnya tertutup)
         if (isHidden) {
           targetAns.classList.remove('hidden');
           icon?.classList.add('rotate-180');
