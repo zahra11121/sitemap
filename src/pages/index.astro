@@ -75,6 +75,7 @@ const companyData = {
   address: "Kp. Kayumanis, RT 001 / RW 006, Kel. Sukatani, Kec. Pacet, Kab. Cianjur, Jawa Barat",
   phone: "087780937884",
   waNumber: "6287780937884",
+  email: "cs@greenfresh.co.id",
   bank: {
     name: "BCA",
     branch: "KCP Cipanas",
@@ -176,32 +177,242 @@ const faqs = [
   }
 ];
 
-const schemaData = {
+// ====================== SEO CONFIG ======================
+const siteUrl = "https://greenfresh.co.id";
+const pageUrl = siteUrl;
+const formattedPhone = `+${companyData.waNumber.replace(/\D/g, "")}`;
+
+const pageTitle = "CV Green Fresh Cipanas — Supplier Sayur Mayur & Hasil Tani Premium";
+const pageDescription = "Supplier & distributor sayuran segar, jamur, umbi-umbian, dan bumbu rempah Grade A langsung dari kebun Cipanas & Puncak untuk hotel, restoran, rumah sakit, supermarket, dan katering pabrik. Minimal order Rp 1.500.000, termin 7 hari, armada harian.";
+
+// ====================== JSON-LD SCHEMA (SEO DUNIA) ======================
+const jsonLdSchema = {
   "@context": "https://schema.org",
-  "@type": "WholesaleStore",
-  "name": companyData.name,
-  "url": "https://greenfresh.co.id",
-  "logo": "https://greenfresh.co.id/logo.png",
-  "description": "Supplier pasokan sayur segar, jamur, umbi-umbian, dan bumbu rempah berkualitas langsung dari petani lokal Cipanas & Puncak.",
-  "telephone": companyData.phone,
-  "taxID": companyData.npwp,
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Kp. Kayumanis, RT 001 / RW 006, Kel. Sukatani",
-    "addressLocality": "Pacet, Cianjur",
-    "addressRegion": "Jawa Barat",
-    "addressCountry": "ID"
-  }
+  "@graph": [
+    // 1. Organization
+    {
+      "@type": "Organization",
+      "@id": `${siteUrl}/#organization`,
+      "name": companyData.name,
+      "url": siteUrl,
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${siteUrl}/logo.png`,
+        "width": 512,
+        "height": 512
+      },
+      "image": `${siteUrl}/og-image.jpg`,
+      "telephone": formattedPhone,
+      "email": companyData.email,
+      "taxID": companyData.npwp,
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Kp. Kayumanis, RT 001 / RW 006, Kel. Sukatani",
+        "addressLocality": "Pacet",
+        "addressRegion": "Jawa Barat",
+        "postalCode": "43253",
+        "addressCountry": "ID"
+      },
+      "sameAs": [
+        `https://wa.me/${companyData.waNumber}`,
+        "https://www.google.com/maps/place/CV+Green+Fresh+Cipanas"
+      ]
+    },
+    // 2. Website
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      "url": siteUrl,
+      "name": "CV Green Fresh Cipanas",
+      "inLanguage": "id-ID",
+      "publisher": { "@id": `${siteUrl}/#organization` },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": `${siteUrl}/?s={search_term_string}`,
+        "query-input": "required name=search_term_string"
+      }
+    },
+    // 3. WholesaleStore (LocalBusiness subtype)
+    {
+      "@type": "WholesaleStore",
+      "@id": `${siteUrl}/#store`,
+      "name": companyData.name,
+      "url": siteUrl,
+      "image": `${siteUrl}/og-image.jpg`,
+      "logo": `${siteUrl}/logo.png`,
+      "telephone": formattedPhone,
+      "email": companyData.email,
+      "taxID": companyData.npwp,
+      "priceRange": "Rp",
+      "currenciesAccepted": "IDR",
+      "paymentAccepted": "Cash, Transfer Bank, Termin 7 Hari (TOP)",
+      "description": "Supplier pasokan sayur segar, jamur, umbi-umbian, dan bumbu rempah berkualitas langsung dari petani lokal Cipanas & Puncak.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Kp. Kayumanis, RT 001 / RW 006, Kel. Sukatani",
+        "addressLocality": "Pacet, Cianjur",
+        "addressRegion": "Jawa Barat",
+        "postalCode": "43253",
+        "addressCountry": "ID"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -6.7444817,
+        "longitude": 107.0236364
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          "opens": "07:00",
+          "closes": "17:00"
+        }
+      ],
+      "areaServed": [
+        { "@type": "AdministrativeArea", "name": "Jawa Barat" },
+        { "@type": "Country", "name": "Indonesia" }
+      ],
+      "parentOrganization": { "@id": `${siteUrl}/#organization` },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Katalog Sayuran Segar & Hasil Tani",
+        "numberOfItems": products.length,
+        "itemListElement": products.map((p) => ({
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Product",
+            "name": p.name,
+            "category": p.category,
+            "brand": { "@type": "Brand", "name": companyData.name }
+          }
+        }))
+      }
+    },
+    // 4. WebPage
+    {
+      "@type": "WebPage",
+      "@id": `${pageUrl}/#webpage`,
+      "url": pageUrl,
+      "name": pageTitle,
+      "description": pageDescription,
+      "inLanguage": "id-ID",
+      "isPartOf": { "@id": `${siteUrl}/#website` },
+      "about": { "@id": `${siteUrl}/#store` },
+      "primaryImageOfPage": { "@type": "ImageObject", "url": `${siteUrl}/og-image.jpg` },
+      "datePublished": "2025-01-01",
+      "dateModified": new Date().toISOString().split("T")[0],
+      "breadcrumb": { "@id": `${pageUrl}/#breadcrumb` }
+    },
+    // 5. Breadcrumb
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${pageUrl}/#breadcrumb`,
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Beranda", "item": siteUrl },
+        { "@type": "ListItem", "position": 2, "name": "Katalog Produk", "item": `${siteUrl}/#katalog` },
+        { "@type": "ListItem", "position": 3, "name": "Tentang Kami", "item": `${siteUrl}/#tentang-kami` },
+        { "@type": "ListItem", "position": 4, "name": "FAQ", "item": `${siteUrl}/#faq` }
+      ]
+    },
+    // 6. FAQPage
+    {
+      "@type": "FAQPage",
+      "@id": `${pageUrl}/#faq`,
+      "mainEntity": faqs.map((f) => ({
+        "@type": "Question",
+        "name": f.q,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": f.a.replace(/\*\*/g, "")
+        }
+      }))
+    },
+    // 7. Service
+    {
+      "@type": "Service",
+      "@id": `${pageUrl}/#service`,
+      "name": "Pasokan Sayuran Segar B2B",
+      "serviceType": "Supplier Sayuran & Hasil Tani B2B",
+      "provider": { "@id": `${siteUrl}/#store` },
+      "areaServed": { "@type": "AdministrativeArea", "name": "Jawa Barat" },
+      "audience": {
+        "@type": "BusinessAudience",
+        "audienceType": "Hotel, Restoran, Rumah Sakit, Supermarket, Katering Pabrik"
+      }
+    }
+  ]
 };
 ---
 
-<Layout title="CV Green Fresh Cipanas — Supplier Sayur Mayur & Hasil Tani" 
-  description="Penyedia produk pertanian, sayuran, jamur, dan bahan pangan segar berkualitas tinggi dari petani lokal Cipanas & Puncak."
-  canonical="https://greenfresh.co.id"
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonical={pageUrl}
 >
+  <!-- ================= SEO HEAD ================= -->
+  <Fragment slot="head">
+    <!-- Canonical & Robots -->
+    <link rel="canonical" href={pageUrl} />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="bingbot" content="index, follow" />
 
-  <!-- SEO Schema Injection -->
-  <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+    <!-- Basic SEO -->
+    <meta name="author" content="CV Green Fresh Cipanas" />
+    <meta name="publisher" content="CV Green Fresh Cipanas" />
+    <meta name="copyright" content="CV Green Fresh Cipanas" />
+    <meta name="theme-color" content="#064e3b" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="language" content="Indonesian" />
+    <meta name="rating" content="general" />
+    <meta name="distribution" content="global" />
+    <meta name="revisit-after" content="7 days" />
+
+    <!-- Keywords (still used by some engines) -->
+    <meta name="keywords" content="supplier sayuran, distributor sayur segar, supplier sayur cipanas, supplier sayur puncak, supplier jamur, supplier umbi-umbian, supplier bumbu dapur, supplier sayur hotel, supplier sayur restoran, supplier sayur rumah sakit, supplier sayur pabrik, sayur grade A, sayuran B2B, CV Green Fresh Cipanas" />
+
+    <!-- Geo SEO -->
+    <meta name="geo.region" content="ID-JB" />
+    <meta name="geo.placename" content="Pacet, Cianjur, Jawa Barat" />
+    <meta name="geo.position" content="-6.7444817;107.0236364" />
+    <meta name="ICBM" content="-6.7444817, 107.0236364" />
+    <meta name="DC.title" content={pageTitle} />
+    <meta name="DC.subject" content="Supplier Sayuran, Distributor Sayur Segar, B2B" />
+    <meta name="DC.coverage" content="Jawa Barat, Indonesia" />
+    <meta name="DC.language" content="id" />
+
+    <!-- Hreflang -->
+    <link rel="alternate" hreflang="id-ID" href={pageUrl} />
+    <link rel="alternate" hreflang="x-default" href={pageUrl} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CV Green Fresh Cipanas" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:locale" content="id_ID" />
+    <meta property="og:image" content={`${siteUrl}/og-image.jpg`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="CV Green Fresh Cipanas — Supplier Sayur Mayur & Hasil Tani Premium" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={`${siteUrl}/og-image.jpg`} />
+    <meta name="twitter:image:alt" content="CV Green Fresh Cipanas — Supplier Sayur Mayur Premium" />
+
+    <!-- Performance Hints -->
+    <link rel="preconnect" href="https://www.google.com" />
+    <link rel="preconnect" href="https://wa.me" />
+    <link rel="dns-prefetch" href="https://www.google.com" />
+    <link rel="dns-prefetch" href="https://wa.me" />
+
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLdSchema)} />
+  </Fragment>
 
   <!-- HERO SECTION (Deep Emerald Glow) -->
   <section id="hero" class="relative pt-12 pb-20 md:pt-28 md:pb-36 overflow-hidden bg-gradient-to-br from-emerald-950 via-emerald-900 to-slate-950 text-white select-none">
@@ -211,7 +422,7 @@ const schemaData = {
       
       <!-- Emblem Leaf SVG Glowing -->
       <div class="inline-flex items-center justify-center p-3 mb-4 md:mb-6 bg-white/10 backdrop-blur-xl rounded-2xl md:rounded-3xl border border-white/20 shadow-2xl hover:scale-110 transition-transform duration-300">
-        <svg class="w-12 h-12 md:w-16 md:h-16 text-emerald-400 drop-shadow-[0_0_15px_rgba(52,211,153,0.5)]" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg class="w-12 h-12 md:w-16 md:h-16 text-emerald-400 drop-shadow-[0_0_15px_rgba(52,211,153,0.5)]" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <path d="M50 10C50 10 20 35 20 62C20 78.5685 33.4315 92 50 92C66.5685 92 80 78.5685 80 62C80 35 50 10 50 10Z" fill="url(#leafGradient)"/>
           <path d="M50 25V85M50 50L32 38M50 62L68 50M50 40L65 30M50 72L35 62" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
           <circle cx="72" cy="25" r="5" fill="#34D399" class="animate-ping"/>
@@ -242,13 +453,13 @@ const schemaData = {
       <!-- App Action Buttons -->
       <div class="mt-6 md:mt-10 flex flex-row gap-3 justify-center items-center max-w-md mx-auto">
         <a href="#order-form" class="flex-1 px-5 py-3.5 rounded-xl md:rounded-2xl bg-emerald-400 text-slate-950 font-extrabold text-xs md:text-lg shadow-xl hover:bg-emerald-300 active:scale-95 transition-all text-center flex items-center justify-center gap-2">
-          <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+          <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
           </svg>
           <span>Form Order WA</span>
         </a>
         <a href="#katalog" class="flex-1 px-5 py-3.5 rounded-xl md:rounded-2xl bg-white/10 border border-white/20 text-white font-bold text-xs md:text-lg backdrop-blur-md hover:bg-white/20 active:scale-95 transition-all text-center flex items-center justify-center gap-2">
-          <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
           </svg>
           <span>Katalog ({products.length})</span>
@@ -369,8 +580,9 @@ const schemaData = {
             id="search-input"
             placeholder="Cari wortel, jamur, cabai..."
             class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-emerald-500 text-xs md:text-sm bg-slate-50 font-medium transition-all"
+            aria-label="Cari produk sayuran"
           />
-          <svg class="w-5 h-5 absolute left-3 top-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-5 h-5 absolute left-3 top-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
           </svg>
         </div>
@@ -402,11 +614,14 @@ const schemaData = {
             <div class="relative aspect-square bg-slate-100 overflow-hidden">
               <Image
                 src={item.image}
-                alt={item.name}
+                alt={`${item.name} Grade A — Supplier Sayuran Segar Cipanas`}
                 width={300}
                 height={300}
                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ease-out"
                 loading="lazy"
+                decoding="async"
+                format="webp"
+                quality={80}
               />
               <span class="absolute top-3 left-3 bg-white/95 backdrop-blur-md text-emerald-800 text-[9px] md:text-[10px] font-extrabold px-2.5 py-1 rounded-full border border-emerald-100 shadow-sm">
                 {item.category}
@@ -425,8 +640,9 @@ const schemaData = {
                 type="button"
                 data-product-name={item.name}
                 class="add-to-form-btn mt-4 w-full py-2.5 rounded-xl bg-emerald-50 text-emerald-700 font-bold text-[11px] md:text-xs text-center hover:bg-emerald-600 hover:text-white active:scale-95 transition-all flex items-center justify-center gap-1.5 shadow-sm"
+                aria-label={`Tambah ${item.name} ke form pesanan`}
               >
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
                 </svg>
                 <span>Tambah Order</span>
@@ -444,7 +660,7 @@ const schemaData = {
           class="px-8 py-4 rounded-2xl bg-white border-2 border-emerald-600 text-emerald-700 font-extrabold text-xs md:text-sm hover:bg-emerald-600 hover:text-white active:scale-95 transition-all shadow-md inline-flex items-center gap-2"
         >
           <span>Muat Lebih Banyak Produk</span>
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
           </svg>
         </button>
@@ -474,22 +690,22 @@ const schemaData = {
         <form id="wa-order-form" class="space-y-4 md:space-y-6 relative z-10">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Nama Usaha / Pembeli *</label>
+              <label for="form-nama" class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Nama Usaha / Pembeli *</label>
               <input type="text" id="form-nama" required placeholder="Hotel / Resto / Nama Pembeli" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-xs md:text-sm focus:ring-2 focus:ring-emerald-500 bg-slate-50 transition-all font-medium" />
             </div>
             <div>
-              <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Alamat Kirim *</label>
+              <label for="form-alamat" class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Alamat Kirim *</label>
               <input type="text" id="form-alamat" required placeholder="Kota / Alamat Tujuan" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-xs md:text-sm focus:ring-2 focus:ring-emerald-500 bg-slate-50 transition-all font-medium" />
             </div>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Tgl Pengiriman *</label>
+              <label for="form-tanggal" class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Tgl Pengiriman *</label>
               <input type="date" id="form-tanggal" required class="w-full px-4 py-3 rounded-xl border border-slate-200 text-xs md:text-sm focus:ring-2 focus:ring-emerald-500 bg-slate-50 transition-all font-medium" />
             </div>
             <div>
-              <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Metode Bayar</label>
+              <label for="form-pembayaran" class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Metode Bayar</label>
               <select id="form-pembayaran" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-xs md:text-sm font-semibold focus:ring-2 focus:ring-emerald-500 bg-slate-50 transition-all">
                 <option value="Cash / Transfer Harian">Cash / Transfer Harian (BCA 1978400999)</option>
                 <option value="Termin Pembayaran 7 Hari (TOP 7)">Termin Pembayaran 7 Hari (B2B)</option>
@@ -498,12 +714,12 @@ const schemaData = {
           </div>
 
           <div>
-            <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Daftar Komoditas (Kg/Pack) *</label>
+            <label for="form-komoditas" class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Daftar Komoditas (Kg/Pack) *</label>
             <textarea id="form-komoditas" rows="4" required placeholder="- Wortel: 50 Kg&#10;- Kentang: 30 Kg" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-xs md:text-sm font-mono focus:ring-2 focus:ring-emerald-500 bg-slate-50 transition-all"></textarea>
           </div>
 
           <div class="p-3.5 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 text-xs flex items-center gap-3">
-            <svg class="w-5 h-5 text-amber-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <svg class="w-5 h-5 text-amber-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
             </svg>
             <p><strong>Minimal Order:</strong> Akumulasi pesanan harian minimal <strong>Rp 1.500.000,-</strong>.</p>
@@ -513,7 +729,7 @@ const schemaData = {
             type="submit"
             class="w-full py-4 rounded-2xl bg-emerald-600 text-white font-extrabold text-xs md:text-base hover:bg-emerald-700 active:scale-95 transition-all flex items-center justify-center gap-2.5 shadow-xl shadow-emerald-600/30"
           >
-            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
               <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
             </svg>
             <span>Kirim Pesanan ke WA (087780937884)</span>
@@ -582,6 +798,7 @@ const schemaData = {
               allowfullscreen="" 
               loading="lazy" 
               referrerpolicy="strict-origin-when-cross-origin"
+              title="Lokasi CV Green Fresh Cipanas — Supplier Sayur Mayur Pacet, Cianjur"
             ></iframe>
           </div>
         </div>
@@ -605,9 +822,11 @@ const schemaData = {
               type="button"
               class="faq-trigger w-full px-5 py-4 text-left font-bold text-slate-900 text-xs md:text-sm flex justify-between items-center gap-3"
               data-target={`faq-ans-${idx}`}
+              aria-expanded="false"
+              aria-controls={`faq-ans-${idx}`}
             >
               <span>{faq.q}</span>
-              <svg class="faq-icon w-5 h-5 text-emerald-600 flex-shrink-0 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+              <svg class="faq-icon w-5 h-5 text-emerald-600 flex-shrink-0 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
               </svg>
             </button>
@@ -623,14 +842,14 @@ const schemaData = {
   <!-- BOTTOM APP NAVIGATION DOCK -->
   <div class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-t border-slate-200 px-4 py-2 flex justify-around items-center text-slate-600 shadow-2xl">
     <a href="#hero" class="flex flex-col items-center gap-1 text-[10px] font-bold text-slate-600 hover:text-emerald-600 active:scale-95 transition-all">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
       </svg>
       <span>Beranda</span>
     </a>
 
     <a href="#katalog" class="flex flex-col items-center gap-1 text-[10px] font-bold text-slate-600 hover:text-emerald-600 active:scale-95 transition-all">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
       </svg>
       <span>Katalog</span>
@@ -638,7 +857,7 @@ const schemaData = {
 
     <a href="#order-form" class="flex flex-col items-center gap-0.5 text-[10px] font-bold text-emerald-600 active:scale-95 transition-all">
       <div class="w-11 h-11 -mt-6 rounded-full bg-emerald-600 text-white flex items-center justify-center shadow-lg shadow-emerald-600/40">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
         </svg>
       </div>
@@ -646,14 +865,14 @@ const schemaData = {
     </a>
 
     <a href="#faq" class="flex flex-col items-center gap-1 text-[10px] font-bold text-slate-600 hover:text-emerald-600 active:scale-95 transition-all">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
       </svg>
       <span>FAQ</span>
     </a>
 
-    <a href={`https://wa.me/${companyData.waNumber}`} target="_blank" class="flex flex-col items-center gap-1 text-[10px] font-bold text-slate-600 hover:text-emerald-600 active:scale-95 transition-all">
-      <svg class="w-5 h-5 fill-current text-emerald-600" viewBox="0 0 24 24">
+    <a href={`https://wa.me/${companyData.waNumber}`} target="_blank" rel="noopener noreferrer" class="flex flex-col items-center gap-1 text-[10px] font-bold text-slate-600 hover:text-emerald-600 active:scale-95 transition-all">
+      <svg class="w-5 h-5 fill-current text-emerald-600" viewBox="0 0 24 24" aria-hidden="true">
         <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
       </svg>
       <span>Kontak</span>
@@ -805,10 +1024,12 @@ const schemaData = {
           const isHidden = targetAns.classList.contains('hidden');
           document.querySelectorAll('.faq-answer').forEach(ans => ans.classList.add('hidden'));
           document.querySelectorAll('.faq-icon').forEach(ic => ic.classList.remove('rotate-180'));
+          document.querySelectorAll('.faq-trigger').forEach(tr => tr.setAttribute('aria-expanded', 'false'));
 
           if (isHidden) {
             targetAns.classList.remove('hidden');
             icon?.classList.add('rotate-180');
+            trigger.setAttribute('aria-expanded', 'true');
           }
         }
       });

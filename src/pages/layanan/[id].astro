@@ -96,22 +96,31 @@ const kotaLain = [
   kotaData[(currentIndex + 4) % kotaData.length],
 ].filter((k) => k.id !== item.id);
 
+// ====================== SEO: VARIASI KONTEN ======================
 const titles = [
-  `Supplier Sayuran ${namaLokasi} — Hotel, Restoran, Rumah Sakit & Pabrik`
+  `Supplier Sayuran ${namaLokasi} — Hotel, Restoran, Rumah Sakit & Pabrik`,
+  `Distributor Sayur Segar ${namaLokasi} Grade A — CV Green Fresh Cipanas`,
+  `Pemasok Sayuran B2B ${namaLokasi} — Harga Grosir & Termin 7 Hari`,
+];
+const descriptions = [
+  `CV Green Fresh Cipanas adalah supplier & distributor sayuran segar Grade A di ${namaLokasi} untuk hotel, restoran, rumah sakit, dan katering pabrik. Minimal order Rp 1.500.000, termin 7 hari, armada harian.`,
+  `Butuh pemasok sayur segar di ${namaLokasi}? Green Fresh menyuplai 64+ komoditas (sayuran hijau, jamur, umbi, bumbu) langsung dari kebun Cipanas–Puncak. Garansi Grade A & retur 100%.`,
+  `Supplier sayuran B2B terpercaya di ${namaLokasi}. Harga grosir, QC ketat, pengiriman rutin harian untuk hotel, resto, RS, dan pabrik. Hubungi 0877-8093-7884.`,
 ];
 const selectedTitle = titles[hash % titles.length];
+const selectedDescription = descriptions[hash % descriptions.length];
 
 const aboutTexts = [
   `Di kawasan komersial <strong>${namaLokasi}</strong>, <strong>CV Green Fresh Cipanas</strong> hadir sebagai solusi rantai pasok pangan profesional. Kami menyuplai kebutuhan harian hotel bintang lima, kafe, restoran, rumah sakit, hingga katering pabrik langsung dari kebun dataran tinggi Cipanas & Puncak dengan garansi kesegaran optimal.`,
   `Sebagai <strong>distributor sayuran</strong> terkemuka di <strong>${namaLokasi}</strong>, kami memastikan setiap komoditas sayuran hijau, jamur, umbi-umbian, dan bumbu dapur melewati sortir QC ketat sebelum dikirimkan. Standar kualitas Grade A kami dirancang khusus untuk memenuhi spesifikasi dapur industri dan bisnis kuliner di ${namaLokasi}.`,
-  `Menjadi <strong>pemasok sayuran</strong> andalan di wilayah <strong>${namaLokasi}</strong> menuntut kedisiplinan waktu dan jaminan mutu yang konsisten. CV Green Fresh Cipanas siap mendukung kelancaran operasional bisnis Anda dengan armada pengiriman rutin harian serta fleksibilitas pembayaran korporat.`
+  `Menjadi <strong>pemasok sayuran</strong> andalan di wilayah <strong>${namaLokasi}</strong> menuntut kedisiplinan waktu dan jaminan mutu yang konsisten. CV Green Fresh Cipanas siap mendukung kelancaran operasional bisnis Anda dengan armada pengiriman rutin harian serta fleksibilitas pembayaran korporat.`,
 ];
 const selectedAbout = aboutTexts[hash % aboutTexts.length];
 
 const visionTexts = [
   `Menjadi jaringan distribusi dan supplier hasil pertanian terdepan di ${namaLokasi} yang diandalkan oleh sektor perhotelan, restoran, dan industri makanan berstandar tinggi.`,
   `Mewujudkan ekosistem pasokan pangan segar yang transparan, konsisten, dan efisien untuk seluruh pelaku bisnis kuliner serta kesehatan di ${namaLokasi}.`,
-  `Menjadi mitra strategis nomor satu dalam penyediaan bahan baku sayuran berkualitas premium bagi korporasi dan pabrik di kawasan ${namaLokasi}.`
+  `Menjadi mitra strategis nomor satu dalam penyediaan bahan baku sayuran berkualitas premium bagi korporasi dan pabrik di kawasan ${namaLokasi}.`,
 ];
 const selectedVision = visionTexts[hash % visionTexts.length];
 
@@ -119,13 +128,13 @@ const missionTexts = [
   [
     `Mengirimkan hasil panen segar Grade A langsung dari Cipanas ke ${namaLokasi}.`,
     `Menjamin ketepatan jadwal distribusi harian untuk efisiensi dapur mitra bisnis.`,
-    `Memberikan layanan responsif dan garansi retur produk 100% tanpa ribet.`
+    `Memberikan layanan responsif dan garansi retur produk 100% tanpa ribet.`,
   ],
   [
     `Membangun sinergi kemitraan jangka panjang dengan skala pemenuhan B2B yang fleksibel.`,
     `Menyediakan harga grosir kompetitif dengan skema termin pembayaran 7 hari (TOP).`,
-    `Menjaga keragaman komoditas pertanian agar selalu ready stok sepanjang tahun.`
-  ]
+    `Menjaga keragaman komoditas pertanian agar selalu ready stok sepanjang tahun.`,
+  ],
 ];
 const selectedMissions = missionTexts[(hash + 1) % missionTexts.length];
 
@@ -134,7 +143,9 @@ const companyData = {
   address: "Kp. Kayumanis, RT 001 / RW 006, Kel. Sukatani, Kec. Pacet, Kab. Cianjur, Jawa Barat",
   phone: "087780937884",
   waNumber: "6287780937884",
-  bank: { name: "BCA", branch: "KCP Cipanas", accountName: "Green Fresh Cipanas", accountNumber: "1978400999" }
+  email: "cs@greenfresh.co.id",
+  npwp: "93.038.709.7-406.000",
+  bank: { name: "BCA", branch: "KCP Cipanas", accountName: "Green Fresh Cipanas", accountNumber: "1978400999" },
 };
 
 const products = [
@@ -201,105 +212,283 @@ const products = [
   { name: 'Timun Segar', category: 'Labu & Timun', image: Timun_1 },
   { name: 'Tomat Merah', category: 'Buah & Sayur', image: Tomat_10 },
   { name: 'Ubi Cilembu', category: 'Umbi-Umbian', image: Ubi_Cilembu_4 },
-  { name: 'Wortel Manis', category: 'Umbi-Umbian', image: Wortel_10 }
+  { name: 'Wortel Manis', category: 'Umbi-Umbian', image: Wortel_10 },
 ];
 
 const categories = ['Semua', ...new Set(products.map(p => p.category))];
 
-
-
-// ====================== SEO SCHEMA DATA ======================
+// ====================== SEO SCHEMA DATA (WORLD-CLASS) ======================
 const siteUrl = "https://greenfresh.co.id";
-const pageUrl = `${siteUrl}/kota/${item.id}`;
+const pageUrl = `${siteUrl}/layanan/${item.id}`;
 
-const formattedPhone = companyData?.waNumber 
-  ? `+${companyData.waNumber.replace(/\D/g, "")}` 
+const formattedPhone = companyData?.waNumber
+  ? `+${companyData.waNumber.replace(/\D/g, "")}`
   : "+628123456789";
 
-// Schema utama digabung dalam 1 Graph agar efisien & tidak dianggap spam
+// Keyword-rich alt text builder
+const buildProductAlt = (p: { name: string; category: string }) =>
+  `${p.name} ${p.category} Grade A — Supplier Sayuran Segar ${namaLokasi} | CV Green Fresh Cipanas`;
+
+// ====================== FAQ DINAMIS (RENDER + SCHEMA) ======================
+const faqs = [
+  {
+    q: `Apakah CV Green Fresh melayani pengiriman sayuran ke ${namaLokasi}?`,
+    a: `Ya, kami melayani pasokan harian sayuran segar Grade A ke ${namaLokasi} untuk hotel, restoran, rumah sakit, dan katering pabrik.`,
+  },
+  {
+    q: `Apa minimal order (MOV) untuk pembelian B2B di ${namaLokasi}?`,
+    a: `Minimal order Rp 1.500.000 dengan opsi termin pembayaran 7 hari (TOP 7) untuk mitra bisnis terdaftar.`,
+  },
+  {
+    q: `Berapa lama pengiriman sayuran ke ${namaLokasi}?`,
+    a: `Pengiriman rutin harian dari gudang Cipanas ke ${namaLokasi}. Order sebelum pukul 15.00 WIB dikirim keesokan pagi.`,
+  },
+  {
+    q: `Apakah ada garansi jika produk tidak segar saat diterima di ${namaLokasi}?`,
+    a: `Ya, kami memberikan garansi retur 100% untuk produk yang tidak memenuhi standar Grade A. Klaim maksimal 24 jam setelah penerimaan.`,
+  },
+  {
+    q: `Komoditas apa saja yang tersedia untuk ${namaLokasi}?`,
+    a: `Tersedia ${products.length}+ komoditas: sayuran hijau, jamur, umbi-umbian, bumbu & rempah, kacang-kacangan, dan buah-sayur. Semua Grade A dan ready stok.`,
+  },
+  {
+    q: `Metode pembayaran apa yang diterima CV Green Fresh?`,
+    a: `Cash/transfer harian ke BCA 1978400999 a/n Green Fresh Cipanas, atau termin 7 hari (TOP) untuk mitra B2B terverifikasi.`,
+  },
+  {
+    q: `Apakah bisa kirim sampel atau trial order ke ${namaLokasi}?`,
+    a: `Bisa. Kami menerima trial order untuk mitra B2B baru di ${namaLokasi} dengan minimal order Rp 1.500.000 dan pembayaran cash/transfer harian pada transaksi pertama.`,
+  },
+  {
+    q: `Apakah CV Green Fresh menyediakan invoice & faktur pajak?`,
+    a: `Ya. Setiap transaksi B2B mendapatkan invoice resmi, dan faktur pajak tersedia untuk mitra yang membutuhkan sesuai ketentuan perpajakan Indonesia.`,
+  },
+];
+
 const jsonLdSchema = {
   "@context": "https://schema.org",
   "@graph": [
+    // 1. Organization
     {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Beranda", "item": siteUrl },
-        { "@type": "ListItem", "position": 2, "name": "Area Layanan", "item": `${siteUrl}/kota` },
-        { "@type": "ListItem", "position": 3, "name": `Supplier Sayuran ${namaLokasi}`, "item": pageUrl }
-      ]
-    },
-    {
-      "@type": "LocalBusiness",
+      "@type": "Organization",
       "@id": `${siteUrl}/#organization`,
       "name": companyData.name,
-      "image": `${siteUrl}/og-image.jpg`,
       "url": siteUrl,
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${siteUrl}/logo.png`,
+        "width": 512,
+        "height": 512,
+      },
+      "image": `${siteUrl}/og-image.jpg`,
       "telephone": formattedPhone,
-      "priceRange": "Rp",
-      "description": `Supplier & distributor sayuran segar di ${namaLokasi} untuk hotel, restoran, rumah sakit, dan pabrik.`,
+      "email": companyData.email,
+      "taxID": companyData.npwp,
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Kp. Kayumanis, RT 001 / RW 006, Kel. Sukatani",
         "addressLocality": "Pacet",
         "addressRegion": "Jawa Barat",
         "postalCode": "43253",
-        "addressCountry": "ID"
+        "addressCountry": "ID",
       },
-      "geo": { 
-        "@type": "GeoCoordinates", 
-        "latitude": -6.7444817, 
-        "longitude": 107.0236364 
-      },
-      "areaServed": { "@type": "City", "name": namaLokasi }
+      "sameAs": [
+        `https://wa.me/${companyData.waNumber}`,
+        "https://www.google.com/maps/place/CV+Green+Fresh+Cipanas",
+      ],
     },
+    // 2. WebSite + SearchAction
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      "url": siteUrl,
+      "name": "CV Green Fresh Cipanas",
+      "inLanguage": "id-ID",
+      "publisher": { "@id": `${siteUrl}/#organization` },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": `${siteUrl}/?s={search_term_string}`,
+        "query-input": "required name=search_term_string",
+      },
+    },
+    // 3. BreadcrumbList
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${pageUrl}#breadcrumb`,
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Beranda", "item": siteUrl },
+        { "@type": "ListItem", "position": 2, "name": "Area Layanan", "item": `${siteUrl}/kota` },
+        { "@type": "ListItem", "position": 3, "name": `Supplier Sayuran ${namaLokasi}`, "item": pageUrl },
+      ],
+    },
+    // 4. LocalBusiness (WholesaleStore)
+    {
+      "@type": ["LocalBusiness", "WholesaleStore"],
+      "@id": `${pageUrl}#localbusiness`,
+      "name": companyData.name,
+      "image": `${siteUrl}/og-image.jpg`,
+      "logo": `${siteUrl}/logo.png`,
+      "url": pageUrl,
+      "telephone": formattedPhone,
+      "email": companyData.email,
+      "taxID": companyData.npwp,
+      "priceRange": "Rp",
+      "currenciesAccepted": "IDR",
+      "paymentAccepted": "Cash, Transfer Bank, Termin 7 Hari (TOP)",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          "opens": "07:00",
+          "closes": "17:00",
+        },
+      ],
+      "description": `Supplier & distributor sayuran segar Grade A di ${namaLokasi} untuk hotel, restoran, rumah sakit, dan pabrik. Garansi retur 100%, termin 7 hari, armada harian.`,
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Kp. Kayumanis, RT 001 / RW 006, Kel. Sukatani",
+        "addressLocality": "Pacet",
+        "addressRegion": "Jawa Barat",
+        "postalCode": "43253",
+        "addressCountry": "ID",
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -6.7444817,
+        "longitude": 107.0236364,
+      },
+      "areaServed": [
+        { "@type": "City", "name": namaLokasi },
+        { "@type": "AdministrativeArea", "name": "Jawa Barat" },
+        { "@type": "Country", "name": "Indonesia" },
+      ],
+      "parentOrganization": { "@id": `${siteUrl}/#organization` },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": `Katalog Sayuran Segar ${namaLokasi}`,
+        "numberOfItems": products.length,
+        "itemListElement": products.map((p) => ({
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Product",
+            "name": p.name,
+            "category": p.category,
+            "brand": { "@type": "Brand", "name": companyData.name },
+          },
+        })),
+      },
+    },
+    // 5. WebPage
+    {
+      "@type": "WebPage",
+      "@id": `${pageUrl}#webpage`,
+      "url": pageUrl,
+      "name": selectedTitle,
+      "description": selectedDescription,
+      "inLanguage": "id-ID",
+      "isPartOf": { "@id": `${siteUrl}/#website` },
+      "about": { "@id": `${pageUrl}#localbusiness` },
+      "breadcrumb": { "@id": `${pageUrl}#breadcrumb` },
+      "primaryImageOfPage": { "@type": "ImageObject", "url": `${siteUrl}/og-image.jpg` },
+      "datePublished": "2025-01-01",
+      "dateModified": new Date().toISOString().split("T")[0],
+      "mainEntity": { "@id": `${pageUrl}#faq` },
+    },
+    // 6. Service
+    {
+      "@type": "Service",
+      "@id": `${pageUrl}#service`,
+      "name": `Pasokan Sayuran Segar B2B di ${namaLokasi}`,
+      "serviceType": "Supplier Sayuran B2B",
+      "provider": { "@id": `${pageUrl}#localbusiness` },
+      "areaServed": { "@type": "City", "name": namaLokasi },
+      "audience": {
+        "@type": "BusinessAudience",
+        "audienceType": "Hotel, Restoran, Rumah Sakit, Katering Pabrik",
+      },
+    },
+    // 7. FAQPage — sinkron dengan array faqs[] di atas
     {
       "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": `Apakah CV Green Fresh melayani pengiriman sayuran ke ${namaLokasi}?`,
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": `Ya, kami melayani pasokan harian sayuran segar Grade A ke ${namaLokasi} untuk hotel, restoran, rumah sakit, dan katering pabrik.`
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Apa minimal order (MOV) untuk pembelian B2B?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Minimal order Rp 1.500.000 dengan opsi termin pembayaran 7 hari (TOP 7)."
-          }
-        }
-      ]
-    }
-  ]
+      "@id": `${pageUrl}#faq`,
+      "mainEntity": faqs.map((f) => ({
+        "@type": "Question",
+        "name": f.q,
+        "acceptedAnswer": { "@type": "Answer", "text": f.a },
+      })),
+    },
+  ],
 };
 ---
 
-<Layout 
+<Layout
   title={`${selectedTitle} — CV Green Fresh Cipanas`}
-  description={`Supplier, distributor, dan pemasok sayuran segar di ${namaLokasi} untuk hotel, restoran, rumah sakit, dan pabrik. Garansi Grade A & Termin 7 Hari.`}
+  description={selectedDescription}
+  canonical={pageUrl}
 >
   <!-- ================= KUMPULAN META, SCHEMA & CANONICAL DI DALAM <HEAD> ================= -->
   <Fragment slot="head">
+    <!-- Canonical & Robots -->
     <link rel="canonical" href={pageUrl} />
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLdSchema)} />
-    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="bingbot" content="index, follow" />
+
+    <!-- Basic SEO -->
     <meta name="author" content="CV Green Fresh Cipanas" />
+    <meta name="publisher" content="CV Green Fresh Cipanas" />
+    <meta name="copyright" content="CV Green Fresh Cipanas" />
+    <meta name="theme-color" content="#064e3b" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="language" content="Indonesian" />
+    <meta name="rating" content="general" />
+    <meta name="distribution" content="global" />
+    <meta name="revisit-after" content="7 days" />
+
+    <!-- Keywords -->
+    <meta name="keywords" content={`supplier sayuran ${namaLokasi.toLowerCase()}, distributor sayur segar ${namaLokasi.toLowerCase()}, supplier sayur hotel ${namaLokasi.toLowerCase()}, supplier sayur restoran ${namaLokasi.toLowerCase()}, supplier sayur rumah sakit ${namaLokasi.toLowerCase()}, supplier sayur pabrik ${namaLokasi.toLowerCase()}, sayur grade A, sayuran B2B, CV Green Fresh Cipanas`} />
+
+    <!-- Geo SEO -->
     <meta name="geo.region" content="ID-JB" />
     <meta name="geo.placename" content={namaLokasi} />
     <meta name="geo.position" content="-6.7444817;107.0236364" />
     <meta name="ICBM" content="-6.7444817, 107.0236364" />
+    <meta name="DC.title" content={`Supplier Sayuran ${namaLokasi}`} />
+    <meta name="DC.subject" content="Supplier Sayuran, Distributor Sayur Segar, B2B" />
+    <meta name="DC.coverage" content={namaLokasi} />
+    <meta name="DC.language" content="id" />
+
+    <!-- Hreflang -->
+    <link rel="alternate" hreflang="id-ID" href={pageUrl} />
+    <link rel="alternate" hreflang="x-default" href={pageUrl} />
+
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="CV Green Fresh Cipanas" />
     <meta property="og:title" content={`${selectedTitle} — CV Green Fresh Cipanas`} />
-    <meta property="og:description" content={`Supplier sayuran segar di ${namaLokasi}. Garansi Grade A, termin 7 hari, armada harian.`} />
+    <meta property="og:description" content={selectedDescription} />
     <meta property="og:url" content={pageUrl} />
     <meta property="og:locale" content="id_ID" />
+    <meta property="og:image" content={`${siteUrl}/og-image.jpg`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`Supplier Sayuran Segar ${namaLokasi} — CV Green Fresh Cipanas`} />
+
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={selectedTitle} />
-    <meta name="twitter:description" content={`Pemasok sayuran segar B2B di ${namaLokasi}.`} />
+    <meta name="twitter:description" content={selectedDescription} />
+    <meta name="twitter:image" content={`${siteUrl}/og-image.jpg`} />
+    <meta name="twitter:image:alt" content={`Supplier Sayuran ${namaLokasi}`} />
+
+    <!-- Performance hint -->
+    <link rel="preconnect" href="https://www.google.com" />
+    <link rel="preconnect" href="https://wa.me" />
+    <link rel="dns-prefetch" href="https://www.google.com" />
+    <link rel="dns-prefetch" href="https://wa.me" />
+
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLdSchema)} />
   </Fragment>
   
   <!-- ================= HERO SECTION ================= -->
@@ -357,13 +546,11 @@ const jsonLdSchema = {
   </div>
 </section>
 
-  <!-- ================= VISI & MISI KORPORAT (Jarak antar section diperluas) ================= -->
+  <!-- ================= VISI & MISI KORPORAT ================= -->
   <section class="py-12 md:py-20 bg-gradient-to-b from-white via-slate-50/50 to-emerald-50/20 border-b border-slate-200/80 relative overflow-hidden">
-  <!-- Elemen dekoratif latar belakang alami yang lembut -->
   <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-100/40 blur-[120px] rounded-full pointer-events-none"></div>
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-    <!-- Header Section -->
     <div class="text-center max-w-3xl mx-auto mb-12">
       <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-100 border border-emerald-200 text-emerald-800 font-extrabold text-xs uppercase tracking-widest mb-4 shadow-sm">
         <span class="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
@@ -377,7 +564,6 @@ const jsonLdSchema = {
       </p>
     </div>
 
-    <!-- Grid Card -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-stretch">
       
       <!-- Visi Card -->
@@ -454,8 +640,9 @@ const jsonLdSchema = {
             id="search-input"
             placeholder="Cari sayuran (wortel, jamur, cabai...)"
             class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-emerald-500 text-xs md:text-sm bg-slate-50 font-medium"
+            aria-label="Cari produk sayuran"
           />
-          <svg class="w-5 h-5 absolute left-3 top-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-5 h-5 absolute left-3 top-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
           </svg>
         </div>
@@ -487,11 +674,14 @@ const jsonLdSchema = {
             <div class="relative aspect-square bg-slate-100 overflow-hidden">
               <Image
                 src={item.image}
-                alt={item.name}
+                alt={buildProductAlt(item)}
                 width={300}
                 height={300}
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 loading="lazy"
+                decoding="async"
+                format="webp"
+                quality={80}
               />
               <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-emerald-800 text-[10px] font-extrabold px-2.5 py-1 rounded-full border border-emerald-100">
                 {item.category}
@@ -510,8 +700,9 @@ const jsonLdSchema = {
                 type="button"
                 data-product-name={item.name}
                 class="add-to-form-btn mt-4 w-full py-2.5 rounded-xl bg-emerald-50 text-emerald-700 font-extrabold text-xs text-center transition-all duration-300 hover:bg-emerald-600 hover:text-white active:scale-95 flex items-center justify-center gap-1.5 shadow-sm"
+                aria-label={`Tambah ${item.name} ke form pesanan`}
               >
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
                 </svg>
                 <span>Tambah</span>
@@ -542,13 +733,11 @@ const jsonLdSchema = {
 
   <!-- ================= FORM DIRECT ORDER WA ================= -->
   <section id="order-form" class="relative z-20 transition-all duration-300 py-12 sm:py-16 md:py-20" style="background: linear-gradient(to bottom right, #f0fdf4, #ecfdf5, #f8fafc);">
-  <!-- Elemen dekoratif latar belakang halus -->
   <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-emerald-200/50 blur-[140px] rounded-full pointer-events-none"></div>
 
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
     <div class="bg-white/90 backdrop-blur-2xl text-slate-900 p-6 sm:p-10 rounded-[2.5rem] border border-emerald-100 shadow-2xl shadow-emerald-950/5 relative transition-all duration-500 hover:border-emerald-300">
       
-      <!-- Header Form -->
       <div class="text-center mb-6">
         <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-100/80 border border-emerald-200 text-emerald-800 font-extrabold text-xs uppercase tracking-widest mb-4 shadow-sm">
           <span class="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
@@ -558,26 +747,25 @@ const jsonLdSchema = {
         <p class="text-xs sm:text-sm text-slate-600 mb-4 font-light">Pesan pasokan sayur segar berkualitas untuk area {namaLokasi}.</p>
       </div>
 
-      <!-- Form Container -->
       <form id="wa-order-form" class="space-y-5">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Nama Usaha / Hotel / Resto *</label>
+            <label for="form-nama" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Nama Usaha / Hotel / Resto *</label>
             <input type="text" id="form-nama" required placeholder={`Nama Usaha di ${namaLokasi}`} class="w-full px-4 py-3.5 rounded-2xl border border-slate-200 text-xs md:text-sm bg-slate-50/80 text-slate-900 font-medium placeholder-slate-400 focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 transition-all" />
           </div>
           <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Alamat Kirim di {namaLokasi} *</label>
+            <label for="form-alamat" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Alamat Kirim di {namaLokasi} *</label>
             <input type="text" id="form-alamat" required placeholder={`Detail Alamat di ${namaLokasi}`} class="w-full px-4 py-3.5 rounded-2xl border border-slate-200 text-xs md:text-sm bg-slate-50/80 text-slate-900 font-medium placeholder-slate-400 focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 transition-all" />
           </div>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Tgl Pengiriman *</label>
+            <label for="form-tanggal" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Tgl Pengiriman *</label>
             <input type="date" id="form-tanggal" required class="w-full px-4 py-3.5 rounded-2xl border border-slate-200 text-xs md:text-sm bg-slate-50/80 text-slate-900 font-medium focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 transition-all" />
           </div>
           <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Metode Bayar</label>
+            <label for="form-pembayaran" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Metode Bayar</label>
             <select id="form-pembayaran" class="w-full px-4 py-3.5 rounded-2xl border border-slate-200 text-xs md:text-sm bg-slate-50/80 text-slate-900 font-semibold focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 transition-all">
               <option value="Cash / Transfer Harian" class="bg-white text-slate-900">Cash / Transfer Harian (BCA 1978400999)</option>
               <option value="Termin Pembayaran 7 Hari (TOP 7)" class="bg-white text-slate-900">Termin Pembayaran 7 Hari (B2B)</option>
@@ -586,7 +774,7 @@ const jsonLdSchema = {
         </div>
 
         <div>
-          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Daftar Komoditas (Kg/Pack) *</label>
+          <label for="form-komoditas" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Daftar Komoditas (Kg/Pack) *</label>
           <textarea id="form-komoditas" rows="4" required placeholder="- Wortel: 50 Kg&#10;- Kentang: 30 Kg" class="w-full px-4 py-3.5 rounded-2xl border border-slate-200 text-xs md:text-sm font-mono bg-slate-50/80 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 transition-all"></textarea>
         </div>
 
@@ -603,7 +791,6 @@ const jsonLdSchema = {
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
         
-        <!-- Legal & Bank Box -->
         <div class="bg-white p-6 md:p-10 rounded-3xl border border-slate-200 shadow-xl space-y-6 flex flex-col justify-between">
           <div>
             <span class="inline-block px-3.5 py-1 rounded-full bg-slate-200 text-slate-800 font-extrabold text-[10px] md:text-xs uppercase tracking-wider mb-2">Informasi Legalitas</span>
@@ -619,11 +806,10 @@ const jsonLdSchema = {
 
             <div class="flex items-center gap-3.5">
               <div class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center flex-shrink-0">📞</div>
-              <p><strong>Telepon / WA Resmi:</strong> <a href={`https://wa.me/${companyData.waNumber}`} class="text-emerald-700 font-extrabold hover:underline">{companyData.phone}</a></p>
+              <p><strong>Telepon / WA Resmi:</strong> <a href={`https://wa.me/${companyData.waNumber}`} rel="noopener noreferrer" class="text-emerald-700 font-extrabold hover:underline">{companyData.phone}</a></p>
             </div>
           </div>
 
-          <!-- Bank Rekening Card -->
           <div class="p-5 md:p-6 rounded-2xl bg-gradient-to-r from-emerald-950 to-emerald-900 text-white space-y-3 relative overflow-hidden shadow-lg">
             <div class="absolute -right-4 -bottom-4 w-32 h-32 bg-emerald-700/30 rounded-full blur-2xl"></div>
             <p class="text-[10px] md:text-xs text-emerald-300 font-extrabold uppercase tracking-widest">Rekening Resmi Transaksi Pembayaran</p>
@@ -640,7 +826,6 @@ const jsonLdSchema = {
           </div>
         </div>
 
-        <!-- Location Google Maps Embed -->
         <div class="bg-white p-5 md:p-6 rounded-3xl border border-slate-200 shadow-xl overflow-hidden flex flex-col justify-between">
           <div class="mb-4 px-2">
             <h3 class="font-extrabold text-slate-900 text-lg md:text-xl">Lokasi Gudang & Kebun</h3>
@@ -655,6 +840,7 @@ const jsonLdSchema = {
               allowfullscreen="" 
               loading="lazy" 
               referrerpolicy="strict-origin-when-cross-origin"
+              title={`Lokasi CV Green Fresh Cipanas — Supplier Sayuran ${namaLokasi}`}
             ></iframe>
           </div>
         </div>
@@ -662,12 +848,63 @@ const jsonLdSchema = {
       </div>
     </div>
   </section>
+
+  <!-- ================= FAQ DINAMIS (RENDER + SCHEMA SINKRON) ================= -->
+  <section id="faq" class="py-12 md:py-24 bg-gradient-to-b from-emerald-50/50 via-teal-50/30 to-white border-t border-slate-200 pb-28 md:pb-24">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10">
+        <span class="inline-block px-3.5 py-1 rounded-full bg-emerald-100 text-emerald-800 font-extrabold text-xs tracking-wider uppercase mb-2">Bantuan & FAQ</span>
+        <h2 class="text-2xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
+          Pertanyaan yang Sering Diajukan di {namaLokasi}
+        </h2>
+        <p class="text-xs md:text-sm text-slate-500 mt-2 max-w-2xl mx-auto">
+          Jawaban cepat seputar pasokan sayuran segar, minimal order, pengiriman, dan pembayaran untuk area {namaLokasi}.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        {faqs.map((faq, idx) => (
+          <div class="faq-item bg-white rounded-2xl border border-emerald-100 overflow-hidden shadow-sm hover:border-emerald-300 transition-all">
+            <button
+              type="button"
+              class="faq-trigger w-full px-5 py-4 text-left font-bold text-slate-900 text-xs md:text-sm flex justify-between items-center gap-3"
+              data-target={`faq-ans-${idx}`}
+              aria-expanded="false"
+              aria-controls={`faq-ans-${idx}`}
+            >
+              <span>{faq.q}</span>
+              <svg class="faq-icon w-5 h-5 text-emerald-600 flex-shrink-0 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div id={`faq-ans-${idx}`} class="faq-answer hidden px-5 pb-5 text-slate-600 text-xs md:text-sm leading-relaxed border-t border-slate-100 pt-3 bg-emerald-50/30">
+              <p>{faq.a}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- CTA kecil di bawah FAQ -->
+      <div class="mt-8 text-center">
+        <a
+          href={`https://wa.me/${companyData.waNumber}?text=${encodeURIComponent(`Halo CV Green Fresh, saya ingin tanya pasokan sayur untuk area ${namaLokasi}`)}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-emerald-600 text-white font-extrabold text-xs md:text-sm shadow-lg shadow-emerald-600/30 hover:bg-emerald-700 active:scale-95 transition-all"
+        >
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+          </svg>
+          <span>Tanya Admin via WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </section>
   
-  <!-- ================= SECTION INTERNAL LINKING 4 KOTA (SEDERHANA) ================= -->
+  <!-- ================= SECTION INTERNAL LINKING 4 KOTA ================= -->
   <section id="area-layanan-lain" class="py-12 md:py-16 bg-slate-900 text-white border-t border-slate-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <!-- Header Section -->
       <div class="mb-6">
         <span class="text-emerald-400 font-extrabold text-xs uppercase tracking-wider block mb-1">Jaringan Layanan B2B</span>
         <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">
@@ -675,13 +912,12 @@ const jsonLdSchema = {
         </h2>
       </div>
 
-      <!-- Grid Tautan Internal 4 Kota -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
         {kotaLain.map((k) => {
           const namaKotaLain = k.lokasi.charAt(0).toUpperCase() + k.lokasi.slice(1);
           return (
             <a
-              href={`/kota/${k.id}`}
+              href={`/layanan/${k.id}`}
               class="group bg-slate-800/80 hover:bg-emerald-700/30 border border-slate-700/70 hover:border-emerald-500/60 p-4 rounded-xl transition-all duration-200 flex items-center justify-between shadow-sm"
               title={`Supplier Sayuran Segar ${namaKotaLain}`}
             >
@@ -702,36 +938,36 @@ const jsonLdSchema = {
     </div>
   </section>
 
-  <!-- ================= ANDROID APP STYLE BOTTOM NAVIGATION BAR (Hanya Tampil di HP) ================= -->
+  <!-- ================= ANDROID APP STYLE BOTTOM NAVIGATION BAR ================= -->
  <div class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-t border-slate-200 shadow-2xl"
      style="width:100%; max-width:100vw; overflow-x:hidden;">
   <div class="max-w-md mx-auto px-2 py-2.5 flex justify-between items-center gap-1">
 
     <a href="#hero" class="flex flex-col items-center justify-center text-emerald-700 flex-1 min-w-0 py-1">
-      <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+      <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
       </svg>
       <span class="text-[10px] font-bold mt-0.5 truncate">Home</span>
     </a>
 
     <a href="#katalog" class="flex flex-col items-center justify-center text-slate-500 hover:text-emerald-700 flex-1 min-w-0 py-1">
-      <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+      <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
       </svg>
       <span class="text-[10px] font-bold mt-0.5 truncate">Katalog</span>
     </a>
 
     <a href="#order-form" class="flex flex-col items-center justify-center text-slate-500 hover:text-emerald-700 flex-1 min-w-0 py-1">
-      <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+      <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
       </svg>
       <span class="text-[10px] font-bold mt-0.5 truncate">Order WA</span>
     </a>
 
-    <a href={`https://wa.me/${companyData.waNumber}?text=Halo%20Green%20Fresh,%20saya%20ingin%20tanya%20produk%20di%20${namaLokasi}`} target="_blank"
+    <a href={`https://wa.me/${companyData.waNumber}?text=Halo%20Green%20Fresh,%20saya%20ingin%20tanya%20produk%20di%20${namaLokasi}`} target="_blank" rel="noopener noreferrer"
        class="flex flex-col items-center justify-center text-emerald-600 font-extrabold flex-1 min-w-0 py-1">
       <div class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center -mt-3 shadow-lg shrink-0">
-        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
         </svg>
       </div>
@@ -820,6 +1056,30 @@ const jsonLdSchema = {
       const komoditas = (document.getElementById('form-komoditas') as HTMLTextAreaElement).value;
       const message = `Halo CV Green Fresh Cipanas, pesan sayur untuk ${namaLokasi}:\n\n*Usaha:* ${nama}\n*Alamat:* ${alamat}\n*Tgl Kirim:* ${tgl}\n*Bayar:* ${bayar}\n\n*Pesanan:*\n${komoditas}`;
       window.open(`https://wa.me/6287780937884?text=${encodeURIComponent(message)}`, '_blank');
+    });
+
+    // ================= FAQ ACCORDION =================
+    const faqTriggers = document.querySelectorAll('.faq-trigger');
+    faqTriggers.forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        const targetId = (trigger as HTMLElement).dataset.target;
+        const targetAns = document.getElementById(targetId || '');
+        const icon = trigger.querySelector('.faq-icon');
+        if (!targetAns) return;
+
+        const isHidden = targetAns.classList.contains('hidden');
+        // Tutup semua
+        document.querySelectorAll('.faq-answer').forEach((ans) => ans.classList.add('hidden'));
+        document.querySelectorAll('.faq-icon').forEach((ic) => ic.classList.remove('rotate-180'));
+        document.querySelectorAll('.faq-trigger').forEach((tr) => tr.setAttribute('aria-expanded', 'false'));
+
+        // Buka yang diklik (jika sebelumnya tertutup)
+        if (isHidden) {
+          targetAns.classList.remove('hidden');
+          icon?.classList.add('rotate-180');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
+      });
     });
 
     renderProducts();
