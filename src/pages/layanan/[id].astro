@@ -363,20 +363,40 @@ const jsonLdSchema = {
         { "@type": "Country", "name": "Indonesia" },
       ],
       "parentOrganization": { "@id": `${siteUrl}/#organization` },
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": `Katalog Sayuran Segar ${namaLokasi}`,
-        "numberOfItems": products.length,
-        "itemListElement": products.map((p) => ({
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Product",
-            "name": p.name,
-            "category": p.category,
-            "brand": { "@type": "Brand", "name": companyData.name },
-          },
-        })),
+     "hasOfferCatalog": {
+  "@type": "OfferCatalog",
+  "name": `Katalog Sayuran Segar ${namaLokasi}`,
+  "numberOfItems": products.length,
+  "itemListElement": products.map((p) => ({
+    "@type": "Offer",
+    "itemOffered": {
+      "@type": "Product",
+      "name": p.name,
+      "category": p.category,
+      "brand": { "@type": "Brand", "name": companyData.name },
+      // ✅ WAJIB: Product harus punya offers / review / aggregateRating
+      "offers": {
+        "@type": "Offer",
+        "url": pageUrl,
+        "priceCurrency": "IDR",
+        "price": "0",
+        "priceValidUntil": "2030-12-31",
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition",
+        "seller": { "@id": `${siteUrl}/#organization` },
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "priceCurrency": "IDR",
+          "valueAddedTaxIncluded": false,
+          "description": "Harga grosir B2B — hubungi admin untuk penawaran terbaru",
+        },
       },
+    },
+    "priceCurrency": "IDR",
+    "availability": "https://schema.org/InStock",
+    "seller": { "@id": `${siteUrl}/#organization` },
+  })),
+},
     },
     // 5. WebPage
     {
