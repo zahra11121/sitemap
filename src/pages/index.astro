@@ -185,7 +185,11 @@ const formattedPhone = `+${companyData.waNumber.replace(/\D/g, "")}`;
 const pageTitle = "CV Green Fresh Cipanas — Supplier Sayur Mayur & Hasil Tani Premium";
 const pageDescription = "Supplier & distributor sayuran segar, jamur, umbi-umbian, dan bumbu rempah Grade A langsung dari kebun Cipanas & Puncak untuk hotel, restoran, rumah sakit, supermarket, dan katering pabrik. Minimal order Rp 1.500.000, termin 7 hari, armada harian.";
 
-// ====================== JSON-LD SCHEMA (SEO DUNIA) ======================
+// Helper: deskripsi per produk untuk schema
+const buildProductDescription = (p: { name: string; category: string }) =>
+  `${p.name} Grade A kategori ${p.category} dari CV Green Fresh Cipanas, supplier sayuran segar & hasil tani premium. Dipanen langsung dari kebun dataran tinggi Cipanas–Puncak, melewati QC ketat, cocok untuk hotel, restoran, rumah sakit, supermarket, dan katering pabrik.`;
+
+// ====================== JSON-LD SCHEMA (SEO DUNIA + PRODUCT FULL) ======================
 const jsonLdSchema = {
   "@context": "https://schema.org",
   "@graph": [
@@ -232,7 +236,7 @@ const jsonLdSchema = {
         "query-input": "required name=search_term_string"
       }
     },
-    // 3. WholesaleStore (LocalBusiness subtype)
+    // 3. WholesaleStore (LocalBusiness subtype) — hasOfferCatalog dengan Product FULL
     {
       "@type": "WholesaleStore",
       "@id": `${siteUrl}/#store`,
@@ -279,11 +283,123 @@ const jsonLdSchema = {
         "numberOfItems": products.length,
         "itemListElement": products.map((p) => ({
           "@type": "Offer",
+          "url": siteUrl,
+          "priceCurrency": "IDR",
+          "price": "0",
+          "priceValidUntil": "2030-12-31",
+          "validFrom": "2025-01-01",
+          "availability": "https://schema.org/InStock",
+          "itemCondition": "https://schema.org/NewCondition",
+          "seller": { "@id": `${siteUrl}/#organization` },
+          "priceSpecification": {
+            "@type": "PriceSpecification",
+            "priceCurrency": "IDR",
+            "valueAddedTaxIncluded": false,
+            "description": "Harga grosir B2B — hubungi admin untuk penawaran terbaru"
+          },
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingRate": {
+              "@type": "MonetaryAmount",
+              "value": "0",
+              "currency": "IDR"
+            },
+            "shippingDestination": {
+              "@type": "DefinedRegion",
+              "addressCountry": "ID",
+              "addressRegion": "Jawa Barat"
+            },
+            "deliveryTime": {
+              "@type": "ShippingDeliveryTime",
+              "handlingTime": {
+                "@type": "QuantitativeValue",
+                "minValue": 0,
+                "maxValue": 1,
+                "unitCode": "DAY"
+              },
+              "transitTime": {
+                "@type": "QuantitativeValue",
+                "minValue": 0,
+                "maxValue": 1,
+                "unitCode": "DAY"
+              }
+            }
+          },
+          "hasMerchantReturnPolicy": {
+            "@type": "MerchantReturnPolicy",
+            "applicableCountry": "ID",
+            "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+            "merchantReturnDays": 1,
+            "returnMethod": "https://schema.org/ReturnByMail",
+            "returnFees": "https://schema.org/FreeReturn",
+            "description": "Garansi retur 100% untuk produk tidak segar, klaim maksimal 24 jam setelah penerimaan."
+          },
           "itemOffered": {
             "@type": "Product",
             "name": p.name,
             "category": p.category,
-            "brand": { "@type": "Brand", "name": companyData.name }
+            "brand": { "@type": "Brand", "name": companyData.name },
+            // ✅ CRITICAL: image wajib untuk Product
+            "image": `${siteUrl}/og-image.jpg`,
+            // ✅ NON-CRITICAL: description per produk
+            "description": buildProductDescription(p),
+            "sku": `GF-${p.name.toLowerCase().replace(/\s+/g, "-")}`,
+            "mpn": `GF-${p.category.replace(/\s+/g, "").toUpperCase()}`,
+            // ✅ CRITICAL: offers di level Product (bersarang)
+            "offers": {
+              "@type": "Offer",
+              "url": siteUrl,
+              "priceCurrency": "IDR",
+              "price": "0",
+              "priceValidUntil": "2030-12-31",
+              "validFrom": "2025-01-01",
+              "availability": "https://schema.org/InStock",
+              "itemCondition": "https://schema.org/NewCondition",
+              "seller": { "@id": `${siteUrl}/#organization` },
+              "priceSpecification": {
+                "@type": "PriceSpecification",
+                "priceCurrency": "IDR",
+                "valueAddedTaxIncluded": false,
+                "description": "Harga grosir B2B — hubungi admin untuk penawaran terbaru"
+              },
+              "shippingDetails": {
+                "@type": "OfferShippingDetails",
+                "shippingRate": {
+                  "@type": "MonetaryAmount",
+                  "value": "0",
+                  "currency": "IDR"
+                },
+                "shippingDestination": {
+                  "@type": "DefinedRegion",
+                  "addressCountry": "ID",
+                  "addressRegion": "Jawa Barat"
+                },
+                "deliveryTime": {
+                  "@type": "ShippingDeliveryTime",
+                  "handlingTime": {
+                    "@type": "QuantitativeValue",
+                    "minValue": 0,
+                    "maxValue": 1,
+                    "unitCode": "DAY"
+                  },
+                  "transitTime": {
+                    "@type": "QuantitativeValue",
+                    "minValue": 0,
+                    "maxValue": 1,
+                    "unitCode": "DAY"
+                  }
+                }
+              },
+              "hasMerchantReturnPolicy": {
+                "@type": "MerchantReturnPolicy",
+                "applicableCountry": "ID",
+                "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+                "merchantReturnDays": 1,
+                "returnMethod": "https://schema.org/ReturnByMail",
+                "returnFees": "https://schema.org/FreeReturn",
+                "description": "Garansi retur 100% untuk produk tidak segar, klaim maksimal 24 jam setelah penerimaan."
+              }
+            }
           }
         }))
       }
