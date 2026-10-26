@@ -1,761 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { Image } from 'astro:assets';
-
-// Import gambar produk untuk thumbnail artikel
-import Asparagus_7 from '../../assets/products/Asparagus_7.jpg';
-import Bawang_Merah_4 from '../../assets/products/Bawang_Merah_4.jpg';
-import Bayam_Hijau_6 from '../../assets/products/Bayam_Hijau_6.jpg';
-import Brokoli_2 from '../../assets/products/Brokoli_2.jpg';
-import Cabai_Merah_4 from '../../assets/products/Cabai_Merah_4.jpg';
-import Daun_Kelor_10 from '../../assets/products/Daun_Kelor_10.jpg';
-import Jagung_1 from '../../assets/products/Jagung_1.jpg';
-import Jahe_1 from '../../assets/products/Jahe_1.jpg';
-import Jamur_Tiram_7 from '../../assets/products/Jamur_Tiram_7.jpg';
-import Kacang_Panjang_10 from '../../assets/products/Kacang_Panjang_10.jpg';
-import Kale_1 from '../../assets/products/Kale_1.jpg';
-import Kangkung_2 from '../../assets/products/Kangkung_2.jpg';
-import Kentang_2 from '../../assets/products/Kentang_2.jpg';
-import Labu_Siam_4 from '../../assets/products/Labu_Siam_4.jpg';
-import Okra_1 from '../../assets/products/Okra_1.jpg';
-import Pakcoy_10 from '../../assets/products/Pakcoy_10.jpg';
-import Paprika_6 from '../../assets/products/Paprika_6.jpg';
-import Selada_3 from '../../assets/products/Selada_3.jpg';
-import Tomat_10 from '../../assets/products/Tomat_10.jpg';
-import Wortel_10 from '../../assets/products/Wortel_10.jpg';
-
-// ====================== DATA 20 ARTIKEL ======================
-const articles = [
-  {
-    slug: 'cara-memilih-wortel-berkualitas-untuk-restoran',
-    title: 'Cara Memilih Wortel Berkualitas untuk Pasokan Restoran',
-    excerpt: 'Wortel Grade A punya warna oranye pekat, tekstur padat, dan tidak mudah patah. Simak panduan sortir untuk dapur profesional.',
-    category: 'Panduan Kualitas',
-    author: 'Tim Green Fresh',
-    date: '2025-01-05',
-    readTime: 6,
-    image: Wortel_10,
-    content: `
-Wortel adalah salah satu komoditas paling sering dipesan oleh restoran, hotel, dan katering. Namun tidak semua wortel layak masuk dapur profesional. Perbedaan kualitas bisa memengaruhi rasa, tekstur, hingga konsistensi plating.
-
-## 1. Warna Oranye Pekat Merata
-Wortel Grade A memiliki warna oranye cerah yang merata dari pangkal hingga ujung. Warna pucat biasanya menandakan kandungan beta-karoten rendah dan kemungkinan dipanen terlalu muda.
-
-## 2. Tekstur Padat dan Tidak Mudah Patah
-Pegang wortel dan tekan perlahan. Wortel segar terasa keras dan padat. Jika terasa lembek atau mudah bengkok, berarti kadar air sudah turun atau penyimpanan terlalu lama.
-
-## 3. Ukuran Seragam
-Untuk kebutuhan restoran, ukuran seragam (biasanya diameter 2–3 cm) memudahkan proses potong dan menghasilkan yield lebih konsisten.
-
-## 4. Bebas Retak dan Luka
-Retakan pada permukaan wortel membuka jalan masuk bakteri dan mempercepat pembusukan. Hindari wortel dengan luka gores atau lubang bekas hama.
-
-## 5. Daun Hijau Segar (Jika Masih Menempel)
-Daun yang masih hijau dan tegak menandakan wortel baru dipanen. Jika daun sudah layu atau menguning, wortel sudah lama disimpan.
-
-## Tips Penyimpanan
-Simpan wortel di chiller bersuhu 0–4°C dengan kelembapan tinggi. Jangan dicuci sebelum disimpan karena kelembapan berlebih memicu jamur.
-
-CV Green Fresh Cipanas menyortir wortel secara manual sebelum dikirim, memastikan hanya Grade A yang sampai ke dapur Anda.
-    `,
-  },
-  {
-    slug: 'manfaat-brokoli-untuk-menu-sehat',
-    title: 'Manfaat Brokoli untuk Menu Sehat Hotel & Restoran',
-    excerpt: 'Brokoli kaya serat, vitamin C, dan senyawa antioksidan. Cocok jadi menu andalan untuk tamu yang peduli kesehatan.',
-    category: 'Nutrisi & Kesehatan',
-    author: 'Tim Green Fresh',
-    date: '2025-01-08',
-    readTime: 5,
-    image: Brokoli_2,
-    content: `
-Brokoli telah lama menjadi primadona di menu sehat. Bagi hotel dan restoran, komoditas ini bukan hanya soal gizi, tetapi juga soal daya tarik visual di piring.
-
-## Kandungan Gizi Brokoli
-- Vitamin C tinggi (mendekati kandungan jeruk)
-- Serat larut untuk pencernaan
-- Senyawa sulforaphane sebagai antioksidan
-- Folat dan vitamin K
-
-## Kenapa Restoran Menyukainya
-Brokoli mempertahankan warna hijau cerah setelah di-blanch, sehingga plating terlihat segar. Teksturnya renyah dan mudah dipadukan dengan protein apa pun.
-
-## Cara Memasak yang Tepat
-Blanch 2–3 menit di air mendidih bergaram, lalu langsung ke ice bath. Cara ini menjaga warna dan kerenyahan tanpa kehilangan nutrisi.
-
-## Penyimpanan
-Brokoli cepat menguning jika disimpan terbuka. Bungkus dengan plastik perforasi di chiller 0–4°C dan gunakan dalam 3–4 hari.
-
-Pasokan brokoli Grade A dari kebun dataran tinggi Cipanas memiliki kepala rapat dan warna hijau tua yang konsisten.
-    `,
-  },
-  {
-    slug: 'mengapa-sayur-cipanas-lebih-segar',
-    title: 'Mengapa Sayur dari Cipanas & Puncak Lebih Segar?',
-    excerpt: 'Faktor ketinggian, suhu, dan tanah vulkanik membuat sayur Cipanas punya rasa dan tekstur khas yang sulit ditiru.',
-    category: 'Edukasi Pertanian',
-    author: 'Tim Green Fresh',
-    date: '2025-01-10',
-    readTime: 7,
-    image: Selada_3,
-    content: `
-Cipanas dan Puncak dikenal sebagai sentra sayur dataran tinggi di Jawa Barat. Banyak chef bersikeras memakai sayur dari sini. Ada alasan ilmiah di baliknya.
-
-## 1. Suhu Ideal untuk Sayur Daun
-Ketinggian 1.100–1.500 meter dengan suhu 15–22°C memperlambat proses pematangan, sehingga sayuran daun tumbuh perlahan dan renyah.
-
-## 2. Tanah Vulkanik yang Subur
-Tanah vulkanik kaya mineral menghasilkan rasa sayur yang lebih pekat. Wortel dan selada dari Cipanas dikenal lebih manis alami.
-
-## 3. Jarak Panen ke Pengiriman Pendek
-Karena dipanen pagi dan dikirim hari yang sama, sayur Cipanas masuk dapur dalam kondisi paling segar.
-
-## 4. Air Gunung untuk Irigasi
-Irigasi dari mata air pegunungan menjaga kadar air sayur optimal dan bersih.
-
-## 5. Budidaya Turun-Temurun
-Petani lokal Cipanas sudah bertani lintas generasi, tahu persis waktu panen terbaik per komoditas.
-
-Green Fresh Cipanas bermitra langsung dengan petani ini untuk menjaga rantai pasok tetap pendek dan segar.
-    `,
-  },
-  {
-    slug: 'strategi-mengelola-stok-sayur-untuk-katering',
-    title: 'Strategi Mengelola Stok Sayur untuk Katering Pabrik',
-    excerpt: 'Katering dengan ribuan porsi harian butuh pasokan stabil. Ini strategi stok dan jadwal pengiriman yang aman.',
-    category: 'Manajemen Dapur',
-    author: 'Tim Green Fresh',
-    date: '2025-01-12',
-    readTime: 8,
-    image: Bawang_Merah_4,
-    content: `
-Katering pabrik menuntut konsistensi volume dan jadwal. Salah hitung stok bisa berarti menu tidak sesuai rencana.
-
-## 1. Hitung Yield, Bukan Berat Kotor
-Sayur daun menyusut 20–30% setelah dibersihkan. Gunakan angka yield realistis saat memesan.
-
-## 2. Gunakan Sistem FIFO
-First In First Out wajib. Label tanggal terima dan susun berdasarkan kedatangan.
-
-## 3. Pesan Komoditas Cepat Rusak dalam Siklus 2 Hari
-Sayur daun hijau seperti kangkung dan bayam paling cepat rusak. Pesan dalam jumlah kecil dan sering.
-
-## 4. Manfaatkan Termin 7 Hari untuk Cash Flow
-Termin pembayaran B2B membantu katering menjaga arus kas sambil tetap mendapat pasokan harian.
-
-## 5. Siapkan Buffer 10–15%
-Selalu sediakan cadangan untuk lonjakan pesanan mendadak atau pembatalan panen.
-
-## 6. Evaluasi Mingguan
-Catat komoditas yang sering tersisa, lalu sesuaikan jumlah pesanan minggu berikutnya.
-
-Dengan strategi ini, katering pabrik bisa menekan waste hingga di bawah 5%.
-    `,
-  },
-  {
-    slug: 'panduan-penyimpanan-sayur-di-chiller',
-    title: 'Panduan Penyimpanan Sayur di Chiller Agar Tahan Lebih Lama',
-    excerpt: 'Suhu, kelembapan, dan pemisahan jenis sayur adalah kunci. Simak panduan lengkap penyimpanan di chiller dapur.',
-    category: 'Manajemen Dapur',
-    author: 'Tim Green Fresh',
-    date: '2025-01-15',
-    readTime: 6,
-    image: Pakcoy_10,
-    content: `
-Penyimpanan yang salah bisa membuat sayur Grade A rusak dalam 24 jam. Berikut panduan praktisnya.
-
-## Suhu Ideal per Jenis
-- Sayur daun: 0–2°C, kelembapan 95%
-- Umbi-umbian: 4–8°C, hindari lembap berlebih
-- Jamur: 2–4°C, simpan di kantong kertas
-- Tomat: 10–12°C, jangan di chiller terlalu dingin
-
-## Pisahkan Etilen
-Tomat dan apel menghasilkan etilen yang mempercepat kematangan sayur lain. Simpan terpisah.
-
-## Jangan Cuci Sebelum Simpan
-Kelembapan berlebih memicu jamur. Cuci saat akan dipakai.
-
-## Gunakan Kontainer Berlubang
-Sirkulasi udara penting untuk sayur daun. Jangan tutup rapat.
-
-## Rotasi Harian
-Cek stok setiap pagi dan pindahkan yang mulai layu ke area pemakaian prioritas.
-
-Panduan ini membantu dapur profesional menjaga kualitas hingga ke piring tamu.
-    `,
-  },
-  {
-    slug: 'jamur-tiram-peluang-menu-vegetarian',
-    title: 'Jamur Tiram: Peluang Menu Vegetarian yang Menguntungkan',
-    excerpt: 'Jamur tiram punya tekstur mirip daging, murah, dan mudah diolah. Cocok jadi menu vegetarian berkelas.',
-    category: 'Nutrisi & Kesehatan',
-    author: 'Tim Green Fresh',
-    date: '2025-01-18',
-    readTime: 5,
-    image: Jamur_Tiram_7,
-    content: `
-Permintaan menu vegetarian di hotel dan restoran terus naik. Jamur tiram adalah jawaban bagi chef yang ingin menu nabati bertekstur.
-
-## Tekstur Mirip Daging
-Jamur tiram bisa disuwir dan ditumis hingga menyerupai tekstur ayam. Banyak restoran memakainya untuk menu "mock meat".
-
-## Harga Bersahabat
-Dibanding daging, jamur tiram jauh lebih murah per porsi, membuat margin menu lebih sehat.
-
-## Kandungan Gizi
-- Protein nabati
-- Serat beta-glukan
-- Vitamin B kompleks
-- Rendah kalori
-
-## Olahan Populer
-- Jamur tiram crispy
-- Tumis jamur saus tiram
-- Jamur isi bumbu
-- Sup jamur
-
-## Penyimpanan
-Simpan di kantong kertas dalam chiller, gunakan dalam 3 hari. Jangan dicuci sebelum diolah.
-
-Green Fresh Cipanas memasok jamur tiram segar harian dari petani mitra.
-    `,
-  },
-  {
-    slug: 'standar-grade-a-sayur-untuk-hotel',
-    title: 'Standar Grade A: Apa yang Dicari Hotel dari Supplier Sayur?',
-    excerpt: 'Hotel bintang lima punya standar sortir ketat. Ini kriteria Grade A yang wajib dipenuhi supplier.',
-    category: 'Panduan Kualitas',
-    author: 'Tim Green Fresh',
-    date: '2025-01-20',
-    readTime: 7,
-    image: Paprika_6,
-    content: `
-Hotel besar tidak asal terima sayur. Ada standar sortir yang harus dipenuhi supplier.
-
-## 1. Keseragaman Ukuran
-Menu hotel butuh plating konsisten. Ukuran seragam memudahkan porsi.
-
-## 2. Bebas Cacat Visual
-Tidak ada luka, goresan, atau bekas hama yang terlihat.
-
-## 3. Warna Sesuai Standar Komoditas
-Paprika merah harus merah merata, bukan belang. Selada harus hijau cerah.
-
-## 4. Kesegaran Daun dan Batang
-Daun tegak, batang tidak layu, dan tidak ada tanda kuning.
-
-## 5. Suhu Saat Terima
-Sayur harus tiba dalam kondisi dingin (chilled), bukan suhu ruang.
-
-## 6. Dokumentasi QC
-Supplier profesional menyertakan catatan QC dan tanggal panen.
-
-Green Fresh Cipanas menjalankan QC Grade A manual sebelum pengiriman, memastikan standar hotel terpenuhi.
-    `,
-  },
-  {
-    slug: 'cara-mengurangi-waste-sayur-di-restoran',
-    title: 'Cara Mengurangi Waste Sayur di Restoran hingga 40%',
-    excerpt: 'Waste sayur menggerus margin. Ini langkah praktis menekan pemborosan dari penerimaan sampai plating.',
-    category: 'Manajemen Dapur',
-    author: 'Tim Green Fresh',
-    date: '2025-01-22',
-    readTime: 6,
-    image: Kangkung_2,
-    content: `
-Waste sayur di restoran bisa mencapai 30–40% jika tidak dikelola. Berikut cara menekannya.
-
-## 1. Terima dengan Pengecekan Ketat
-Tolak atau catat sayur yang tidak sesuai standar saat penerimaan. Jangan biarkan masuk stok.
-
-## 2. Menu Harian Berbasis Stok
-Susun menu spesial berdasarkan komoditas yang paling cepat rusak.
-
-## 3. Pelatihan Staf Potong
-Teknik potong yang benar meningkatkan yield. Wortel yang dipotong salah bisa kehilangan 15% daging.
-
-## 4. Manfaatkan Bagian Sisa
-Daun wortel bisa jadi pesto, batang brokoli bisa jadi sup krim.
-
-## 5. Data Waste Mingguan
-Catat jenis dan volume waste tiap minggu, lalu cari pola.
-
-## 6. Pilih Supplier dengan Garansi Retur
-Supplier yang berani garansi retur membantu restoran mengurangi risiko.
-
-Dengan disiplin ini, banyak dapur memangkas waste hingga 40%.
-    `,
-  },
-  {
-    slug: 'tomat-segar-untuk-saus-dan-salad',
-    title: 'Tomat Segar untuk Saus dan Salad: Panduan Memilih',
-    excerpt: 'Tomat untuk saus berbeda dengan tomat untuk salad. Kenali jenis dan tingkat kematangan yang tepat.',
-    category: 'Panduan Kualitas',
-    author: 'Tim Green Fresh',
-    date: '2025-01-25',
-    readTime: 5,
-    image: Tomat_10,
-    content: `
-Tomat adalah bahan serba guna, tetapi tidak semua tomat cocok untuk semua olahan.
-
-## Tomat untuk Saus
-Pilih tomat yang matang penuh, berdaging tebal, dan kadar air sedang. Varietas plum atau roma ideal karena sedikit biji.
-
-## Tomat untuk Salad
-Pilih tomat yang masih sedikit keras, warna cerah, dan tidak terlalu berair agar tidak membuat salad lembek.
-
-## Tingkat Kematangan
-- Hijau: untuk acar atau tumis
-- Setengah matang: untuk salad
-- Matang penuh: untuk saus dan sup
-
-## Penyimpanan
-Jangan simpan tomat di chiller di bawah 10°C karena merusak tekstur. Simpan di suhu ruang sampai matang, lalu gunakan.
-
-## Ciri Tomat Segar
-Kulit mengkilap, tidak keriput, dan berat terasa padat saat dipegang.
-
-Green Fresh Cipanas memasok tomat merah Grade A dengan tingkat kematangan sesuai kebutuhan dapur.
-    `,
-  },
-  {
-    slug: 'kale-sayuran-premium-yang-naik-daun',
-    title: 'Kale: Sayuran Premium yang Naik Daun di Menu Sehat',
-    excerpt: 'Kale kaya serat dan antioksidan. Simak cara mengolah dan memilih kale segar untuk menu premium.',
-    category: 'Nutrisi & Kesehatan',
-    author: 'Tim Green Fresh',
-    date: '2025-01-28',
-    readTime: 5,
-    image: Kale_1,
-    content: `
-Kale dikenal sebagai superfood dan kini banyak muncul di menu restoran sehat dan hotel.
-
-## Kandungan Gizi
-- Vitamin K tinggi
-- Vitamin A dan C
-- Serat dan antioksidan
-- Rendah kalori
-
-## Cara Memilih Kale Segar
-Pilih daun hijau tua, keriting rapat, dan batang tidak terlalu tebal. Hindari daun menguning atau berlubang.
-
-## Olahan Populer
-- Kale chips (dipanggang)
-- Kale salad dengan dressing lemon
-- Smoothie hijau
-- Tumis kale dengan bawang putih
-
-## Teknik Mengurangi Rasa Pahit
-Massage daun kale dengan minyak zaitun dan garam selama 1–2 menit sebelum diolah. Rasa pahit berkurang, tekstur lebih lembut.
-
-## Penyimpanan
-Bungkus dalam plastik perforasi di chiller, gunakan dalam 4 hari.
-
-Kale premium dari kebun dataran tinggi Cipanas memiliki daun keriting tebal dan warna hijau pekat.
-    `,
-  },
-  {
-    slug: 'cabai-merah-pedas-pasokan-stabil',
-    title: 'Cabai Merah: Menjaga Pasokan Stabil Saat Harga Naik',
-    excerpt: 'Fluktuasi harga cabai merah sering mengganggu dapur. Ini strategi menjaga pasokan tetap stabil.',
-    category: 'Manajemen Dapur',
-    author: 'Tim Green Fresh',
-    date: '2025-02-01',
-    readTime: 6,
-    image: Cabai_Merah_4,
-    content: `
-Cabai merah adalah komoditas paling fluktuatif. Harga bisa melonjak drastis saat musim hujan atau menjelang hari raya.
-
-## 1. Bangun Hubungan Jangka Panjang dengan Supplier
-Supplier yang punya akses langsung ke petani bisa memberi harga lebih stabil dibanding pasar.
-
-## 2. Simpan Cabai Kering atau Beku
-Saat harga rendah, beli lebih banyak lalu keringkan atau bekukan untuk cadangan.
-
-## 3. Gunakan Cabai Bubuk untuk Menu Tertentu
-Menu yang tidak menonjolkan cabai segar bisa memakai cabai bubuk berkualitas.
-
-## 4. Pantau Pola Musim
-Harga cabai merah biasanya naik saat musim hujan (Desember–Februari) dan hari besar keagamaan.
-
-## 5. Kontrak Pasokan
-Untuk kebutuhan besar, kontrak pasokan jangka pendek dengan harga tetap bisa membantu.
-
-Green Fresh Cipanas membantu mitra B2B menjaga pasokan cabai merah tetap stabil dengan jaringan petani mitra.
-    `,
-  },
-  {
-    slug: 'resep-tumis-pakcoy-bawang-putih',
-    title: 'Resep Tumis Pakcoy Bawang Putih ala Restoran',
-    excerpt: 'Menu sederhana dengan rasa premium. Resep tumis pakcoy bawang putih yang cocok untuk menu harian hotel.',
-    category: 'Resep & Olahan',
-    author: 'Tim Green Fresh',
-    date: '2025-02-04',
-    readTime: 4,
-    image: Pakcoy_10,
-    content: `
-Pakcoy adalah sayur serba guna yang cepat matang. Berikut resep tumis pakcoy bawang putih ala restoran.
-
-## Bahan (2 porsi)
-- 300 gram pakcoy segar
-- 4 siung bawang putih, cincang
-- 1 sdm saus tiram
-- ½ sdt garam
-- ½ sdt gula
-- 1 sdm minyak wijen
-- 100 ml air
-
-## Cara Membuat
-1. Cuci pakcoy, potong sesuai selera.
-2. Panaskan minyak, tumis bawang putih hingga harum.
-3. Masukkan pakcoy, aduk cepat.
-4. Tambahkan saus tiram, garam, gula, dan air.
-5. Masak 2 menit, jangan terlalu lama agar tetap renyah.
-6. Angkat, sajikan dengan minyak wijen.
-
-## Tips
-Gunakan api besar dan waktu masak singkat untuk menjaga warna hijau cerah dan tekstur renyah.
-
-Pakcoy Grade A dari Cipanas memiliki batang tebal dan daun hijau cerah, cocok untuk menu ini.
-    `,
-  },
-  {
-    slug: 'jahe-segar-untuk-minuman-dan-bumbu',
-    title: 'Jahe Segar: Dari Bumbu Dapur hingga Minuman Kekinian',
-    excerpt: 'Jahe segar punya aroma khas dan manfaat kesehatan. Simak cara memilih dan mengolahnya.',
-    category: 'Nutrisi & Kesehatan',
-    author: 'Tim Green Fresh',
-    date: '2025-02-07',
-    readTime: 5,
-    image: Jahe_1,
-    content: `
-Jahe adalah bumbu wajib di dapur profesional, sekaligus bahan minuman sehat yang sedang naik daun.
-
-## Cara Memilih Jahe Segar
-- Kulit mengkilap dan tidak keriput
-- Aroma tajam saat dipotong
-- Tekstur padat, tidak berair
-- Tidak ada tanda jamur atau bercak hitam
-
-## Manfaat Kesehatan
-- Meredakan mual
-- Menghangatkan tubuh
-- Anti-inflamasi alami
-- Membantu pencernaan
-
-## Olahan Populer
-- Wedang jahe
-- Jahe lemon madu
-- Bumbu dasar tumis
-- Marinasi daging
-
-## Penyimpanan
-Simpan jahe di tempat kering bersuhu ruang, atau bekukan dalam bentuk irisan untuk pemakaian cepat.
-
-Green Fresh Cipanas memasok jahe segar dari kebun dataran tinggi dengan aroma tajam khas.
-    `,
-  },
-  {
-    slug: 'selada-keriting-untuk-burger-dan-salad',
-    title: 'Selada Keriting untuk Burger dan Salad: Tips Memilih',
-    excerpt: 'Selada keriting adalah tulang punggung burger dan salad. Kenali ciri selada segar berkualitas.',
-    category: 'Panduan Kualitas',
-    author: 'Tim Green Fresh',
-    date: '2025-02-10',
-    readTime: 5,
-    image: Selada_3,
-    content: `
-Selada keriting sering jadi penentu kualitas burger dan salad. Daun yang lembek bisa merusak pengalaman makan.
-
-## Ciri Selada Segar
-- Daun hijau cerah dan keriting rapat
-- Batang tidak berlendir
-- Tidak ada bercak cokelat di tepi daun
-- Berat terasa padat
-
-## Penyimpanan
-Bungkus dengan tisu dapur dan plastik perforasi, simpan di chiller 0–2°C.
-
-## Teknik Mencuci
-Cuci dengan air dingin mengalir, lalu rendam air es 5 menit agar daun renyah. Keringkan dengan salad spinner.
-
-## Untuk Burger
-Gunakan daun bagian dalam yang lebih lembut. Untuk salad, campur daun dalam dan luar agar tekstur bervariasi.
-
-## Untuk Salad
-Potong dengan tangan, bukan pisau, agar tidak cepat layu.
-
-Selada keriting dari Cipanas punya daun tebal dan warna hijau cerah yang tahan lama.
-    `,
-  },
-  {
-    slug: 'kentang-dieng-untuk-menu-fries',
-    title: 'Kentang Dieng untuk Menu Fries: Kenapa Berbeda?',
-    excerpt: 'Kentang Dieng punya kadar air rendah dan tekstur tepung yang ideal untuk fries renyah.',
-    category: 'Panduan Kualitas',
-    author: 'Tim Green Fresh',
-    date: '2025-02-13',
-    readTime: 5,
-    image: Kentang_2,
-    content: `
-Kentang Dieng dikenal sebagai salah satu kentang terbaik untuk fries. Ada alasan agronomis di baliknya.
-
-## Kadar Air Rendah
-Kentang Dieng tumbuh di dataran tinggi dengan suhu dingin, menghasilkan kadar air lebih rendah. Ini membuat fries lebih renyah.
-
-## Tekstur Tepung
-Kandungan pati yang tinggi memberi tekstur tepung di dalam dan renyah di luar.
-
-## Warna Kuning Alami
-Tidak perlu pewarna, fries dari kentang Dieng sudah kuning keemasan alami.
-
-## Cara Memasak Fries Sempurna
-1. Potong memanjang, rendam air dingin 30 menit.
-2. Blanch 3 menit di air 80°C.
-3. Keringkan, bekukan 2 jam.
-4. Goreng dua kali: 160°C lalu 190°C.
-
-## Penyimpanan
-Simpan di tempat gelap, sejuk, dan berventilasi. Jangan di chiller karena pati berubah jadi gula.
-
-Green Fresh Cipanas memasok kentang Dieng Grade A dengan ukuran seragam untuk kebutuhan fries.
-    `,
-  },
-  {
-    slug: 'okra-hijau-sayuran-premium-kaya-serat',
-    title: 'Okra Hijau: Sayuran Premium Kaya Serat untuk Menu Sehat',
-    excerpt: 'Okra hijau kaya lendir alami yang bermanfaat untuk pencernaan. Simak cara mengolahnya agar tidak berlendir berlebihan.',
-    category: 'Nutrisi & Kesehatan',
-    author: 'Tim Green Fresh',
-    date: '2025-02-16',
-    readTime: 5,
-    image: Okra_1,
-    content: `
-Okra hijau adalah sayuran premium yang kaya serat dan sering muncul di menu sehat dan menu internasional.
-
-## Kandungan Gizi
-- Serat larut tinggi
-- Vitamin C dan K
-- Antioksidan
-- Rendah kalori
-
-## Ciri Okra Segar
-- Warna hijau cerah
-- Tekstur padat, tidak lembek
-- Ujung tidak menghitam
-- Ukuran kecil hingga sedang lebih lembut
-
-## Mengurangi Lendir
-Lendir alami okra bermanfaat, tetapi jika tidak disukai:
-- Potong memanjang dan panggang
-- Tumis dengan api besar
-- Tambahkan sedikit cuka atau lemon
-
-## Olahan Populer
-- Okra tumis bawang putih
-- Okra panggang
-- Okra dalam kari
-- Okra crispy
-
-## Penyimpanan
-Simpan dalam kantong kertas di chiller, gunakan dalam 3 hari.
-
-Okra hijau Grade A dari Cipanas dipanen muda untuk tekstur terbaik.
-    `,
-  },
-  {
-    slug: 'daun-kelor-superfood-lokal',
-    title: 'Daun Kelor: Superfood Lokal yang Mendunia',
-    excerpt: 'Daun kelor kaya nutrisi dan mudah diolah. Simak cara memilih dan mengolah kelor untuk menu sehat.',
-    category: 'Nutrisi & Kesehatan',
-    author: 'Tim Green Fresh',
-    date: '2025-02-19',
-    readTime: 5,
-    image: Daun_Kelor_10,
-    content: `
-Daun kelor disebut sebagai superfood karena kandungan nutrisinya yang luar biasa.
-
-## Kandungan Gizi
-- Vitamin A dan C tinggi
-- Kalsium dan zat besi
-- Protein nabati
-- Antioksidan
-
-## Ciri Kelor Segar
-- Daun kecil hijau cerah
-- Tangkai mudah dipatahkan
-- Tidak ada daun menguning
-- Aroma segar khas
-
-## Olahan Populer
-- Sayur bening kelor
-- Tumis kelor
-- Kelor krispi
-- Smoothie hijau
-
-## Tips Mengolah
-Masak kelor sebentar saja (2–3 menit) untuk menjaga nutrisi dan warna. Daun muda lebih lembut dan tidak pahit.
-
-## Penyimpanan
-Simpan dalam plastik perforasi di chiller, gunakan dalam 2–3 hari. Bisa juga dikeringkan untuk cadangan.
-
-Green Fresh Cipanas memasok daun kelor segar dari kebun mitra di dataran tinggi.
-    `,
-  },
-  {
-    slug: 'kacang-panjang-menu-harian-hemat',
-    title: 'Kacang Panjang: Menu Harian Hemat dengan Gizi Tinggi',
-    excerpt: 'Kacang panjang murah, mudah diolah, dan kaya serat. Cocok jadi menu harian katering dan restoran.',
-    category: 'Resep & Olahan',
-    author: 'Tim Green Fresh',
-    date: '2025-02-22',
-    readTime: 4,
-    image: Kacang_Panjang_10,
-    content: `
-Kacang panjang adalah sayur andalan dapur Indonesia. Harganya bersahabat, gizinya tinggi, dan mudah diolah.
-
-## Kandungan Gizi
-- Serat tinggi
-- Vitamin A, C, dan K
-- Folat
-- Protein nabati
-
-## Ciri Kacang Panjang Segar
-- Warna hijau cerah
-- Tekstur renyah saat dipatahkan
-- Tidak ada bercak cokelat
-- Ukuran seragam
-
-## Olahan Populer
-- Tumis kacang panjang tempe
-- Kacang panjang lodeh
-- Pecel
-- Kacang panjang crispy
-
-## Tips Memasak
-Potong pendek dan masak cepat dengan api besar agar tetap renyah. Jangan terlalu lama agar warna tetap hijau.
-
-## Penyimpanan
-Simpan dalam kantong plastik berlubang di chiller, gunakan dalam 3–4 hari.
-
-Kacang panjang Grade A dari Cipanas dipanen muda untuk tekstur renyah optimal.
-    `,
-  },
-  {
-    slug: 'jagung-manis-untuk-menu-sarapan',
-    title: 'Jagung Manis untuk Menu Sarapan Hotel',
-    excerpt: 'Jagung manis segar punya rasa alami yang manis dan tekstur lembut. Cocok untuk menu sarapan buffet.',
-    category: 'Resep & Olahan',
-    author: 'Tim Green Fresh',
-    date: '2025-02-25',
-    readTime: 4,
-    image: Jagung_1,
-    content: `
-Jagung manis adalah komoditas serba guna untuk menu sarapan hotel, dari buffet hingga à la carte.
-
-## Ciri Jagung Manis Segar
-- Kelobot hijau segar
-- Rambut jagung masih lembap
-- Biji kuning cerah dan padat
-- Tidak ada biji keriput
-
-## Olahan Sarapan Populer
-- Jagung rebus
-- Jagung bakar
-- Jagung susu keju
-- Jagung creamy soup
-- Pancake jagung
-
-## Tips Memasak
-Rebus jagung dengan sedikit gula dan garam selama 5–7 menit untuk rasa manis maksimal. Jangan terlalu lama agar biji tidak keras.
-
-## Penyimpanan
-Simpan dengan kelobot di chiller, gunakan dalam 2–3 hari. Jagung cepat kehilangan rasa manis setelah dipanen.
-
-Green Fresh Cipanas memasok jagung manis segar harian dari kebun dataran tinggi.
-    `,
-  },
-  {
-    slug: 'bayam-hijau-pasokan-harian-dapur',
-    title: 'Bayam Hijau: Menjaga Pasokan Harian untuk Dapur Profesional',
-    excerpt: 'Bayam cepat layu, tetapi paling sering dipesan. Ini cara menjaga pasokan harian tetap segar.',
-    category: 'Manajemen Dapur',
-    author: 'Tim Green Fresh',
-    date: '2025-02-28',
-    readTime: 5,
-    image: Bayam_Hijau_6,
-    content: `
-Bayam hijau adalah sayur paling sering dipesan dapur profesional, tetapi juga paling cepat layu.
-
-## Ciri Bayam Segar
-- Daun hijau cerah dan tegak
-- Batang tidak lembek
-- Tidak ada daun menguning
-- Akar masih segar (jika ada)
-
-## Tantangan Pasokan
-Bayam menyusut hingga 30% setelah dibersihkan dan cepat layu di suhu ruang. Ini membuat perencanaan stok kritis.
-
-## Strategi Pasokan
-1. Pesan harian dalam jumlah kecil.
-2. Terima dalam kondisi chilled.
-3. Simpan di chiller 0–2°C dengan plastik perforasi.
-4. Gunakan dalam 24–48 jam.
-5. Siapkan buffer 10% untuk lonjakan pesanan.
-
-## Olahan Populer
-- Sayur bening bayam
-- Tumis bayam bawang putih
-- Bayam creamy
-- Sup bayam
-
-## Tips Memasak
-Masak bayam sebentar (2–3 menit) untuk menjaga warna dan nutrisi.
-
-Green Fresh Cipanas mengirim bayam hijau harian dari kebun mitra, memastikan kesegaran maksimal.
-    `,
-  },
-  {
-    slug: 'labu-siam-menu-rendah-kalori',
-    title: 'Labu Siam: Menu Rendah Kalori yang Ramah Biaya',
-    excerpt: 'Labu siam murah, rendah kalori, dan mudah diolah. Cocok untuk menu diet dan katering massal.',
-    category: 'Nutrisi & Kesehatan',
-    author: 'Tim Green Fresh',
-    date: '2025-03-03',
-    readTime: 4,
-    image: Labu_Siam_4,
-    content: `
-Labu siam adalah sayur andalan untuk menu rendah kalori. Harganya bersahabat dan mudah diolah.
-
-## Kandungan Gizi
-- Rendah kalori
-- Serat tinggi
-- Vitamin C
-- Kalium
-
-## Ciri Labu Siam Segar
-- Kulit hijau muda cerah
-- Tekstur padat, tidak lembek
-- Tidak ada bercak cokelat
-- Ukuran seragam
-
-## Olahan Populer
-- Tumis labu siam
-- Sayur lodeh labu siam
-- Labu siam krispi
-- Labu siam isi
-
-## Tips Mengolah
-Kupas dan potong, lalu rendam air garam sebentar untuk mengurangi getah. Masak hingga empuk tetapi tidak hancur.
-
-## Penyimpanan
-Simpan di tempat sejuk dan kering. Labu siam tahan hingga 1 minggu di suhu ruang.
-
-Labu siam Grade A dari Cipanas dipanen muda untuk tekstur lembut dan rasa manis alami.
-    `,
-  },
-];
+import { articles } from '../../data/articles';
 
 // ====================== SEO CONFIG ======================
 const siteUrl = 'https://greenfresh.co.id';
@@ -828,7 +74,40 @@ const jsonLdSchema = {
   ],
 };
 
+// sort by date desc
+const sortedArticles = [...articles].sort(
+  (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+);
+const featured = sortedArticles[0];
+const rest = sortedArticles.slice(1);
+
 const categories = ['Semua', ...new Set(articles.map((a) => a.category))];
+
+// hitung artikel per kategori
+const categoryCounts: Record<string, number> = {
+  Semua: articles.length,
+};
+for (const a of articles) {
+  categoryCounts[a.category] = (categoryCounts[a.category] || 0) + 1;
+}
+
+// emoji per kategori (fallback 📄)
+const categoryEmoji: Record<string, string> = {
+  'Panduan Kualitas': '🏅',
+  'Nutrisi & Kesehatan': '🥗',
+  'Edukasi Pertanian': '🌱',
+  'Manajemen Dapur': '📋',
+  'Resep & Olahan': '🍳',
+};
+
+const totalReadMinutes = articles.reduce((sum, a) => sum + a.readTime, 0);
+
+const formatDate = (d: string) =>
+  new Date(d).toLocaleDateString('id-ID', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  });
 ---
 
 <Layout title={pageTitle} description={pageDescription} canonical={pageUrl}>
@@ -862,63 +141,216 @@ const categories = ['Semua', ...new Set(articles.map((a) => a.category))];
     <script type="application/ld+json" set:html={JSON.stringify(jsonLdSchema)} />
   </Fragment>
 
-  <!-- HERO -->
-  <section class="relative pt-12 pb-16 md:pt-24 md:pb-24 overflow-hidden bg-gradient-to-br from-emerald-950 via-emerald-900 to-slate-950 text-white">
-    <div class="absolute -top-40 -left-40 w-96 h-96 bg-emerald-500/20 rounded-full blur-3xl animate-pulse"></div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-      <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-[11px] md:text-sm font-semibold mb-4 backdrop-blur-md">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> Edukasi Sayur & Pertanian
-      </span>
-      <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight max-w-4xl mx-auto text-transparent bg-clip-text bg-gradient-to-r from-white via-emerald-100 to-teal-200">
-        Blog Green Fresh Cipanas
-      </h1>
-      <p class="mt-3 text-xs sm:text-lg text-emerald-100/80 max-w-2xl mx-auto font-light leading-relaxed">
-        Panduan kualitas, manajemen dapur, nutrisi, dan tips pasokan sayur segar untuk hotel, restoran, katering, dan supermarket.
-      </p>
-      <div class="mt-6 flex flex-row gap-3 justify-center items-center max-w-md mx-auto">
-        <a href="#artikel" class="flex-1 px-5 py-3 rounded-xl bg-emerald-400 text-slate-950 font-extrabold text-xs md:text-base shadow-xl hover:bg-emerald-300 active:scale-95 transition-all text-center">
-          Lihat Artikel
-        </a>
-        <a href="/" class="flex-1 px-5 py-3 rounded-xl bg-white/10 border border-white/20 text-white font-bold text-xs md:text-base backdrop-blur-md hover:bg-white/20 active:scale-95 transition-all text-center">
-          Kembali ke Beranda
-        </a>
+  <!-- ===================== HERO ===================== -->
+  <section class="relative pt-14 pb-20 md:pt-24 md:pb-28 overflow-hidden bg-slate-950 text-white">
+    <!-- background grid -->
+    <div class="absolute inset-0 opacity-[0.07]" style="background-image: radial-gradient(circle, #fff 1px, transparent 1px); background-size: 28px 28px;"></div>
+    <!-- gradient glow -->
+    <div class="absolute -top-40 -left-32 w-[28rem] h-[28rem] bg-emerald-500/25 rounded-full blur-3xl animate-pulse"></div>
+    <div class="absolute -bottom-40 -right-32 w-[28rem] h-[28rem] bg-teal-500/20 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/3 left-1/2 -translate-x-1/2 w-72 h-72 bg-lime-400/10 rounded-full blur-3xl"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="text-center max-w-3xl mx-auto">
+        <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 text-[11px] md:text-sm font-semibold mb-5 backdrop-blur-md">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+          Edukasi Sayur & Pertanian
+        </span>
+
+        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.05]">
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-emerald-100 to-teal-200">
+            Blog Green Fresh
+          </span>
+          <br />
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-teal-300 to-emerald-400">
+            Cipanas
+          </span>
+        </h1>
+
+        <p class="mt-5 text-sm sm:text-lg text-emerald-100/70 max-w-2xl mx-auto font-light leading-relaxed">
+          Wawasan seputar sayur segar, standar kualitas Grade A, manajemen dapur, dan tips pasokan B2B untuk hotel, restoran, katering, dan supermarket.
+        </p>
+
+        <!-- Stats -->
+        <div class="mt-8 grid grid-cols-3 gap-2 sm:gap-4 max-w-lg mx-auto">
+          <div class="rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md p-3 sm:p-4">
+            <div class="text-2xl sm:text-3xl font-black text-emerald-300">{articles.length}</div>
+            <div class="text-[10px] sm:text-xs text-emerald-100/60 font-semibold uppercase tracking-wider mt-0.5">Artikel</div>
+          </div>
+          <div class="rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md p-3 sm:p-4">
+            <div class="text-2xl sm:text-3xl font-black text-teal-300">{categories.length - 1}</div>
+            <div class="text-[10px] sm:text-xs text-emerald-100/60 font-semibold uppercase tracking-wider mt-0.5">Kategori</div>
+          </div>
+          <div class="rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md p-3 sm:p-4">
+            <div class="text-2xl sm:text-3xl font-black text-lime-300">{totalReadMinutes}</div>
+            <div class="text-[10px] sm:text-xs text-emerald-100/60 font-semibold uppercase tracking-wider mt-0.5">Menit Baca</div>
+          </div>
+        </div>
+
+        <div class="mt-7 flex flex-row gap-3 justify-center items-center max-w-md mx-auto">
+          <a href="#artikel" class="flex-1 px-5 py-3 rounded-xl bg-emerald-400 text-slate-950 font-extrabold text-xs md:text-base shadow-xl shadow-emerald-400/20 hover:bg-emerald-300 active:scale-95 transition-all text-center">
+            Mulai Baca
+          </a>
+          <a href="/" class="flex-1 px-5 py-3 rounded-xl bg-white/10 border border-white/20 text-white font-bold text-xs md:text-base backdrop-blur-md hover:bg-white/20 active:scale-95 transition-all text-center">
+            Beranda
+          </a>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- FILTER KATEGORI + GRID ARTIKEL -->
+  <!-- ===================== FEATURED ARTICLE ===================== -->
+  <section class="relative -mt-10 md:-mt-16 z-20 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+      <a
+        href={`/blog/${featured.slug}`}
+        class="featured-card group block bg-white rounded-3xl shadow-2xl shadow-emerald-900/10 border border-slate-200/80 overflow-hidden hover:shadow-emerald-900/20 hover:border-emerald-300 transition-all duration-500"
+      >
+        <div class="grid md:grid-cols-2">
+          <div class="relative aspect-[16/10] md:aspect-auto md:min-h-[380px] overflow-hidden bg-slate-100">
+            <Image
+              src={featured.image}
+              alt={`${featured.title} — CV Green Fresh Cipanas`}
+              width={900}
+              height={600}
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+              loading="eager"
+              decoding="async"
+              format="webp"
+              quality={85}
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent md:bg-gradient-to-r"></div>
+            <div class="absolute top-4 left-4 flex flex-wrap gap-2">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-[10px] md:text-xs font-extrabold uppercase tracking-wider shadow-lg shadow-emerald-500/30">
+                ⭐ Artikel Pilihan
+              </span>
+            </div>
+          </div>
+
+          <div class="p-6 sm:p-8 md:p-10 flex flex-col justify-center">
+            <div class="flex flex-wrap items-center gap-2 text-[10px] md:text-xs font-semibold mb-3">
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100">
+                <span>{categoryEmoji[featured.category] ?? '📄'}</span>
+                {featured.category}
+              </span>
+              <span class="text-slate-400">•</span>
+              <time datetime={featured.date} class="text-slate-500">{formatDate(featured.date)}</time>
+              <span class="text-slate-400">•</span>
+              <span class="text-slate-500">{featured.readTime} menit baca</span>
+            </div>
+
+            <h2 class="text-xl sm:text-3xl lg:text-4xl font-black text-slate-900 leading-tight tracking-tight group-hover:text-emerald-700 transition-colors">
+              {featured.title}
+            </h2>
+
+            <p class="mt-3 text-sm md:text-base text-slate-600 leading-relaxed line-clamp-3">
+              {featured.excerpt}
+            </p>
+
+            <div class="mt-6 flex items-center justify-between gap-3">
+              <div class="flex items-center gap-2">
+                <div class="w-9 h-9 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white font-extrabold text-xs">
+                  GF
+                </div>
+                <div class="text-xs">
+                  <div class="font-extrabold text-slate-900">{featured.author}</div>
+                  <div class="text-slate-400 font-semibold">Penulis</div>
+                </div>
+              </div>
+
+              <span class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 text-white font-extrabold text-xs md:text-sm group-hover:bg-emerald-500 transition-colors shadow-lg shadow-emerald-600/20">
+                Baca Artikel
+                <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===================== FILTER + SEARCH + GRID ===================== -->
   <section id="artikel" class="py-12 md:py-20 bg-gradient-to-b from-white via-emerald-50/30 to-slate-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-8 md:mb-12">
-        <span class="inline-block px-3.5 py-1 rounded-full bg-emerald-100 text-emerald-800 font-extrabold text-xs tracking-wider uppercase mb-2">Artikel Terbaru</span>
-        <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">20 Artikel Pilihan</h2>
+      <div class="text-center mb-8 md:mb-10">
+        <span class="inline-block px-3.5 py-1 rounded-full bg-emerald-100 text-emerald-800 font-extrabold text-[10px] md:text-xs tracking-wider uppercase mb-2">
+          Semua Artikel
+        </span>
+        <h2 class="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight">
+          Jelajahi <span class="text-emerald-600">{articles.length}</span> Artikel
+        </h2>
+        <p class="mt-2 text-xs md:text-sm text-slate-500 max-w-xl mx-auto">
+          Gunakan pencarian atau filter kategori untuk menemukan artikel yang Anda butuhkan.
+        </p>
       </div>
 
-      <!-- FILTER -->
-      <div class="sticky top-16 md:top-24 z-30 mb-8 bg-white/95 backdrop-blur-md p-3 rounded-2xl shadow-md border border-slate-200">
-        <div class="flex gap-2 overflow-x-auto no-scrollbar pb-1">
-          {categories.map((cat, index) => (
+      <!-- Sticky toolbar: search + filter -->
+      <div class="sticky top-16 md:top-20 z-30 mb-8">
+        <div class="bg-white/95 backdrop-blur-md p-3 md:p-4 rounded-2xl shadow-lg shadow-slate-900/5 border border-slate-200 space-y-3">
+          <!-- Search -->
+          <div class="relative">
+            <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z" />
+            </svg>
+            <input
+              id="blog-search"
+              type="search"
+              placeholder="Cari artikel… (mis. wortel, chiller, cabai)"
+              class="w-full pl-10 pr-10 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-400 transition-all"
+            />
             <button
-              class={`blog-filter-btn px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all duration-300 ${
-                index === 0
-                  ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30 active-category scale-105'
-                  : 'bg-white text-slate-600 border border-slate-200 hover:bg-emerald-50 hover:text-emerald-700'
-              }`}
-              data-category={cat}
+              id="blog-search-clear"
+              type="button"
+              class="hidden absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-600 flex items-center justify-center transition-colors"
+              aria-label="Hapus pencarian"
             >
-              {cat}
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
             </button>
-          ))}
+          </div>
+
+          <!-- Filter -->
+          <div class="flex gap-2 overflow-x-auto no-scrollbar pb-0.5">
+            {categories.map((cat, index) => (
+              <button
+                class={`blog-filter-btn group inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all duration-300 ${
+                  index === 0
+                    ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30 scale-105'
+                    : 'bg-white text-slate-600 border border-slate-200 hover:bg-emerald-50 hover:text-emerald-700 hover:border-emerald-200'
+                }`}
+                data-category={cat}
+              >
+                <span class="text-sm">{categoryEmoji[cat] ?? (cat === 'Semua' ? '✨' : '📄')}</span>
+                <span>{cat}</span>
+                <span class={`text-[10px] px-1.5 py-0.5 rounded-md font-extrabold ${index === 0 ? 'bg-white/20' : 'bg-slate-100 group-hover:bg-emerald-100'}`}>
+                  {categoryCounts[cat]}
+                </span>
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
-      <!-- GRID -->
+      <!-- Result info -->
+      <div class="mb-4 flex items-center justify-between text-xs md:text-sm">
+        <p class="text-slate-500">
+          Menampilkan <span id="result-count" class="font-extrabold text-emerald-700">{rest.length}</span> artikel
+          <span id="filter-label" class="hidden"> • filter aktif: <span class="font-bold text-slate-700"></span></span>
+        </p>
+      </div>
+
+      <!-- Grid -->
       <div id="blog-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-7">
-        {articles.map((item) => (
+        {rest.map((item, i) => (
           <a
             href={`/blog/${item.slug}`}
-            class="blog-card group bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-2xl hover:border-emerald-300 transition-all duration-300 flex flex-col"
+            class="blog-card reveal group bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-2xl hover:-translate-y-1.5 hover:border-emerald-300 transition-all duration-300 flex flex-col"
             data-category={item.category}
+            data-search={`${item.title} ${item.excerpt} ${item.category}`.toLowerCase()}
+            style={`transition-delay:${Math.min(i * 40, 400)}ms`}
           >
             <div class="relative aspect-[4/3] bg-slate-100 overflow-hidden">
               <Image
@@ -932,15 +364,24 @@ const categories = ['Semua', ...new Set(articles.map((a) => a.category))];
                 format="webp"
                 quality={80}
               />
-              <span class="absolute top-3 left-3 bg-white/95 backdrop-blur-md text-emerald-800 text-[9px] md:text-[10px] font-extrabold px-2.5 py-1 rounded-full border border-emerald-100 shadow-sm">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+
+              <span class="absolute top-3 left-3 inline-flex items-center gap-1 bg-white/95 backdrop-blur-md text-emerald-800 text-[9px] md:text-[10px] font-extrabold px-2.5 py-1 rounded-full border border-emerald-100 shadow-sm">
+                <span>{categoryEmoji[item.category] ?? '📄'}</span>
                 {item.category}
               </span>
+
+              <span class="absolute top-3 right-3 inline-flex items-center gap-1 bg-slate-900/70 backdrop-blur-md text-white text-[9px] md:text-[10px] font-bold px-2 py-1 rounded-full">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                {item.readTime}m
+              </span>
             </div>
+
             <div class="p-4 md:p-5 flex flex-col flex-grow">
               <div class="flex items-center gap-2 text-[10px] md:text-xs text-slate-400 font-semibold mb-2">
-                <time datetime={item.date}>{new Date(item.date).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}</time>
-                <span>•</span>
-                <span>{item.readTime} menit baca</span>
+                <time datetime={item.date}>{formatDate(item.date)}</time>
               </div>
               <h3 class="font-extrabold text-slate-900 text-sm md:text-base leading-snug line-clamp-2 group-hover:text-emerald-600 transition-colors">
                 {item.title}
@@ -958,22 +399,54 @@ const categories = ['Semua', ...new Set(articles.map((a) => a.category))];
           </a>
         ))}
       </div>
+
+      <!-- Empty state -->
+      <div id="empty-state" class="hidden text-center py-20">
+        <div class="w-20 h-20 mx-auto rounded-full bg-slate-100 flex items-center justify-center mb-4">
+          <svg class="w-10 h-10 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z" />
+          </svg>
+        </div>
+        <h3 class="text-lg md:text-xl font-extrabold text-slate-800">Artikel tidak ditemukan</h3>
+        <p class="mt-1.5 text-sm text-slate-500">Coba kata kunci lain atau pilih kategori "Semua".</p>
+        <button
+          id="reset-filter"
+          class="mt-5 inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 text-white font-extrabold text-sm hover:bg-emerald-500 active:scale-95 transition-all"
+        >
+          Reset Filter
+        </button>
+      </div>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="py-12 md:py-20 bg-gradient-to-br from-emerald-900 via-teal-900 to-slate-900 text-white">
-    <div class="max-w-3xl mx-auto px-4 text-center">
-      <h2 class="text-2xl md:text-4xl font-extrabold">Butuh Pasokan Sayur Segar?</h2>
-      <p class="mt-3 text-emerald-100/80 text-xs md:text-base">
-        CV Green Fresh Cipanas siap memasok hotel, restoran, katering, dan supermarket dengan sayur Grade A, termin 7 hari, minimal order Rp 1.500.000.
+  <!-- ===================== CTA ===================== -->
+  <section class="relative py-16 md:py-24 bg-slate-950 text-white overflow-hidden">
+    <div class="absolute inset-0 opacity-[0.08]" style="background-image: radial-gradient(circle, #fff 1px, transparent 1px); background-size: 24px 24px;"></div>
+    <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[36rem] h-[36rem] bg-emerald-500/20 rounded-full blur-3xl"></div>
+
+    <div class="max-w-3xl mx-auto px-4 text-center relative z-10">
+      <span class="inline-block px-3.5 py-1 rounded-full bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 text-[10px] md:text-xs font-extrabold uppercase tracking-wider mb-4">
+        Siap Pasokan?
+      </span>
+      <h2 class="text-3xl md:text-5xl font-black tracking-tight leading-tight">
+        Butuh Pasokan <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-teal-300">Sayur Segar</span>?
+      </h2>
+      <p class="mt-4 text-emerald-100/70 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
+        CV Green Fresh Cipanas memasok hotel, restoran, katering, dan supermarket dengan sayur Grade A.
       </p>
-      <div class="mt-6 flex flex-row gap-3 justify-center max-w-md mx-auto">
+
+      <div class="mt-6 flex flex-wrap justify-center gap-2 text-[10px] md:text-xs font-bold">
+        <span class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-emerald-100">✓ Termin 7 Hari</span>
+        <span class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-emerald-100">✓ Minimal Order Rp 1.500.000</span>
+        <span class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-emerald-100">✓ Garansi Retur</span>
+      </div>
+
+      <div class="mt-7 flex flex-row gap-3 justify-center max-w-md mx-auto">
         <a
           href="https://wa.me/6287780937884?text=Halo%20Green%20Fresh%2C%20saya%20ingin%20konsultasi%20pasokan%20sayur."
           target="_blank"
           rel="noopener noreferrer"
-          class="flex-1 px-5 py-3.5 rounded-xl bg-emerald-400 text-slate-950 font-extrabold text-xs md:text-base shadow-xl hover:bg-emerald-300 active:scale-95 transition-all"
+          class="flex-1 px-5 py-3.5 rounded-xl bg-emerald-400 text-slate-950 font-extrabold text-xs md:text-base shadow-xl shadow-emerald-400/30 hover:bg-emerald-300 active:scale-95 transition-all"
         >
           Chat WhatsApp
         </a>
@@ -990,32 +463,143 @@ const categories = ['Semua', ...new Set(articles.map((a) => a.category))];
   <style>
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Scroll reveal */
+    .reveal { opacity: 0; transform: translateY(12px); transition: opacity .5s ease, transform .5s ease; }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+    /* Hide card when filtered */
+    .blog-card.is-hidden { display: none; }
   </style>
 
   <script>
-    const filterBtns = document.querySelectorAll('.blog-filter-btn');
-    const blogCards = document.querySelectorAll('.blog-card');
+    // ============ Refs ============
+    const filterBtns = Array.from(document.querySelectorAll<HTMLButtonElement>('.blog-filter-btn'));
+    const blogCards = Array.from(document.querySelectorAll<HTMLElement>('.blog-card'));
+    const searchInput = document.getElementById('blog-search') as HTMLInputElement | null;
+    const searchClear = document.getElementById('blog-search-clear');
+    const resultCount = document.getElementById('result-count');
+    const filterLabel = document.getElementById('filter-label');
+    const filterLabelValue = filterLabel?.querySelector('span');
+    const emptyState = document.getElementById('empty-state');
+    const resetBtn = document.getElementById('reset-filter');
 
+    let activeCategory = 'Semua';
+    let searchQuery = '';
+
+    // ============ Filter logic ============
+    function applyFilters() {
+      let visible = 0;
+
+      blogCards.forEach((card) => {
+        const cat = card.dataset.category || '';
+        const hay = (card.dataset.search || '').toLowerCase();
+
+        const matchCat = activeCategory === 'Semua' || cat === activeCategory;
+        const matchSearch = searchQuery === '' || hay.includes(searchQuery);
+
+        if (matchCat && matchSearch) {
+          card.classList.remove('is-hidden');
+          visible++;
+        } else {
+          card.classList.add('is-hidden');
+        }
+      });
+
+      if (resultCount) resultCount.textContent = String(visible);
+
+      // label filter
+      if (filterLabel && filterLabelValue) {
+        if (activeCategory !== 'Semua' && visible !== blogCards.length) {
+          filterLabel.classList.remove('hidden');
+          filterLabelValue.textContent = activeCategory;
+        } else {
+          filterLabel.classList.add('hidden');
+        }
+      }
+
+      // empty state
+      if (emptyState) {
+        if (visible === 0) emptyState.classList.remove('hidden');
+        else emptyState.classList.add('hidden');
+      }
+    }
+
+    // ============ Kategori buttons ============
     filterBtns.forEach((btn) => {
       btn.addEventListener('click', () => {
+        // reset semua
         filterBtns.forEach((b) => {
-          b.classList.remove('bg-emerald-600', 'text-white', 'shadow-lg', 'shadow-emerald-600/30', 'active-category', 'scale-105');
+          b.classList.remove(
+            'bg-emerald-600', 'text-white', 'shadow-lg', 'shadow-emerald-600/30',
+            'scale-105', 'border-emerald-200'
+          );
           b.classList.add('bg-white', 'text-slate-600', 'border', 'border-slate-200');
         });
+
+        // aktifkan
         btn.classList.remove('bg-white', 'text-slate-600', 'border', 'border-slate-200');
-        btn.classList.add('bg-emerald-600', 'text-white', 'shadow-lg', 'shadow-emerald-600/30', 'active-category', 'scale-105');
+        btn.classList.add('bg-emerald-600', 'text-white', 'shadow-lg', 'shadow-emerald-600/30', 'scale-105');
 
-        const cat = (btn as HTMLElement).dataset.category || 'Semua';
-
-        blogCards.forEach((card) => {
-          const el = card as HTMLElement;
-          if (cat === 'Semua' || el.dataset.category === cat) {
-            el.classList.remove('hidden');
-          } else {
-            el.classList.add('hidden');
-          }
-        });
+        activeCategory = btn.dataset.category || 'Semua';
+        applyFilters();
       });
     });
+
+    // ============ Search ============
+    searchInput?.addEventListener('input', () => {
+      searchQuery = searchInput.value.trim().toLowerCase();
+      if (searchClear) {
+        if (searchQuery) searchClear.classList.remove('hidden');
+        else searchClear.classList.add('hidden');
+      }
+      applyFilters();
+    });
+
+    searchClear?.addEventListener('click', () => {
+      if (searchInput) {
+        searchInput.value = '';
+        searchInput.focus();
+      }
+      searchQuery = '';
+      searchClear.classList.add('hidden');
+      applyFilters();
+    });
+
+    // ============ Reset ============
+    resetBtn?.addEventListener('click', () => {
+      activeCategory = 'Semua';
+      searchQuery = '';
+      if (searchInput) searchInput.value = '';
+      if (searchClear) searchClear.classList.add('hidden');
+
+      filterBtns.forEach((b, i) => {
+        if (i === 0) {
+          b.classList.add('bg-emerald-600', 'text-white', 'shadow-lg', 'shadow-emerald-600/30', 'scale-105');
+          b.classList.remove('bg-white', 'text-slate-600', 'border', 'border-slate-200');
+        } else {
+          b.classList.remove('bg-emerald-600', 'text-white', 'shadow-lg', 'shadow-emerald-600/30', 'scale-105');
+          b.classList.add('bg-white', 'text-slate-600', 'border', 'border-slate-200');
+        }
+      });
+      applyFilters();
+    });
+
+    // ============ Scroll reveal ============
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            (entry.target as HTMLElement).classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+    );
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+    // init count
+    applyFilters();
   </script>
 </Layout>
