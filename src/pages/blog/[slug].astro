@@ -1,0 +1,571 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import { articles, type Article } from '../../data/articles';
+
+// ====================== GET STATIC PATHS ======================
+export function getStaticPaths() {
+  return articles.map((article) => ({
+    params: { slug: article.slug },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props as { article: Article };
+const { slug, title, excerpt, category, author, date, readTime, image, content } = article;
+
+const siteUrl = 'https://greenfresh.co.id';
+const pageUrl = `${siteUrl}/blog/${slug}`;
+const formattedPhone = '+6287780937884';
+
+// prev / next / related
+const currentIndex = articles.findIndex((a) => a.slug === slug);
+const prevArticle = currentIndex > 0 ? articles[currentIndex - 1] : articles[articles.length - 1];
+const nextArticle = currentIndex < articles.length - 1 ? articles[currentIndex + 1] : articles[0];
+const relatedArticles = articles
+  .filter((a) => a.slug !== slug && a.category === category)
+  .slice(0, 3);
+
+const formattedDate = new Date(date).toLocaleDateString('id-ID', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+});
+
+// ====================== PARSER KONTEN ======================
+type Block =
+  | { type: 'h2'; text: string; id: string }
+  | { type: 'p'; html: string }
+  | { type: 'ul'; items: string[] };
+
+function slugify(text: string) {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-');
+}
+
+const lines = content.trim().split('\n');
+const blocks: Block[] = [];
+let currentList: string[] | null = null;
+
+for (const raw of lines) {
+  const line = raw.trim();
+  if (!line) {
+    if (currentList) {
+      blocks.push({ type: 'ul', items: currentList });
+      currentList = null;
+    }
+    continue;
+  }
+  if (line.startsWith('## ')) {
+    if (currentList) {
+      blocks.push({ type: 'ul', items: currentList });
+      currentList = null;
+    }
+    const text = line.replace(/^##\s+/, '');
+    blocks.push({ type: 'h2', text, id: slugify(text) });
+    continue;
+  }
+  if (line.startsWith('- ')) {
+    if (!currentList) currentList = [];
+    currentList.push(line.replace(/^-\s+/, ''));
+    continue;
+  }
+  if (currentList) {
+    blocks.push({ type: 'ul', items: currentList });
+    currentList = null;
+  }
+  blocks.push({ type: 'p', html: line });
+}
+if (currentList) blocks.push({ type: 'ul', items: currentList });
+
+const toc = blocks.filter((b): b is { type: 'h2'; text: string; id: string } => b.type === 'h2');
+let headingCounter = 0;
+
+// ====================== JSON-LD ======================
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BlogPosting',
+      '@id': `${pageUrl}/#article`,
+      headline: title,
+      description: excerpt,
+      datePublished: date,
+      dateModified: date,
+      author: { '@type': 'Organization', name: author },
+      publisher: {
+        '@type': 'Organization',
+        name: 'CV Green Fresh Cipanas',
+        url: siteUrl,
+        telephone: formattedPhone,
+      },
+      mainEntityOfPage: { '@type': 'WebPage', '@id': pageUrl },
+      image: `${siteUrl}/og-image.jpg`,
+      articleSection: category,
+      inLanguage: 'id-ID',
+      wordCount: content.split(/\s+/).length,
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${pageUrl}/#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Beranda', item: siteUrl },
+        { '@type': 'ListItem', position: 2, name: 'Blog', item: `${siteUrl}/blog` },
+        { '@type': 'ListItem', position: 3, name: title, item: pageUrl },
+      ],
+    },
+  ],
+};
+---
+
+<Layout title={`${title} — CV Green Fresh Cipanas`} description={excerpt} canonical={pageUrl}>
+  <Fragment slot="head">
+    <link rel="canonical" href={pageUrl} />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="author" content={author} />
+    <meta name="theme-color" content="#064e3b" />
+    <meta name="keywords" content={`${category}, sayur segar, supplier sayur B2B, CV Green Fresh Cipanas, ${title}`} />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="CV Green Fresh Cipanas" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={excerpt} />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:locale" content="id_ID" />
+    <meta property="og:image" content={`${siteUrl}/og-image.jpg`} />
+    <meta property="article:published_time" content={date} />
+    <meta property="article:section" content={category} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={excerpt} />
+    <meta name="twitter:image" content={`${siteUrl}/og-image.jpg`} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
+  <!-- PROGRESS BAR BACA -->
+  <div class="fixed top-0 left-0 right-0 z-50 h-1 bg-transparent">
+    <div id="reading-progress" class="h-full w-0 bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-300 transition-[width] duration-75"></div>
+  </div>
+
+  <!-- HERO ARTIKEL -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-emerald-950 via-emerald-900 to-slate-950 text-white">
+    <div class="absolute -top-32 -right-32 w-96 h-96 bg-emerald-500/20 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 left-1/4 w-72 h-72 bg-teal-500/10 rounded-full blur-3xl"></div>
+
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-12 md:pt-16 md:pb-20">
+      <nav aria-label="Breadcrumb" class="flex items-center gap-1.5 text-[10px] md:text-xs text-emerald-200/70 font-semibold mb-6 flex-wrap">
+        <a href="/" class="hover:text-emerald-300 transition-colors">Beranda</a>
+        <span class="opacity-50">/</span>
+        <a href="/blog" class="hover:text-emerald-300 transition-colors">Blog</a>
+        <span class="opacity-50">/</span>
+        <span class="text-emerald-300 line-clamp-1">{title}</span>
+      </nav>
+
+      <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-[10px] md:text-xs font-bold mb-4">
+        {category}
+      </span>
+
+      <h1 class="text-2xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-emerald-50 to-teal-100">
+        {title}
+      </h1>
+
+      <p class="mt-4 text-sm md:text-lg text-emerald-100/80 leading-relaxed font-light">
+        {excerpt}
+      </p>
+
+      <div class="mt-6 flex items-center gap-4 flex-wrap text-[11px] md:text-sm text-emerald-200/80">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 md:w-9 md:h-9 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-slate-950 font-extrabold text-xs md:text-sm">
+            GF
+          </div>
+          <span class="font-bold text-emerald-100">{author}</span>
+        </div>
+        <span class="opacity-40">•</span>
+        <time datetime={date}>{formattedDate}</time>
+        <span class="opacity-40">•</span>
+        <span>{readTime} menit baca</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- DAFTAR ISI STICKY DI ATAS -->
+  {toc.length > 0 && (
+    <div id="toc-sticky" class="sticky top-16 md:top-20 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- header TOC -->
+        <button
+          id="toc-toggle"
+          type="button"
+          class="w-full flex items-center justify-between py-3 text-left group"
+          aria-expanded="false"
+          aria-controls="toc-panel"
+        >
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center flex-shrink-0">
+              <svg class="w-4 h-4 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h10" />
+              </svg>
+            </div>
+            <div>
+              <div class="text-xs md:text-sm font-extrabold text-slate-900 uppercase tracking-wider">Daftar Isi</div>
+              <div class="text-[10px] md:text-[11px] text-slate-500 font-semibold">
+                {toc.length} bagian • klik untuk lompat
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="hidden sm:inline text-[10px] md:text-xs font-bold text-emerald-700">
+              <span id="toc-active-label" class="text-slate-500 font-semibold">Pilih bagian</span>
+            </span>
+            <div class="w-8 h-8 rounded-full bg-slate-100 group-hover:bg-emerald-100 flex items-center justify-center transition-colors">
+              <svg id="toc-chevron" class="w-4 h-4 text-slate-500 group-hover:text-emerald-700 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </div>
+        </button>
+
+        <!-- panel TOC -->
+        <div id="toc-panel" class="hidden pb-3">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1.5 max-h-[60vh] overflow-y-auto pr-1">
+            {toc.map((item, i) => (
+              <a
+                href={`#${item.id}`}
+                data-toc-target={item.id}
+                class="toc-link group flex items-start gap-2.5 py-2 px-2.5 rounded-xl text-xs md:text-[13px] text-slate-600 hover:text-emerald-700 hover:bg-emerald-50 border border-transparent transition-all"
+              >
+                <span class="toc-num flex-shrink-0 w-5 h-5 rounded-md bg-slate-100 group-hover:bg-emerald-600 group-hover:text-white text-slate-500 font-bold text-[10px] flex items-center justify-center transition-colors">
+                  {i + 1}
+                </span>
+                <span class="font-semibold leading-snug pt-0.5 line-clamp-2">{item.text}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  )}
+
+  <!-- KONTEN -->
+  <section class="relative bg-gradient-to-b from-white via-emerald-50/20 to-slate-50 py-8 md:py-14">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+
+        <!-- ARTIKEL UTAMA -->
+        <article class="lg:col-span-8">
+          <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden">
+            <div class="relative aspect-[16/9] bg-slate-100 overflow-hidden">
+              <Image
+                src={image}
+                alt={`${title} — CV Green Fresh Cipanas`}
+                width={1200}
+                height={675}
+                class="w-full h-full object-cover"
+                loading="eager"
+                decoding="async"
+                format="webp"
+                quality={85}
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
+            </div>
+
+            <div id="article-body" class="p-5 sm:p-8 md:p-10">
+              {blocks.map((block) => {
+                if (block.type === 'h2') {
+                  headingCounter++;
+                  return (
+                    <h2
+                      id={block.id}
+                      class="scroll-mt-40 group flex items-start gap-3 mt-10 mb-4 first:mt-0"
+                    >
+                      <span class="flex-shrink-0 w-9 h-9 md:w-10 md:h-10 rounded-xl bg-gradient-to-br from-emerald-600 to-teal-600 text-white font-extrabold text-sm md:text-base flex items-center justify-center shadow-md shadow-emerald-600/20">
+                        {String(headingCounter).padStart(2, '0')}
+                      </span>
+                      <span class="text-lg sm:text-2xl md:text-3xl font-extrabold text-slate-900 leading-snug tracking-tight pt-1">
+                        {block.text}
+                      </span>
+                    </h2>
+                  );
+                }
+                if (block.type === 'ul') {
+                  return (
+                    <ul class="my-4 space-y-2 pl-1">
+                      {block.items.map((item) => (
+                        <li class="flex items-start gap-2.5 text-sm md:text-base text-slate-700 leading-relaxed">
+                          <svg class="w-4 h-4 mt-1 flex-shrink-0 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                          </svg>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  );
+                }
+                return (
+                  <p class="my-4 text-sm md:text-[16.5px] text-slate-700 leading-[1.85] md:leading-[1.9]">
+                    {block.html}
+                  </p>
+                );
+              })}
+
+              <!-- CTA dalam artikel -->
+              <div class="mt-10 rounded-2xl bg-gradient-to-br from-emerald-900 via-teal-900 to-slate-900 p-6 md:p-8 text-white relative overflow-hidden">
+                <div class="absolute -top-16 -right-16 w-48 h-48 bg-emerald-500/20 rounded-full blur-2xl"></div>
+                <div class="relative">
+                  <h3 class="text-lg md:text-xl font-extrabold">Butuh Pasokan Sayur Segar?</h3>
+                  <p class="mt-2 text-xs md:text-sm text-emerald-100/80 leading-relaxed">
+                    CV Green Fresh Cipanas memasok hotel, restoran, katering, dan supermarket dengan sayur Grade A, termin 7 hari, minimal order Rp 1.500.000.
+                  </p>
+                  <div class="mt-4 flex flex-col sm:flex-row gap-2.5">
+                    <a
+                      href={`https://wa.me/6287780937884?text=${encodeURIComponent(`Halo Green Fresh, saya membaca artikel "${title}" dan ingin konsultasi pasokan sayur.`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="flex-1 px-4 py-2.5 rounded-xl bg-emerald-400 text-slate-950 font-extrabold text-xs md:text-sm text-center hover:bg-emerald-300 active:scale-95 transition-all"
+                    >
+                      Chat WhatsApp
+                    </a>
+                    <a
+                      href="/#order-form"
+                      class="flex-1 px-4 py-2.5 rounded-xl bg-white/10 border border-white/20 text-white font-bold text-xs md:text-sm text-center backdrop-blur-md hover:bg-white/20 active:scale-95 transition-all"
+                    >
+                      Form Order
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- prev/next -->
+              <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <a href={`/blog/${prevArticle.slug}`} class="group flex items-start gap-3 p-4 rounded-2xl border border-slate-200 bg-white hover:border-emerald-300 hover:shadow-md transition-all">
+                  <div class="w-8 h-8 rounded-full bg-slate-100 group-hover:bg-emerald-100 flex items-center justify-center flex-shrink-0 transition-colors">
+                    <svg class="w-4 h-4 text-slate-500 group-hover:text-emerald-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </div>
+                  <div class="min-w-0">
+                    <div class="text-[10px] md:text-xs font-bold text-slate-400 uppercase tracking-wider">Sebelumnya</div>
+                    <div class="mt-0.5 text-xs md:text-sm font-extrabold text-slate-800 line-clamp-2 group-hover:text-emerald-700 transition-colors">{prevArticle.title}</div>
+                  </div>
+                </a>
+                <a href={`/blog/${nextArticle.slug}`} class="group flex items-start justify-end gap-3 p-4 rounded-2xl border border-slate-200 bg-white hover:border-emerald-300 hover:shadow-md transition-all text-right">
+                  <div class="min-w-0">
+                    <div class="text-[10px] md:text-xs font-bold text-slate-400 uppercase tracking-wider">Berikutnya</div>
+                    <div class="mt-0.5 text-xs md:text-sm font-extrabold text-slate-800 line-clamp-2 group-hover:text-emerald-700 transition-colors">{nextArticle.title}</div>
+                  </div>
+                  <div class="w-8 h-8 rounded-full bg-slate-100 group-hover:bg-emerald-100 flex items-center justify-center flex-shrink-0 transition-colors">
+                    <svg class="w-4 h-4 text-slate-500 group-hover:text-emerald-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- SIDEBAR KANAN -->
+        <aside class="lg:col-span-4">
+          <div class="lg:sticky lg:top-44 space-y-6">
+            <!-- Info Artikel -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
+              <h2 class="text-sm font-extrabold text-slate-900 uppercase tracking-wider mb-3">Info Artikel</h2>
+              <dl class="space-y-2.5 text-xs md:text-sm">
+                <div class="flex justify-between gap-3">
+                  <dt class="text-slate-500">Kategori</dt>
+                  <dd class="font-bold text-emerald-700 text-right">{category}</dd>
+                </div>
+                <div class="flex justify-between gap-3">
+                  <dt class="text-slate-500">Penulis</dt>
+                  <dd class="font-bold text-slate-800 text-right">{author}</dd>
+                </div>
+                <div class="flex justify-between gap-3">
+                  <dt class="text-slate-500">Tanggal</dt>
+                  <dd class="font-bold text-slate-800 text-right">{formattedDate}</dd>
+                </div>
+                <div class="flex justify-between gap-3">
+                  <dt class="text-slate-500">Waktu baca</dt>
+                  <dd class="font-bold text-slate-800 text-right">{readTime} menit</dd>
+                </div>
+              </dl>
+            </div>
+
+            <!-- Artikel Terkait -->
+            {relatedArticles.length > 0 && (
+              <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
+                <h2 class="text-sm font-extrabold text-slate-900 uppercase tracking-wider mb-3">Artikel Terkait</h2>
+                <div class="space-y-3">
+                  {relatedArticles.map((rel) => (
+                    <a href={`/blog/${rel.slug}`} class="group flex gap-3 items-start">
+                      <div class="w-16 h-16 rounded-xl overflow-hidden bg-slate-100 flex-shrink-0">
+                        <Image
+                          src={rel.image}
+                          alt={rel.title}
+                          width={128}
+                          height={128}
+                          class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                          loading="lazy"
+                          format="webp"
+                          quality={70}
+                        />
+                      </div>
+                      <div class="min-w-0">
+                        <div class="text-[10px] font-bold text-emerald-600 uppercase tracking-wider">{rel.category}</div>
+                        <div class="text-xs md:text-[13px] font-extrabold text-slate-800 leading-snug line-clamp-2 group-hover:text-emerald-700 transition-colors">
+                          {rel.title}
+                        </div>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <!-- CTA sidebar -->
+            <div class="rounded-2xl bg-gradient-to-br from-emerald-900 via-teal-900 to-slate-900 p-5 text-white relative overflow-hidden">
+              <div class="absolute -top-10 -right-10 w-32 h-32 bg-emerald-500/20 rounded-full blur-2xl"></div>
+              <div class="relative">
+                <div class="text-xs font-bold text-emerald-300 uppercase tracking-wider mb-1">Butuh pasokan?</div>
+                <h2 class="text-base font-extrabold leading-snug">Sayur Grade A langsung dari Cipanas</h2>
+                <p class="mt-1.5 text-[11px] text-emerald-100/70 leading-relaxed">Termin 7 hari, minimal order Rp 1.500.000.</p>
+                <a
+                  href="https://wa.me/6287780937884?text=Halo%20Green%20Fresh%2C%20saya%20ingin%20konsultasi%20pasokan%20sayur."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="mt-3 block w-full px-4 py-2.5 rounded-xl bg-emerald-400 text-slate-950 font-extrabold text-xs text-center hover:bg-emerald-300 active:scale-95 transition-all"
+                >
+                  Chat WhatsApp
+                </a>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    #article-body h2 { scroll-margin-top: 10rem; }
+    #article-body p { text-wrap: pretty; }
+
+    /* active TOC highlight */
+    .toc-link.is-active {
+      background-color: rgb(236 253 245); /* emerald-50 */
+      color: rgb(4 120 87); /* emerald-700 */
+      border-color: rgb(167 243 208); /* emerald-200 */
+    }
+    .toc-link.is-active .toc-num {
+      background-color: rgb(5 150 105); /* emerald-600 */
+      color: white;
+    }
+  </style>
+
+  <script>
+    // ---------- Progress bar baca ----------
+    const progressEl = document.getElementById('reading-progress');
+    const articleBody = document.getElementById('article-body');
+    if (progressEl && articleBody) {
+      const updateProgress = () => {
+        const rect = articleBody.getBoundingClientRect();
+        const total = articleBody.offsetHeight - window.innerHeight;
+        const scrolled = Math.min(Math.max(-rect.top, 0), Math.max(total, 1));
+        const pct = total > 0 ? (scrolled / total) * 100 : 0;
+        progressEl.style.width = `${Math.min(pct, 100)}%`;
+      };
+      updateProgress();
+      window.addEventListener('scroll', updateProgress, { passive: true });
+      window.addEventListener('resize', updateProgress);
+    }
+
+    // ---------- Toggle TOC panel ----------
+    const tocToggle = document.getElementById('toc-toggle');
+    const tocPanel = document.getElementById('toc-panel');
+    const tocChevron = document.getElementById('toc-chevron');
+
+    if (tocToggle && tocPanel && tocChevron) {
+      tocToggle.addEventListener('click', () => {
+        const isOpen = !tocPanel.classList.contains('hidden');
+        if (isOpen) {
+          tocPanel.classList.add('hidden');
+          tocChevron.classList.remove('rotate-180');
+          tocToggle.setAttribute('aria-expanded', 'false');
+        } else {
+          tocPanel.classList.remove('hidden');
+          tocChevron.classList.add('rotate-180');
+          tocToggle.setAttribute('aria-expanded', 'true');
+        }
+      });
+    }
+
+    // ---------- Smooth scroll TOC + close panel setelah klik (mobile) ----------
+    document.querySelectorAll('.toc-link').forEach((a) => {
+      a.addEventListener('click', (e) => {
+        const href = a.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          const target = document.querySelector(href);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            history.replaceState(null, '', href);
+
+            // tutup panel di layar kecil
+            if (window.innerWidth < 1024 && tocPanel && tocChevron && tocToggle) {
+              tocPanel.classList.add('hidden');
+              tocChevron.classList.remove('rotate-180');
+              tocToggle.setAttribute('aria-expanded', 'false');
+            }
+          }
+        }
+      });
+    });
+
+    // ---------- Scrollspy: highlight TOC aktif ----------
+    const tocLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('.toc-link'));
+    const headings = tocLinks
+      .map((link) => {
+        const id = link.getAttribute('href')?.slice(1);
+        return id ? document.getElementById(id) : null;
+      })
+      .filter((el): el is HTMLElement => el !== null);
+
+    const activeLabel = document.getElementById('toc-active-label');
+
+    if (headings.length > 0 && tocLinks.length > 0) {
+      const onScrollSpy = () => {
+        const scrollPos = window.scrollY + 200; // offset di bawah sticky header
+        let currentId: string | null = null;
+
+        for (const h of headings) {
+          if (h.offsetTop <= scrollPos) {
+            currentId = h.id;
+          } else {
+            break;
+          }
+        }
+
+        tocLinks.forEach((link) => {
+          const isActive = link.getAttribute('href') === `#${currentId}`;
+          link.classList.toggle('is-active', isActive);
+        });
+
+        if (activeLabel) {
+          if (currentId) {
+            const activeLink = tocLinks.find((l) => l.getAttribute('href') === `#${currentId}`);
+            const txt = activeLink?.querySelector('span:last-child')?.textContent?.trim();
+            activeLabel.textContent = txt ? txt : 'Pilih bagian';
+          } else {
+            activeLabel.textContent = 'Pilih bagian';
+          }
+        }
+      };
+
+      onScrollSpy();
+      window.addEventListener('scroll', onScrollSpy, { passive: true });
+    }
+  </script>
+</Layout>
