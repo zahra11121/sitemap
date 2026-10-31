@@ -31,6 +31,9 @@ const waDefault = `https://wa.me/${waNumber}?text=${encodeURIComponent("Halo akb
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
 
+    <!-- Slot Head untuk Canonical, Keywords, & Schema Markup dari Halaman Child -->
+    <slot name="head" />
+
     <!-- Mobile & Android Native Theme Config -->
     <meta name="theme-color" content="#003580" />
     <meta name="mobile-web-app-capable" content="yes" />
