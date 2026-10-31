@@ -1,0 +1,711 @@
+---
+import Layout from "../../layouts/Layouts.astro";
+import wilayahData from "../../data/wilayah_indonesia.json";
+
+const waNumber = "6285938573419";
+const waLink = (msg: string) => `https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`;
+
+const heroStats = [
+  { value: "150+", label: "Sites Delivered" },
+  { value: "99.9%", label: "Uptime" },
+  { value: "100%", label: "Satisfaction" },
+];
+
+const logos = ["Astro", "Next.js", "React", "Tailwind", "Vercel", "Cloudflare", "Supabase", "Stripe"];
+
+const problems = [
+  "Loading lambat >3 detik",
+  "Desain usang & tidak responsif",
+  "Lead hilang karena UX buruk",
+  "Bounce rate tinggi",
+  "Tidak muncul di Google",
+];
+
+const solutions = [
+  "Loading <1 detik (PageSpeed 100)",
+  "Desain modern & mobile-first",
+  "UI fokus konversi & CTA jelas",
+  "SEO on-page built-in",
+  "Ranking Google lebih tinggi",
+];
+
+const services = [
+  { icon: "🚀", title: "Landing Page", desc: "Halaman fokus konversi untuk campaign, produk, atau jasa Anda.", features: ["Copywriting assist", "A/B test ready", "Analytics setup"] },
+  { icon: "🏢", title: "Company Profile", desc: "Profil perusahaan kredibel yang membangun kepercayaan klien.", features: ["Multi-page", "Blog & CMS", "SEO optimized"] },
+  { icon: "🛒", title: "E-Commerce", desc: "Toko online siap jualan dengan pembayaran & inventori.", features: ["Payment gateway", "Product management", "Order tracking"] },
+  { icon: "⚙️", title: "Web App & CMS", desc: "Aplikasi web custom sesuai alur bisnis Anda.", features: ["Dashboard admin", "Role & auth", "API integration"] },
+];
+
+const steps = [
+  { no: "01", title: "Discovery & Strategy", desc: "Riset bisnis, target audiens, dan tujuan konversi." },
+  { no: "02", title: "UI/UX Design", desc: "Wireframe hingga prototype interaktif di Figma." },
+  { no: "03", title: "Development & SEO", desc: "Coding rapi, cepat, dan SEO on-page built-in." },
+  { no: "04", title: "Testing & Launch", desc: "QA lintas device, deploy, dan monitoring." },
+];
+
+const pricing = [
+  {
+    name: "Gold",
+    target: "Paket Website Landing Page / UMKM",
+    priceNormal: "Rp 2.500.000",
+    pricePromo: "Rp 999.000",
+    diskon: "Diskon 60%",
+    periode: "PER TAHUN",
+    popular: false,
+    badge: null,
+    features: [
+      "Hosting 1 Tahun",
+      "Gratis Domain",
+      "Gratis Sertifikat SSL",
+      "1x Revisi Design Minor",
+      "4x Update",
+      "SEO & Mobile Friendly",
+      "Support Maintenance",
+      "Setup 1 Halaman",
+      "Input 5 Produk Awal",
+      "Button WhatsApp (CTA)",
+      "Slider Banner",
+    ]
+  },
+  {
+    name: "Platinum",
+    target: "Paket Website Company Profile Berkembang",
+    priceNormal: "Rp 3.500.000",
+    pricePromo: "Rp 1.499.000",
+    diskon: "Diskon 57%",
+    periode: "PER TAHUN",
+    popular: false,
+    badge: "Recommended",
+    features: [
+      "Hosting 1 Tahun",
+      "Gratis Domain",
+      "Gratis Sertifikat SSL",
+      "2x Revisi Design",
+      "12x Update",
+      "SEO & Mobile Friendly",
+      "Support Maintenance",
+      "Setup 5 Halaman",
+      "Input 10 Produk Awal",
+      "Button WhatsApp (CTA)",
+      "Slider Banner",
+    ]
+  },
+  {
+    name: "Diamond",
+    target: "Paket Toko Online / E-Commerce Siap Jualan",
+    priceNormal: "Rp 4.500.000",
+    pricePromo: "Rp 3.150.000",
+    diskon: "Diskon 30%",
+    periode: "PER TAHUN",
+    popular: true,
+    badge: "Terpopuler",
+    features: [
+      "Hosting 1 Tahun",
+      "Gratis Domain",
+      "Gratis Sertifikat SSL",
+      "2x Revisi Design",
+      "12x Update",
+      "SEO & Mobile Friendly",
+      "Prioritas Support Maintenance",
+      "Setup 5 Halaman",
+      "Input 10 Produk Awal",
+      "Slider Banner",
+      "Keranjang Belanja",
+      "Fitur Cek Ongkir",
+      "Integrasi WhatsApp",
+      "Integrasi Marketplace",
+    ]
+  },
+  {
+    name: "Custom",
+    target: "Solusi Skala Besar & Kebutuhan Khusus",
+    priceNormal: "",
+    pricePromo: "Sesuai Kebutuhan",
+    diskon: "Custom Budget",
+    periode: "PER TAHUN",
+    popular: false,
+    badge: "Fleksibel",
+    features: [
+      "Hosting Custom",
+      "Bisa Pilih Domain",
+      "Gratis Sertifikat SSL",
+      "3x Revisi Design",
+      "12x Update",
+      "SEO & Mobile Friendly",
+      "Dedicated Support",
+      "Halaman Sesuai Kebutuhan",
+      "Integrasi Sesuai Kebutuhan",
+      "Design Custom",
+      "Akses Penuh",
+      "Dan lain-lain",
+    ]
+  }
+];
+
+const testimonials = [
+  { name: "Budi Santoso", role: "Owner", company: "Kopi Nusantara", text: "Website cepat dan rapi. Penjualan online naik 40% dalam 2 bulan.", initial: "BS" },
+  { name: "Rina Wijaya", role: "Direktur", company: "Klinik Sehat", text: "Tim responsif dan paham kebutuhan bisnis. Hasilnya profesional.", initial: "RW" },
+  { name: "Andi Pratama", role: "Founder", company: "Kursus Coding", text: "Desain modern dan mudah diupdate. Sangat worth it.", initial: "AP" },
+];
+
+/* 6 Pertanyaan FAQ Tanpa Ikon */
+const faqs = [
+  { 
+    q: "Berapa lama proses pengerjaan pembuatan website?", 
+    a: "Paket Gold selesai dalam 3–5 hari kerja, Platinum 7–10 hari, sedangkan Diamond atau Custom memakan waktu 2–3 minggu tergantung tingkat kompleksitas fitur." 
+  },
+  { 
+    q: "Apakah sudah termasuk domain dan hosting?", 
+    a: "Ya! Paket Gold, Platinum, dan Diamond sudah termasuk gratis domain (.com / .id) selama 1 tahun penuh beserta hosting performa tinggi." 
+  },
+  { 
+    q: "Apakah saya bisa melakukan revisi selama proses pembuatan?", 
+    a: "Tentu saja. Setiap paket sudah mencakup kuota revisi desain (minor hingga standar) agar hasil akhirnya sesuai dengan keinginan Anda." 
+  },
+  { 
+    q: "Apakah website dijamin ramah SEO (Search Engine Optimization)?", 
+    a: "Sangat ramah SEO. Setiap website dibangun dengan struktur kode semantik yang bersih, kecepatan muat super cepat, serta meta tags lengkap." 
+  },
+  { 
+    q: "Bagaimana jika ada kendala atau butuh maintenance setelah website rilis?", 
+    a: "Kami menyediakan layanan update berkala serta support maintenance sesuai dengan ketentuan paket yang Anda ambil." 
+  },
+  { 
+    q: "Bagaimana sistem pembayaran jasanya?", 
+    a: "Pembayaran transparan melalui transfer atau sistem termin yang disepakati via WhatsApp sebelum pengerjaan dimulai." 
+  },
+];
+
+const provinsiPopuler = wilayahData.slice(0, 12);
+
+/* Schema Markup Gabungan ProfessionalService & FAQPage */
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "name": "akbarweb.com",
+      "description": "Jasa pembuatan website profesional di Indonesia. Landing page, company profile, e-commerce, dan web app.",
+      "url": "https://akbarweb.com",
+      "telephone": "+6285938573419",
+      "areaServed": "ID",
+      "priceRange": "Rp 999.000 - Rp 3.150.000"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": faqs.map(f => ({
+        "@type": "Question",
+        "name": f.q,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": f.a
+        }
+      }))
+    }
+  ]
+};
+---
+
+<Layout
+  title="AkbarWeb — Jasa Pembuatan Website Profesional & Cepat"
+  description="Jasa pembuatan website profesional di Indonesia. Landing page, company profile, e-commerce, dan web app. Cepat, SEO-friendly, dan fokus konversi. Konsultasi gratis via WhatsApp."
+>
+  <!-- Menambahkan Meta Keywords di Head Layout -->
+  <Fragment slot="head">
+    <meta name="keywords" content="jasa pembuatan website, jasa buat web, bikin website murah, jasa website company profile, jasa pembuatan toko online, e-commerce murah, landing page profesional, jasa SEO Indonesia, akbarweb" />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
+  <div class="bg-white text-gray-800 overflow-hidden">
+
+    <!-- ============ 1. HERO ============ -->
+    <section class="relative bg-booking-700 reveal-bottom">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-16 md:py-24 grid md:grid-cols-2 gap-8 sm:gap-12 items-center">
+        <div>
+          <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-white/10 border border-white/20 text-[10px] sm:text-xs font-semibold text-white mb-4 sm:mb-6 animate-bounce">
+            <span class="w-2 h-2 rounded-full bg-yellow-500 animate-ping"></span>
+            🚀 Website Online dalam 48 Jam
+          </span>
+
+          <h1 class="text-2xl sm:text-3xl md:text-5xl font-bold tracking-tight text-white leading-[1.2]">
+            <span class="bk-highlight">Jasa Pembuatan Website</span> Profesional untuk Bisnis Anda
+          </h1>
+
+          <p class="mt-3 sm:mt-5 text-sm sm:text-base md:text-lg text-white/90 max-w-lg leading-relaxed">
+            Website cepat, SEO-friendly, dan fokus konversi.
+            Dibangun dengan tech stack modern — siap tingkatkan penjualan Anda.
+          </p>
+
+          <div class="mt-5 sm:mt-8 flex flex-col sm:flex-row gap-2 sm:gap-3">
+            <a href={waLink("Halo akbarweb, saya tertarik konsultasi pembuatan website.")} target="_blank" rel="noopener noreferrer"
+               class="bk-btn-yellow px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base text-center shadow-lg transition-all">
+              Buatkan Saya Website
+            </a>
+            <a href="#harga" class="px-6 sm:px-8 py-2.5 sm:py-3 rounded-md bg-white/10 border border-white/30 text-white font-semibold hover:bg-white/20 hover:border-yellow-400 transition-all text-sm sm:text-base text-center">
+              Lihat Paket Harga
+            </a>
+          </div>
+
+          <div class="mt-5 sm:mt-8 flex items-center gap-3 sm:gap-4">
+            <div class="flex -space-x-2">
+              {["BS", "RW", "AP", "DN"].map((i) => (
+                <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-yellow-500 border-2 border-booking-700 grid place-items-center text-[10px] sm:text-xs font-bold text-booking-700 shadow-sm">
+                  {i}
+                </div>
+              ))}
+            </div>
+            <div>
+              <div class="text-yellow-400 text-xs sm:text-sm">★★★★★</div>
+              <p class="text-[10px] sm:text-xs text-white/80">Dipercaya 100+ bisnis</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative">
+          <div class="relative rounded-lg bg-white p-1.5 sm:p-2 shadow-2xl hover:scale-105 transition-transform duration-300">
+            <div class="rounded overflow-hidden bg-gray-50">
+              <div class="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 bg-white border-b border-gray-200">
+                <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-red-400"></span>
+                <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-yellow-400"></span>
+                <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-green-400"></span>
+                <span class="ml-2 sm:ml-3 text-[10px] sm:text-xs text-gray-400 font-mono">akbarweb.com</span>
+              </div>
+              <img
+                src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop"
+                alt="Dashboard analitik website modern untuk bisnis"
+                class="w-full h-auto object-cover"
+                loading="eager"
+                width="600"
+                height="400"
+              />
+            </div>
+          </div>
+          <div class="absolute -top-2 sm:-top-3 -right-2 sm:-right-3 bg-yellow-500 text-booking-700 rounded-md px-2 sm:px-3 py-1 sm:py-1.5 text-[10px] sm:text-xs font-bold shadow-lg animate-bounce">
+            ⚡ PageSpeed 100
+          </div>
+          <div class="absolute -bottom-2 sm:-bottom-3 -left-2 sm:-left-3 bg-white border border-gray-200 rounded-md px-2 sm:px-3 py-1 sm:py-1.5 text-[10px] sm:text-xs font-bold text-booking-700 shadow-lg">
+            📈 +40% Conversion
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 2. PARTNER ============ -->
+    <section class="bg-gray-50 border-b border-gray-200 reveal-left">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+        <p class="text-center text-[10px] sm:text-xs text-gray-500 uppercase tracking-widest mb-3 sm:mb-6 font-semibold">Tech Stack & Partners</p>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 md:gap-4">
+          {logos.map((logo) => (
+            <div class="flex items-center justify-center px-3 sm:px-4 py-2.5 sm:py-3 bg-booking-700 border border-booking-700 rounded-md hover:bg-booking-800 hover:border-yellow-500 hover:-translate-y-2 transition-all shadow-sm">
+              <span class="text-white font-bold text-sm sm:text-base md:text-lg whitespace-nowrap">
+                {logo}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        <div class="grid grid-cols-3 gap-2 sm:gap-4 mt-5 sm:mt-8 pt-5 sm:pt-8 border-t border-gray-200">
+          {heroStats.map((s) => (
+            <div class="text-center group">
+              <p class="text-xl sm:text-2xl md:text-3xl font-bold text-booking-700">{s.value}</p>
+              <p class="text-[10px] sm:text-xs text-gray-500 mt-0.5 sm:mt-1">{s.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 3. PROBLEM vs SOLUTION ============ -->
+    <section class="bg-white reveal-right">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-16">
+        <div class="text-center mb-6 sm:mb-10">
+          <h2 class="text-xl sm:text-2xl md:text-4xl font-bold text-gray-900">Website Anda Bermasalah?</h2>
+          <p class="mt-1 sm:mt-2 text-sm sm:text-base text-gray-600">Bandingkan kondisi website lama vs modern.</p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-3 sm:gap-4">
+          <div class="bk-card p-4 sm:p-6 border-l-4 border-l-red-500">
+            <div class="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+              <span class="w-8 h-8 sm:w-10 sm:h-10 rounded-md bg-red-100 grid place-items-center text-red-600 text-base sm:text-xl font-bold">✕</span>
+              <h3 class="text-base sm:text-lg font-bold text-gray-900">Website Lama</h3>
+            </div>
+            <ul class="space-y-2 sm:space-y-2.5">
+              {problems.map((p) => (
+                <li class="flex items-start gap-2 text-xs sm:text-sm text-gray-700">
+                  <span class="text-red-500 mt-0.5 font-bold">✕</span>
+                  {p}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="bk-card p-4 sm:p-6 border-l-4 border-l-booking-700 relative">
+            <div class="absolute top-3 sm:top-4 right-3 sm:right-4 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded bg-yellow-500 text-booking-700 text-[10px] sm:text-xs font-bold animate-bounce">RECOMMENDED</div>
+            <div class="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+              <span class="w-8 h-8 sm:w-10 sm:h-10 rounded-md bg-booking-100 grid place-items-center text-booking-700 text-base sm:text-xl font-bold">✓</span>
+              <h3 class="text-base sm:text-lg font-bold text-gray-900">AkbarWeb Solution</h3>
+            </div>
+            <ul class="space-y-2 sm:space-y-2.5">
+              {solutions.map((s) => (
+                <li class="flex items-start gap-2 text-xs sm:text-sm text-gray-700">
+                  <span class="text-booking-700 mt-0.5 font-bold">✓</span>
+                  {s}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 4. SERVICES ============ -->
+    <section id="layanan" class="bg-booking-700 text-white border-y border-white/10 reveal-bottom">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-16">
+        <div class="text-center mb-6 sm:mb-10">
+          <span class="inline-block text-[10px] sm:text-xs font-bold uppercase tracking-wider bg-yellow-500 text-booking-700 px-2.5 py-1 rounded">
+            Layanan Kami
+          </span>
+          <h2 class="text-xl sm:text-2xl md:text-4xl font-bold mt-2 sm:mt-3">
+            Apa yang Bisa <span class="bk-highlight">Kami Bantu</span>?
+          </h2>
+          <p class="mt-1 sm:mt-2 text-sm sm:text-base text-white/80">
+            Solusi website sesuai kebutuhan bisnis Anda — dari landing page sampai web app custom.
+          </p>
+        </div>
+
+        <div class="grid gap-3 sm:gap-4 grid-cols-2 lg:grid-cols-4">
+          {services.map((s) => (
+            <div class="group rounded-md p-3 sm:p-6 flex flex-col bg-white/5 border border-white/15 backdrop-blur hover:bg-white/10 hover:border-yellow-400 hover:-translate-y-2 transition-all duration-300">
+              <div class="w-9 h-9 sm:w-12 sm:h-12 rounded-md bg-yellow-500 text-booking-700 grid place-items-center text-lg sm:text-2xl mb-2 sm:mb-4 group-hover:scale-110 transition-transform">
+                {s.icon}
+              </div>
+              <h3 class="font-bold mb-1 sm:mb-2 text-xs sm:text-base text-white">{s.title}</h3>
+              <p class="text-[10px] sm:text-sm text-white/80 mb-2 sm:mb-4 leading-relaxed flex-1 line-clamp-2 sm:line-clamp-none">
+                {s.desc}
+              </p>
+              <ul class="space-y-1 sm:space-y-1.5 mb-3 sm:mb-5 hidden sm:block">
+                {s.features.map((f) => (
+                  <li class="text-[10px] sm:text-xs text-white/80 flex items-center gap-1.5 sm:gap-2">
+                    <span class="text-yellow-400">✓</span> {f}
+                  </li>
+                ))}
+              </ul>
+              <a href={waLink(`Halo akbarweb, saya tertarik dengan layanan ${s.title}.`)}
+                 target="_blank" rel="noopener noreferrer"
+                 class="text-[10px] sm:text-sm text-yellow-400 font-bold hover:text-yellow-300 inline-flex items-center gap-1 group/link">
+                Detail
+                <span class="group-hover/link:translate-x-1 transition-transform">→</span>
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 5. WORKFLOW ============ -->
+    <section class="bg-gray-50 border-y border-gray-200 reveal-left">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-16">
+        <div class="text-center mb-6 sm:mb-10">
+          <h2 class="text-xl sm:text-2xl md:text-4xl font-bold text-gray-900">Proses Kerja Kami</h2>
+          <p class="mt-1 sm:mt-2 text-sm sm:text-base text-gray-600">Transparan, terstruktur, dan tepat waktu.</p>
+        </div>
+        <div class="relative grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+          <div class="hidden md:block absolute top-8 left-[12%] right-[12%] h-0.5 bg-gray-300"></div>
+          {steps.map((s) => (
+            <div class="relative text-center group">
+              <div class="relative z-10 w-12 h-12 sm:w-16 sm:h-16 mx-auto rounded-md bg-booking-700 grid place-items-center text-white font-bold text-sm sm:text-lg mb-2 sm:mb-4 group-hover:bg-yellow-500 group-hover:text-booking-700 transition-all shadow-md">
+                {s.no}
+              </div>
+              <h3 class="font-bold text-gray-900 mb-1 sm:mb-2 text-xs sm:text-base">{s.title}</h3>
+              <p class="text-[10px] sm:text-sm text-gray-600 leading-relaxed">{s.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 6. PRICING (Card Header Biru, Badge Aman Tidak Terpotong) ============ -->
+    <section id="harga" class="bg-gray-100 border-y border-gray-200 py-12 sm:py-20 reveal-right">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-10 sm:mb-14">
+          <span class="inline-block text-[10px] sm:text-xs font-bold uppercase tracking-wider bg-booking-100 text-booking-700 px-3 py-1 rounded-full shadow-sm">
+            Paket Harga
+          </span>
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mt-2 sm:mt-3">
+            Pilihan Paket <span class="text-booking-700">Terbaik Untuk Anda</span>
+          </h2>
+          <p class="mt-2 text-sm sm:text-base text-gray-600">
+            Investasi website profesional dengan harga transparan dan fitur lengkap.
+          </p>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4 items-stretch pt-4">
+          {pricing.map((p) => (
+            <div class:list={[
+              "rounded-2xl bg-white border shadow-xl flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 relative",
+              p.popular ? "border-2 border-yellow-500 lg:-translate-y-2 ring-4 ring-yellow-500/20" : "border-gray-200"
+            ]}>
+              <div>
+                <!-- BAGIAN HEADER KARTU: WARNA BIRU -->
+                <div class="bg-booking-700 text-white p-6 text-center relative rounded-t-2xl">
+                  {/* BADGE KUNING DI DALAM FLOW HEADER */}
+                  {p.badge ? (
+                    <div class="mb-3 flex justify-center">
+                      <span class="px-3 py-1 rounded-full bg-yellow-400 text-booking-700 text-xs font-extrabold shadow-md animate-bounce whitespace-nowrap">
+                        ⭐ {p.badge.toUpperCase()}
+                      </span>
+                    </div>
+                  ) : (
+                    <div class="mb-3 h-6"></div>
+                  )}
+
+                  <h3 class="text-xl font-bold text-white mb-1">{p.name}</h3>
+                  <p class="text-xs text-white/80 mb-4 h-8 flex items-center justify-center">{p.target}</p>
+
+                  <div class="bg-black/20 p-3 rounded-xl border border-white/10">
+                    {p.priceNormal && (
+                      <span class="text-xs text-red-300 line-through block font-mono">{p.priceNormal}</span>
+                    )}
+                    <span class="text-2xl sm:text-3xl font-extrabold text-yellow-400">{p.pricePromo}</span>
+                    <div class="mt-1 flex items-center justify-center gap-1.5 flex-wrap">
+                      <span class="text-[11px] bg-yellow-500/20 text-yellow-300 font-semibold px-2 py-0.5 rounded-full">
+                        {p.diskon}
+                      </span>
+                      <span class="text-[10px] text-white/70 font-mono tracking-wider">{p.periode}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- BAGIAN BODY KARTU: WARNA TERANG / PUTIH -->
+                <div class="p-5 bg-white">
+                  <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Layanan Meliputi:</p>
+                  <ul class="space-y-2.5 text-xs sm:text-sm text-gray-700">
+                    {p.features.map((f) => (
+                      <li class="flex items-start gap-2.5 border-b border-gray-100 pb-2">
+                        <span class="text-emerald-600 font-bold shrink-0 mt-0.5">✓</span>
+                        <span class="flex-1 leading-snug">{f}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              <!-- BAGIAN FOOTER KARTU -->
+              <div class="p-5 bg-gray-50 border-t border-gray-100 rounded-b-2xl">
+                <a href={waLink(`Halo akbarweb, saya ingin memesan ${p.name} (${p.pricePromo}).`)} 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   class:list={[
+                     "block text-center px-4 py-3 rounded-xl font-bold transition-all text-xs sm:text-sm shadow-md",
+                     p.popular ? "bg-yellow-500 text-booking-700 hover:bg-yellow-400 hover:scale-[1.02]" : "bg-booking-700 text-white hover:bg-booking-800",
+                   ]}>
+                  Jadwalkan Konsultasi
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <p class="text-center text-xs text-gray-500 mt-8">
+          * Harga belum termasuk PPN. Konsultasi gratis via WhatsApp untuk kebutuhan custom lainnya.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ 7. WHY CHOOSE US ============ -->
+    <section class="bg-white border-y border-gray-200 reveal-bottom">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
+        <div class="text-center mb-10 sm:mb-14">
+          <span class="inline-block text-[10px] sm:text-xs font-bold uppercase tracking-wider bg-booking-100 text-booking-700 px-3 py-1 rounded-full shadow-sm mb-2">
+            Keunggulan Kami
+          </span>
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">Kenapa AkbarWeb?</h2>
+          <p class="mt-2 text-sm sm:text-base text-gray-600">Kualitas enterprise, performa maksimal, harga terjangkau.</p>
+        </div>
+        <div class="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-3">
+          <div class="bg-gray-50 border border-gray-200 rounded-2xl p-6 text-center hover:shadow-xl transition-all flex flex-col items-center justify-center">
+            <div class="relative w-24 h-24 sm:w-28 sm:h-28 mb-4">
+              <svg class="w-full h-full -rotate-90" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="42" fill="none" stroke="#e5e7eb" stroke-width="8"/>
+                <circle cx="50" cy="50" r="42" fill="none" stroke="url(#grad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="264" stroke-dashoffset="0"/>
+                <defs>
+                  <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#febb02"/>
+                    <stop offset="100%" stop-color="#0071c2"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+              <div class="absolute inset-0 grid place-items-center">
+                <span class="text-2xl sm:text-3xl font-bold text-booking-700">100</span>
+              </div>
+            </div>
+            <p class="font-bold text-gray-900 text-base">PageSpeed Score</p>
+            <p class="text-xs text-gray-500 mt-1">Performa sempurna 100/100</p>
+          </div>
+
+          <div class="bg-gray-50 border border-gray-200 rounded-2xl p-6 hover:shadow-xl transition-all flex flex-col justify-center">
+            <div class="w-12 h-12 rounded-xl bg-booking-100 text-booking-700 flex items-center justify-center text-xl font-bold mb-4">🔍</div>
+            <h3 class="font-bold text-gray-900 mb-1 text-lg">SEO Built-in</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">Structured data, sitemap XML, dan OG tags sudah terpasang otomatis agar mudah terindeks Google.</p>
+          </div>
+
+          <div class="bg-gray-50 border border-gray-200 rounded-2xl p-6 hover:shadow-xl transition-all flex flex-col justify-center">
+            <div class="w-12 h-12 rounded-xl bg-yellow-100 text-yellow-700 flex items-center justify-center text-xl font-bold mb-4">🛡️</div>
+            <h3 class="font-bold text-gray-900 mb-1 text-lg">Support & Garansi</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">Zero hidden fees, gratis SSL seumur hidup, dan garansi keamanan teknis untuk kenyamanan bisnis Anda.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 8. TESTIMONIALS ============ -->
+    <section class="bg-gray-50 py-12 sm:py-20 reveal-left">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="mb-12">
+          <div class="text-center mb-10">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">Kata Klien Kami</h2>
+            <p class="mt-2 text-sm sm:text-base text-gray-600">Kepuasan klien adalah prioritas utama kami.</p>
+          </div>
+          <div class="grid gap-6 md:grid-cols-3">
+            {testimonials.map((t) => (
+              <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all flex flex-col justify-between">
+                <div>
+                  <div class="text-yellow-500 mb-3 text-base">★★★★★</div>
+                  <p class="text-gray-700 text-sm leading-relaxed italic mb-6">"{t.text}"</p>
+                </div>
+                <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                  <div class="w-10 h-10 rounded-full bg-booking-700 grid place-items-center text-sm font-bold text-white shadow-sm">
+                    {t.initial}
+                  </div>
+                  <div>
+                    <p class="font-bold text-gray-900 text-sm">{t.name}</p>
+                    <p class="text-xs text-gray-500">{t.role} · {t.company}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 9. FAQ BARU ============ -->
+    <section class="bg-white border-y border-gray-200 py-12 sm:py-20 reveal-right">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-10 sm:mb-14">
+          <span class="inline-block text-[10px] sm:text-xs font-bold uppercase tracking-wider bg-booking-100 text-booking-700 px-3 py-1 rounded-full shadow-sm">
+            FAQ & Tanya Jawab
+          </span>
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mt-2 sm:mt-3">
+            Pertanyaan yang <span class="bk-highlight">Sering Diajukan</span>
+          </h2>
+          <p class="mt-2 text-sm sm:text-base text-gray-600">
+            Temukan jawaban lengkap seputar layanan, proses kerja, dan jaminan kualitas kami.
+          </p>
+        </div>
+
+        <div class="space-y-4">
+          {faqs.map((f, i) => (
+            <details class="group bg-gray-50 border border-gray-200 rounded-xl shadow-sm hover:shadow-md hover:border-booking-300 overflow-hidden transition-all duration-300" open={i === 0}>
+              <summary class="flex items-center justify-between px-5 sm:px-6 py-4 sm:py-5 cursor-pointer list-none select-none bg-gray-50 hover:bg-booking-50/50 transition-colors">
+                <div class="pr-3">
+                  <span class="font-bold text-gray-900 text-sm sm:text-base md:text-lg">
+                    {f.q}
+                  </span>
+                </div>
+                <div class="w-8 h-8 rounded-full bg-gray-200 text-booking-700 flex items-center justify-center shrink-0 group-open:bg-yellow-400 group-open:rotate-180 transition-all duration-300 font-bold">
+                  ↓
+                </div>
+              </summary>
+              <div class="px-5 sm:px-6 pb-5 pt-2 text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed border-t border-gray-200 bg-white">
+                <p>{f.a}</p>
+              </div>
+            </details>
+          ))}
+        </div>
+
+        <div class="mt-10 text-center bg-gray-50 border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-sm">
+          <p class="text-sm sm:text-base text-gray-700 font-medium">Masih punya pertanyaan lain yang belum terjawab?</p>
+          <a href={waLink("Halo akbarweb, saya ingin bertanya hal lain diluar FAQ website.")} target="_blank" rel="noopener noreferrer"
+             class="mt-4 inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-booking-700 text-white font-bold text-xs sm:text-sm hover:bg-booking-800 transition-all shadow-md">
+            💬 Konsultasi Langsung via WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 10. CAKUPAN NASIONAL ============ -->
+    <section class="bg-booking-700 text-white border-y border-white/10 reveal-bottom">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+        <div class="text-center mb-8">
+          <span class="inline-block text-[10px] sm:text-xs font-bold uppercase tracking-wider bg-yellow-500 text-booking-700 px-3 py-1 rounded-full">
+            Cakupan Nasional
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-bold mt-2">Layanan di Seluruh Indonesia</h2>
+          <p class="mt-1 text-sm sm:text-base text-white/80">Pilih provinsi Anda untuk layanan web development yang lebih spesifik.</p>
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-2">
+          {provinsiPopuler.map((p: any) => (
+            <a
+              href={`/web/${p.slug}`}
+              class="px-3 sm:px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-xs sm:text-sm text-white font-medium hover:bg-yellow-500 hover:text-booking-700 hover:border-yellow-500 hover:-translate-y-0.5 transition-all duration-200"
+            >
+              {p.name}
+            </a>
+          ))}
+        </div>
+
+        <div class="text-center mt-6">
+          <a href="#kontak" class="text-xs sm:text-sm font-semibold text-yellow-400 hover:text-yellow-300 transition underline underline-offset-4">
+            Butuh provinsi atau kota lain? Hubungi kami →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 11. FINAL CTA ============ -->
+    <section id="kontak" class="bg-white py-12 sm:py-20 reveal-bottom">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6">
+        <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-booking-700 to-blue-900 p-8 sm:p-12 text-center shadow-2xl text-white">
+          <div class="relative z-10">
+            <h2 class="text-xl sm:text-3xl md:text-4xl font-extrabold leading-tight">
+              Siap <span class="text-yellow-400">Naik Level</span> dengan Website Baru?
+            </h2>
+            <p class="mt-3 text-sm sm:text-base text-white/90 max-w-xl mx-auto">
+              Konsultasi gratis, tanpa komitmen. Kami bantu rancang solusi website terbaik untuk mendongkrak omzet bisnis Anda.
+            </p>
+            <div class="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
+              <a href={waLink("Halo akbarweb, saya ingin konsultasi mengenai pembuatan website untuk bisnis saya.")} target="_blank" rel="noopener noreferrer"
+                 class="bk-btn-yellow px-8 py-3.5 text-sm sm:text-base font-bold text-center shadow-lg transition-all hover:scale-105">
+                Konsultasi Gratis via WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- SCRIPT INTERSECTION OBSERVER UNTUK EFEK SCROLL REVEAL -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const observerOptions = {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.1
+      };
+
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+          }
+        });
+      }, observerOptions);
+
+      const revealElements = document.querySelectorAll(".reveal-bottom, .reveal-left, .reveal-right");
+      revealElements.forEach(el => observer.observe(el));
+    });
+  </script>
+</Layout>

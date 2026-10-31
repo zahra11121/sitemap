@@ -1,0 +1,128 @@
+@import "tailwindcss";
+
+@theme {
+  --color-booking-50: #e6f0fa;
+  --color-booking-100: #cce0f5;
+  --color-booking-200: #99c2eb;
+  --color-booking-300: #66a3e0;
+  --color-booking-400: #3385d6;
+  --color-booking-500: #0071c2;
+  --color-booking-600: #005999;
+  --color-booking-700: #003580;
+  --color-booking-800: #002a66;
+  --color-booking-900: #001f4d;
+
+  --color-yellow-50: #fff9e6;
+  --color-yellow-100: #fff3cc;
+  --color-yellow-200: #ffe799;
+  --color-yellow-300: #ffdb66;
+  --color-yellow-400: #fecd33;
+  --color-yellow-500: #febb02;
+  --color-yellow-600: #e0a800;
+
+  --color-gray-50: #f5f5f5;
+  --color-gray-100: #ebebeb;
+  --color-gray-200: #d9d9d9;
+  --color-gray-300: #b3b3b3;
+  --color-gray-400: #808080;
+  --color-gray-500: #666666;
+  --color-gray-600: #4d4d4d;
+  --color-gray-700: #333333;
+  --color-gray-800: #1a1a1a;
+  --color-gray-900: #000000;
+}
+
+/* ============================================================
+   KEYFRAMES SCROLL ANIMATION (Bawah, Kiri, Kanan)
+   ============================================================ */
+@keyframes slideFromBottom {
+  from { opacity: 0; transform: translateY(60px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideFromLeft {
+  from { opacity: 0; transform: translateX(-60px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideFromRight {
+  from { opacity: 0; transform: translateX(60px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Kelas untuk mendeteksi saat discroll pakai JS Intersection Observer */
+.reveal-bottom, .reveal-left, .reveal-right {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-bottom.active {
+  opacity: 1;
+  visibility: visible;
+  animation: slideFromBottom 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.reveal-left.active {
+  opacity: 1;
+  visibility: visible;
+  animation: slideFromLeft 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.reveal-right.active {
+  opacity: 1;
+  visibility: visible;
+  animation: slideFromRight 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+  body {
+    font-family: "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
+    background-color: #ffffff;
+    color: #1a1a1a;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+.bk-card {
+  background: #ffffff;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.bk-card:hover {
+  border-color: #0071c2;
+  box-shadow: 0 10px 25px rgba(0, 53, 128, 0.15);
+  transform: translateY(-6px);
+}
+
+.bk-btn-yellow {
+  background-color: #febb02;
+  color: #003580;
+  font-weight: 700;
+  border-radius: 4px;
+  transition: all 0.25s ease;
+  display: inline-block;
+  text-align: center;
+  border: 1px solid #febb02;
+}
+.bk-btn-yellow:hover {
+  background-color: #ffcb3d;
+  border-color: #ffcb3d;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(254, 187, 2, 0.4);
+}
+
+.bk-highlight {
+  background-color: #febb02;
+  color: #003580;
+  padding: 0.05em 0.4em;
+  border-radius: 3px;
+  display: inline;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}

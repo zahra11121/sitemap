@@ -1,0 +1,734 @@
+---
+import Layout from "../../../../layouts/Layouts.astro";
+import wilayahData from "../../../../data/wilayah_indonesia.json";
+
+// ============================================================
+// 1. GET STATIC PATHS (DINAMIS UNTUK PROVINSI & KABUPATEN)
+// ============================================================
+export function getStaticPaths() {
+  let paths: any[] = [];
+  
+  wilayahData.forEach((prov: any) => {
+    if (prov.regencies && Array.isArray(prov.regencies)) {
+      prov.regencies.forEach((kab: any) => {
+        paths.push({
+          params: { 
+            provinsi: prov.slug, 
+            kabupaten: kab.slug 
+          },
+          props: { 
+            provData: prov, 
+            kabData: kab 
+          },
+        });
+      });
+    }
+  });
+
+  return paths;
+}
+
+// ============================================================
+// 2. DATA & KONTEN PROGRAMMATIC SEO
+// ============================================================
+const { provinsi, kabupaten } = Astro.params;
+const { provData, kabData } = Astro.props;
+
+const keywordKabupaten = `Jasa buat web di ${kabData.name}`;
+
+const content = {
+  headline: `Jasa Buat Web di ${kabData.name} — Website Profesional untuk Bisnis Anda`,
+  subheadline: `Tingkatkan omzet dan kredibilitas bisnis Anda di ${kabData.name}, ${provData.name} dengan website profesional, cepat, dan siap tampil di halaman pertama Google.`,
+  highlightIndustry: ["UMKM & Retail", "Kuliner & F&B", "Jasa Konsultan", "Properti & Developer", "Pariwisata & Travel", "Agribisnis"],
+  whyUs: [
+    { icon: "⚡", title: `Paham Karakter ${kabData.name}`, desc: `Kami mengerti kebutuhan dan persaingan pasar lokal di ${kabData.name} untuk strategi digital yang tepat.` },
+    { icon: "📱", title: "Cepat & Mobile-First", desc: "Website dioptimasi khusus agar mulus diakses dari HP, mendatangkan lebih banyak konversi." },
+    { icon: "🔍", title: `SEO Lokal ${kabData.name}`, desc: `Struktur web dirancang agar bisnis Anda mudah ditemukan pelanggan sekitar ${kabData.name}.` },
+    { icon: "💬", title: "Support WhatsApp", desc: "Tim support kami siap membantu kapan pun Anda membutuhkan bantuan teknis via WhatsApp." },
+  ],
+  faqs: [
+    { q: `Berapa lama proses pembuatan website untuk bisnis di ${kabData.name}?`, a: "Waktu pengerjaan standar adalah 3–5 hari kerja untuk Paket Gold, dan 7–10 hari untuk Paket Platinum/E-Commerce tergantung kelengkapan data." },
+    { q: "Apakah sudah termasuk domain dan hosting?", a: "Ya! Semua paket kami sudah termasuk gratis domain (.com / .id) selama 1 tahun dan cloud hosting performa tinggi." },
+    { q: "Apakah website mudah di-update sendiri?", a: "Sangat mudah. Anda akan mendapatkan akses ke halaman admin yang user-friendly beserta panduan cara menggunakannya." },
+    { q: `Bisakah website ini diakses pelanggan dari luar ${kabData.name}?`, a: "Tentu saja. Website Anda akan online 24 jam penuh dan bisa diakses oleh siapa saja dari seluruh Indonesia bahkan dunia." },
+    { q: "Bagaimana cara melakukan pembayaran?", a: "Pembayaran dapat dilakukan melalui transfer bank yang akan kami infokan melalui WhatsApp setelah kesepakatan project." },
+    { q: "Apakah ada biaya bulanan?", a: "Tidak ada biaya bulanan. Anda hanya perlu memperpanjang domain dan hosting setahun sekali." },
+  ],
+  testimonial: { 
+    name: "Klien akbarweb", 
+    role: "Pemilik Usaha", 
+    company: `Bisnis Lokal di ${kabData.name}`, 
+    text: `Sejak dibuatkan website oleh akbarweb, pelanggan dari luar daerah pun mulai berdatangan. Loadingnya cepat dan sangat mudah digunakan. Terima kasih tim akbarweb!` 
+  },
+  stats: [
+    { value: "50+", label: `Website Lokal ${kabData.name}` },
+    { value: "4.9/5", label: "Rating Klien" },
+    { value: "7 Hari", label: "Rata-rata Delivery" },
+    { value: "99.9%", label: "Uptime" },
+  ],
+};
+
+const heroImg = "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1000&auto=format&fit=crop";
+
+// ============================================================
+// 3. PAKET HARGA TERBARU (GOLD, PLATINUM, DIAMOND, CUSTOM)
+// ============================================================
+const pricing = [
+  {
+    name: "Gold",
+    target: "Paket Website Landing Page / UMKM",
+    priceNormal: "Rp 2.500.000",
+    pricePromo: "Rp 999.000",
+    diskon: "Diskon 60%",
+    periode: "PER TAHUN",
+    popular: false,
+    badge: null,
+    features: [
+      "Hosting 1 Tahun",
+      "Gratis Domain",
+      "Gratis Sertifikat SSL",
+      "1x Revisi Design Minor",
+      "4x Update",
+      "SEO & Mobile Friendly",
+      "Support Maintenance",
+      "Setup 1 Halaman",
+      "Input 5 Produk Awal",
+      "Button WhatsApp (CTA)",
+      "Slider Banner",
+    ]
+  },
+  {
+    name: "Platinum",
+    target: "Paket Website Company Profile Berkembang",
+    priceNormal: "Rp 3.500.000",
+    pricePromo: "Rp 1.499.000",
+    diskon: "Diskon 57%",
+    periode: "PER TAHUN",
+    popular: false,
+    badge: "Recommended",
+    features: [
+      "Hosting 1 Tahun",
+      "Gratis Domain",
+      "Gratis Sertifikat SSL",
+      "2x Revisi Design",
+      "12x Update",
+      "SEO & Mobile Friendly",
+      "Support Maintenance",
+      "Setup 5 Halaman",
+      "Input 10 Produk Awal",
+      "Button WhatsApp (CTA)",
+      "Slider Banner",
+    ]
+  },
+  {
+    name: "Diamond",
+    target: "Paket Toko Online / E-Commerce Siap Jualan",
+    priceNormal: "Rp 4.500.000",
+    pricePromo: "Rp 3.150.000",
+    diskon: "Diskon 30%",
+    periode: "PER TAHUN",
+    popular: true,
+    badge: "Terpopuler",
+    features: [
+      "Hosting 1 Tahun",
+      "Gratis Domain",
+      "Gratis Sertifikat SSL",
+      "2x Revisi Design",
+      "12x Update",
+      "SEO & Mobile Friendly",
+      "Prioritas Support Maintenance",
+      "Setup 5 Halaman",
+      "Input 10 Produk Awal",
+      "Slider Banner",
+      "Keranjang Belanja",
+      "Fitur Cek Ongkir",
+      "Integrasi WhatsApp",
+      "Integrasi Marketplace",
+    ]
+  },
+  {
+    name: "Custom",
+    target: "Solusi Skala Besar & Kebutuhan Khusus",
+    priceNormal: "",
+    pricePromo: "Sesuai Kebutuhan",
+    diskon: "Custom Budget",
+    periode: "PER TAHUN",
+    popular: false,
+    badge: "Fleksibel",
+    features: [
+      "Hosting Custom",
+      "Bisa Pilih Domain",
+      "Gratis Sertifikat SSL",
+      "3x Revisi Design",
+      "12x Update",
+      "SEO & Mobile Friendly",
+      "Dedicated Support",
+      "Halaman Sesuai Kebutuhan",
+      "Integrasi Sesuai Kebutuhan",
+      "Design Custom",
+      "Akses Penuh",
+      "Dan lain-lain",
+    ]
+  }
+];
+
+// ============================================================
+// 4. LAYANAN
+// ============================================================
+const services = [
+  { icon: "🚀", title: "Landing Page", desc: "Halaman fokus konversi untuk campaign & produk." },
+  { icon: "🏢", title: "Company Profile", desc: "Profil perusahaan kredibel & profesional." },
+  { icon: "🛒", title: "E-Commerce", desc: "Toko online siap jualan dengan payment gateway." },
+  { icon: "⚙️", title: "Web App & CMS", desc: "Aplikasi web custom sesuai alur bisnis." },
+  { icon: "🎨", title: "Redesign Website", desc: "Ubah website lama jadi modern & cepat." },
+  { icon: "🔧", title: "Maintenance", desc: "Update konten & perawatan website berkala." },
+];
+
+// ============================================================
+// 5. PROSES
+// ============================================================
+const steps = [
+  { no: "01", title: "Konsultasi", desc: "Diskusi kebutuhan & tujuan bisnis Anda." },
+  { no: "02", title: "Desain", desc: "Wireframe & mockup sesuai brand Anda." },
+  { no: "03", title: "Development", desc: "Coding rapi, cepat, dan SEO-friendly." },
+  { no: "04", title: "Launch", desc: "Testing, deploy, dan monitoring." },
+];
+
+// ============================================================
+// 6. SEO & SCHEMA
+// ============================================================
+const siteUrl = "https://namadomain.com";
+const currentUrl = `${siteUrl}/web/${provinsi}/${kabupaten}`;
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
+    { "@type": "ListItem", position: 2, name: provData.name, item: `${siteUrl}/web/${provinsi}` },
+    { "@type": "ListItem", position: 3, name: kabData.name, item: currentUrl },
+  ],
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: content.faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
+const waNumber = "6285938573419";
+const waLink = (msg: string) => `https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`;
+---
+
+<Layout
+  title={`${keywordKabupaten} | akbarweb.com`}
+  description={`Butuh ${keywordKabupaten}? Kami melayani pembuatan website bisnis, toko online, dan company profile profesional untuk seluruh wilayah di ${kabData.name}, ${provData.name}.`}
+>
+  <Fragment slot="head">
+    <meta name="keywords" content={`jasa pembuatan website ${kabData.name}, jasa buat web ${kabData.name}, bikin website murah ${kabData.name}, company profile ${kabData.name}, toko online ${kabData.name}, akbarweb`} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  </Fragment>
+
+  <!-- ============================================================
+       STYLE ANIMASI SCROLL REVEAL & STICKY FIX
+       ============================================================ -->
+  <style is:global>
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-8px) rotate(0.5deg); }
+    }
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.85; transform: scale(1.03); }
+    }
+
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+
+    .reveal-on-scroll.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .anim-float {
+      animation: floatSlow 5s ease-in-out infinite;
+    }
+    .anim-pulse-glow {
+      animation: pulseGlow 3s ease-in-out infinite;
+    }
+    .anim-card-hover {
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .anim-card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 25px -8px rgba(0, 0, 0, 0.1);
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Menggunakan overflow-x clip agar position sticky header tetap berfungsi */
+    html {
+      overflow-x: hidden;
+    }
+    body {
+      overflow-x: clip;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal-on-scroll {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+      .anim-float, .anim-pulse-glow, .anim-card-hover {
+        animation: none !important;
+        transform: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+
+  <div class="bg-white text-gray-800 w-full">
+
+    <!-- ============ 1. HERO SECTION ============ -->
+    <section class="bg-booking-700 text-white relative overflow-hidden">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-16 md:py-24 grid md:grid-cols-2 gap-8 items-center">
+
+        <!-- Kiri: Teks -->
+        <div class="reveal-on-scroll w-full">
+          <nav aria-label="Breadcrumb" class="mb-3 sm:mb-5">
+            <ol class="flex items-center flex-wrap gap-1 text-[11px] sm:text-xs text-white/80 leading-normal">
+              <li><a href="/web" class="hover:text-yellow-400 transition">Home</a></li>
+              <li><span class="mx-1">/</span></li>
+              <li><a href={`/web/${provinsi}`} class="hover:text-yellow-400 transition">{provData.name}</a></li>
+              <li><span class="mx-1">/</span></li>
+              <li><span class="text-white font-medium truncate max-w-[140px] sm:max-w-none inline-block align-bottom" aria-current="page">{kabData.name}</span></li>
+            </ol>
+          </nav>
+
+          <span class="inline-block text-[10px] sm:text-xs font-semibold uppercase tracking-wider bg-yellow-500 text-booking-700 px-3 py-1 rounded-full shadow-md anim-pulse-glow">
+            ✨ Jangkauan Layanan {kabData.name}
+          </span>
+
+          <h1 class="text-2xl sm:text-3xl md:text-5xl font-extrabold mt-3 mb-3 sm:mb-4 leading-tight tracking-tight">
+            {content.headline}
+          </h1>
+          <p class="text-xs sm:text-sm md:text-base text-white/90 leading-relaxed max-w-xl mb-6">
+            {content.subheadline}
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+            <a href={waLink(`Halo akbarweb, saya tertarik konsultasi pembuatan website untuk bisnis saya di wilayah ${kabData.name}.`)}
+               target="_blank" rel="noopener noreferrer"
+               class="bk-btn-yellow px-5 py-3 text-xs sm:text-sm font-bold text-center shadow-lg active:scale-95 transition-all">
+              💬 Konsultasi via WhatsApp
+            </a>
+            <a href="#harga"
+               class="px-5 py-3 rounded-xl bg-white/10 border border-white/30 text-white font-semibold hover:bg-white/20 active:scale-95 transition-all text-xs sm:text-sm text-center">
+              Lihat Paket Harga
+            </a>
+          </div>
+        </div>
+
+        <!-- Kanan: Gambar dengan Animasi Melayang -->
+        <div class="relative reveal-on-scroll anim-float w-full max-w-md mx-auto md:max-w-none">
+          <div class="relative rounded-2xl bg-white p-2 shadow-2xl">
+            <div class="rounded-xl overflow-hidden bg-gray-50">
+              <div class="flex items-center gap-2 px-3 py-2 bg-white border-b border-gray-200">
+                <span class="w-2.5 h-2.5 rounded-full bg-red-400"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-yellow-400"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-green-400"></span>
+                <span class="ml-2 text-[10px] sm:text-xs text-gray-400 font-mono truncate">akbarweb.com/{kabupaten}</span>
+              </div>
+              <img
+                src={heroImg}
+                alt={`Foto tim bisnis profesional di ${kabData.name} — akbarweb.com`}
+                class="w-full h-48 sm:h-64 md:h-80 object-cover"
+                loading="eager"
+                width="600"
+                height="400"
+              />
+            </div>
+          </div>
+
+          <div class="absolute -top-2 -right-2 sm:-top-3 sm:-right-3 bg-yellow-500 text-booking-700 rounded-lg px-2.5 py-1 text-[11px] sm:text-xs font-bold shadow-lg animate-bounce">
+            ⚡ PageSpeed 100
+          </div>
+          <div class="absolute -bottom-2 -left-2 sm:-bottom-3 sm:-left-3 bg-white border border-gray-200 rounded-lg px-2.5 py-1 text-[11px] sm:text-xs font-bold text-booking-700 shadow-lg">
+            📈 +40% Conversion
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ 2. STATS BAR ============ -->
+    <section class="bg-yellow-500 shadow-inner">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 py-5 sm:py-6 grid grid-cols-2 md:grid-cols-4 gap-4">
+        {content.stats.map((s) => (
+          <div class="text-center text-booking-700 reveal-on-scroll">
+            <p class="text-xl sm:text-2xl md:text-4xl font-black">{s.value}</p>
+            <p class="text-[11px] sm:text-xs md:text-sm font-semibold opacity-90">{s.label}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- ============ 3. LAYANAN ============ -->
+    <section class="bg-booking-700 text-white border-y border-white/10 py-10 sm:py-16">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-8 sm:mb-12 reveal-on-scroll">
+          <span class="inline-block text-[11px] sm:text-xs font-bold uppercase tracking-wider bg-yellow-500 text-booking-700 px-3 py-1 rounded-full">
+            Layanan Kami
+          </span>
+          <h2 class="text-xl sm:text-2xl md:text-4xl font-bold mt-2 sm:mt-3">
+            Apa yang Bisa <span class="bk-highlight">Kami Bantu</span> di {kabData.name}?
+          </h2>
+          <p class="mt-2 text-xs sm:text-sm text-white/80 max-w-xl mx-auto">
+            Solusi website lengkap untuk mendukung transformasi digital bisnis Anda.
+          </p>
+        </div>
+
+        <div class="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          {services.map((s) => (
+            <div class="group rounded-xl p-5 sm:p-6 flex flex-col bg-white/5 border border-white/15 backdrop-blur anim-card-hover reveal-on-scroll">
+              <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-yellow-500 text-booking-700 grid place-items-center text-lg sm:text-xl mb-3 sm:mb-4 group-hover:scale-110 transition-transform shadow-md">
+                {s.icon}
+              </div>
+              <h3 class="font-bold text-base sm:text-lg mb-1 sm:mb-2 text-white">{s.title}</h3>
+              <p class="text-xs sm:text-sm text-white/80 leading-relaxed flex-1">
+                {s.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 4. INDUSTRI UNGGULAN ============ -->
+    <section class="bg-gray-50 border-y border-gray-200 py-10 sm:py-14">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 text-center">
+        <div class="mb-6 sm:mb-8 reveal-on-scroll">
+          <span class="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-booking-600 bg-booking-100 px-3 py-1 rounded-full">Fokus Kami</span>
+          <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mt-2">Sektor Bisnis di {kabData.name}</h2>
+          <p class="mt-1 text-xs sm:text-sm text-gray-600 max-w-lg mx-auto">Sistem web yang dirancang sesuai dengan ekosistem bisnis dan kebutuhan pasar daerah Anda.</p>
+        </div>
+        <div class="flex flex-wrap justify-center gap-2 sm:gap-3">
+          {content.highlightIndustry.map((ind) => (
+            <div class="bg-white border border-gray-200 px-4 py-2 sm:px-5 sm:py-3 rounded-xl shadow-sm hover:border-booking-500 hover:shadow-md transition-all reveal-on-scroll">
+              <span class="text-xs sm:text-sm font-bold text-booking-700">{ind}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 5. PAKET HARGA TERBARU ============ -->
+    <section id="harga" class="bg-gray-100 border-y border-gray-200 py-10 sm:py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-10 sm:mb-12 reveal-on-scroll">
+          <span class="inline-block text-[11px] sm:text-xs font-bold uppercase tracking-wider bg-booking-100 text-booking-700 px-3 py-1 rounded-full shadow-sm">
+            Paket Harga
+          </span>
+          <h2 class="text-xl sm:text-2xl md:text-4xl font-bold text-gray-900 mt-2 sm:mt-3">
+            Pilihan Paket <span class="text-booking-700">Terbaik di {kabData.name}</span>
+          </h2>
+          <p class="mt-2 text-xs sm:text-sm md:text-base text-gray-600 max-w-xl mx-auto">
+            Investasi website profesional dengan harga transparan, fitur lengkap, dan tanpa biaya tersembunyi.
+          </p>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4 items-stretch">
+          {pricing.map((p) => (
+            <div class:list={[
+              "rounded-2xl bg-white border shadow-xl flex flex-col justify-between anim-card-hover reveal-on-scroll",
+              p.popular ? "border-2 border-yellow-500 lg:-translate-y-2 ring-4 ring-yellow-500/20" : "border-gray-200"
+            ]}>
+              <div>
+                <!-- Header Kartu: Warna Biru -->
+                <div class="bg-booking-700 text-white p-5 sm:p-6 text-center relative rounded-t-2xl">
+                  {p.badge ? (
+                    <div class="mb-2 sm:mb-3 flex justify-center">
+                      <span class="px-2.5 py-0.5 rounded-full bg-yellow-400 text-booking-700 text-[10px] sm:text-xs font-extrabold shadow-md animate-bounce whitespace-nowrap">
+                        ⭐ {p.badge.toUpperCase()}
+                      </span>
+                    </div>
+                  ) : (
+                    <div class="mb-2 sm:mb-3 h-5 sm:h-6"></div>
+                  )}
+
+                  <h3 class="text-lg sm:text-xl font-bold text-white mb-1">{p.name}</h3>
+                  <p class="text-[11px] sm:text-xs text-white/80 mb-3 sm:mb-4 h-7 sm:h-8 flex items-center justify-center px-2">{p.target}</p>
+
+                  <div class="bg-black/20 p-2.5 sm:p-3 rounded-xl border border-white/10">
+                    {p.priceNormal && (
+                      <span class="text-[11px] sm:text-xs text-red-300 line-through block font-mono">{p.priceNormal}</span>
+                    )}
+                    <span class="text-xl sm:text-2xl md:text-3xl font-extrabold text-yellow-400">{p.pricePromo}</span>
+                    <div class="mt-1 flex items-center justify-center gap-1.5 flex-wrap">
+                      <span class="text-[10px] sm:text-[11px] bg-yellow-500/20 text-yellow-300 font-semibold px-2 py-0.5 rounded-full">
+                        {p.diskon}
+                      </span>
+                      <span class="text-[9px] sm:text-[10px] text-white/70 font-mono tracking-wider">{p.periode}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Body Kartu: Warna Terang / Putih -->
+                <div class="p-4 sm:p-5 bg-white">
+                  <p class="text-[11px] sm:text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 sm:mb-3">Layanan Meliputi:</p>
+                  <ul class="space-y-2 text-xs sm:text-sm text-gray-700">
+                    {p.features.map((f) => (
+                      <li class="flex items-start gap-2 border-b border-gray-100 pb-2">
+                        <span class="text-emerald-600 font-bold shrink-0 mt-0.5">✓</span>
+                        <span class="flex-1 leading-snug text-[11px] sm:text-xs">{f}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Footer Kartu -->
+              <div class="p-4 sm:p-5 bg-gray-50 border-t border-gray-100 rounded-b-2xl">
+                <a href={waLink(`Halo akbarweb, saya ingin memesan ${p.name} (${p.pricePromo}) untuk bisnis saya di ${kabData.name}.`)} 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   class:list={[
+                     "block text-center px-4 py-2.5 sm:py-3 rounded-xl font-bold transition-all text-xs sm:text-sm shadow-md active:scale-95",
+                     p.popular ? "bg-yellow-500 text-booking-700 hover:bg-yellow-400" : "bg-booking-700 text-white hover:bg-booking-800",
+                   ]}>
+                  Jadwalkan Konsultasi
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <p class="text-center text-[11px] sm:text-xs text-gray-500 mt-6 sm:mt-8 px-2">
+          * Harga belum termasuk PPN. Konsultasi gratis via WhatsApp untuk kebutuhan custom di {kabData.name}.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ 6. MENGAPA MEMILIH KAMI ============ -->
+    <section class="bg-booking-700 text-white py-10 sm:py-16">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-10 sm:mb-12 reveal-on-scroll">
+          <span class="inline-block text-[11px] sm:text-xs font-bold uppercase tracking-wider bg-yellow-500 text-booking-700 px-3 py-1 rounded-full">
+            Keunggulan Kami
+          </span>
+          <h2 class="text-xl sm:text-2xl md:text-4xl font-bold mt-2 sm:mt-3">
+            Mengapa Memilih <span class="bk-highlight">akbarweb</span> di {kabData.name}?
+          </h2>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          {content.whyUs.map((w) => (
+            <div class="bg-white/5 border border-white/15 p-5 sm:p-6 rounded-2xl backdrop-blur anim-card-hover reveal-on-scroll">
+              <div class="text-2xl sm:text-3xl mb-2 sm:mb-3">{w.icon}</div>
+              <h3 class="font-bold text-base sm:text-lg mb-1 sm:mb-2 text-white">{w.title}</h3>
+              <p class="text-xs sm:text-sm text-white/80 leading-relaxed">{w.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 7. PROSES KERJA (MOBILE 2 KOLOM) ============ -->
+    <section class="bg-gray-50 border-y border-gray-200 py-10 sm:py-16">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-8 sm:mb-12 reveal-on-scroll">
+          <h2 class="text-xl sm:text-2xl md:text-4xl font-bold text-gray-900">Proses Pembuatan Website</h2>
+          <p class="mt-2 text-xs sm:text-sm md:text-base text-gray-600 max-w-lg mx-auto">Langkah mudah, terstruktur, dan transparan dari awal hingga rilis.</p>
+        </div>
+
+        <!-- Diatur grid-cols-2 untuk mobile dan md:grid-cols-4 untuk layar besar -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6">
+          {steps.map((s) => (
+            <div class="bg-white p-3.5 sm:p-6 rounded-2xl border border-gray-200 text-center shadow-sm anim-card-hover reveal-on-scroll flex flex-col justify-between">
+              <div>
+                <div class="w-9 h-9 sm:w-12 sm:h-12 mx-auto rounded-xl bg-booking-700 text-white font-extrabold grid place-items-center text-xs sm:text-base mb-2.5 sm:mb-4 shadow-md">
+                  {s.no}
+                </div>
+                <h3 class="font-bold text-gray-900 text-xs sm:text-base mb-1 sm:mb-2 leading-snug">{s.title}</h3>
+              </div>
+              <p class="text-[11px] sm:text-sm text-gray-600 leading-relaxed mt-1">{s.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 8. TESTIMONI ============ -->
+    <section class="bg-white py-10 sm:py-16">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-8 sm:mb-10 reveal-on-scroll">
+          <span class="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-booking-600 bg-booking-100 px-3 py-1 rounded-full">Testimoni Klien</span>
+          <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mt-2">Apa Kata Mereka di {kabData.name}?</h2>
+        </div>
+        <div class="bg-gray-50 border border-gray-200 rounded-2xl p-6 sm:p-10 shadow-lg reveal-on-scroll anim-card-hover">
+          <div class="text-yellow-500 mb-3 sm:mb-4 text-base sm:text-lg">★★★★★</div>
+          <p class="text-sm sm:text-base md:text-lg text-gray-700 italic mb-5 sm:mb-6 leading-relaxed">
+            "{content.testimonial.text}"
+          </p>
+          <div class="flex items-center gap-3 sm:gap-4 pt-3 sm:pt-4 border-t border-gray-200">
+            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-booking-700 text-white font-bold grid place-items-center text-sm sm:text-base shadow-md">
+              {content.testimonial.name.charAt(0)}
+            </div>
+            <div>
+              <p class="font-bold text-gray-900 text-xs sm:text-base">{content.testimonial.name}</p>
+              <p class="text-[11px] sm:text-xs text-gray-500">{content.testimonial.role} — {content.testimonial.company}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 9. FAQ ============ -->
+    <section class="bg-gray-50 border-y border-gray-200 py-10 sm:py-16">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-10 sm:mb-12 reveal-on-scroll">
+          <span class="text-[11px] sm:text-xs font-bold uppercase tracking-wider bg-booking-100 text-booking-700 px-3 py-1 rounded-full">FAQ & Tanya Jawab</span>
+          <h2 class="text-xl sm:text-2xl md:text-4xl font-bold text-gray-900 mt-2 sm:mt-3">
+            Pertanyaan yang <span class="bk-highlight">Sering Diajukan</span>
+          </h2>
+          <p class="mt-2 text-xs sm:text-sm md:text-base text-gray-600 max-w-lg mx-auto">
+            Temukan jawaban lengkap seputar layanan, proses pembuatan, dan jaminan kualitas kami di {kabData.name}.
+          </p>
+        </div>
+
+        <div class="space-y-3 sm:space-y-4">
+          {content.faqs.map((f, i) => (
+            <details class="group bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden transition-all duration-300 reveal-on-scroll" open={i === 0}>
+              <summary class="flex items-center justify-between p-4 sm:p-6 cursor-pointer list-none font-bold text-gray-900 text-xs sm:text-sm md:text-base hover:bg-booking-50/50 transition-colors">
+                <span class="pr-2">{f.q}</span>
+                <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gray-100 text-booking-700 flex items-center justify-center shrink-0 group-open:bg-yellow-400 group-open:rotate-180 transition-all duration-300 font-bold ml-2">
+                  ↓
+                </div>
+              </summary>
+              <div class="p-4 sm:p-6 pt-0 text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed border-t border-gray-100 bg-white">
+                <p>{f.a}</p>
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 10. INTERNAL LINK AUTO-SCROLL SLIDER: KECAMATAN (BG BIRU, DI ATAS FOOTER) ============ -->
+    <section class="bg-booking-700 text-white py-10 sm:py-16 border-t border-white/10 overflow-hidden">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-6 sm:mb-8 reveal-on-scroll">
+          <span class="text-[11px] sm:text-xs font-bold uppercase tracking-wider bg-yellow-500 text-booking-700 px-3 py-1 rounded-full">Cakupan Wilayah</span>
+          <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-white mt-2 sm:mt-3">Daftar Kecamatan di {kabData.name}</h2>
+          <p class="mt-1.5 text-xs sm:text-sm text-white/80 max-w-lg mx-auto">Pilih wilayah kecamatan Anda untuk layanan pembuatan website yang lebih spesifik.</p>
+        </div>
+
+        {kabData.districts && kabData.districts.length > 0 ? (
+          <div class="relative reveal-on-scroll">
+            <!-- Container Auto-Scroll Slider Kecamatan -->
+            <div
+              id="auto-kecamatan-slider"
+              class="flex gap-2.5 sm:gap-3 overflow-x-auto no-scrollbar py-2 px-1 select-none cursor-grab active:cursor-grabbing"
+            >
+              {kabData.districts.map((kec: any) => (
+                <a
+                  href={`/web/${provinsi}/${kabupaten}/${kec.slug}`}
+                  class="shrink-0 w-44 sm:w-60 p-3.5 sm:p-4 rounded-xl bg-white/5 border border-white/15 hover:bg-white/10 hover:border-yellow-400 transition-all flex items-center justify-between group shadow-sm"
+                >
+                  <span class="font-medium text-white group-hover:text-yellow-400 transition text-xs sm:text-sm truncate">{kec.name}</span>
+                  <span class="text-yellow-400 group-hover:translate-x-1 transition shrink-0 ml-2">&rarr;</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <p class="text-center text-white/70 py-6 text-xs sm:text-sm">Data kecamatan belum tersedia untuk wilayah ini.</p>
+        )}
+      </div>
+    </section>
+
+    <!-- ============ 11. FINAL CTA (FOOTER UTAMA) ============ -->
+    <section id="kontak" class="bg-booking-800 text-white py-12 sm:py-20 text-center relative overflow-hidden border-t border-white/10">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 relative z-10 reveal-on-scroll">
+        <h2 class="text-xl sm:text-2xl md:text-5xl font-extrabold mb-3 sm:mb-4 leading-tight">
+          Siap Tingkatkan Omzet Bisnis di <span class="text-yellow-400">{kabData.name}</span>?
+        </h2>
+        <p class="text-xs sm:text-sm md:text-lg text-white/90 max-w-lg mx-auto mb-6 sm:mb-8 leading-relaxed">
+          Konsultasikan kebutuhan website Anda secara gratis, cepat, dan tanpa komitmen via WhatsApp sekarang juga.
+        </p>
+        <a href={waLink(`Halo akbarweb, saya ingin konsultasi pembuatan website untuk bisnis saya di ${kabData.name}.`)}
+           target="_blank" rel="noopener noreferrer"
+           class="bk-btn-yellow px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-lg font-bold shadow-2xl inline-block active:scale-95 transition-transform">
+          💬 Konsultasi Gratis via WhatsApp
+        </a>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ============ SCRIPT INTERSECTION OBSERVER & AUTO-SCROLL SLIDER ============ -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // 1. Scroll Reveal Observer
+      const observerOptions = {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.1
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+          }
+        });
+      }, observerOptions);
+
+      const revealElements = document.querySelectorAll(".reveal-on-scroll");
+      revealElements.forEach(el => observer.observe(el));
+
+      // 2. Auto-Scroll Slider Kecamatan
+      const slider = document.getElementById("auto-kecamatan-slider") as HTMLElement | null;
+      if (!slider) return;
+
+      let scrollSpeed = 0.8;
+      let isPaused = false;
+      let animationId: number;
+
+      function autoScroll() {
+        if (!isPaused) {
+          slider.scrollLeft += scrollSpeed;
+          if (slider.scrollLeft >= (slider.scrollWidth - slider.clientWidth - 2)) {
+            slider.scrollLeft = 0;
+          }
+        }
+        animationId = requestAnimationFrame(autoScroll);
+      }
+
+      slider.addEventListener("mouseenter", () => { isPaused = true; });
+      slider.addEventListener("mouseleave", () => { isPaused = false; });
+      slider.addEventListener("touchstart", () => { isPaused = true; }, { passive: true });
+      slider.addEventListener("touchend", () => { 
+        setTimeout(() => { isPaused = false; }, 2000); 
+      }, { passive: true });
+
+      animationId = requestAnimationFrame(autoScroll);
+    });
+  </script>
+</Layout>
