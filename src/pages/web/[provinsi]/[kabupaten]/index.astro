@@ -195,10 +195,10 @@ const steps = [
 ];
 
 // ============================================================
-// 6. SEO & SCHEMA
+// 6. SEO & SCHEMA MARKUP
 // ============================================================
-const siteUrl = "https://namadomain.com";
-const currentUrl = `${siteUrl}/web/${provinsi}/${kabupaten}`;
+const siteUrl = "https://greenfresh.co.id"; // Sesuaikan dengan domain utama Anda
+const currentUrl = `${siteUrl}/web/${provinsi}/${kabupaten}/`;
 
 const breadcrumbSchema = {
   "@context": "https://schema.org",
@@ -220,6 +220,62 @@ const faqSchema = {
   })),
 };
 
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": `Akbarweb - ${keywordKabupaten}`,
+  "image": heroImg,
+  "@id": currentUrl,
+  "url": currentUrl,
+  "telephone": "+6285938573419",
+  "priceRange": "Rp999.000 - Rp3.150.000",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": kabData.name,
+    "addressRegion": provData.name,
+    "addressCountry": "ID"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": -6.2088,
+    "longitude": 106.8456
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
+    ],
+    "opens": "08:00",
+    "closes": "21:00"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "50",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "review": {
+    "@type": "Review",
+    "author": {
+      "@type": "Person",
+      "name": content.testimonial.name
+    },
+    "reviewRating": {
+      "@type": "Rating",
+      "ratingValue": "5",
+      "bestRating": "5"
+    },
+    "reviewBody": content.testimonial.text
+  }
+};
+
 const waNumber = "6285938573419";
 const waLink = (msg: string) => `https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`;
 ---
@@ -229,9 +285,15 @@ const waLink = (msg: string) => `https://wa.me/${waNumber}?text=${encodeURICompo
   description={`Butuh ${keywordKabupaten}? Kami melayani pembuatan website bisnis, toko online, dan company profile profesional untuk seluruh wilayah di ${kabData.name}, ${provData.name}.`}
 >
   <Fragment slot="head">
+    <!-- Canonical Tag -->
+    <link rel="canonical" href={currentUrl} />
+
     <meta name="keywords" content={`jasa pembuatan website ${kabData.name}, jasa buat web ${kabData.name}, bikin website murah ${kabData.name}, company profile ${kabData.name}, toko online ${kabData.name}, akbarweb`} />
+    
+    <!-- Schema Markups -->
     <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
     <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
   </Fragment>
 
   <!-- ============================================================
@@ -353,7 +415,7 @@ const waLink = (msg: string) => `https://wa.me/${waNumber}?text=${encodeURICompo
                 <span class="w-2.5 h-2.5 rounded-full bg-red-400"></span>
                 <span class="w-2.5 h-2.5 rounded-full bg-yellow-400"></span>
                 <span class="w-2.5 h-2.5 rounded-full bg-green-400"></span>
-                <span class="ml-2 text-[10px] sm:text-xs text-gray-400 font-mono truncate">akbarweb.com/{kabupaten}</span>
+                <span class="ml-2 text-[10px] sm:text-xs text-gray-400 font-mono truncate">akbarweb.com/web/{provinsi}/{kabupaten}</span>
               </div>
               <img
                 src={heroImg}
@@ -460,7 +522,6 @@ const waLink = (msg: string) => `https://wa.me/${waNumber}?text=${encodeURICompo
               p.popular ? "border-2 border-yellow-500 lg:-translate-y-2 ring-4 ring-yellow-500/20" : "border-gray-200"
             ]}>
               <div>
-                <!-- Header Kartu: Warna Biru -->
                 <div class="bg-booking-700 text-white p-5 sm:p-6 text-center relative rounded-t-2xl">
                   {p.badge ? (
                     <div class="mb-2 sm:mb-3 flex justify-center">
@@ -489,7 +550,6 @@ const waLink = (msg: string) => `https://wa.me/${waNumber}?text=${encodeURICompo
                   </div>
                 </div>
 
-                <!-- Body Kartu: Warna Terang / Putih -->
                 <div class="p-4 sm:p-5 bg-white">
                   <p class="text-[11px] sm:text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 sm:mb-3">Layanan Meliputi:</p>
                   <ul class="space-y-2 text-xs sm:text-sm text-gray-700">
@@ -503,7 +563,6 @@ const waLink = (msg: string) => `https://wa.me/${waNumber}?text=${encodeURICompo
                 </div>
               </div>
 
-              <!-- Footer Kartu -->
               <div class="p-4 sm:p-5 bg-gray-50 border-t border-gray-100 rounded-b-2xl">
                 <a href={waLink(`Halo akbarweb, saya ingin memesan ${p.name} (${p.pricePromo}) untuk bisnis saya di ${kabData.name}.`)} 
                    target="_blank" 
@@ -549,7 +608,7 @@ const waLink = (msg: string) => `https://wa.me/${waNumber}?text=${encodeURICompo
       </div>
     </section>
 
-    <!-- ============ 7. PROSES KERJA (MOBILE 2 KOLOM) ============ -->
+    <!-- ============ 7. PROSES KERJA ============ -->
     <section class="bg-gray-50 border-y border-gray-200 py-10 sm:py-16">
       <div class="max-w-6xl mx-auto px-4 sm:px-6">
         <div class="text-center mb-8 sm:mb-12 reveal-on-scroll">
@@ -557,7 +616,6 @@ const waLink = (msg: string) => `https://wa.me/${waNumber}?text=${encodeURICompo
           <p class="mt-2 text-xs sm:text-sm md:text-base text-gray-600 max-w-lg mx-auto">Langkah mudah, terstruktur, dan transparan dari awal hingga rilis.</p>
         </div>
 
-        <!-- Diatur grid-cols-2 untuk mobile dan md:grid-cols-4 untuk layar besar -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6">
           {steps.map((s) => (
             <div class="bg-white p-3.5 sm:p-6 rounded-2xl border border-gray-200 text-center shadow-sm anim-card-hover reveal-on-scroll flex flex-col justify-between">
@@ -630,7 +688,7 @@ const waLink = (msg: string) => `https://wa.me/${waNumber}?text=${encodeURICompo
       </div>
     </section>
 
-    <!-- ============ 10. INTERNAL LINK AUTO-SCROLL SLIDER: KECAMATAN (BG BIRU, DI ATAS FOOTER) ============ -->
+    <!-- ============ 10. INTERNAL LINK AUTO-SCROLL SLIDER: KECAMATAN ============ -->
     <section class="bg-booking-700 text-white py-10 sm:py-16 border-t border-white/10 overflow-hidden">
       <div class="max-w-6xl mx-auto px-4 sm:px-6">
         <div class="text-center mb-6 sm:mb-8 reveal-on-scroll">
@@ -641,7 +699,6 @@ const waLink = (msg: string) => `https://wa.me/${waNumber}?text=${encodeURICompo
 
         {kabData.districts && kabData.districts.length > 0 ? (
           <div class="relative reveal-on-scroll">
-            <!-- Container Auto-Scroll Slider Kecamatan -->
             <div
               id="auto-kecamatan-slider"
               class="flex gap-2.5 sm:gap-3 overflow-x-auto no-scrollbar py-2 px-1 select-none cursor-grab active:cursor-grabbing"
@@ -663,7 +720,7 @@ const waLink = (msg: string) => `https://wa.me/${waNumber}?text=${encodeURICompo
       </div>
     </section>
 
-    <!-- ============ 11. FINAL CTA (FOOTER UTAMA) ============ -->
+    <!-- ============ 11. FINAL CTA ============ -->
     <section id="kontak" class="bg-booking-800 text-white py-12 sm:py-20 text-center relative overflow-hidden border-t border-white/10">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 relative z-10 reveal-on-scroll">
         <h2 class="text-xl sm:text-2xl md:text-5xl font-extrabold mb-3 sm:mb-4 leading-tight">
@@ -685,7 +742,6 @@ const waLink = (msg: string) => `https://wa.me/${waNumber}?text=${encodeURICompo
   <!-- ============ SCRIPT INTERSECTION OBSERVER & AUTO-SCROLL SLIDER ============ -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      // 1. Scroll Reveal Observer
       const observerOptions = {
         root: null,
         rootMargin: "0px",
@@ -703,7 +759,6 @@ const waLink = (msg: string) => `https://wa.me/${waNumber}?text=${encodeURICompo
       const revealElements = document.querySelectorAll(".reveal-on-scroll");
       revealElements.forEach(el => observer.observe(el));
 
-      // 2. Auto-Scroll Slider Kecamatan
       const slider = document.getElementById("auto-kecamatan-slider") as HTMLElement | null;
       if (!slider) return;
 

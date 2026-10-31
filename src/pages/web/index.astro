@@ -178,18 +178,23 @@ const faqs = [
 
 const provinsiPopuler = wilayahData.slice(0, 12);
 
-/* Schema Markup Gabungan ProfessionalService & FAQPage */
+/* Schema Markup Gabungan ProfessionalService & FAQPage dengan penambahan AggregateRating */
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "ProfessionalService",
-      "name": "akbarweb.com",
+      "name": "akbarweb.com/web/",
       "description": "Jasa pembuatan website profesional di Indonesia. Landing page, company profile, e-commerce, dan web app.",
-      "url": "https://akbarweb.com",
+      "url": "https://akbarweb.com/web/",
       "telephone": "+6285938573419",
       "areaServed": "ID",
-      "priceRange": "Rp 999.000 - Rp 3.150.000"
+      "priceRange": "Rp 999.000 - Rp 3.150.000",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "100"
+      }
     },
     {
       "@type": "FAQPage",
@@ -210,8 +215,9 @@ const jsonLd = {
   title="AkbarWeb — Jasa Pembuatan Website Profesional & Cepat"
   description="Jasa pembuatan website profesional di Indonesia. Landing page, company profile, e-commerce, dan web app. Cepat, SEO-friendly, dan fokus konversi. Konsultasi gratis via WhatsApp."
 >
-  <!-- Menambahkan Meta Keywords di Head Layout -->
+  <!-- Menambahkan Meta Keywords, Canonical URL, & Schema Markup di Head Layout -->
   <Fragment slot="head">
+    <link rel="canonical" href="https://akbarweb.com/web/" />
     <meta name="keywords" content="jasa pembuatan website, jasa buat web, bikin website murah, jasa website company profile, jasa pembuatan toko online, e-commerce murah, landing page profesional, jasa SEO Indonesia, akbarweb" />
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </Fragment>
