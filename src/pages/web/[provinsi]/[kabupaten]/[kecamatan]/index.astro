@@ -40,10 +40,10 @@ export function getStaticPaths() {
 const { provinsi, kabupaten, kecamatan } = Astro.params;
 const { provData, kabData, kecData } = Astro.props;
 
-const keywordKecamatan = `Jasa buat web di Kecamatan ${kecData.name}`;
+const keywordKecamatan = `Jasa buat web di ${kecData.name}`;
 
 const content = {
-  headline: `Jasa Buat Web di ${kecData.name} — Website Profesional & Siap Konversi`,
+  headline: `Jasa Pembuatan Web di ${kecData.name} — Website Profesional & Siap Konversi`,
   subheadline: `Bantu usaha dan UMKM Anda di wilayah Kecamatan ${kecData.name}, ${kabData.name} tampil lebih profesional, tepercaya, dan gampang ditemukan di Google.`,
   highlightIndustry: ["UMKM & Toko Lokal", "Kuliner & Resto", "Jasa Perorangan", "Properti & Rental", "Pendidikan & Bimbel", "Bengkel & Otomotif"],
   whyUs: [
