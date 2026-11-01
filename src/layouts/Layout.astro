@@ -16,9 +16,11 @@ const {
 const navLinks = [
   { href: '/#hero', label: 'Beranda' },
   { href: '/#katalog', label: 'Katalog Produk' },
+  { href: '/kawasan/', label: 'Kawasan' },
   { href: '/blog', label: 'Blog' },
   { href: '/about', label: 'Tentang Kami' },
   { href: '/layanan', label: 'Layanan' },
+  { href: '/syarat-ketentuan', label: 'Syarat & Ketentuan' },
   { href: '/#faq', label: 'FAQ' },
 ];
 ---
@@ -65,9 +67,8 @@ const navLinks = [
         id="header-container"
         class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-2 transition-all duration-300 ease-in-out h-20 md:h-24"
       >
-        <!-- BRAND / TEKS KEREN (Pengganti Logo Gambar) -->
+        <!-- BRAND / TEKS BRAND -->
         <a href="/" class="flex items-center gap-2 md:gap-3 shrink-0 group">
-          <!-- Ikon Daun Premium -->
           <div class="relative flex items-center justify-center w-10 h-10 md:w-12 md:h-12 bg-white/10 rounded-xl md:rounded-2xl border border-white/20 shadow-inner group-hover:bg-white/20 transition-all">
             <svg class="w-6 h-6 md:w-7 md:h-7 text-amber-300 drop-shadow-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
@@ -75,7 +76,6 @@ const navLinks = [
             </svg>
           </div>
           
-          <!-- Teks Brand -->
           <div class="flex flex-col justify-center">
             <span class="text-xl md:text-2xl font-extrabold tracking-tight text-white leading-none">
               Green<span class="text-amber-300">Fresh</span>
@@ -166,7 +166,6 @@ const navLinks = [
 
           <!-- Brand Footer -->
           <div class="md:col-span-5 flex items-start gap-3">
-            <!-- Teks Keren untuk Footer -->
             <div class="flex flex-col justify-center shrink-0">
               <span class="text-xl font-extrabold tracking-tight text-white leading-none">
                 Green<span class="text-emerald-400">Fresh</span>
@@ -183,7 +182,7 @@ const navLinks = [
             </div>
           </div>
 
-          <!-- Navigasi -->
+          <!-- Navigasi Utama (Grid 2 Kolom) -->
           <nav class="md:col-span-4" aria-label="Footer navigation">
             <h3 class="text-white font-extrabold text-xs uppercase tracking-widest mb-4">Navigasi</h3>
             <ul class="grid grid-cols-2 gap-y-2.5 gap-x-6 text-xs">
@@ -197,9 +196,9 @@ const navLinks = [
             </ul>
           </nav>
 
-          <!-- Kontak -->
+          <!-- Kontak Resmi -->
           <div class="md:col-span-3">
-            <h3 class="text-white font-extrabold text-xs uppercase tracking-widest mb-4">Kontak</h3>
+            <h3 class="text-white font-extrabold text-xs uppercase tracking-widest mb-4">Kontak Resmi</h3>
             <ul class="space-y-2.5 text-xs">
               <li class="flex items-start gap-2">
                 <svg class="w-4 h-4 mt-0.5 text-emerald-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
@@ -228,14 +227,20 @@ const navLinks = [
           </div>
         </div>
 
+        <!-- BOTTOM COPYRIGHT BAR (Tautan Jasa Web Disisipkan di Sini) -->
         <div class="pt-6 flex flex-col sm:flex-row justify-between items-center gap-3">
           <p class="text-xs text-slate-500 text-center sm:text-left">
             © {new Date().getFullYear()} CV Green Fresh Cipanas. All rights reserved.
           </p>
-          <p class="text-[11px] text-slate-600 text-center sm:text-right">
-            Supplier Sayur B2B · Grade A · Termin 7 Hari
-          </p>
+          <div class="flex items-center gap-3 text-[11px] text-slate-500">
+            <span>Supplier Sayur B2B · Grade A · Termin 7 Hari</span>
+            <span class="text-slate-700">•</span>
+            <a href="/web/" class="text-slate-400 hover:text-amber-400 transition-colors underline underline-offset-2">
+              Jasa Web
+            </a>
+          </div>
         </div>
+
       </div>
     </footer>
 
@@ -269,14 +274,13 @@ const navLinks = [
         if (window.innerWidth >= 768) setMenuState(false);
       });
 
-      // ---------- 2. Scroll Shrink (Hanya Header Height) ----------
+      // ---------- 2. Scroll Shrink Header ----------
       const header = document.getElementById('main-header');
       const container = document.getElementById('header-container');
 
       const onScroll = () => {
         const scrolled = window.scrollY > 20;
 
-        // Karena sekarang pakai teks, ukuran header bisa lebih ringkas
         if (container) {
           container.style.height = scrolled
             ? (window.innerWidth >= 768 ? '72px' : '64px')
@@ -303,12 +307,12 @@ const navLinks = [
     font-family: 'Plus Jakarta Sans', sans-serif;
   }
 
-  /* ====== HEADER GRADIENT (normal) ====== */
+  /* ====== HEADER GRADIENT ====== */
   .header-gradient {
     background: linear-gradient(135deg, #065f46 0%, #047857 45%, #0d9488 100%);
   }
 
-  /* ====== HEADER SAAT SCROLL (lebih pekat + glow) ====== */
+  /* ====== HEADER SAAT SCROLL ====== */
   .header-gradient.header-scrolled {
     background: linear-gradient(135deg, #022c22 0%, #064e3b 45%, #0f766e 100%);
     box-shadow: 0 8px 28px -4px rgba(4, 120, 87, 0.55), 0 2px 8px rgba(0, 0, 0, 0.25);
