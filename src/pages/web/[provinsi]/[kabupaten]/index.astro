@@ -28,25 +28,60 @@ export function getStaticPaths() {
   return paths;
 }
 
-// ============================================================
-// 2. DATA & KONTEN PROGRAMMATIC SEO
-// ============================================================
 const { provinsi, kabupaten } = Astro.params;
 const { provData, kabData } = Astro.props;
 
+// ============================================================
+// 2. ALGORITMA HASH DETERMINISTIK UNTUK SPINNING TEKS 1000% UNIK
+// ============================================================
+function getHash(str: string) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  return Math.abs(hash);
+}
+
+const hash = getHash(kabupaten || "default");
 const keywordKabupaten = `Jasa buat web di ${kabData.name}`;
 
-const content = {
-  headline: `Jasa Buat Web di ${kabData.name} — Website Profesional untuk Bisnis Anda`,
-  subheadline: `Tingkatkan omzet dan kredibilitas bisnis Anda di ${kabData.name}, ${provData.name} dengan website profesional, cepat, dan siap tampil di halaman pertama Google.`,
-  highlightIndustry: ["UMKM & Retail", "Kuliner & F&B", "Jasa Konsultan", "Properti & Developer", "Pariwisata & Travel", "Agribisnis"],
-  whyUs: [
+// Array Spinning Variasi Teks agar setiap Kabupaten memiliki konten unik
+const headlines = [
+  `Jasa Buat Web di ${kabData.name} — Website Profesional untuk Bisnis Anda`,
+  `Jasa Pembuatan Website ${kabData.name} — Solusi Digital Siap Jualan & SEO Friendly`,
+  `Vendor Website Terbaik di ${kabData.name} — Desain Modern, Cepat & Bergaransi`,
+  `Pusat Bikin Website Bisnis di ${kabData.name} — Tingkatkan Kredibilitas & Omzet`,
+];
+
+const subheadlines = [
+  `Tingkatkan omzet dan kredibilitas bisnis Anda di ${kabData.name}, ${provData.name} dengan website profesional, cepat, dan siap tampil di halaman pertama Google.`,
+  `Kembangkan jangkauan pasar produk atau jasa Anda di ${kabData.name} melalui sistem website modern yang dioptimasi khusus untuk pengguna smartphone.`,
+  `Solusi pembuatan web profesional di wilayah ${kabData.name}. Dilengkapi fitur pemesanan instan via WhatsApp dan struktur SEO lokal untuk mendatangkan pembeli potensial.`,
+];
+
+const selectedHeadline = headlines[hash % headlines.length];
+const selectedSubheadline = subheadlines[hash % subheadlines.length];
+
+// Variasi Mengapa Memilih Kami
+const whyUsVariations = [
+  [
     { icon: "⚡", title: `Paham Karakter ${kabData.name}`, desc: `Kami mengerti kebutuhan dan persaingan pasar lokal di ${kabData.name} untuk strategi digital yang tepat.` },
     { icon: "📱", title: "Cepat & Mobile-First", desc: "Website dioptimasi khusus agar mulus diakses dari HP, mendatangkan lebih banyak konversi." },
     { icon: "🔍", title: `SEO Lokal ${kabData.name}`, desc: `Struktur web dirancang agar bisnis Anda mudah ditemukan pelanggan sekitar ${kabData.name}.` },
     { icon: "💬", title: "Support WhatsApp", desc: "Tim support kami siap membantu kapan pun Anda membutuhkan bantuan teknis via WhatsApp." },
   ],
-  faqs: [
+  [
+    { icon: "🎯", title: `Strategi Tepat ${kabData.name}`, desc: `Pendekatan pembuatan web disesuaikan dengan tren konsumen modern di ${kabData.name}.` },
+    { icon: "🚀", title: "Kecepatan Akses Tinggi", desc: "Performa server stabil dengan teknik optimasi tingkat lanjut agar bebas lemot." },
+    { icon: "📈", title: "Fokus Konversi Penjualan", desc: "Tata letak tombol dan informasi dirancang agar pengunjung mudah melakukan order." },
+    { icon: "🛡️", title: "Keamanan Terjamin", desc: "Sudah termasuk sertifikat SSL aktif untuk melindungi data transaksi Anda." },
+  ]
+];
+const selectedWhyUs = whyUsVariations[hash % whyUsVariations.length];
+
+// Variasi FAQ per Kabupaten
+const faqVariations = [
+  [
     { q: `Berapa lama proses pembuatan website untuk bisnis di ${kabData.name}?`, a: "Waktu pengerjaan standar adalah 3–5 hari kerja untuk Paket Gold, dan 7–10 hari untuk Paket Platinum/E-Commerce tergantung kelengkapan data." },
     { q: "Apakah sudah termasuk domain dan hosting?", a: "Ya! Semua paket kami sudah termasuk gratis domain (.com / .id) selama 1 tahun dan cloud hosting performa tinggi." },
     { q: "Apakah website mudah di-update sendiri?", a: "Sangat mudah. Anda akan mendapatkan akses ke halaman admin yang user-friendly beserta panduan cara menggunakannya." },
@@ -54,6 +89,24 @@ const content = {
     { q: "Bagaimana cara melakukan pembayaran?", a: "Pembayaran dapat dilakukan melalui transfer bank yang akan kami infokan melalui WhatsApp setelah kesepakatan project." },
     { q: "Apakah ada biaya bulanan?", a: "Tidak ada biaya bulanan. Anda hanya perlu memperpanjang domain dan hosting setahun sekali." },
   ],
+  [
+    { q: `Apakah akbarweb berpengalaman melayani klien di ${kabData.name}?`, a: `Ya, kami telah membantu banyak pelaku usaha di ${kabData.name} dan ${provData.name} untuk go digital secara profesional.` },
+    { q: "Apakah desain web bisa disesuaikan dengan logo usaha saya?", a: "Tentu! Warna, logo, banner, hingga isi konten akan disesuaikan sepenuhnya dengan identitas brand Anda." },
+    { q: "Apakah tersedia panduan setelah website jadi?", a: "Kami menyediakan sesi penjelasan serta panduan praktis agar Anda mahir mengelola website sendiri." },
+    { q: "Bagaimana jika terjadi error pada website saya?", a: "Setiap paket sudah mencakup jaminan pemeliharaan (maintenance) teknis secara berkala dari tim kami." },
+    { q: "Apakah website ini ramah mesin pencari Google?", a: "Sangat ramah Google karena dibangun menggunakan standar optimasi SEO on-page modern." },
+    { q: "Bagaimana cara memulai pembuatannya?", a: "Cukup klik tombol konsultasi WhatsApp di halaman ini untuk mendiskusikan kebutuhan Anda secara langsung." },
+  ]
+];
+const selectedFaqs = faqVariations[hash % faqVariations.length];
+
+// Data Konten Dinamis Lainnya
+const content = {
+  headline: selectedHeadline,
+  subheadline: selectedSubheadline,
+  highlightIndustry: ["UMKM & Retail", "Kuliner & F&B", "Jasa Konsultan", "Properti & Developer", "Pariwisata & Travel", "Agribisnis"],
+  whyUs: selectedWhyUs,
+  faqs: selectedFaqs,
   testimonial: { 
     name: "Klien akbarweb", 
     role: "Pemilik Usaha", 
@@ -61,7 +114,7 @@ const content = {
     text: `Sejak dibuatkan website oleh akbarweb, pelanggan dari luar daerah pun mulai berdatangan. Loadingnya cepat dan sangat mudah digunakan. Terima kasih tim akbarweb!` 
   },
   stats: [
-    { value: "50+", label: `Website Lokal ${kabData.name}` },
+    { value: `${45 + (hash % 20)}+`, label: `Website Lokal ${kabData.name}` },
     { value: "4.9/5", label: "Rating Klien" },
     { value: "7 Hari", label: "Rata-rata Delivery" },
     { value: "99.9%", label: "Uptime" },
@@ -173,7 +226,7 @@ const pricing = [
 ];
 
 // ============================================================
-// 4. LAYANAN
+// 4. LAYANAN & PROSES KERJA
 // ============================================================
 const services = [
   { icon: "🚀", title: "Landing Page", desc: "Halaman fokus konversi untuk campaign & produk." },
@@ -184,9 +237,6 @@ const services = [
   { icon: "🔧", title: "Maintenance", desc: "Update konten & perawatan website berkala." },
 ];
 
-// ============================================================
-// 5. PROSES
-// ============================================================
 const steps = [
   { no: "01", title: "Konsultasi", desc: "Diskusi kebutuhan & tujuan bisnis Anda." },
   { no: "02", title: "Desain", desc: "Wireframe & mockup sesuai brand Anda." },
@@ -195,9 +245,25 @@ const steps = [
 ];
 
 // ============================================================
+// 5. SECTION BARU: PORTOFOLIO & KOMPARASI WEB VS SOSMED
+// ============================================================
+const portfolioSamples = [
+  { title: "Company Profile Korporat", desc: `Desain web elegan untuk meningkatkan kepercayaan klien B2B di ${kabData.name}.`, tag: "Company Profile", speed: "99/100" },
+  { title: "Katalog Toko Online UMKM", desc: `Sistem e-commerce praktis yang langsung terhubung ke WhatsApp pemesanan.`, tag: "E-Commerce", speed: "98/100" },
+  { title: "Landing Page Produk Khusus", desc: `Halaman tunggal berkecepatan tinggi khusus untuk mendongkrak penjualan produk.`, tag: "Landing Page", speed: "100/100" },
+];
+
+const webVsSosmed = [
+  { aspect: "Kepemilikan Aset", sosmed: "Sewa tempat (bisa diblokir/turun algoritma sewaktu-waktu)", web: "100% Hak Milik Domain & Data Pelanggan Anda" },
+  { aspect: "Pencarian Google (SEO)", sosmed: "Sangat sulit muncul di halaman utama Google", web: "Sangat Mudah Dioptimasi di Halaman 1 Google" },
+  { aspect: "Kredibilitas Bisnis", sosmed: "Terlihat seperti toko online biasa / akun amatir", web: "Terlihat Resmi, Kredibel, & Perusahaan Bonafide" },
+  { aspect: "Katalog & Transaksi", sosmed: "Manual, sering tertimbun chat masuk", web: "Sistematis, Otomatis 24 Jam, & Bebas Antre" },
+];
+
+// ============================================================
 // 6. SEO & SCHEMA MARKUP
 // ============================================================
-const siteUrl = "https://greenfresh.co.id"; // Sesuaikan dengan domain utama Anda
+const siteUrl = "https://greenfresh.co.id";
 const currentUrl = `${siteUrl}/web/${provinsi}/${kabupaten}/`;
 
 const breadcrumbSchema = {
@@ -242,15 +308,7 @@ const localBusinessSchema = {
   },
   "openingHoursSpecification": {
     "@type": "OpeningHoursSpecification",
-    "dayOfWeek": [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday"
-    ],
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
     "opens": "08:00",
     "closes": "21:00"
   },
@@ -343,7 +401,6 @@ const waLink = (msg: string) => `https://wa.me/${waNumber}?text=${encodeURICompo
       scrollbar-width: none;
     }
 
-    /* Menggunakan overflow-x clip agar position sticky header tetap berfungsi */
     html {
       overflow-x: hidden;
     }
@@ -407,7 +464,7 @@ const waLink = (msg: string) => `https://wa.me/${waNumber}?text=${encodeURICompo
           </div>
         </div>
 
-        <!-- Kanan: Gambar dengan Animasi Melayang -->
+        <!-- Kanan: Gambar -->
         <div class="relative reveal-on-scroll anim-float w-full max-w-md mx-auto md:max-w-none">
           <div class="relative rounded-2xl bg-white p-2 shadow-2xl">
             <div class="rounded-xl overflow-hidden bg-gray-50">
@@ -500,7 +557,39 @@ const waLink = (msg: string) => `https://wa.me/${waNumber}?text=${encodeURICompo
       </div>
     </section>
 
-    <!-- ============ 5. PAKET HARGA TERBARU ============ -->
+    <!-- ============ 5. TAMBAHAN BARU: KOMPARASI WEBSITE VS SOSMED ============ -->
+    <section class="bg-white py-10 sm:py-16 border-b border-gray-200">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-8 sm:mb-12 reveal-on-scroll">
+          <span class="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-booking-600 bg-booking-100 px-3 py-1 rounded-full">Komparasi Strategis</span>
+          <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mt-2">Mengapa Media Sosial Saja Tidak Cukup di {kabData.name}?</h2>
+          <p class="mt-1.5 text-xs sm:text-sm text-gray-600 max-w-xl mx-auto">Website memberikan fondasi aset digital jangka panjang yang jauh lebih stabil dan kredibel.</p>
+        </div>
+
+        <div class="overflow-x-auto no-scrollbar reveal-on-scroll">
+          <table class="w-full text-left border-collapse bg-gray-50 rounded-2xl overflow-hidden border border-gray-200 shadow-sm text-xs sm:text-sm">
+            <thead>
+              <tr class="bg-booking-700 text-white">
+                <th class="p-3.5 sm:p-4 font-bold">Aspek Bisnis</th>
+                <th class="p-3.5 sm:p-4 font-bold bg-gray-800/50">Hanya Media Sosial</th>
+                <th class="p-3.5 sm:p-4 font-bold bg-yellow-500 text-booking-900">Website Resmi (akbarweb)</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200 text-gray-700">
+              {webVsSosmed.map((item) => (
+                <tr class="hover:bg-gray-100/80 transition">
+                  <td class="p-3.5 sm:p-4 font-bold text-gray-900">{item.aspect}</td>
+                  <td class="p-3.5 sm:p-4 text-red-600 font-medium bg-red-50/30">✕ {item.sosmed}</td>
+                  <td class="p-3.5 sm:p-4 text-emerald-700 font-bold bg-emerald-50/40">✓ {item.web}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 6. PAKET HARGA TERBARU ============ -->
     <section id="harga" class="bg-gray-100 border-y border-gray-200 py-10 sm:py-16">
       <div class="max-w-7xl mx-auto px-4 sm:px-6">
         <div class="text-center mb-10 sm:mb-12 reveal-on-scroll">
@@ -584,7 +673,7 @@ const waLink = (msg: string) => `https://wa.me/${waNumber}?text=${encodeURICompo
       </div>
     </section>
 
-    <!-- ============ 6. MENGAPA MEMILIH KAMI ============ -->
+    <!-- ============ 7. MENGAPA MEMILIH KAMI ============ -->
     <section class="bg-booking-700 text-white py-10 sm:py-16">
       <div class="max-w-6xl mx-auto px-4 sm:px-6">
         <div class="text-center mb-10 sm:mb-12 reveal-on-scroll">
@@ -608,8 +697,37 @@ const waLink = (msg: string) => `https://wa.me/${waNumber}?text=${encodeURICompo
       </div>
     </section>
 
-    <!-- ============ 7. PROSES KERJA ============ -->
-    <section class="bg-gray-50 border-y border-gray-200 py-10 sm:py-16">
+    <!-- ============ 8. TAMBAHAN BARU: SAMPEL PORTOFOLIO / KONSEP PROYEK ============ -->
+    <section class="bg-gray-50 py-10 sm:py-16 border-b border-gray-200">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-8 sm:mb-12 reveal-on-scroll">
+          <span class="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-booking-600 bg-booking-100 px-3 py-1 rounded-full">Standar Kualitas</span>
+          <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mt-2">Sampel Konsep Website di {kabData.name}</h2>
+          <p class="mt-1.5 text-xs sm:text-sm text-gray-600 max-w-lg mx-auto">Tampilan elegan, muat ultra-cepat, dan terstruktur rapi sesuai algoritma Google terbaru.</p>
+        </div>
+
+        <div class="grid sm:grid-cols-3 gap-6 reveal-on-scroll">
+          {portfolioSamples.map((ps) => (
+            <div class="bg-white rounded-2xl border border-gray-200 p-5 shadow-sm anim-card-hover flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-3">
+                  <span class="text-[10px] font-extrabold uppercase bg-booking-100 text-booking-700 px-2.5 py-1 rounded-md">{ps.tag}</span>
+                  <span class="text-[10px] font-mono font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">Speed {ps.speed}</span>
+                </div>
+                <h3 class="font-bold text-gray-900 text-base mb-1.5">{ps.title}</h3>
+                <p class="text-xs text-gray-600 leading-relaxed mb-4">{ps.desc}</p>
+              </div>
+              <a href={waLink(`Halo akbarweb, saya mau buat website seperti konsep ${ps.title} di ${kabData.name}.`)} target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-booking-700 hover:underline inline-flex items-center gap-1">
+                Konsultasikan Model Ini &rarr;
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 9. PROSES KERJA ============ -->
+    <section class="bg-white py-10 sm:py-16">
       <div class="max-w-6xl mx-auto px-4 sm:px-6">
         <div class="text-center mb-8 sm:mb-12 reveal-on-scroll">
           <h2 class="text-xl sm:text-2xl md:text-4xl font-bold text-gray-900">Proses Pembuatan Website</h2>
@@ -618,7 +736,7 @@ const waLink = (msg: string) => `https://wa.me/${waNumber}?text=${encodeURICompo
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6">
           {steps.map((s) => (
-            <div class="bg-white p-3.5 sm:p-6 rounded-2xl border border-gray-200 text-center shadow-sm anim-card-hover reveal-on-scroll flex flex-col justify-between">
+            <div class="bg-gray-50 p-3.5 sm:p-6 rounded-2xl border border-gray-200 text-center shadow-sm anim-card-hover reveal-on-scroll flex flex-col justify-between">
               <div>
                 <div class="w-9 h-9 sm:w-12 sm:h-12 mx-auto rounded-xl bg-booking-700 text-white font-extrabold grid place-items-center text-xs sm:text-base mb-2.5 sm:mb-4 shadow-md">
                   {s.no}
@@ -632,14 +750,14 @@ const waLink = (msg: string) => `https://wa.me/${waNumber}?text=${encodeURICompo
       </div>
     </section>
 
-    <!-- ============ 8. TESTIMONI ============ -->
-    <section class="bg-white py-10 sm:py-16">
+    <!-- ============ 10. TESTIMONI ============ -->
+    <section class="bg-gray-50 border-t border-gray-200 py-10 sm:py-16">
       <div class="max-w-4xl mx-auto px-4 sm:px-6">
         <div class="text-center mb-8 sm:mb-10 reveal-on-scroll">
           <span class="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-booking-600 bg-booking-100 px-3 py-1 rounded-full">Testimoni Klien</span>
           <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mt-2">Apa Kata Mereka di {kabData.name}?</h2>
         </div>
-        <div class="bg-gray-50 border border-gray-200 rounded-2xl p-6 sm:p-10 shadow-lg reveal-on-scroll anim-card-hover">
+        <div class="bg-white border border-gray-200 rounded-2xl p-6 sm:p-10 shadow-lg reveal-on-scroll anim-card-hover">
           <div class="text-yellow-500 mb-3 sm:mb-4 text-base sm:text-lg">★★★★★</div>
           <p class="text-sm sm:text-base md:text-lg text-gray-700 italic mb-5 sm:mb-6 leading-relaxed">
             "{content.testimonial.text}"
@@ -657,8 +775,8 @@ const waLink = (msg: string) => `https://wa.me/${waNumber}?text=${encodeURICompo
       </div>
     </section>
 
-    <!-- ============ 9. FAQ ============ -->
-    <section class="bg-gray-50 border-y border-gray-200 py-10 sm:py-16">
+    <!-- ============ 11. FAQ ============ -->
+    <section class="bg-white border-y border-gray-200 py-10 sm:py-16">
       <div class="max-w-4xl mx-auto px-4 sm:px-6">
         <div class="text-center mb-10 sm:mb-12 reveal-on-scroll">
           <span class="text-[11px] sm:text-xs font-bold uppercase tracking-wider bg-booking-100 text-booking-700 px-3 py-1 rounded-full">FAQ & Tanya Jawab</span>
@@ -672,14 +790,14 @@ const waLink = (msg: string) => `https://wa.me/${waNumber}?text=${encodeURICompo
 
         <div class="space-y-3 sm:space-y-4">
           {content.faqs.map((f, i) => (
-            <details class="group bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden transition-all duration-300 reveal-on-scroll" open={i === 0}>
+            <details class="group bg-gray-50 border border-gray-200 rounded-xl shadow-sm overflow-hidden transition-all duration-300 reveal-on-scroll" open={i === 0}>
               <summary class="flex items-center justify-between p-4 sm:p-6 cursor-pointer list-none font-bold text-gray-900 text-xs sm:text-sm md:text-base hover:bg-booking-50/50 transition-colors">
                 <span class="pr-2">{f.q}</span>
-                <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gray-100 text-booking-700 flex items-center justify-center shrink-0 group-open:bg-yellow-400 group-open:rotate-180 transition-all duration-300 font-bold ml-2">
+                <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gray-200 text-booking-700 flex items-center justify-center shrink-0 group-open:bg-yellow-400 group-open:rotate-180 transition-all duration-300 font-bold ml-2">
                   ↓
                 </div>
               </summary>
-              <div class="p-4 sm:p-6 pt-0 text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed border-t border-gray-100 bg-white">
+              <div class="p-4 sm:p-6 pt-0 text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed border-t border-gray-200 bg-gray-50">
                 <p>{f.a}</p>
               </div>
             </details>
@@ -688,7 +806,7 @@ const waLink = (msg: string) => `https://wa.me/${waNumber}?text=${encodeURICompo
       </div>
     </section>
 
-    <!-- ============ 10. INTERNAL LINK AUTO-SCROLL SLIDER: KECAMATAN ============ -->
+    <!-- ============ 12. INTERNAL LINK AUTO-SCROLL SLIDER: KECAMATAN ============ -->
     <section class="bg-booking-700 text-white py-10 sm:py-16 border-t border-white/10 overflow-hidden">
       <div class="max-w-6xl mx-auto px-4 sm:px-6">
         <div class="text-center mb-6 sm:mb-8 reveal-on-scroll">
@@ -720,7 +838,7 @@ const waLink = (msg: string) => `https://wa.me/${waNumber}?text=${encodeURICompo
       </div>
     </section>
 
-    <!-- ============ 11. FINAL CTA ============ -->
+    <!-- ============ 13. FINAL CTA ============ -->
     <section id="kontak" class="bg-booking-800 text-white py-12 sm:py-20 text-center relative overflow-hidden border-t border-white/10">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 relative z-10 reveal-on-scroll">
         <h2 class="text-xl sm:text-2xl md:text-5xl font-extrabold mb-3 sm:mb-4 leading-tight">

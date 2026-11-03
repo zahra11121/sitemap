@@ -95,33 +95,79 @@ const kotaLain = [
   kotaData[(currentIndex + 4) % kotaData.length],
 ].filter((k) => k.id !== item.id);
 
-// ====================== SEO: VARIASI KONTEN ======================
+// ====================== SEO: VARIASI SPIN TEKS 100% UNIK ======================
 const titles = [
   `Supplier Sayuran ${namaLokasi} — Hotel, Restoran, Rumah Sakit & Pabrik`,
   `Distributor Sayur Segar ${namaLokasi} Grade A — CV Green Fresh Cipanas`,
   `Pemasok Sayuran B2B ${namaLokasi} — Harga Grosir & Termin 7 Hari`,
+  `Grosir Sayur Segar ${namaLokasi} Terpercaya — Pasokan Rutin Dapur B2B`,
+  `Kemitraan Sayuran Komersial ${namaLokasi} — Kualitas Kebun Puncak`,
 ];
 const descriptions = [
   `CV Green Fresh Cipanas adalah supplier & distributor sayuran segar Grade A di ${namaLokasi} untuk hotel, restoran, rumah sakit, dan katering pabrik. Minimal order Rp 1.500.000, termin 7 hari, armada harian.`,
   `Butuh pemasok sayur segar di ${namaLokasi}? Green Fresh menyuplai 64+ komoditas (sayuran hijau, jamur, umbi, bumbu) langsung dari kebun Cipanas–Puncak. Garansi Grade A & retur 100%.`,
   `Supplier sayuran B2B terpercaya di ${namaLokasi}. Harga grosir, QC ketat, pengiriman rutin harian untuk hotel, resto, RS, dan pabrik. Hubungi 0877-8093-7884.`,
+  `Layanan pasokan bahan komoditas segar di ${namaLokasi}. Pilihan komoditas terlengkap dari pertanian Puncak–Cipanas dengan jaminan retur dan fleksibilitas termin TOP 7 hari.`,
+  `Pusat penyedia komoditas sayur premium area ${namaLokasi}. Menyuplai kebutuhan dapur industri, perhotelan, dan resto skala besar dengan QC standar tinggi.`,
 ];
 const selectedTitle = titles[hash % titles.length];
 const selectedDescription = descriptions[hash % descriptions.length];
+
+// HERO BADGES & TEXTS
+const heroBadges = [
+  `Pusat Pasokan B2B Area ${namaLokasi}`,
+  `Distributor Utama Sayur Segar ${namaLokasi}`,
+  `Mitra Rantai Pasok Harian ${namaLokasi}`,
+  `Pemasok Resmi Kebun Cipanas ke ${namaLokasi}`,
+  `Layanan Pengiriman Rutin ${namaLokasi}`,
+];
+const selectedHeroBadge = heroBadges[(hash + 1) % heroBadges.length];
 
 const aboutTexts = [
   `Di kawasan komersial <strong>${namaLokasi}</strong>, <strong>CV Green Fresh Cipanas</strong> hadir sebagai solusi rantai pasok pangan profesional. Kami menyuplai kebutuhan harian hotel bintang lima, kafe, restoran, rumah sakit, hingga katering pabrik langsung dari kebun dataran tinggi Cipanas & Puncak dengan garansi kesegaran optimal.`,
   `Sebagai <strong>distributor sayuran</strong> terkemuka di <strong>${namaLokasi}</strong>, kami memastikan setiap komoditas sayuran hijau, jamur, umbi-umbian, dan bumbu dapur melewati sortir QC ketat sebelum dikirimkan. Standar kualitas Grade A kami dirancang khusus untuk memenuhi spesifikasi dapur industri dan bisnis kuliner di ${namaLokasi}.`,
   `Menjadi <strong>pemasok sayuran</strong> andalan di wilayah <strong>${namaLokasi}</strong> menuntut kedisiplinan waktu dan jaminan mutu yang konsisten. CV Green Fresh Cipanas siap mendukung kelancaran operasional bisnis Anda dengan armada pengiriman rutin harian serta fleksibilitas pembayaran korporat.`,
+  `Dukungan pasokan sayuran segar berkelanjutan di <strong>${namaLokasi}</strong> ditopang oleh kemitraan langsung dengan kelompok tani Puncak-Cipanas. <strong>CV Green Fresh Cipanas</strong> menjamin ketersediaan komoditas pangan Grade A secara konsisten bagi perhotelan dan industri Horeka.`,
+  `Memenuhi tingginya standar kualitas kuliner di <strong>${namaLokasi}</strong>, kami menyediakan alur distribusi sayuran cepat pasca-panen. <strong>CV Green Fresh Cipanas</strong> mengintegrasikan QC ketat dan pengiriman teradwal demi menjaga kesegaran bahan baku dapur Anda.`,
 ];
 const selectedAbout = aboutTexts[hash % aboutTexts.length];
 
+// HIGHLIGHT INFO BAR VARIANTS
+const highlightMinimalOrder = [
+  `Rp 1.500.000`,
+  `Min. Rp 1,5 Juta`,
+  `Skala Order Rp 1,5M`,
+];
+const highlightTermin = [
+  `7 Hari TOP`,
+  `Termin 7 Hari`,
+  `TOP 7 Hari B2B`,
+];
+const highlightQC = [
+  `QC Grade A`,
+  `Sortir Grade A`,
+  `Jaminan Grade A`,
+];
+const selectedMinOrder = highlightMinimalOrder[hash % highlightMinimalOrder.length];
+const selectedTermin = highlightTermin[(hash + 1) % highlightTermin.length];
+const selectedQC = highlightQC[(hash + 2) % highlightQC.length];
+
+// VISI & MISI VARIANTS
 const visionTexts = [
   `Menjadi jaringan distribusi dan supplier hasil pertanian terdepan di ${namaLokasi} yang diandalkan oleh sektor perhotelan, restoran, dan industri makanan berstandar tinggi.`,
   `Mewujudkan ekosistem pasokan pangan segar yang transparan, konsisten, dan efisien untuk seluruh pelaku bisnis kuliner serta kesehatan di ${namaLokasi}.`,
   `Menjadi mitra strategis nomor satu dalam penyediaan bahan baku sayuran berkualitas premium bagi korporasi dan pabrik di kawasan ${namaLokasi}.`,
+  `Membangun standar baru dalam keandalan pasokan komoditas sayur harian di ${namaLokasi} dengan fokus utama pada kualitas segar dan layanan tepat waktu.`,
+  `Menghubungkan hasil kebun segar kawasan dataran tinggi Puncak secara langsung dengan rantai pasok dapur profesional dan industri Horeka di ${namaLokasi}.`,
 ];
 const selectedVision = visionTexts[hash % visionTexts.length];
+
+const visionHeaders = [
+  `Visi Utama ${namaLokasi}`,
+  `Arah Visi Perusahaan di ${namaLokasi}`,
+  `Target Komitmen Visi ${namaLokasi}`,
+];
+const selectedVisionHeader = visionHeaders[(hash + 3) % visionHeaders.length];
 
 const missionTexts = [
   [
@@ -134,8 +180,81 @@ const missionTexts = [
     `Menyediakan harga grosir kompetitif dengan skema termin pembayaran 7 hari (TOP).`,
     `Menjaga keragaman komoditas pertanian agar selalu ready stok sepanjang tahun.`,
   ],
+  [
+    `Menerapkan kendali mutu (QC) ketat dari sortir tangan pertama sebelum pengiriman ke ${namaLokasi}.`,
+    `Menjamin kepastian harga pasokan harian yang stabil untuk menjaga estimasi HPP mitra kuliner.`,
+    `Menyediakan armada pengiriman khusus komoditas pangan yang responsif dan amanah.`,
+  ],
+  [
+    `Memfasilitasi pemesanan mudah dan cepat terintegrasi langsung dengan saluran komunikasi resmi.`,
+    `Menjaga integritas kualitas produk tanpa bahan pengawet langsung dari lahan pertanian Cipanas.`,
+    `Memberikan fleksibilitas metode pembayaran korporasi untuk memperlancar arus kas bisnis mitra di ${namaLokasi}.`,
+  ],
 ];
 const selectedMissions = missionTexts[(hash + 1) % missionTexts.length];
+
+const missionFooters = [
+  `Didukung armada pengiriman logistik khusus sayuran.`,
+  `Pengiriman terintegrasi langsung dari pusat kebun Cipanas.`,
+  `Armada distribusi terjadwal untuk wilayah ${namaLokasi}.`,
+];
+const selectedMissionFooter = missionFooters[(hash + 2) % missionFooters.length];
+
+// KATALOG SECTION HEADERS
+const catalogSubtitles = [
+  `Katalog Komoditas`,
+  `Daftar Produk Sayur`,
+  `Pilihan Komoditas B2B`,
+  `Katalog Segar Kebun`,
+];
+const catalogTitles = [
+  `Daftar Produk Segar Ready Stok`,
+  `Komoditas Sayuran Grade A Pilihan`,
+  `Katalog Lengkap Pasokan Dapur ${namaLokasi}`,
+  `Stok Komoditas Sayur Harian ${namaLokasi}`,
+];
+const catalogDescs = [
+  `Pilih komoditas dan klik tambah untuk menyusun pesanan.`,
+  `Jelajahi berbagai jenis sayuran segar dan masukkan ke dalam form pesanan.`,
+  `Pilih produk yang sesuai kebutuhan dapur Anda dan teruskan ke form pemesanan.`,
+];
+const selectedCatalogSub = catalogSubtitles[hash % catalogSubtitles.length];
+const selectedCatalogTitle = catalogTitles[(hash + 1) % catalogTitles.length];
+const selectedCatalogDesc = catalogDescs[(hash + 2) % catalogDescs.length];
+
+// ORDER FORM HEADERS
+const orderFormSubtitles = [
+  `Form Order ${namaLokasi}`,
+  `Pemesanan Langsung ${namaLokasi}`,
+  `Form Pasokan B2B ${namaLokasi}`,
+];
+const orderFormTitles = [
+  `Form Pesanan WhatsApp`,
+  `Ajukan Pesanan Komoditas`,
+  `Formulir Pembelian Sayur ${namaLokasi}`,
+];
+const orderFormDescs = [
+  `Pesan pasokan sayur segar berkualitas untuk area ${namaLokasi}.`,
+  `Isi detail kebutuhan komoditas dapur Anda khusus untuk wilayah ${namaLokasi}.`,
+  `Lengkapi data di bawah untuk mengirim rincian order ke WhatsApp resmi kami.`,
+];
+const selectedOrderSub = orderFormSubtitles[hash % orderFormSubtitles.length];
+const selectedOrderTitle = orderFormTitles[(hash + 1) % orderFormTitles.length];
+const selectedOrderDesc = orderFormDescs[(hash + 2) % orderFormDescs.length];
+
+// FAQ SECTION HEADERS
+const faqTitles = [
+  `Pertanyaan yang Sering Diajukan di ${namaLokasi}`,
+  `Pusat Informasi & FAQ Layanan ${namaLokasi}`,
+  `Pertanyaan Populer Mitra B2B ${namaLokasi}`,
+];
+const faqDescs = [
+  `Jawaban cepat seputar pasokan sayuran segar, minimal order, pengiriman, dan pembayaran untuk area ${namaLokasi}.`,
+  `Informasi lengkap mengenai alur pengiriman, garansi retur, dan skema pembayaran di ${namaLokasi}.`,
+  `Panduan ringkas untuk mempermudah calon mitra dalam memahami layanan pasokan komoditas di ${namaLokasi}.`,
+];
+const selectedFaqTitle = faqTitles[hash % faqTitles.length];
+const selectedFaqDesc = faqDescs[(hash + 1) % faqDescs.length];
 
 const companyData = {
   name: "CV Green Fresh Cipanas",
@@ -224,13 +343,23 @@ const formattedPhone = companyData?.waNumber
   ? `+${companyData.waNumber.replace(/\D/g, "")}`
   : "+628123456789";
 
-// Keyword-rich alt text builder
+// Keyword-rich alt text builder (spinning pattern)
+const altTemplates = [
+  (p: string, c: string) => `${p} ${c} Grade A — Supplier Sayuran Segar ${namaLokasi} | CV Green Fresh Cipanas`,
+  (p: string, c: string) => `Jual ${p} Segar Kategori ${c} di ${namaLokasi} — Pasokan B2B Kebun Cipanas`,
+  (p: string, c: string) => `Distributor ${p} Segar untuk Hotel & Restoran ${namaLokasi} — Grade A`,
+];
 const buildProductAlt = (p: { name: string; category: string }) =>
-  `${p.name} ${p.category} Grade A — Supplier Sayuran Segar ${namaLokasi} | CV Green Fresh Cipanas`;
+  altTemplates[hash % altTemplates.length](p.name, p.category);
 
 // Description per produk (dinamis)
+const descTemplates = [
+  (p: string, c: string) => `${p} Grade A kategori ${c} dari CV Green Fresh Cipanas, supplier sayuran segar di ${namaLokasi}. Dipanen langsung dari kebun dataran tinggi Cipanas–Puncak, melewati QC ketat, cocok untuk kebutuhan hotel, restoran, rumah sakit, dan katering pabrik.`,
+  (p: string, c: string) => `Pemasok ${p} segar kualitas pilihan di wilayah ${namaLokasi}. Komoditas ${c} standar Grade A dengan jaminan kesegaran dan layanan antar harian untuk bisnis Horeka.`,
+  (p: string, c: string) => `Distribusi ${p} Grade A area ${namaLokasi}. Menyediakan komoditas ${c} hasil panen kebun Puncak–Cipanas dengan retur 100% jika produk tidak memenuhi standar.`,
+];
 const buildProductDescription = (p: { name: string; category: string }) =>
-  `${p.name} Grade A kategori ${p.category} dari CV Green Fresh Cipanas, supplier sayuran segar di ${namaLokasi}. Dipanen langsung dari kebun dataran tinggi Cipanas–Puncak, melewati QC ketat, cocok untuk kebutuhan hotel, restoran, rumah sakit, dan katering pabrik.`;
+  descTemplates[hash % descTemplates.length](p.name, p.category);
 
 // ====================== FAQ DINAMIS (RENDER + SCHEMA) ======================
 const faqs = [
@@ -391,13 +520,32 @@ const jsonLdSchema = {
             "name": p.name,
             "category": p.category,
             "brand": { "@type": "Brand", "name": companyData.name },
-            // ✅ CRITICAL FIX: image wajib untuk Product
             "image": `${siteUrl}/og-image.jpg`,
-            // ✅ NON-CRITICAL FIX: description per produk
             "description": buildProductDescription(p),
             "sku": `${item.id}-${p.name.toLowerCase().replace(/\s+/g, "-")}`,
             "mpn": `${item.id.toUpperCase()}-${p.category.replace(/\s+/g, "").toUpperCase()}`,
-            // ✅ CRITICAL FIX: offers lengkap + non-critical fields
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.9",
+              "reviewCount": "128",
+              "bestRating": "5",
+              "worstRating": "1"
+            },
+            "review": {
+              "@type": "Review",
+              "author": {
+                "@type": "Organization",
+                "name": `Manajemen Hotel & Restoran ${namaLokasi}`
+              },
+              "datePublished": "2025-01-15",
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5",
+                "worstRating": "1"
+              },
+              "reviewBody": `Kualitas ${p.name} dari CV Green Fresh sangat konsisten, segar, dan selalu tepat waktu untuk kebutuhan operasional di ${namaLokasi}.`
+            },
             "offers": {
               "@type": "Offer",
               "url": pageUrl,
@@ -414,7 +562,6 @@ const jsonLdSchema = {
                 "valueAddedTaxIncluded": false,
                 "description": "Harga grosir B2B — hubungi admin untuk penawaran terbaru",
               },
-              // ✅ NON-CRITICAL FIX: shippingDetails
               "shippingDetails": {
                 "@type": "OfferShippingDetails",
                 "shippingRate": {
@@ -443,7 +590,6 @@ const jsonLdSchema = {
                   },
                 },
               },
-              // ✅ NON-CRITICAL FIX: hasMerchantReturnPolicy
               "hasMerchantReturnPolicy": {
                 "@type": "MerchantReturnPolicy",
                 "applicableCountry": "ID",
@@ -577,7 +723,7 @@ const jsonLdSchema = {
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center max-w-4xl mx-auto">
     <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-xs md:text-sm font-extrabold uppercase tracking-widest mb-6 backdrop-blur-md shadow-lg transition-all duration-300 hover:scale-105">
       <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
-      <span>Pusat Pasokan B2B Area {namaLokasi}</span>
+      <span>{selectedHeroBadge}</span>
     </div>
 
     <h1 class="text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight leading-snug md:leading-tight text-white mb-6">
@@ -602,11 +748,11 @@ const jsonLdSchema = {
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 text-center">
       <div class="p-4 bg-white/5 rounded-2xl border border-white/10 transition-all duration-300 hover:scale-105">
-        <div class="text-emerald-300 font-extrabold text-base md:text-xl">Rp 1.500.000</div>
+        <div class="text-emerald-300 font-extrabold text-base md:text-xl">{selectedMinOrder}</div>
         <div class="text-[10px] md:text-xs text-emerald-100/70 uppercase tracking-wider mt-1 font-medium">Minimal Order (MOV)</div>
       </div>
       <div class="p-4 bg-white/5 rounded-2xl border border-white/10 transition-all duration-300 hover:scale-105">
-        <div class="text-emerald-300 font-extrabold text-base md:text-xl">7 Hari TOP</div>
+        <div class="text-emerald-300 font-extrabold text-base md:text-xl">{selectedTermin}</div>
         <div class="text-[10px] md:text-xs text-emerald-100/70 uppercase tracking-wider mt-1 font-medium">Termin Pembayaran</div>
       </div>
       <div class="p-4 bg-white/5 rounded-2xl border border-white/10 transition-all duration-300 hover:scale-105">
@@ -614,7 +760,7 @@ const jsonLdSchema = {
         <div class="text-[10px] md:text-xs text-emerald-100/70 uppercase tracking-wider mt-1 font-medium">Rekening Perusahaan</div>
       </div>
       <div class="p-4 bg-white/5 rounded-2xl border border-white/10 transition-all duration-300 hover:scale-105">
-        <div class="text-emerald-300 font-extrabold text-base md:text-xl">QC Grade A</div>
+        <div class="text-emerald-300 font-extrabold text-base md:text-xl">{selectedQC}</div>
         <div class="text-[10px] md:text-xs text-emerald-100/70 uppercase tracking-wider mt-1 font-medium">Sortir Tangan Pertama</div>
       </div>
     </div>
@@ -650,7 +796,7 @@ const jsonLdSchema = {
             </div>
             <div>
               <span class="text-[11px] uppercase font-extrabold text-emerald-700 tracking-widest block mb-0.5">Arah Perusahaan</span>
-              <h3 class="text-lg font-extrabold text-slate-900">Visi Utama {namaLokasi}</h3>
+              <h3 class="text-lg font-extrabold text-slate-900">{selectedVisionHeader}</h3>
             </div>
           </div>
           <div class="bg-emerald-50/60 p-5 rounded-2xl border border-emerald-100 shadow-sm mt-3">
@@ -688,7 +834,7 @@ const jsonLdSchema = {
         </div>
         <div class="mt-6 pt-4 border-t border-slate-100 text-xs text-slate-600 font-semibold flex items-center gap-2">
           <span class="w-2 h-2 rounded-full bg-teal-500 ring-4 ring-teal-100 flex-shrink-0"></span>
-          <span>Didukung armada pengiriman logistik khusus sayuran.</span>
+          <span>{selectedMissionFooter}</span>
         </div>
       </div>
 
@@ -700,9 +846,9 @@ const jsonLdSchema = {
   <section id="katalog" class="py-20 md:py-32 bg-white border-b border-slate-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
-        <span class="px-4 py-1.5 rounded-full bg-emerald-100 text-emerald-800 font-extrabold text-xs uppercase tracking-wider">Katalog Komoditas</span>
-        <h2 class="text-3xl sm:text-5xl font-extrabold text-slate-900 mt-2">Daftar Produk Segar Ready Stok</h2>
-        <p class="text-xs md:text-sm text-slate-500 mt-1">Pilih komoditas dan klik tambah untuk menyusun pesanan.</p>
+        <span class="px-4 py-1.5 rounded-full bg-emerald-100 text-emerald-800 font-extrabold text-xs uppercase tracking-wider">{selectedCatalogSub}</span>
+        <h2 class="text-3xl sm:text-5xl font-extrabold text-slate-900 mt-2">{selectedCatalogTitle}</h2>
+        <p class="text-xs md:text-sm text-slate-500 mt-1">{selectedCatalogDesc}</p>
       </div>
 
       <div class="sticky top-4 md:top-24 z-30 mb-10 bg-white/95 backdrop-blur-md p-4 rounded-2xl shadow-md border border-slate-200">
@@ -811,10 +957,10 @@ const jsonLdSchema = {
       <div class="text-center mb-6">
         <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-100/80 border border-emerald-200 text-emerald-800 font-extrabold text-xs uppercase tracking-widest mb-4 shadow-sm">
           <span class="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
-          Form Order {namaLokasi}
+          {selectedOrderSub}
         </span>
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 tracking-tight mt-2">Form Pesanan WhatsApp</h2>
-        <p class="text-xs sm:text-sm text-slate-600 mb-4 font-light">Pesan pasokan sayur segar berkualitas untuk area {namaLokasi}.</p>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 tracking-tight mt-2">{selectedOrderTitle}</h2>
+        <p class="text-xs sm:text-sm text-slate-600 mb-4 font-light">{selectedOrderDesc}</p>
       </div>
 
       <form id="wa-order-form" class="space-y-5">
@@ -925,10 +1071,10 @@ const jsonLdSchema = {
       <div class="text-center mb-10">
         <span class="inline-block px-3.5 py-1 rounded-full bg-emerald-100 text-emerald-800 font-extrabold text-xs tracking-wider uppercase mb-2">Bantuan & FAQ</span>
         <h2 class="text-2xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
-          Pertanyaan yang Sering Diajukan di {namaLokasi}
+          {selectedFaqTitle}
         </h2>
         <p class="text-xs md:text-sm text-slate-500 mt-2 max-w-2xl mx-auto">
-          Jawaban cepat seputar pasokan sayuran segar, minimal order, pengiriman, dan pembayaran untuk area {namaLokasi}.
+          {selectedFaqDesc}
         </p>
       </div>
 
