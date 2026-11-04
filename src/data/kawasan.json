@@ -3,6 +3,42 @@
         "id": "seminyak",
         "lokasi": "Seminyak"
     },
+	    {
+        "id": "bekasi",
+        "lokasi": "Bekasi"
+    },
+	    {
+        "id": "depok",
+        "lokasi": "Depok"
+    },
+	    {
+        "id": "jakarta",
+        "lokasi": "jakarta"
+    },
+	    {
+        "id": "tangerang",
+        "lokasi": "Tangerang"
+    },
+	    {
+        "id": "bogor",
+        "lokasi": "Bogor"
+    },
+	    {
+        "id": "cibubur",
+        "lokasi": "Cibubur"
+    },
+	    {
+        "id": "karawang",
+        "lokasi": "Karawang"
+    },
+	    {
+        "id": "cirebon",
+        "lokasi": "Cirebon"
+    },
+	    {
+        "id": "kuningan",
+        "lokasi": "Kuningan"
+    },
     {
         "id": "petitenget",
         "lokasi": "Petitenget"
