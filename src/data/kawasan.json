@@ -1171,10 +1171,7 @@
         "id": "sumbergondo",
         "lokasi": "Sumbergondo"
     },
-    {
-        "id": "bandung-malang",
-        "lokasi": "Bandung Malang"
-    },
+ 
     {
         "id": "rampal",
         "lokasi": "Rampal"
@@ -3046,46 +3043,6 @@
     {
         "id": "resort-dago-pakar",
         "lokasi": "Resort Dago Pakar"
-    },
-    {
-        "id": "setiabudi-regency-bandung",
-        "lokasi": "Setiabudi Regency Bandung"
-    },
-    {
-        "id": "ciumbuleuit-fine-dining-ring",
-        "lokasi": "Ciumbuleuit Fine Dining Ring"
-    },
-    {
-        "id": "dago-highlands-bandung",
-        "lokasi": "Dago Highlands Bandung"
-    },
-    {
-        "id": "cipaganti-bandung",
-        "lokasi": "Cipaganti Bandung"
-    },
-    {
-        "id": "riau-boulevard-bandung",
-        "lokasi": "Riau Boulevard Bandung"
-    },
-    {
-        "id": "paskal-food-market-ring-bandung",
-        "lokasi": "Paskal Food Market Ring Bandung"
-    },
-    {
-        "id": "asia-afrika-bandung",
-        "lokasi": "Asia Afrika Bandung"
-    },
-    {
-        "id": "buah-batu-bandung",
-        "lokasi": "Buah Batu Bandung"
-    },
-    {
-        "id": "summarecon-bandung-ring",
-        "lokasi": "Summarecon Bandung Ring"
-    },
-    {
-        "id": "taman-kopo-indah-bandung",
-        "lokasi": "Taman Kopo Indah Bandung"
     },
     {
         "id": "cimahi-kota",
