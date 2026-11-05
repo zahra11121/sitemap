@@ -335,7 +335,7 @@ const categories = ['Semua', ...new Set(products.map(p => p.category))];
 
 // ====================== SEO SCHEMA DATA (WORLD-CLASS + PRODUCT FULL) ======================
 const siteUrl = "https://greenfresh.co.id";
-const pageUrl = `${siteUrl}/layanan/${item.id}/`;
+const pageUrl = `${siteUrl}/kota/${item.id}/`;
 
 const formattedPhone = companyData?.waNumber
   ? `+${companyData.waNumber.replace(/\D/g, "")}`
@@ -447,7 +447,7 @@ const jsonLdSchema = {
       "@id": `${pageUrl}#breadcrumb`,
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Beranda", "item": siteUrl },
-        { "@type": "ListItem", "position": 2, "name": "Area Layanan", "item": `${siteUrl}/layanan` },
+        { "@type": "ListItem", "position": 2, "name": "Area Layanan", "item": `${siteUrl}/kota` },
         { "@type": "ListItem", "position": 3, "name": `Supplier Sayuran ${namaLokasi}`, "item": pageUrl },
       ],
     },
@@ -1130,7 +1130,7 @@ const jsonLdSchema = {
           const namaKotaLain = k.lokasi.charAt(0).toUpperCase() + k.lokasi.slice(1);
           return (
             <a
-              href={`/layanan/${k.id}/`}
+              href={`/kota/${k.id}/`}
               class="group bg-slate-800/80 hover:bg-emerald-700/30 border border-slate-700/70 hover:border-emerald-500/60 p-4 rounded-xl transition-all duration-200 flex items-center justify-between shadow-sm"
               title={`Supplier Sayuran Segar ${namaKotaLain}`}
             >
