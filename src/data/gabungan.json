@@ -1788,8 +1788,8 @@
         "lokasi": "Pemogan"
     },
     {
-        "id": "sesetan",
-        "lokasi": "Sesetan"
+        "id": "lombok",
+        "lokasi": "Lombok"
     },
     {
         "id": "suwung",
@@ -4528,12 +4528,12 @@
         "lokasi": "Bukit Darmo Golf Residence"
     },
     {
-        "id": "spazio-soho",
-        "lokasi": "Spazio SOHO"
+        "id": "subang",
+        "lokasi": "Subang"
     },
     {
-        "id": "intiland-tower-corridor",
-        "lokasi": "Intiland Tower Corridor"
+        "id": "pandeglang",
+        "lokasi": "Pandeglang"
     },
     {
         "id": "vasa-hotel-corridor",
@@ -4580,12 +4580,12 @@
         "lokasi": "Jatim Park 1 Ring"
     },
     {
-        "id": "jatim-park-2-ring",
-        "lokasi": "Jatim Park 2 Ring"
+        "id": "indramayu",
+        "lokasi": "Indramayu"
     },
     {
-        "id": "jatim-park-3-ring",
-        "lokasi": "Jatim Park 3 Ring"
+        "id": "majalengka",
+        "lokasi": "Majalengka"
     },
     {
         "id": "museum-angkut-ring",
