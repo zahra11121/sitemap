@@ -1,16 +1,16 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import kotaData from '../../data/kawasan.json';
+import Layout from '../layouts/Layout.astro';
+import kotaData from '../data/gabungan.json';
 
 const siteUrl = "https://greenfresh.co.id";
-const pageUrl = `${siteUrl}/kawasan`;
+const pageUrl = `${siteUrl}/kota`;
 
 const jsonLdSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
     { "@type": "ListItem", "position": 1, "name": "Beranda", "item": siteUrl },
-    { "@type": "ListItem", "position": 2, "name": "Area Kawasan Kota", "item": pageUrl }
+    { "@type": "ListItem", "position": 2, "name": "Area Layanan Kota", "item": pageUrl }
   ]
 };
 
@@ -27,7 +27,7 @@ function getUniqueDescription(id: string, namaLokasi: string) {
     `distribusi komoditas hasil pertanian dataran tinggi Cipanas berkualitas tinggi`,
     `pengiriman rutin bahan pangan segar langsung dari kebun petani lokal`,
     `suplai bahan baku sayuran organik dan segar siap saji berstandar industri`,
-    `Kawasan logistik dan pengiriman komoditas tani terbaik untuk dapur komersial`
+    `layanan logistik dan pengiriman komoditas tani terbaik untuk dapur komersial`
   ];
 
   const target = [
@@ -55,8 +55,8 @@ function getUniqueDescription(id: string, namaLokasi: string) {
 ---
 
 <Layout 
-  title="Daftar Kawasan Supplier Sayuran — CV Green Fresh Cipanas"
-  description="Pusat informasi area Kawasan pasokan sayur mayur segar B2B CV Green Fresh Cipanas untuk berbagai kota dan wilayah."
+  title="Daftar Area Layanan Supplier Sayuran — CV Green Fresh Cipanas"
+  description="Pusat informasi area layanan pasokan sayur mayur segar B2B CV Green Fresh Cipanas untuk berbagai kota dan wilayah."
 >
   <Fragment slot="head">
     <link rel="canonical" href={pageUrl} />
@@ -72,7 +72,7 @@ function getUniqueDescription(id: string, namaLokasi: string) {
         Jangkauan Logistik & Distribusi B2B
       </span>
       <h1 class="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-white max-w-4xl mx-auto leading-tight">
-        Area Kawasan Pemasok Sayuran Segar
+        Area Layanan Pemasok Sayuran Segar
       </h1>
       <p class="mt-4 text-emerald-100/80 text-sm sm:text-lg max-w-2xl mx-auto font-light leading-relaxed">
         CV Green Fresh Cipanas melayani pengiriman harian komoditas pertanian Grade A untuk Hotel, Restoran, Rumah Sakit, dan Katering di berbagai kota.
@@ -99,14 +99,14 @@ function getUniqueDescription(id: string, namaLokasi: string) {
         </div>
       </div>
 
-      <!-- KOTA CARDS GRID (Deskripsi dijamin unik antar kota) -->
+      <!-- KOTA CARDS GRID (Semua di-render terbuka agar terbaca Googlebot) -->
       <div id="kota-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {kotaData.map((item, index) => {
+        {kotaData.map((item) => {
           const namaLokasi = item.lokasi.charAt(0).toUpperCase() + item.lokasi.slice(1);
           const uniqueDesc = getUniqueDescription(item.id, namaLokasi);
           return (
             <div 
-              class={`kota-card bg-white p-6 rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:border-emerald-300 transition-all duration-300 flex flex-col justify-between group ${index >= 6 ? 'hidden' : ''}`}
+              class="kota-card bg-white p-6 rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:border-emerald-300 transition-all duration-300 flex flex-col justify-between group"
               data-nama={namaLokasi.toLowerCase()}
             >
               <div>
@@ -129,10 +129,10 @@ function getUniqueDescription(id: string, namaLokasi: string) {
               <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
                 <span class="text-[11px] font-semibold text-slate-400">Termin TOP 7 Hari</span>
                 <a 
-                  href={`/kawasan/${item.id}/`} 
+                  href={`/wilayah/${item.id}/`} 
                   class="inline-flex items-center gap-1.5 text-xs font-extrabold text-emerald-600 hover:text-emerald-700 group-hover:translate-x-1 transition-all"
                 >
-                  <span>Lihat Kawasan</span>
+                  <span>Lihat Layanan</span>
                   <span>→</span>
                 </a>
               </div>
@@ -166,7 +166,7 @@ function getUniqueDescription(id: string, namaLokasi: string) {
     </div>
   </section>
 
-  <!-- SCRIPT INTERAKTIF CLIENT-SIDE -->
+  <!-- SCRIPT INTERAKTIF CLIENT-SIDE (Pagination & Search Ditangani via DOM) -->
   <script define:vars={{ totalKota: kotaData.length }}>
     const searchInput = document.getElementById('search-kota-input');
     const kotaCards = document.querySelectorAll('.kota-card');
@@ -226,11 +226,12 @@ function getUniqueDescription(id: string, namaLokasi: string) {
     });
 
     searchInput?.addEventListener('input', (e) => {
-      currentSearch = e.target.value;
+      currentSearch = e.target.value.trim();
       visibleLimit = 6;
       renderKota();
     });
 
+    // Jalankan sekali saat halaman dimuat untuk menyembunyikan item > 6 lewat JS
     renderKota();
   </script>
 </Layout>

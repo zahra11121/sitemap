@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { Image } from 'astro:assets';
-import kotaData from '../../data/kawasan.json';
+import kotaData from '../../data/gabungan.json';
 
 // Import Seluruh 64 Gambar Produk
 import Asparagus_7 from '../../assets/products/Asparagus_7.jpg';
@@ -95,18 +95,122 @@ const kotaLain = [
   kotaData[(currentIndex + 4) % kotaData.length],
 ].filter((k) => k.id !== item.id);
 
-// ====================== SEO: VARIASI SPIN TEKS 100% UNIK ======================
-const titles = [
-  `Supplier Sayuran ${namaLokasi} — Hotel, Restoran, Rumah Sakit & Pabrik`,
-  `Distributor Sayur Segar ${namaLokasi} Grade A — CV Green Fresh Cipanas`,
+// ====================== GENERATOR SPIN-TEXT 1000+ VARIASI UNIK ======================
+// Helper generator kombinasi modular acak terdeterminasi berdasarkan Hash ID
+function buildSpinVariations<T>(hashSeed: number, arrayA: string[], arrayB: string[], arrayC: string[], formatter: (a: string, b: string, c: string) => T): T[] {
+  const result: T[] = [];
+  for (let i = 0; i < arrayA.length; i++) {
+    for (let j = 0; j < arrayB.length; j++) {
+      for (let k = 0; k < arrayC.length; k++) {
+        result.push(formatter(arrayA[i], arrayB[j], arrayC[k]));
+      }
+    }
+  }
+  return result;
+}
+
+// ====================== GENERATOR TITLES (Fokus Kata Kunci Utama) ======================
+const tKeyword = [
+  "Supplier Sayuran", 
+  "Distributor Sayuran", 
+  "Pemasok Sayuran"
 ];
-const descriptions = [
-  `CV Green Fresh Cipanas adalah supplier & distributor sayuran segar Grade A di ${namaLokasi} untuk hotel, restoran, rumah sakit, dan katering pabrik. Minimal order Rp 1.500.000, termin 7 hari, armada harian.`,
-  `Butuh pemasok sayur segar di ${namaLokasi}? Green Fresh menyuplai 64+ komoditas (sayuran hijau, jamur, umbi, bumbu) langsung dari kebun Cipanas–Puncak. Garansi Grade A & retur 100%.`,
-  `Supplier sayuran B2B terpercaya di ${namaLokasi}. Harga grosir, QC ketat, pengiriman rutin harian untuk hotel, resto, RS, dan pabrik. Hubungi 0877-8093-7884.`,
-  `Layanan pasokan bahan komoditas segar di ${namaLokasi}. Pilihan komoditas terlengkap dari pertanian Puncak–Cipanas dengan jaminan retur dan fleksibilitas termin TOP 7 hari.`,
-  `Pusat penyedia komoditas sayur premium area ${namaLokasi}. Menyuplai kebutuhan dapur industri, perhotelan, dan resto skala besar dengan QC standar tinggi.`,
+
+const tWilayah = [
+  `${namaLokasi}`, 
+  `Segar ${namaLokasi}`, 
+  `Murah ${namaLokasi}`, 
+  `Terpercaya ${namaLokasi}`
 ];
+
+const tSuffix = [
+  "| CV Green Fresh Cipanas", 
+  "| CV Green Fresh CIpanas", 
+  "| Grade A", 
+  "| Langsung Dari Kebun"
+];
+
+// Menghasilkan 3 x 4 x 4 = 48 variasi inti yang pas dan ramah SEO/Mobile
+const titles = buildSpinVariations(hash, tKeyword, tWilayah, tSuffix, (a, b, c) => `${a} ${b} ${c}`);
+
+// 2. GENERATOR DESCRIPTIONS (10 x 10 x 10 = 1.000 Variasi Unik)
+const dIntro = [
+  `CV Green Fresh Cipanas adalah supplier & distributor sayuran segar Grade A di ${namaLokasi}`,
+  `Butuh pemasok sayur segar berpengalaman di ${namaLokasi}? Green Fresh menyediakan`,
+  `Mitra pasokan rantai dingin sayuran segar di ${namaLokasi} melayani kebutuhan rutin`,
+  `CV Green Fresh menghadirkan layanan agen distributor komoditas sayur harian di ${namaLokasi}`,
+  `Layanan penyedia bahan pangan komoditas lengkap wilayah ${namaLokasi} khusus sektor`,
+  `Distributor utama komoditas pertanian segar dataran tinggi Puncak untuk area ${namaLokasi}`,
+  `Pusat pasokan komoditas sayuran dapur komersial dan perhotelan di ${namaLokasi}`,
+  `Pemasok terpercaya 64+ komoditas sayur hijau, umbi, jamur, dan bumbu area ${namaLokasi}`,
+  `Solusi rantai pasok pangan profesional bagi industri kuliner dan rumah sakit di ${namaLokasi}`,
+  `Vendor resmi pasokan komoditas segar langsung dari kebun Cipanas untuk bisnis Anda di ${namaLokasi}`
+];
+const dMid = [
+  "untuk hotel, restoran, rumah sakit, dan katering pabrik.",
+  "skala B2B dengan garansi sortir QC ketat tangan pertama.",
+  "dengan skema fleksibel minimal order Rp 1.500.000 dan termin 7 hari.",
+  "didukung armada pengiriman rutin harian terintegrasi.",
+  "dengan jaminan retur 100% jika produk tidak memenuhi standar mutu.",
+  "menjamin kestabilan pasokan harian serta kepastian harga transparan.",
+  "melayani permintaan kustomisasi ukuran dan spesifikasi dapur industri.",
+  "berkelanjutan langsung dipanen dari kelompok tani dataran tinggi Puncak-Cipanas.",
+  "dilengkapi faktur resmi perusahaan dan layanan admin responsif 24/7.",
+  "dengan sistem distribusi higienis menjaga kestabilan ketersediaan komoditas."
+];
+const dOutro = [
+  " Hubungi WhatsApp resmi kami 0877-8093-7884 untuk penawaran harga grosir terbaru.",
+  " Dapatkan garansi kesegaran optimal langsung tiba di gudang dapur Anda setiap pagi.",
+  " Konsultasikan kebutuhan pasokan komoditas dapur usaha Anda sekarang juga.",
+  " Kerjasama B2B resmi dengan proses administrasi legalitas usaha yang jelas.",
+  " Nikmati kemudahan order langsung dengan armada pengiriman cepat dan amanah.",
+  " Kirim spesifikasi komoditas Anda dan ajukan trial order hari ini.",
+  " Solusi hemat HPP dapur profesional dengan standar mutlak Grade A.",
+  " Pengiriman terjadwal dini hari menjaga kerenyahan dan bobot sayur tetap utuh.",
+  " Rekening resmi pembayaran BCA atas nama CV Green Fresh Cipanas.",
+  " Pilihan utama chef profesional dan manajemen perhotelan terkemuka."
+];
+const descriptions = buildSpinVariations(hash, dIntro, dMid, dOutro, (a, b, c) => `${a} ${b}${c}`);
+
+// 3. GENERATOR ABOUT TEXTS (10 x 10 x 10 = 1.000 Variasi Unik)
+const aStart = [
+  `Di kawasan komersial <strong>${namaLokasi}</strong>, <strong>CV Green Fresh Cipanas</strong> hadir sebagai mitra rantai pasok pangan profesional.`,
+  `Sebagai <strong>distributor sayuran</strong> terkemuka di wilayah <strong>${namaLokasi}</strong>, kami memastikan kontinuitas pasokan harian Anda.`,
+  `Menjadi <strong>pemasok sayuran</strong> andalan di kawasan <strong>${namaLokasi}</strong> menuntut ketepatan waktu serta kendali mutu yang konsisten.`,
+  `Dukungan pasokan komoditas segar berkelanjutan di <strong>${namaLokasi}</strong> ditopang oleh jaringan petani kebun Puncak-Cipanas.`,
+  `Memenuhi tingginya standar kuliner komersial di <strong>${namaLokasi}</strong>, kami menghadirkan jalur distribusi sayuran super cepat.`,
+  `Kebutuhan bahan baku dapur industri di <strong>${namaLokasi}</strong> kini makin mudah terpenuhi bersama <strong>CV Green Fresh Cipanas</strong>.`,
+  `Kami hadir melayani jaringan perhotelan, rumah sakit, dan katering di <strong>${namaLokasi}</strong> dengan komoditas sayur segar pilihan.`,
+  `Membangun sinergi distribusi hasil pertanian di <strong>${namaLokasi}</strong> dengan fokus utama pada kualitas segar alami.`,
+  `Sebagai vendor pasokan pangan terpercaya di <strong>${namaLokasi}</strong>, kami memahami pentingnya bahan baku tepat waktu.`,
+  `Mengintegrasikan hasil panen kebun dataran tinggi Cipanas langsung ke pusat operasional kuliner Anda di <strong>${namaLokasi}</strong>.`
+];
+const aBody = [
+  " Kami menyuplai kebutuhan harian hotel bintang lima, kafe, restoran, rumah sakit, hingga katering pabrik dengan garansi mutu optimal.",
+  " Setiap komoditas sayuran hijau, jamur, umbi, serta bumbu dapur melewati proses sortir QC ketat sebelum diserahkan ke tim logistik.",
+  " Standar kualitas Grade A kami dirancang khusus untuk memenuhi kriteria ketat chef profesional dan standar dapur kesehatan.",
+  " Armada pengiriman harian kami bergerak sejak dini hari agar seluruh pesanan tiba tepat waktu sebelum operasional dapur dimulai.",
+  " Jaminan retur 100% kami berikan untuk setiap komoditas yang tidak memenuhi kualifikasi kesegaran demi menjaga reputasi bisnis Anda.",
+  " Kemitraan langsung dengan kelompok tani lokal memungkinkan kami memberikan kestabilan harga grosir yang sangat kompetitif.",
+  " Sistem manajemen rantai dingin (*cold chain*) kami jaga secara ketat untuk meminimalkan penyusutan bobot dan kadar air produk.",
+  " Kelengkapan dokumen faktur pajak dan administrasi legalitas korporasi siap kami fasilitasi untuk kemudahan klaim perusahaan.",
+  " Skema pembayaran termin 7 hari (TOP 7) kami sediakan khusus untuk mendukung fleksibilitas arus kas bisnis korporasi mitra.",
+  " Pilihan 64+ jenis komoditas segar ready stok siap dikirim sesuai spesifikasi ukuran dan potongan yang dibutuhkan dapur Anda."
+];
+const aEnd = [
+  ` Percayakan kebutuhan pasokan dapur usaha Anda di ${namaLokasi} kepada CV Green Fresh Cipanas.`,
+  ` Komitmen utama kami adalah integritas rasa, kesegaran mutlak, dan keandalan pengiriman di ${namaLokasi}.`,
+  ` Hubungi tim pemasaran kami hari ini untuk mendapatkan katalog harga grosir khusus area ${namaLokasi}.`,
+  ` Hadirkan cita rasa kuliner terbaik di ${namaLokasi} dengan dukungan bahan baku sayuran Grade A dari kami.`,
+  ` Efisiensikan pengeluaran HPP dapur bisnis Anda di ${namaLokasi} bersama skema kemitraan B2B kami.`,
+  ` Bergabunglah bersama puluhan mitra korporat di ${namaLokasi} yang telah memercayakan rantai pasok pangannya kepada kami.`,
+  ` Kami siap menjadi fondasi utama kesuksesan operasional dapur komersial dan bisnis kesehatan Anda di ${namaLokasi}.`,
+  ` Nikmati kemudahan alur pemesanan langsung via WhatsApp dengan layanan customer service yang siaga dan responsif.`,
+  ` Jaminan kesegaran daun, kerenyahan umbi, dan kebersihan komoditas adalah prioritas pengiriman kami ke ${namaLokasi}.`,
+  ` CV Green Fresh Cipanas: Pilihan bijak rantai pasok sayur segar berkualitas untuk wilayah ${namaLokasi}.`
+];
+const aboutTexts = buildSpinVariations(hash, aStart, aBody, aEnd, (a, b, c) => `${a}${b}${c}`);
+
 const selectedTitle = titles[hash % titles.length];
 const selectedDescription = descriptions[hash % descriptions.length];
 
@@ -119,15 +223,24 @@ const heroBadges = [
   `Layanan Pengiriman Rutin ${namaLokasi}`,
 ];
 const selectedHeroBadge = heroBadges[(hash + 1) % heroBadges.length];
-
-const aboutTexts = [
-  `Di kawasan komersial <strong>${namaLokasi}</strong>, <strong>CV Green Fresh Cipanas</strong> hadir sebagai solusi rantai pasok pangan profesional. Kami menyuplai kebutuhan harian hotel bintang lima, kafe, restoran, rumah sakit, hingga katering pabrik langsung dari kebun dataran tinggi Cipanas & Puncak dengan garansi kesegaran optimal.`,
-  `Sebagai <strong>distributor sayuran</strong> terkemuka di <strong>${namaLokasi}</strong>, kami memastikan setiap komoditas sayuran hijau, jamur, umbi-umbian, dan bumbu dapur melewati sortir QC ketat sebelum dikirimkan. Standar kualitas Grade A kami dirancang khusus untuk memenuhi spesifikasi dapur industri dan bisnis kuliner di ${namaLokasi}.`,
-  `Menjadi <strong>pemasok sayuran</strong> andalan di wilayah <strong>${namaLokasi}</strong> menuntut kedisiplinan waktu dan jaminan mutu yang konsisten. CV Green Fresh Cipanas siap mendukung kelancaran operasional bisnis Anda dengan armada pengiriman rutin harian serta fleksibilitas pembayaran korporat.`,
-  `Dukungan pasokan sayuran segar berkelanjutan di <strong>${namaLokasi}</strong> ditopang oleh kemitraan langsung dengan kelompok tani Puncak-Cipanas. <strong>CV Green Fresh Cipanas</strong> menjamin ketersediaan komoditas pangan Grade A secara konsisten bagi perhotelan dan industri Horeka.`,
-  `Memenuhi tingginya standar kualitas kuliner di <strong>${namaLokasi}</strong>, kami menyediakan alur distribusi sayuran cepat pasca-panen. <strong>CV Green Fresh Cipanas</strong> mengintegrasikan QC ketat dan pengiriman teradwal demi menjaga kesegaran bahan baku dapur Anda.`,
-];
 const selectedAbout = aboutTexts[hash % aboutTexts.length];
+
+// SECTION TAMBAHAN UNIK 1 (Logistik & Rute Lokal)
+const logisticNotes = [
+  `Pengiriman logistik ke ${namaLokasi} diberangkatkan langsung dari pool kebun Cipanas pada dini hari menggunakan armada berpendingin mikro untuk memastikan suhu sayuran hijau dan jamur tetap terjaga setibanya di dapur mitra ${namaLokasi}.`,
+  `Jalur distribusi terpadu CV Green Fresh menjangkau seluruh titik komersial di ${namaLokasi} dengan estimasi kedatangan tepat waktu sebelum jam operasional dapur hotel dan restoran dimulai.`,
+  `Kami menerapkan sistem rantai dingin (*cold chain management*) dari dataran tinggi Puncak-Cipanas menuju sentra bisnis di ${namaLokasi}, meminimalkan susut bobot dan menjaga kerenyahan komoditas sayur premium.`,
+  `Didukung supir berpengalaman yang menguasai rute tercepat ke ${namaLokasi}, setiap pengiriman komoditas pertanian dijamin aman, bersih, dan langsung diserahterimakan kepada bagian gudang atau chef terkait.`,
+];
+const selectedLogisticNote = logisticNotes[hash % logisticNotes.length];
+
+// SECTION TAMBAHAN UNIK 2 (Segmen Horeka & Spesifikasi Dapur)
+const horekaNotes = [
+  `Kebutuhan spesifikasi potongan dan sortir khusus untuk chef hotel bintang lima serta restoran siap saji di ${namaLokasi} dapat dipenuhi melalui koordinasi langsung dengan tim quality control kami di Cipanas.`,
+  `Bagi pengelola rumah sakit, katering pabrik, dan kantin korporasi di ${namaLokasi}, CV Green Fresh menawarkan stabilitas harga kontrak bulanan serta kelengkapan dokumen pajak resmi.`,
+  `Café modern, coffee shop, dan restoran tematik di ${namaLokasi} mempercayakan pasokan sayuran organik serta garnish segar harian kepada kami karena konsistensi ukuran dan kebersihan produk.`,
+];
+const selectedHorekaNote = horekaNotes[(hash + 2) % horekaNotes.length];
 
 // HIGHLIGHT INFO BAR VARIANTS
 const highlightMinimalOrder = [
@@ -332,72 +445,67 @@ const products = [
 
 const categories = ['Semua', ...new Set(products.map(p => p.category))];
 
-// ====================== SEO SCHEMA DATA (WORLD-CLASS + PRODUCT FULL) ======================
 const siteUrl = "https://greenfresh.co.id";
-const pageUrl = `${siteUrl}/kawasan/${item.id}/`;
+const pageUrl = `${siteUrl}/wilayah/${item.id}/`;
 
 const formattedPhone = companyData?.waNumber
   ? `+${companyData.waNumber.replace(/\D/g, "")}`
   : "+628123456789";
 
-// Keyword-rich alt text builder (spinning pattern)
 const altTemplates = [
   (p: string, c: string) => `${p} ${c} Grade A — Supplier Sayuran Segar ${namaLokasi} | CV Green Fresh Cipanas`,
   (p: string, c: string) => `Jual ${p} Segar Kategori ${c} di ${namaLokasi} — Pasokan B2B Kebun Cipanas`,
   (p: string, c: string) => `Distributor ${p} Segar untuk Hotel & Restoran ${namaLokasi} — Grade A`,
 ];
 const buildProductAlt = (p: { name: string; category: string }) =>
-  altTemplates[hash % altTemplates.length](p.name, p.category);
+  altTemplates[(hash + p.name.length) % altTemplates.length](p.name, p.category);
 
-// Description per produk (dinamis)
 const descTemplates = [
   (p: string, c: string) => `${p} Grade A kategori ${c} dari CV Green Fresh Cipanas, supplier sayuran segar di ${namaLokasi}. Dipanen langsung dari kebun dataran tinggi Cipanas–Puncak, melewati QC ketat, cocok untuk kebutuhan hotel, restoran, rumah sakit, dan katering pabrik.`,
   (p: string, c: string) => `Pemasok ${p} segar kualitas pilihan di wilayah ${namaLokasi}. Komoditas ${c} standar Grade A dengan jaminan kesegaran dan layanan antar harian untuk bisnis Horeka.`,
   (p: string, c: string) => `Distribusi ${p} Grade A area ${namaLokasi}. Menyediakan komoditas ${c} hasil panen kebun Puncak–Cipanas dengan retur 100% jika produk tidak memenuhi standar.`,
 ];
 const buildProductDescription = (p: { name: string; category: string }) =>
-  descTemplates[hash % descTemplates.length](p.name, p.category);
+  descTemplates[(hash + p.name.length) % descTemplates.length](p.name, p.category);
 
-// ====================== FAQ DINAMIS (RENDER + SCHEMA) ======================
 const faqs = [
   {
-    q: `Apakah CV Green Fresh melayani pengiriman sayuran ke ${namaLokasi}?`,
-    a: `Ya, kami melayani pasokan harian sayuran segar Grade A ke ${namaLokasi} untuk hotel, restoran, rumah sakit, dan katering pabrik.`,
+    q: `Apakah CV Green Fresh melayani pengiriman sayuran harian ke ${namaLokasi}?`,
+    a: `Ya, kami melayani pasokan harian sayuran segar Grade A ke ${namaLokasi} untuk hotel, restoran, rumah sakit, dan katering pabrik dengan jadwal teratur setiap pagi.`,
   },
   {
-    q: `Apa minimal order (MOV) untuk pembelian B2B di ${namaLokasi}?`,
-    a: `Minimal order Rp 1.500.000 dengan opsi termin pembayaran 7 hari (TOP 7) untuk mitra bisnis terdaftar.`,
+    q: `Apa minimal order (MOV) untuk pembelian B2B di wilayah ${namaLokasi}?`,
+    a: `Minimal order untuk pengiriman ke ${namaLokasi} adalah Rp 1.500.000 dengan opsi termin pembayaran 7 hari (TOP 7) untuk mitra bisnis terdaftar.`,
   },
   {
-    q: `Berapa lama pengiriman sayuran ke ${namaLokasi}?`,
-    a: `Pengiriman rutin harian dari gudang Cipanas ke ${namaLokasi}. Order sebelum pukul 15.00 WIB dikirim keesokan pagi.`,
+    q: `Berapa lama estimasi pengiriman sayuran dari gudang ke ${namaLokasi}?`,
+    a: `Pengiriman dilakukan secara rutin setiap hari menggunakan armada khusus dari gudang Cipanas langsung ke lokasi usaha Anda di ${namaLokasi}.`,
   },
   {
-    q: `Apakah ada garansi jika produk tidak segar saat diterima di ${namaLokasi}?`,
-    a: `Ya, kami memberikan garansi retur 100% untuk produk yang tidak memenuhi standar Grade A. Klaim maksimal 24 jam setelah penerimaan.`,
+    q: `Apakah tersedia garansi retur jika produk tidak segar saat diterima di ${namaLokasi}?`,
+    a: `Ya, kami memberikan garansi retur 100% untuk produk yang tidak memenuhi standar Grade A. Klaim dapat diajukan maksimal 24 jam setelah penerimaan barang.`,
   },
   {
-    q: `Komoditas apa saja yang tersedia untuk ${namaLokasi}?`,
-    a: `Tersedia ${products.length}+ komoditas: sayuran hijau, jamur, umbi-umbian, bumbu & rempah, kacang-kacangan, dan buah-sayur. Semua Grade A dan ready stok.`,
+    q: `Komoditas apa saja yang ready stok untuk pemesanan di ${namaLokasi}?`,
+    a: `Tersedia ${products.length}+ komoditas pilihan meliputi sayuran hijau, jamur, umbi-umbian, bumbu & rempah, kacang-kacangan, hingga buah-sayur dengan kualitas Grade A.`,
   },
   {
-    q: `Metode pembayaran apa yang diterima CV Green Fresh?`,
-    a: `Cash/transfer harian ke BCA 1978400999 a/n Green Fresh Cipanas, atau termin 7 hari (TOP) untuk mitra B2B terverifikasi.`,
+    q: `Metode pembayaran apa saja yang diterima oleh CV Green Fresh?`,
+    a: `Pembayaran dapat dilakukan melalui transfer harian ke rekening resmi BCA 1978400999 a/n Green Fresh Cipanas, atau menggunakan skema termin 7 hari bagi mitra korporat.`,
   },
   {
-    q: `Apakah bisa kirim sampel atau trial order ke ${namaLokasi}?`,
+    q: `Apakah mitra baru di ${namaLokasi} bisa mengajukan trial order atau sampel?`,
     a: `Bisa. Kami menerima trial order untuk mitra B2B baru di ${namaLokasi} dengan minimal order Rp 1.500.000 dan pembayaran cash/transfer harian pada transaksi pertama.`,
   },
   {
-    q: `Apakah CV Green Fresh menyediakan invoice & faktur pajak?`,
-    a: `Ya. Setiap transaksi B2B mendapatkan invoice resmi, dan faktur pajak tersedia untuk mitra yang membutuhkan sesuai ketentuan perpajakan Indonesia.`,
+    q: `Apakah transaksi pembelian di ${namaLokasi} disertai faktur resmi?`,
+    a: `Ya. Setiap transaksi B2B mendapatkan nota/invoice resmi perusahaan, serta faktur pajak yang tersedia bagi mitra yang membutuhkan sesuai ketentuan berlaku.`,
   },
 ];
 
 const jsonLdSchema = {
   "@context": "https://schema.org",
   "@graph": [
-    // 1. Organization
     {
       "@type": "Organization",
       "@id": `${siteUrl}/#organization`,
@@ -426,7 +534,6 @@ const jsonLdSchema = {
         "https://www.google.com/maps/place/CV+Green+Fresh+Cipanas",
       ],
     },
-    // 2. WebSite + SearchAction
     {
       "@type": "WebSite",
       "@id": `${siteUrl}/#website`,
@@ -440,17 +547,15 @@ const jsonLdSchema = {
         "query-input": "required name=search_term_string",
       },
     },
-    // 3. BreadcrumbList
     {
       "@type": "BreadcrumbList",
       "@id": `${pageUrl}#breadcrumb`,
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Beranda", "item": siteUrl },
-        { "@type": "ListItem", "position": 2, "name": "Area Layanan", "item": `${siteUrl}/kawasan` },
+        { "@type": "ListItem", "position": 2, "name": "Area Layanan", "item": `${siteUrl}/wilayah` },
         { "@type": "ListItem", "position": 3, "name": `Supplier Sayuran ${namaLokasi}`, "item": pageUrl },
       ],
     },
-    // 4. LocalBusiness (WholesaleStore)
     {
       "@type": ["LocalBusiness", "WholesaleStore"],
       "@id": `${pageUrl}#localbusiness`,
@@ -592,7 +697,6 @@ const jsonLdSchema = {
                 "applicableCountry": "ID",
                 "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
                 "merchantReturnDays": 1,
-                "returnMethod": "https://schema.org/ReturnByMail",
                 "returnFees": "https://schema.org/FreeReturn",
                 "description": "Garansi retur 100% untuk produk tidak segar, klaim maksimal 24 jam setelah penerimaan.",
               },
@@ -601,7 +705,6 @@ const jsonLdSchema = {
         })),
       },
     },
-    // 5. WebPage
     {
       "@type": "WebPage",
       "@id": `${pageUrl}#webpage`,
@@ -617,7 +720,6 @@ const jsonLdSchema = {
       "dateModified": new Date().toISOString().split("T")[0],
       "mainEntity": { "@id": `${pageUrl}#faq` },
     },
-    // 6. Service
     {
       "@type": "Service",
       "@id": `${pageUrl}#service`,
@@ -630,7 +732,6 @@ const jsonLdSchema = {
         "audienceType": "Hotel, Restoran, Rumah Sakit, Katering Pabrik",
       },
     },
-    // 7. FAQPage
     {
       "@type": "FAQPage",
       "@id": `${pageUrl}#faq`,
@@ -645,7 +746,7 @@ const jsonLdSchema = {
 ---
 
 <Layout
-  title={`${selectedTitle} — CV Green Fresh Cipanas`}
+  title={`${selectedTitle}`}
   description={selectedDescription}
   canonical={pageUrl}
 >
@@ -688,7 +789,7 @@ const jsonLdSchema = {
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="CV Green Fresh Cipanas" />
-    <meta property="og:title" content={`${selectedTitle} — CV Green Fresh Cipanas`} />
+    <meta property="og:title" content={`${selectedTitle}`} />
     <meta property="og:description" content={selectedDescription} />
     <meta property="og:url" content={pageUrl} />
     <meta property="og:locale" content="id_ID" />
@@ -717,7 +818,7 @@ const jsonLdSchema = {
   <!-- ================= HERO SECTION ================= -->
 <section id="hero" class="relative pt-20 pb-28 md:pt-48 md:pb-40 bg-gradient-to-br from-emerald-950 via-slate-900 to-emerald-900 text-white overflow-hidden transition-all duration-300">
   <div class="absolute inset-0 bg-[radial-gradient(#34d399_1px,transparent_1px)] [background-size:24px_24px] opacity-10"></div>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center max-w-4xl mx-auto">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center max-w-4xl">
     <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-xs md:text-sm font-extrabold uppercase tracking-widest mb-6 backdrop-blur-md shadow-lg transition-all duration-300 hover:scale-105">
       <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
       <span>{selectedHeroBadge}</span>
@@ -838,6 +939,30 @@ const jsonLdSchema = {
     </div>
   </div>
 </section>
+
+<!-- ================= SECTION TAMBAHAN 100% UNIK: LOGISTIK & HOREKA LOKAL ================= -->
+  <section class="py-14 md:py-20 bg-white border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        
+        <!-- Kotak 1: Rute & Pengiriman -->
+        <div class="bg-emerald-50/60 border border-emerald-100 p-8 rounded-3xl shadow-sm">
+          <span class="text-xs font-extrabold text-emerald-700 uppercase tracking-wider block mb-2">🚚 Rute & Jaminan Pengiriman</span>
+          <h3 class="text-xl md:text-2xl font-black text-slate-900 mb-3">Distribusi Rutin ke {namaLokasi}</h3>
+          <p class="text-xs md:text-sm text-slate-700 leading-relaxed font-normal">{selectedLogisticNote}</p>
+        </div>
+
+        <!-- Kotak 2: Standar Kualitas Horeka (Diubah ke tema terang senada) -->
+        <div class="bg-emerald-50/60 border border-emerald-100 p-8 rounded-3xl shadow-sm relative overflow-hidden">
+          <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-emerald-200/40 rounded-full blur-3xl"></div>
+          <span class="text-xs font-extrabold text-emerald-700 uppercase tracking-wider block mb-2">🏨 Standar Kualitas Dapur Industri</span>
+          <h3 class="text-xl md:text-2xl font-black text-slate-900 mb-3">Mitra Horeka di {namaLokasi}</h3>
+          <p class="text-xs md:text-sm text-slate-700 leading-relaxed font-normal">{selectedHorekaNote}</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
 
   <!-- ================= KATALOG PRODUK INTERAKTIF ================= -->
   <section id="katalog" class="py-20 md:py-32 bg-white border-b border-slate-200">
@@ -1129,7 +1254,7 @@ const jsonLdSchema = {
           const namaKotaLain = k.lokasi.charAt(0).toUpperCase() + k.lokasi.slice(1);
           return (
             <a
-              href={`/kawasan/${k.id}/`}
+              href={`/wilayah/${k.id}/`}
               class="group bg-slate-800/80 hover:bg-emerald-700/30 border border-slate-700/70 hover:border-emerald-500/60 p-4 rounded-xl transition-all duration-200 flex items-center justify-between shadow-sm"
               title={`Supplier Sayuran Segar ${namaKotaLain}`}
             >
@@ -1266,7 +1391,7 @@ const jsonLdSchema = {
       const tgl = (document.getElementById('form-tanggal') as HTMLInputElement).value;
       const bayar = (document.getElementById('form-pembayaran') as HTMLSelectElement).value;
       const komoditas = (document.getElementById('form-komoditas') as HTMLTextAreaElement).value;
-      const message = `Halo CV Green Fresh Cipanas, pesan sayur untuk ${namaLokasi}:\n\n*Usaha:* ${nama}\n*Alamat:* ${alamat}\n*Tgl Kirim:* ${tgl}\n*Bayar:* ${bayar}\n\n*Pesanan:*\n${komoditas}`;
+      const message = `Halo CV Green Fresh Cipanas, pesan sayur untuk wilayah terkait:\n\n*Usaha:* ${nama}\n*Alamat:* ${alamat}\n*Tgl Kirim:* ${tgl}\n*Bayar:* ${bayar}\n\n*Pesanan:*\n${komoditas}`;
       window.open(`https://wa.me/6287780937884?text=${encodeURIComponent(message)}`, '_blank');
     });
 
