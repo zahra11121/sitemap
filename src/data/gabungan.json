@@ -15,6 +15,10 @@
         "id": "tomang",
         "lokasi": "Tomang"
     },
+	   {
+        "id": "deli-serdang",
+        "lokasi": "Deli Serdang"
+    },
     {
         "id": "cianjur",
         "lokasi": "cianjur"
