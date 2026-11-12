@@ -444,7 +444,7 @@ const products = [
 const categories = ['Semua', ...new Set(products.map(p => p.category))];
 
 const siteUrl = "https://greenfresh.co.id";
-const pageUrl = `${siteUrl}/wilayah/${item.id}/`;
+const pageUrl = `${siteUrl}/layanan/${item.id}/`;
 
 const formattedPhone = companyData?.waNumber
   ? `+${companyData.waNumber.replace(/\D/g, "")}`
@@ -550,7 +550,7 @@ const jsonLdSchema = {
       "@id": `${pageUrl}#breadcrumb`,
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Beranda", "item": siteUrl },
-        { "@type": "ListItem", "position": 2, "name": "Area Layanan", "item": `${siteUrl}/wilayah` },
+        { "@type": "ListItem", "position": 2, "name": "Area Layanan", "item": `${siteUrl}/layanan` },
         { "@type": "ListItem", "position": 3, "name": `Supplier Sayuran ${namaLokasi}`, "item": pageUrl },
       ],
     },
@@ -1252,7 +1252,7 @@ const jsonLdSchema = {
           const namaKotaLain = k.lokasi.charAt(0).toUpperCase() + k.lokasi.slice(1);
           return (
             <a
-              href={`/wilayah/${k.id}/`}
+              href={`/layanan/${k.id}/`}
               class="group bg-slate-800/80 hover:bg-emerald-700/30 border border-slate-700/70 hover:border-emerald-500/60 p-4 rounded-xl transition-all duration-200 flex items-center justify-between shadow-sm"
               title={`Supplier Sayuran Segar ${namaKotaLain}`}
             >
