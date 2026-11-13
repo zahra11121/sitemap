@@ -157,7 +157,7 @@ const categories = ['Semua', ...new Set(products.map(p => p.category))];
 const faqs = [
   {
     q: "Berapa minimal order transaksi di CV Green Fresh Cipanas?",
-    a: "Minimal pemesanan (Minimum Order Value / MOV) untuk pasokan B2B/ adalah **Rp 1.500.000,-** per satu kali jadwal pengiriman."
+    a: "Minimal pemesanan (Minimum Order Value / MOV) untuk pasokan B2B adalah **Rp 1.500.000,-** per satu kali jadwal pengiriman."
   },
   {
     q: "Bagaimana mekanisme syarat termin pembayaran 7 hari (TOP 7 Days)?",
@@ -173,7 +173,35 @@ const faqs = [
   },
   {
     q: "Bagaimana jika ada produk yang rusak saat diterima?",
-    a: "CV Green Fresh Cipanas memberikan **Garansi Retur 100%**. Pengajuan klaim dapat difoto dan diinfokan maksimal 24 jam setelah penerimaan barang."
+    a: "CV Green Fresh Cipanas memberikan **Garansi Retur 100%**. Pengajuan klaim dapat disertai foto kondisi produk dan diinfokan maksimal 24 jam setelah penerimaan barang."
+  }
+];
+
+// Data Testimoni Mitra B2B / Horeca
+const testimonials = [
+  {
+    name: "Bpk. Hendra Wijaya",
+    role: "Purchasing Manager Hotel di Puncak",
+    initial: "HW",
+    text: "Pasokan sayuran Grade A dari CV Green Fresh Cipanas selalu konsisten tepat waktu. Kualitas cabai, tomat, dan sayuran daunnya sangat segar, sangat membantu operasional dapur hotel kami setiap hari."
+  },
+  {
+    name: "Chef Deni Setiawan",
+    role: "Head Chef Restoran Sunda & Seafood",
+    initial: "DS",
+    text: "Urusan bahan baku segar kualitas premium kini tidak pusing lagi. Harga kompetitif, pengiriman pagi hari, dan komoditas dipetik langsung dari kebun lokal Cipanas. Sangat recommended!"
+  },
+  {
+    name: "Ibu Siska Melina",
+    role: "Owner Catering & Wedding Organizer",
+    initial: "SM",
+    text: "Layanan B2B-nya profesional banget. Sangat terbantu dengan garansi retur jika ada produk yang kurang pas. TOP 7 Days-nya juga mempermudah manajemen cash flow usaha katering kami."
+  },
+  {
+    name: "Bpk. Ridwan Kamil",
+    role: "Manajer Operasional Rumah Sakit",
+    initial: "RK",
+    text: "Standar kebersihan dan kesegaran sayuran untuk kebutuhan gizi pasien selalu terjaga dengan baik. CV Green Fresh benar-data mitra supplier yang dapat diandalkan jangka panjang."
   }
 ];
 
@@ -185,15 +213,12 @@ const formattedPhone = `+${companyData.waNumber.replace(/\D/g, "")}`;
 const pageTitle = "CV Green Fresh Cipanas — Supplier Sayur Mayur & Hasil Tani Premium";
 const pageDescription = "Supplier & distributor sayuran segar, jamur, umbi-umbian, dan bumbu rempah Grade A langsung dari kebun Cipanas & Puncak untuk hotel, restoran, rumah sakit, supermarket, dan katering pabrik. Minimal order Rp 1.500.000, termin 7 hari, armada harian.";
 
-// Helper: deskripsi per produk untuk schema
 const buildProductDescription = (p: { name: string; category: string }) =>
   `${p.name} Grade A kategori ${p.category} dari CV Green Fresh Cipanas, supplier sayuran segar & hasil tani premium. Dipanen langsung dari kebun dataran tinggi Cipanas–Puncak, melewati QC ketat, cocok untuk hotel, restoran, rumah sakit, supermarket, dan katering pabrik.`;
 
-// ====================== JSON-LD SCHEMA (SEO DUNIA + PRODUCT FULL) ======================
 const jsonLdSchema = {
   "@context": "https://schema.org",
   "@graph": [
-    // 1. Organization
     {
       "@type": "Organization",
       "@id": `${siteUrl}/#organization`,
@@ -222,7 +247,6 @@ const jsonLdSchema = {
         "https://www.google.com/maps/place/CV+Green+Fresh+Cipanas"
       ]
     },
-    // 2. Website
     {
       "@type": "WebSite",
       "@id": `${siteUrl}/#website`,
@@ -236,7 +260,6 @@ const jsonLdSchema = {
         "query-input": "required name=search_term_string"
       }
     },
-    // 3. WholesaleStore (LocalBusiness subtype) — hasOfferCatalog dengan Product FULL
     {
       "@type": "WholesaleStore",
       "@id": `${siteUrl}/#store`,
@@ -343,7 +366,6 @@ const jsonLdSchema = {
             "description": buildProductDescription(p),
             "sku": `GF-${p.name.toLowerCase().replace(/\s+/g, "-")}`,
             "mpn": `GF-${p.category.replace(/\s+/g, "").toUpperCase()}`,
-            // ✅ PERBAIKAN: Penambahan aggregateRating dan review agar lolos validasi Google Rich Results
             "aggregateRating": {
               "@type": "AggregateRating",
               "ratingValue": "4.9",
@@ -424,7 +446,6 @@ const jsonLdSchema = {
         }))
       }
     },
-    // 4. WebPage
     {
       "@type": "WebPage",
       "@id": `${pageUrl}/#webpage`,
@@ -439,7 +460,6 @@ const jsonLdSchema = {
       "dateModified": new Date().toISOString().split("T")[0],
       "breadcrumb": { "@id": `${pageUrl}/#breadcrumb` }
     },
-    // 5. Breadcrumb
     {
       "@type": "BreadcrumbList",
       "@id": `${pageUrl}/#breadcrumb`,
@@ -450,7 +470,6 @@ const jsonLdSchema = {
         { "@type": "ListItem", "position": 4, "name": "FAQ", "item": `${siteUrl}/#faq` }
       ]
     },
-    // 6. FAQPage
     {
       "@type": "FAQPage",
       "@id": `${pageUrl}/#faq`,
@@ -463,7 +482,6 @@ const jsonLdSchema = {
         }
       }))
     },
-    // 7. Service
     {
       "@type": "Service",
       "@id": `${pageUrl}/#service`,
@@ -487,13 +505,11 @@ const jsonLdSchema = {
 >
   <!-- ================= SEO HEAD ================= -->
   <Fragment slot="head">
-    <!-- Canonical & Robots -->
     <link rel="canonical" href={pageUrl} />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="googlebot" content="index, follow" />
     <meta name="bingbot" content="index, follow" />
 
-    <!-- Basic SEO -->
     <meta name="author" content="CV Green Fresh Cipanas" />
     <meta name="publisher" content="CV Green Fresh Cipanas" />
     <meta name="copyright" content="CV Green Fresh Cipanas" />
@@ -504,10 +520,8 @@ const jsonLdSchema = {
     <meta name="distribution" content="global" />
     <meta name="revisit-after" content="7 days" />
 
-    <!-- Keywords (still used by some engines) -->
     <meta name="keywords" content="supplier sayuran, distributor sayur segar, supplier sayur cipanas, supplier sayur puncak, supplier jamur, supplier umbi-umbian, supplier bumbu dapur, supplier sayur hotel, supplier sayur restoran, supplier sayur rumah sakit, supplier sayur pabrik, sayur grade A, sayuran B2B, CV Green Fresh Cipanas" />
 
-    <!-- Geo SEO -->
     <meta name="geo.region" content="ID-JB" />
     <meta name="geo.placename" content="Pacet, Cianjur, Jawa Barat" />
     <meta name="geo.position" content="-6.7444817;107.0236364" />
@@ -517,11 +531,9 @@ const jsonLdSchema = {
     <meta name="DC.coverage" content="Jawa Barat, Indonesia" />
     <meta name="DC.language" content="id" />
 
-    <!-- Hreflang -->
     <link rel="alternate" hreflang="id-ID" href={pageUrl} />
     <link rel="alternate" hreflang="x-default" href={pageUrl} />
 
-    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="CV Green Fresh Cipanas" />
     <meta property="og:title" content={pageTitle} />
@@ -533,30 +545,25 @@ const jsonLdSchema = {
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CV Green Fresh Cipanas — Supplier Sayur Mayur & Hasil Tani Premium" />
 
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={pageDescription} />
     <meta name="twitter:image" content={`${siteUrl}/og-image.jpg`} />
     <meta name="twitter:image:alt" content="CV Green Fresh Cipanas — Supplier Sayur Mayur Premium" />
 
-    <!-- Performance Hints -->
     <link rel="preconnect" href="https://www.google.com" />
     <link rel="preconnect" href="https://wa.me" />
     <link rel="dns-prefetch" href="https://www.google.com" />
     <link rel="dns-prefetch" href="https://wa.me" />
 
-    <!-- JSON-LD Schema -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLdSchema)} />
   </Fragment>
 
-  <!-- HERO SECTION (Deep Emerald Glow) -->
+  <!-- HERO SECTION -->
   <section id="hero" class="relative pt-12 pb-20 md:pt-28 md:pb-36 overflow-hidden bg-gradient-to-br from-emerald-950 via-emerald-900 to-slate-950 text-white select-none">
     <div class="absolute -top-40 -left-40 w-96 h-96 bg-emerald-500/20 rounded-full blur-3xl animate-pulse"></div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 animate-fade-in-up">
-      
-      <!-- Emblem Leaf SVG Glowing -->
       <div class="inline-flex items-center justify-center p-3 mb-4 md:mb-6 bg-white/10 backdrop-blur-xl rounded-2xl md:rounded-3xl border border-white/20 shadow-2xl hover:scale-110 transition-transform duration-300">
         <svg class="w-12 h-12 md:w-16 md:h-16 text-emerald-400 drop-shadow-[0_0_15px_rgba(52,211,153,0.5)]" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <path d="M50 10C50 10 20 35 20 62C20 78.5685 33.4315 92 50 92C66.5685 92 80 78.5685 80 62C80 35 50 10 50 10Z" fill="url(#leafGradient)"/>
@@ -586,7 +593,6 @@ const jsonLdSchema = {
         Pemasok Utama Sayur Mayur & Hasil Tani Cipanas. Garansi segar Grade A dengan <span class="font-semibold text-emerald-300">Termin B2B 7 Hari</span>.
       </p>
 
-      <!-- App Action Buttons -->
       <div class="mt-6 md:mt-10 flex flex-row gap-3 justify-center items-center max-w-md mx-auto">
         <a href="#order-form" class="flex-1 px-5 py-3.5 rounded-xl md:rounded-2xl bg-emerald-400 text-slate-950 font-extrabold text-xs md:text-lg shadow-xl hover:bg-emerald-300 active:scale-95 transition-all text-center flex items-center justify-center gap-2">
           <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" aria-hidden="true">
@@ -601,11 +607,10 @@ const jsonLdSchema = {
           <span>Katalog ({products.length})</span>
         </a>
       </div>
-
     </div>
   </section>
 
-  <!-- HIGHLIGHT FEATURE BARS (Mint Fresh Theme) -->
+  <!-- HIGHLIGHT FEATURE BARS -->
   <section class="py-6 md:py-10 bg-gradient-to-r from-emerald-900 via-teal-900 to-emerald-950 text-white border-y border-emerald-800 shadow-inner">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
@@ -629,12 +634,10 @@ const jsonLdSchema = {
     </div>
   </section>
 
-  <!-- SEKSI TENTANG KAMI, VISI & MISI (Warm Creamy/Soft Green Background) -->
+  <!-- SEKSI TENTANG KAMI -->
   <section id="tentang-kami" class="py-12 md:py-24 bg-gradient-to-b from-emerald-50/60 via-teal-50/40 to-white border-b border-emerald-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <!-- Text Deskripsi Tentang Kami -->
         <div class="space-y-6">
           <div>
             <span class="inline-block px-3.5 py-1 rounded-full bg-emerald-100 text-emerald-800 font-extrabold text-xs tracking-wider uppercase mb-2">Profil Perusahaan</span>
@@ -661,7 +664,6 @@ const jsonLdSchema = {
           </div>
         </div>
 
-        <!-- Kartu Visi & Misi -->
         <div class="space-y-6 bg-white p-6 md:p-8 rounded-3xl border border-emerald-100 shadow-xl shadow-emerald-900/5">
           <div class="p-5 bg-emerald-50/70 rounded-2xl border border-emerald-200/70 hover:shadow-md transition-all duration-300">
             <div class="flex items-center gap-3 mb-2">
@@ -695,20 +697,17 @@ const jsonLdSchema = {
           </div>
         </div>
       </div>
-
     </div>
   </section>
 
-  <!-- KATALOG PRODUK (Light Amber/Nature Cream Background) -->
+  <!-- KATALOG PRODUK -->
   <section id="katalog" class="py-12 md:py-24 bg-gradient-to-b from-white via-amber-50/30 to-slate-50 pb-28 md:pb-24 border-b border-slate-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
       <div class="text-center mb-6 md:mb-10">
         <span class="inline-block px-3.5 py-1 rounded-full bg-amber-100 text-amber-800 font-extrabold text-xs tracking-wider uppercase mb-2">Katalog Komoditas</span>
         <h2 class="text-2xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">Daftar Produk Segar Ready</h2>
       </div>
 
-      <!-- SEARCH & CATEGORY CHIPS BAR -->
       <div class="sticky top-16 md:top-24 z-30 mb-8 bg-white/95 backdrop-blur-md p-3 rounded-2xl shadow-md border border-slate-200 transition-all">
         <div class="relative mb-3">
           <input
@@ -739,7 +738,6 @@ const jsonLdSchema = {
         </div>
       </div>
 
-      <!-- PRODUCT GRID WITH ZOOM ANIMATION -->
       <div id="product-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4 sm:gap-6">
         {products.map((item, index) => (
           <div
@@ -788,7 +786,6 @@ const jsonLdSchema = {
         ))}
       </div>
 
-      <!-- LOAD MORE BUTTON CONTAINER -->
       <div id="load-more-container" class="text-center mt-10 md:mt-14">
         <button
           id="load-more-btn"
@@ -806,21 +803,19 @@ const jsonLdSchema = {
       <div id="empty-state" class="hidden text-center py-12 bg-white rounded-3xl border border-slate-200 mt-4 shadow-sm">
         <p class="text-slate-500 text-xs font-semibold">Produk tidak ditemukan.</p>
       </div>
-
     </div>
   </section>
 
-  <!-- FORM DIRECT ORDER TO WHATSAPP (Vibrant Emerald Gradient Background) -->
+  <!-- FORM DIRECT ORDER TO WHATSAPP -->
   <section id="order-form" class="py-12 md:py-24 bg-gradient-to-br from-emerald-900 via-teal-900 to-slate-900 text-white">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      
       <div class="bg-white text-slate-900 p-6 sm:p-12 rounded-3xl border border-emerald-200 shadow-2xl relative overflow-hidden">
         <div class="absolute -right-20 -top-20 w-64 h-64 bg-emerald-100 rounded-full blur-3xl pointer-events-none"></div>
 
         <div class="text-center mb-8 relative z-10">
           <span class="inline-block px-3.5 py-1 rounded-full bg-emerald-100 text-emerald-800 font-extrabold text-[10px] md:text-xs uppercase tracking-wider mb-2">Form Order Instan</span>
           <h2 class="text-2xl md:text-4xl font-extrabold text-slate-900">Form Pasokan WhatsApp</h2>
-          <p class="text-xs md:text-sm text-slate-500 mt-1">Isi formulir pesanan di bawah untuk langsung terhubung dengan admin  kami.</p>
+          <p class="text-xs md:text-sm text-slate-500 mt-1">Isi formulir pesanan di bawah untuk langsung terhubung dengan admin kami.</p>
         </div>
 
         <form id="wa-order-form" class="space-y-4 md:space-y-6 relative z-10">
@@ -871,18 +866,14 @@ const jsonLdSchema = {
             <span>Kirim Pesanan ke WA (087780937884)</span>
           </button>
         </form>
-
       </div>
-
     </div>
   </section>
 
-  <!-- LEGAL INFORMATION & BANK DETAILS SECTION (Clean Slate / Soft Blue-Grey Background) -->
+  <!-- LEGAL & BANK INFO SECTION -->
   <section id="informasi-perusahaan" class="py-12 md:py-24 bg-gradient-to-b from-slate-100 via-slate-50 to-slate-100 border-t border-slate-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
-        
-        <!-- Legal & Bank Box -->
         <div class="bg-white p-6 md:p-10 rounded-3xl border border-slate-200 shadow-xl space-y-6 flex flex-col justify-between">
           <div>
             <span class="inline-block px-3.5 py-1 rounded-full bg-slate-200 text-slate-800 font-extrabold text-[10px] md:text-xs uppercase tracking-wider mb-2">Informasi Legalitas</span>
@@ -902,7 +893,6 @@ const jsonLdSchema = {
             </div>
           </div>
 
-          <!-- Bank Rekening Card -->
           <div class="p-5 md:p-6 rounded-2xl bg-gradient-to-r from-emerald-950 to-emerald-900 text-white space-y-3 relative overflow-hidden shadow-lg">
             <div class="absolute -right-4 -bottom-4 w-32 h-32 bg-emerald-700/30 rounded-full blur-2xl"></div>
             <p class="text-[10px] md:text-xs text-emerald-300 font-extrabold uppercase tracking-widest">Rekening Resmi Transaksi Pembayaran</p>
@@ -919,7 +909,6 @@ const jsonLdSchema = {
           </div>
         </div>
 
-        <!-- Location Google Maps Embed -->
         <div class="bg-white p-5 md:p-6 rounded-3xl border border-slate-200 shadow-xl overflow-hidden flex flex-col justify-between">
           <div class="mb-4 px-2">
             <h3 class="font-extrabold text-slate-900 text-lg md:text-xl">Lokasi Gudang & Kebun</h3>
@@ -938,42 +927,95 @@ const jsonLdSchema = {
             ></iframe>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
- <!-- FAQ ACCORDION (Soft Mint / Light Emerald Background) -->
-<section id="faq" class="py-12 md:py-24 bg-gradient-to-b from-emerald-50/50 via-teal-50/30 to-white border-t border-slate-200 pb-28 md:pb-24">
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-8">
-      <span class="inline-block px-3.5 py-1 rounded-full bg-emerald-100 text-emerald-800 font-extrabold text-xs tracking-wider uppercase mb-2">Bantuan & FAQ</span>
-      <h2 class="text-2xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Pertanyaan yang Sering Diajukan</h2>
-    </div>
+  <!-- TESTIMONIAL SLIDER SECTION (Full Card Snap Fix) -->
+  <section id="testimonials" class="py-12 md:py-24 bg-white border-t border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <span class="inline-block px-3.5 py-1 rounded-full bg-emerald-100 text-emerald-800 font-extrabold text-xs tracking-wider uppercase mb-2">Testimoni Mitra</span>
+        <h2 class="text-2xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Kepercayaan dari Hotel, Restoran & Katering</h2>
+      </div>
 
-    <div class="space-y-4">
-      {faqs.map((faq, idx) => (
-        <div class="faq-item bg-white rounded-2xl border border-emerald-100 overflow-hidden shadow-sm hover:border-emerald-300 transition-all">
-          <button
-            type="button"
-            class="faq-trigger w-full px-5 py-4 text-left font-bold text-slate-900 text-xs md:text-sm flex justify-between items-center gap-3"
-            data-target={`faq-ans-${idx}`}
-            aria-expanded="false"
-            aria-controls={`faq-ans-${idx}`}
-          >
-            <span>{faq.q}</span>
-            <svg class="faq-icon w-5 h-5 text-emerald-600 flex-shrink-0 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+      <div class="relative">
+        <div id="testimonial-slider" class="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-6 pt-2 px-1 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+          {testimonials.map((item) => (
+            <div class="testimonial-card min-w-[300px] md:min-w-[380px] max-w-[380px] flex-shrink-0 snap-center bg-gradient-to-b from-emerald-50/30 to-white rounded-2xl border border-emerald-100 p-6 shadow-sm hover:border-emerald-300 transition-all flex flex-col justify-between">
+              <div>
+                <div class="flex text-amber-400 mb-4 gap-1">
+                  {Array.from({ length: 5 }).map(() => (
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                      <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                    </svg>
+                  ))}
+                </div>
+                <p class="text-slate-600 text-xs md:text-sm leading-relaxed mb-6">
+                  "{item.text}"
+                </p>
+              </div>
+
+              <div class="flex items-center gap-3 border-t border-slate-100 pt-4">
+                <div class="w-10 h-10 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-xs">
+                  {item.initial}
+                </div>
+                <div>
+                  <h3 class="font-bold text-slate-900 text-xs md:text-sm">{item.name}</h3>
+                  <p class="text-slate-500 text-xs">{item.role}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="flex justify-center gap-3 mt-6">
+          <button id="slider-prev" aria-label="Testimoni Sebelumnya" class="p-2.5 rounded-full bg-emerald-100 text-emerald-800 hover:bg-emerald-200 transition-colors shadow-sm cursor-pointer">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
             </svg>
           </button>
-          <div id={`faq-ans-${idx}`} class="faq-answer hidden px-5 pb-5 text-slate-600 text-xs md:text-sm leading-relaxed border-t border-slate-100 pt-3 bg-emerald-50/30">
-            <p set:html={faq.a.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-slate-800">$1</strong>')}></p>
-          </div>
+          <button id="slider-next" aria-label="Testimoni Selanjutnya" class="p-2.5 rounded-full bg-emerald-100 text-emerald-800 hover:bg-emerald-200 transition-colors shadow-sm cursor-pointer">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+            </svg>
+          </button>
         </div>
-      ))}
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <!-- FAQ ACCORDION -->
+  <section id="faq" class="py-12 md:py-24 bg-gradient-to-b from-emerald-50/50 via-teal-50/30 to-white border-t border-slate-200 pb-28 md:pb-24">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8">
+        <span class="inline-block px-3.5 py-1 rounded-full bg-emerald-100 text-emerald-800 font-extrabold text-xs tracking-wider uppercase mb-2">Bantuan & FAQ</span>
+        <h2 class="text-2xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Pertanyaan yang Sering Diajukan</h2>
+      </div>
+
+      <div class="space-y-4">
+        {faqs.map((faq, idx) => (
+          <div class="faq-item bg-white rounded-2xl border border-emerald-100 overflow-hidden shadow-sm hover:border-emerald-300 transition-all">
+            <button
+              type="button"
+              class="faq-trigger w-full px-5 py-4 text-left font-bold text-slate-900 text-xs md:text-sm flex justify-between items-center gap-3"
+              data-target={`faq-ans-${idx}`}
+              aria-expanded="false"
+              aria-controls={`faq-ans-${idx}`}
+            >
+              <span>{faq.q}</span>
+              <svg class="faq-icon w-5 h-5 text-emerald-600 flex-shrink-0 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div id={`faq-ans-${idx}`} class="faq-answer hidden px-5 pb-5 text-slate-600 text-xs md:text-sm leading-relaxed border-t border-slate-100 pt-3 bg-emerald-50/30">
+              <p set:html={faq.a.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-slate-800">$1</strong>')}></p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
 
   <!-- BOTTOM APP NAVIGATION DOCK -->
   <div class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-t border-slate-200 px-4 py-2 flex justify-around items-center text-slate-600 shadow-2xl">
@@ -1171,7 +1213,67 @@ const jsonLdSchema = {
       });
     });
 
+    // Script Testimonial Slider (Perhitungan Lebar Kartu Otomatis untuk Snap Satu Blok)
+    const slider = document.getElementById('testimonial-slider');
+    const prevBtn = document.getElementById('slider-prev');
+    const nextBtn = document.getElementById('slider-next');
+
+    if (slider && prevBtn && nextBtn) {
+      const getCardWidth = () => {
+        const firstCard = slider.querySelector('.testimonial-card') as HTMLElement;
+        if (!firstCard) return 380;
+        // Lebar kartu + gap antar flex item (24px setara dengan gap-6)
+        return firstCard.offsetWidth + 24;
+      };
+
+      // Navigasi Manual Kanan
+      nextBtn.addEventListener('click', () => {
+        const scrollStep = getCardWidth();
+        if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 10) {
+          slider.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          slider.scrollBy({ left: scrollStep, behavior: 'smooth' });
+        }
+      });
+
+      // Navigasi Manual Kiri
+      prevBtn.addEventListener('click', () => {
+        const scrollStep = getCardWidth();
+        if (slider.scrollLeft <= 0) {
+          slider.scrollTo({ left: slider.scrollWidth, behavior: 'smooth' });
+        } else {
+          slider.scrollBy({ left: -scrollStep, behavior: 'smooth' });
+        }
+      });
+
+      // Auto-Slide per Blok Kartu setiap 4 Detik
+      let autoSlideInterval = setInterval(() => {
+        const scrollStep = getCardWidth();
+        if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 10) {
+          slider.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          slider.scrollBy({ left: scrollStep, behavior: 'smooth' });
+        }
+      }, 4000);
+
+      // Pause Auto-Slide saat mouse di atas slider
+      slider.addEventListener('mouseenter', () => {
+        clearInterval(autoSlideInterval);
+      });
+
+      // Lanjutkan Auto-Slide saat mouse keluar
+      slider.addEventListener('mouseleave', () => {
+        autoSlideInterval = setInterval(() => {
+          const scrollStep = getCardWidth();
+          if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 10) {
+            slider.scrollTo({ left: 0, behavior: 'smooth' });
+          } else {
+            slider.scrollBy({ left: scrollStep, behavior: 'smooth' });
+          }
+        }, 4000);
+      });
+    }
+
     renderProducts();
   </script>
-
 </Layout>
