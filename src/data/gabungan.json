@@ -31,6 +31,10 @@
         "id": "bandung",
         "lokasi": "bandung"
     },
+	   {
+        "id": "gresik",
+        "lokasi": "Gresik"
+    },
     {
         "id": "cilegon",
         "lokasi": "cilegon"
