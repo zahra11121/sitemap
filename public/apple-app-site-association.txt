@@ -1,0 +1,17 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": [
+          "TEAMID.com.greenfresh.app"
+        ],
+        "components": [
+          {
+            "/": "/*",
+            "comment": "Cocokkan semua halaman"
+          }
+        ]
+      }
+    ]
+  }
+}
