@@ -171,6 +171,10 @@
         "id": "ragunan",
         "lokasi": "Ragunan"
     },
+	    {
+        "id": "surakarta",
+        "lokasi": "Surakarta"
+    },
     {
         "id": "puri-indah",
         "lokasi": "Puri Indah"
@@ -2266,6 +2270,10 @@
     {
         "id": "veteran-malang",
         "lokasi": "Veteran Malang"
+    },
+	    {
+        "id": "cikupa",
+        "lokasi": "Cikupa"
     },
     {
         "id": "klojen",
